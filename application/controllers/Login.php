@@ -42,7 +42,7 @@ class Login extends CI_Controller
                 // redirect another page according to role user
                 if ($data_user->role == 'Karyawan') {
                     // employee dashboard
-                    echo '<script>alert("Karyawan ");</script>';
+                    redirect(site_url(('dashboardadmin')));
                 } else if ($data_user->role == 'Donatur') {
                     // landing page
                     echo '<script>alert("Donatur");</script>';
