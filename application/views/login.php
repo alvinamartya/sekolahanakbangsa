@@ -21,15 +21,35 @@
         <div class="login-form">
             <div class="w-50">
                 <h5 class="">Masuk</h5>
-                <form action="#" method="POST">
+                <form action="<?= site_url("login/login") ?>" method="POST">
                     <div class="form-group">
                         <label for="nama_pengguna">Nama Pengguna</label>
-                        <input type="text" class="form-control" name="username">
+                        <input type="text" class="form-control" name="username" value="<?= isset($l['username']) ? $l['username'] : '' ?>">
                     </div>
                     <div class="form-group">
                         <label for="password">Kata Sandi</label>
-                        <input type="password" class="form-control" name="password">
+                        <input type="password" class="form-control" name="password" value="<?= isset($l['password']) ? $l['password'] : '' ?>">
                     </div>
+
+                    <!-- ============================================================== -->
+                    <!-- Start Error Alert -->
+                    <!-- ============================================================== -->
+
+                    <?php if (isset($err)) { ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <!-- Error Message -->
+                            <?= $err ?>
+                            <!-- Close Button -->
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php } ?>
+
+                    <!-- ============================================================== -->
+                    <!-- End Error Alert -->
+                    <!-- ============================================================== -->
+
                     <div class="form-group mt-4">
                         <button type="submit" class="btn btn-danger w-100"><i class="fa fa-sign-in"></i> Masuk</button>
                     </div>
