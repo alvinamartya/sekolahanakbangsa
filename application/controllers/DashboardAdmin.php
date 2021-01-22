@@ -6,8 +6,8 @@ class DashboardAdmin extends CI_Controller
     // view
     public function index()
     {
-        $this->load->view('templates/dashboard_admin/header');
+        $this->load->view('templates/header');
         $this->load->view('dashboard_admin');
-        $this->load->view('templates/dashboard_admin/footer');
+        $this->load->view('templates/footer');
     }
 }
