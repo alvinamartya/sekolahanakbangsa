@@ -47,7 +47,7 @@ class user_login_model extends CI_Model
 		$modidate = date('Y-m-d H:i:s');		
 		
 		$data = array(				
-				'password'		=> $password
+				'password'		=> $password,
 				'modiby'		=> $modiby,
 				'modidate'		=> $modidate				
 		);
