@@ -17,6 +17,8 @@
     <link href="<?= base_url('assets') ?>/extra-libs/jvector/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="<?= base_url('assets') ?>/css/admin-mart.min.css" rel="stylesheet">
+    <!-- Datatables CSS -->
+    <link href="<?= base_url('assets') ?>/libs/datatables/css/datatables.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -241,7 +243,7 @@
                         <li class="list-divider"></li>
                         <li class="nav-small-cap"><span class="hide-menu">Applications</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link" href="ticket-list.html" aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Ticket List
+                        <li class="sidebar-item"> <a class="sidebar-link" href="<?= site_url('sekolah') ?>" aria-expanded="false"><i data-feather="tag" class="feather-icon"></i><span class="hide-menu">Sekolah
                                 </span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="app-chat.html" aria-expanded="false"><i data-feather="message-square" class="feather-icon"></i><span class="hide-menu">Chat</span></a></li>
