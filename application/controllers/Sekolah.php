@@ -13,8 +13,15 @@ class Sekolah extends CI_Controller
     // login view
     public function index()
     {
+        // include header
         $this->load->view('templates/header');
-        $this->load->view('sekolah');
-        $this->load->view('templates/footer');
+
+        // data sekolah
+        $data_sekolah = $this->sekolah_model->getSekolah();
+        $data['sekolah'] = $data_sekolah;
+        $this->load->view('sekolah/body', $data);
+
+        // inlcude footer
+        $this->load->view('sekolah/footer');
     }
 }
