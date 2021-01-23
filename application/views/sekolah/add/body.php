@@ -4,10 +4,11 @@
             <div class="card-body">
                 <h4 class="card-title">Tambah Sekolah</h4>
                 </h6>
-                <form>
+                <form action="<?= site_url('sekolah/tambah_action') ?>" method="POST">
                     <label for="nama_sekolah">Nama Sekolah</label>
                     <div class="form-group">
                         <input type="text" class="form-control" id="nama_sekolah" name="nama_sekolah" aria-describedby="schoolNameHelp" placeholder="Nama Sekolah">
+                        <small id="nama_sekolah_err" class="text-danger d-none">Nama sekolah harus diisi</small>
                     </div>
 
                     <label for="jenis_sekolah">Jenis Sekolah</label>
@@ -21,6 +22,7 @@
                     <label for="alamat">Alamat</label>
                     <div class="form-group">
                         <textarea name="alamat" id="alamat" class="form-control" cols="100" rows="4" placeholder="Alamat"></textarea>
+                        <small id="alamat_err" class="text-danger d-none">Alamat harus diisi</small>
                     </div>
 
                     <label for="provinsi">Provinsi</label>
@@ -34,7 +36,7 @@
                     </div>
 
                     <div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button id="btn-save" type="submit" class="btn btn-primary">Simpan</button>
                         <a href="<?= site_url('sekolah') ?>" class="btn btn-danger">Batal</a>
                     </div>
                 </form>
