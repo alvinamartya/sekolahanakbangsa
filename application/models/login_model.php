@@ -11,5 +11,5 @@ class login_model extends CI_Model
         $where = array('username' => $data['username']);
         $query = $this->db->get_where($this->_table, $where);
         return $query->row();
-    }
+    }	
 }
