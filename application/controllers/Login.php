@@ -37,12 +37,13 @@ class Login extends CI_Controller
         } else if ($data_user != null) {
             if (password_verify($data_login['password'], $data_user->password)) {
                 // create new session
-                $this->session->set_userdata('user_id', $data_user->id);
+                $session_arr = array('user_id' => $data_user->id, 'role' => $data_user->role);
+                $this->session->set_userdata($session_arr);
 
                 // redirect another page according to role user
                 if ($data_user->role == 'Karyawan') {
                     // employee dashboard
-                    echo '<script>alert("Karyawan ");</script>';
+                    redirect(site_url(('dashboardadmin')));
                 } else if ($data_user->role == 'Donatur') {
                     // landing page
                     echo '<script>alert("Donatur");</script>';
