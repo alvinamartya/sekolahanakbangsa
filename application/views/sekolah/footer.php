@@ -32,12 +32,7 @@
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
-<script>
-    $(document).ready(() => {
-        $("#school_table").DataTable();
-    })
-</script>
-
+<script src="<?= base_url('assets/js/school.js') ?>"></script>
 </body>
 
 </html>
