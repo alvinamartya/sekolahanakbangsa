@@ -5,7 +5,7 @@
                 <h4 class="card-title">Data Sekolah</h4>
                 </h6>
                 <div class="table-responsive">
-                    <a href="<?= site_url('tambahsekolah') ?>" class="btn btn-primary mb-2">Tambah Data Sekolah</a>
+                    <a href="<?= site_url('sekolah/tambah') ?>" class="btn btn-primary mb-2">Tambah Data Sekolah</a>
                     <table id="school_table" class="table table-striped table-bordered no-wrap">
                         <thead>
                             <tr>

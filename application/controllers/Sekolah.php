@@ -24,4 +24,11 @@ class Sekolah extends CI_Controller
         // inlcude footer
         $this->load->view('sekolah/footer');
     }
+
+    public function tambah()
+    {
+        $this->load->view('templates/header');
+        $this->load->view('tambah_sekolah/body');
+        $this->load->view('tambah_sekolah/footer');
+    }
 }
