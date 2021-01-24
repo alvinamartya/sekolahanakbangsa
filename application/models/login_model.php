@@ -13,9 +13,9 @@ class login_model extends CI_Model
         return $query->row();
     }
 
-    public function save($role)
+    public function save($data)
     {
-        return $this->db->insert($this->_table, $this);
+        return $this->db->insert($this->_table, $data);
     }
 
     public function getLastData()
