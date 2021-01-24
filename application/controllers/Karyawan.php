@@ -14,8 +14,11 @@ class Karyawan extends CI_Controller
 	// login view
 	public function index()
 	{
+		// set page title
+		$header['title'] = 'Karyawan';
+
 		// include header
-		$this->load->view('templates/admin_header');
+		$this->load->view('templates/admin_header', $header);
 
 		// data karyawan
 		$data_karyawan = $this->karyawan_model->getAllData();
@@ -28,8 +31,11 @@ class Karyawan extends CI_Controller
 
 	public function tambah()
 	{
+		// set page title
+		$header['title'] = 'Tambah Karyawan';
+
 		// include header
-		$this->load->view('templates/admin_header');
+		$this->load->view('templates/admin_header', $header);
 
 		$this->load->view('karyawan/add');
 
@@ -54,8 +60,11 @@ class Karyawan extends CI_Controller
 
 	public function ubah($id_karyawan)
 	{
+		// set page title
+		$header['title'] = 'Ubah Karyawan';
+
 		// include header
-		$this->load->view('templates/admin_header');
+		$this->load->view('templates/admin_header', $header);
 
 		//ambil data karyawan
 		$data_karyawan = $this->karyawan_model->getKaryawan($id_karyawan);
