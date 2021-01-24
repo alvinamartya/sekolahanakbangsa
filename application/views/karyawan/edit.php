@@ -70,9 +70,9 @@
 					<label for="tanggal_lahir">Tanggal Lahir</label>
 					<input type="date" name="tanggal_lahir" class="form-control" value="<?php echo date("Y-m-d", strtotime($data->tanggal_lahir)); ?>" required>					
 				</div>
-				<br>
-				<a href="<?php echo site_url('Karyawan') ?>" class="btn btn-secondary">Kembali</a>
-				<input type="submit" id="btnSubmit" class="btn btn-primary" value="Perbarui">
+				<br>				
+				<input type="submit" id="btnSubmit" class="btn btn-primary" value="Perbarui">				
+				<a href="<?php echo site_url('Karyawan') ?>" class="btn btn-danger">Batal</a>
 			</form>
 		</div>
 	</div>

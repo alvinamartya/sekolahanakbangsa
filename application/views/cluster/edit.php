@@ -36,9 +36,9 @@
 					<input type="hidden" name="deskripsi_cluster" id="deskripsi" value="<?php echo $cluster->deskripsi_cluster ?>">
 					
 				</div>				
-				<br>
-				<a href="<?php echo base_url('Cluster') ?>" class="btn btn-secondary">Kembali</a>
+				<br>				
 				<input type="submit" id="btnSubmit" class="btn btn-primary" value="Perbarui">
+				<a href="<?php echo base_url('Cluster') ?>" class="btn btn-danger">Batal</a>
 			</form>
 		</div>
 	</div>
