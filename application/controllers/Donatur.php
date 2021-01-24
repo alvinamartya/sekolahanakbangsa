@@ -38,7 +38,7 @@ class Donatur extends CI_Controller
         $userlogin->delete($id_userlogin);
 
         $this->session->set_flashdata("success", "Data berhasil dihapus.");
-        redirect(site_url(('donatur')));
+        redirect(site_url('donatur'));
     }
 
 }
