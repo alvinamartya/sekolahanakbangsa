@@ -43,13 +43,13 @@ class Login extends CI_Controller
                 // redirect another page according to role user
                 if ($data_user->role == 'Karyawan') {
                     // employee dashboard
-                    redirect(site_url(('dashboardadmin')));
+                    redirect(site_url(('dashboard/admin')));
                 } else if ($data_user->role == 'Donatur') {
                     // landing page
                     echo '<script>alert("Donatur");</script>';
                 } else if ($data_user->role == 'Relawan') {
                     // volunteer dashboard
-                    echo '<script>alert("Relawan");</script>';
+                    redirect(site_url(('dashboard/relawan')));
                 }
             } else {
                 // incorrect password
