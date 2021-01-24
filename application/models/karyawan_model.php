@@ -3,24 +3,29 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class karyawan_model extends CI_Model
 {
+	// deklarasi nama table yang diolah
 	private $_karyawan = "karyawan";
-
 
 	public function getAllData()
 	{
+		// mengambil seluruh data dari table karyawan
 		return $this->db->get($this->_karyawan)->result();
 	}
 
 	public function save()
 	{
+		// deklarasi variable dari post(), supaya lebih sederhana;
 		$post = $this->input->post();
-		//$id_karyawan;
+		
+		// pengambilan data id terbaru dari table user_login
 		$id = $this->db->query('select max(id) ID from user_login');
 
+		// memasukkan id terbaru ke variable id_user_login
 		foreach ($id->result() as $row) {
 			$id_user_login =  $row->ID;
 		}
-
+		
+		// memasukkan seluruh data post ke dalam variable yang akan disimpan
 		$nama_karyawan = $post['nama_karyawan'];
 		$jenis_kelamin = $post['jenis_kelamin'];
 		$jabatan_karyawan = "Admin";
@@ -29,12 +34,21 @@ class karyawan_model extends CI_Model
 		$email = $post['email'];
 		$tempat_lahir = $post['tempat_lahir'];
 		$tanggal_lahir = $post['tanggal_lahir'];
+		
+		/*
+		$this->db->where('id_user_login', $_SESSION['user_id']);
+		$login = $this->db->query('select * from karyawan');		
+		$data = $login->row();
+		$creaby  = $data->nama_karyawan;
+		*/
+		
 		$creaby  = 'user_login';
 		$creadate = date('Y-m-d H:i:s');
 		$modiby = '';
 		$modidate = date('Y-m-d H:i:s');
 		$row_status = 'A';
 
+		// membuar array dari data yang akan diinputkan
 		$data = array(
 			'id_user_login' 	=> $id_user_login,
 			'nama_karyawan'		=> $nama_karyawan,
@@ -50,18 +64,18 @@ class karyawan_model extends CI_Model
 			'modiby'		=> $modiby,
 			'modidate'		=> $modidate,
 			'row_status'	=> $row_status
-		);
-
-		/*$query = $this->db->query('insert into karyawan values(DEFAULT,$id_user_login,$nama_karyawan,
-		$jenis_kelamin,$jabatan_karyawan,$nik,$no_telepon,$email,$tempat_lahir,$tanggal_lahir,$creaby,$creadate,
-		$modiby,$modidate,$row_status)');
-		return $query;*/
-
+		);		
+		
+		// return hasil inputan sekaligus menginput
+		// 0 jika gagal, 1 jika berhasil
 		return $this->db->insert($this->_karyawan, $data);
 	}
 	public function edit()
 	{
+		// deklarasi variable dari post(), supaya lebih sederhana;
 		$post = $this->input->post();
+		
+		// insert seluruh data post ke variable yang akan diupdate
 		$id_karyawan = $post['id_karyawan'];
 		$id_user_login = $post['id_user_login'];
 		$nama_karyawan = $post['nama_karyawan'];
@@ -71,9 +85,18 @@ class karyawan_model extends CI_Model
 		$email = $post['email'];
 		$tempat_lahir = $post['tempat_lahir'];
 		$tanggal_lahir = $post['tanggal_lahir'];
+		
+		/*
+		$this->db->where('id_user_login', $_SESSION['user_id']);
+		$login = $this->db->query('select * from karyawan');		
+		$data = $login->row();
+		$modiby  = $data->nama_karyawan;
+		*/
+		
 		$modiby = 'user_login';
 		$modidate = date('Y-m-d H:i:s');
-
+		
+		// memasukkan data ke dalam array
 		$data = array(
 			'nama_karyawan'		=> $nama_karyawan,
 			'jenis_kelamin'		=> $jenis_kelamin,
@@ -85,20 +108,47 @@ class karyawan_model extends CI_Model
 			'modiby'		=> $modiby,
 			'modidate'		=> $modidate
 		);
+		
+		// set query dengan where untuk menentukan data yang akan diupdate		
 		$this->db->where('id_karyawan', $id_karyawan);
+		
+		// update data sekaligus mengembalikan nilai
+		// 0 jika gagal, 1 jika berhasil
 		return $this->db->update($this->_karyawan, $data);
 	}
 	public function hapus($id_karyawan)
 	{
+		/*
+		$this->db->where('id_user_login', $_SESSION['user_id']);
+		$login = $this->db->query('select * from karyawan');		
+		$data = $login->row();
+		$modiby  = $data->nama_karyawan;
+		*/
+		
+		$modiby = 'user_login';
+		$modidate = date('Y-m-d H:i:s');
+		
+		// set data array yang akan diupdate
+		// update row_status menjadi D ('Deactive') atau tidak aktif
 		$data = array(
-			'row_status' => 'D'
+			'row_status' => 'D',
+			'modiby' => $modiby,
+			'modidate' => $modidate
 		);
+		
+		// set query dengan where untuk menentukan data yang akan diupdate
 		$this->db->where('id_karyawan', $id_karyawan);
+		
+		// update data sekaligus mengembalikan nilai
+		// 0 jika gagal, 1 jika berhasil
 		return $this->db->update($this->_karyawan, $data);
 	}
 	public function getKaryawan($id_karyawan)
 	{
+		// mengambil data sesuai dengan id_karyawan
 		$result = $this->db->query('Select * from karyawan where id_karyawan = ' . $id_karyawan . '');
+		
+		// mengembalikan hasil query dalam bentuk row
 		return $result->row();
 	}
 }
