@@ -3,89 +3,91 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Karyawan extends CI_Controller
 {
-    // constructor
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('karyawan_model');
-		$this->load->model('user_login_model');
-    }
-
-    // login view
-    public function index()
+	// constructor
+	public function __construct()
 	{
-        // include header
-        $this->load->view('templates/header');
+		parent::__construct();
+		$this->load->model('karyawan_model');
+		$this->load->model('user_login_model');
+	}
 
-        // data karyawan
-        $data_karyawan = $this->karyawan_model->getAllData();
-        $data['karyawan'] = $data_karyawan;
-        $this->load->view('karyawan/_view', $data);
+	// login view
+	public function index()
+	{
+		// include header
+		$this->load->view('templates/admin_header');
 
-        // inlcude footer
-        $this->load->view('karyawan/footer');
-    }
-	
+		// data karyawan
+		$data_karyawan = $this->karyawan_model->getAllData();
+		$data['karyawan'] = $data_karyawan;
+		$this->load->view('karyawan/_view', $data);
+
+		// inlcude footer
+		$this->load->view('karyawan/footer');
+	}
+
 	public function page_tambah()
-    {
-        // include header
-        $this->load->view('templates/header');
-              
-        $this->load->view('karyawan/_add');
+	{
+		// include header
+		$this->load->view('templates/admin_header');
 
-        // inlcude footer
-        $this->load->view('karyawan/footer');
-    }
+		$this->load->view('karyawan/_add');
+
+		// inlcude footer
+		$this->load->view('karyawan/footer');
+	}
 	public function tambah()
 	{
 		$karyawan = $this->karyawan_model;
 		$user_login = $this->user_login_model;
-		
+
 		$result = $user_login->saveKaryawan();
-		if($result < 0){
-			$this->gagal();			
+		if ($result < 0) {
+			$this->gagal();
 			return;
 		}
 		$result = $karyawan->save();
-		if($result > 0) $this->sukses();
+		if ($result > 0) $this->sukses();
 		else $this->gagal();
 	}
 	public function page_edit($id_karyawan)
-    {
-        // include header
-        $this->load->view('templates/header');              
-			  
+	{
+		// include header
+		$this->load->view('templates/admin_header');
+
 		//ambil data karyawan
 		$data_karyawan = $this->karyawan_model->getKaryawan($id_karyawan);
 		$data['data'] = $data_karyawan;
-        $this->load->view('karyawan/_edit',$data);
+		$this->load->view('karyawan/_edit', $data);
 
-        // inlcude footer
-        $this->load->view('karyawan/footer');
-    }
+		// inlcude footer
+		$this->load->view('karyawan/footer');
+	}
 	public function edit()
 	{
 		$karyawan = $this->karyawan_model;
-					
+
 		$result = $karyawan->edit();
-		if($result > 0) $this->sukses();
+		if ($result > 0) $this->sukses();
 		else $this->gagal();
 	}
-	
+
 	public function hapus($id_karyawan)
 	{
 		$data_karyawan = $this->karyawan_model;
 		$result = $data_karyawan->hapus($id_karyawan);
-		if($result > 0) $this->sukses();
-		else $this->gagal();		
+		if ($result > 0) $this->sukses();
+		else $this->gagal();
 	}
-	
-	
-	
-	function sukses(){
+
+
+
+	function sukses()
+	{
 		redirect(base_url('Karyawan'));
 	}
-	function gagal(){
+	function gagal()
+	{
 		echo "<script>alert('Input data gagal')</script>";
 		redirect(base_url('Karyawan'));
 	}

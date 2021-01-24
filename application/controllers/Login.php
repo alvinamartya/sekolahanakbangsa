@@ -27,15 +27,19 @@ class Login extends CI_Controller
 
         // validate
         if (!isset($data_login['username']) || $data_login['username'] == "") {
+
             // username is not filled
             $data['err'] = 'Nama pengguna harus diisi!';
             $this->load->view('login', $data);
         } else if (!isset($data_login['password']) || $data_login['password'] == "") {
+
             // password is not filled
             $data['err'] = 'Kata sandi harus diisi!';
             $this->load->view('login', $data);
         } else if ($data_user != null) {
+
             if (password_verify($data_login['password'], $data_user->password)) {
+
                 // create new session
                 $session_arr = array('user_id' => $data_user->id, 'role' => $data_user->role);
                 $this->session->set_userdata($session_arr);

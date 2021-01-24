@@ -7,14 +7,14 @@ class Cluster extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('cluster_relawan_model');		
+        $this->load->model('cluster_relawan_model');
     }
 
     // login view
     public function index()
-	{
+    {
         // include header
-        $this->load->view('templates/header');
+        $this->load->view('templates/admin_header');
 
         // data karyawan
         $data_karyawan = $this->cluster_relawan_model->getAllData();
@@ -24,57 +24,60 @@ class Cluster extends CI_Controller
         // inlcude footer
         $this->load->view('cluster/footer');
     }
-	
-	public function page_tambah()
+
+    public function page_tambah()
     {
         // include header
-        $this->load->view('templates/header');
-              
+        $this->load->view('templates/admin_header');
+
         $this->load->view('cluster/_add');
 
         // inlcude footer
         $this->load->view('cluster/footer');
     }
-	public function tambah()
-	{
-		$cluster = $this->cluster_relawan_model;
-		
-		$result = $cluster->save();
-		if($result > 0) $this->sukses();
-		else $this->gagal();
-	}
-	public function page_edit($id_cluster)
+
+    public function tambah()
+    {
+        $cluster = $this->cluster_relawan_model;
+
+        $result = $cluster->save();
+        if ($result > 0) $this->sukses();
+        else $this->gagal();
+    }
+
+    public function page_edit($id_cluster)
     {
         // include header		
-        $this->load->view('templates/header');              
-			  
-		//ambil data cluster
-		$data_cluster = $this->cluster_relawan_model->getCluster($id_cluster);
-		$data['cluster'] = $data_cluster;
-        $this->load->view('cluster/_edit',$data);
+        $this->load->view('templates/admin_header');
+
+        //ambil data cluster
+        $data_cluster = $this->cluster_relawan_model->getCluster($id_cluster);
+        $data['cluster'] = $data_cluster;
+        $this->load->view('cluster/_edit', $data);
 
         // inlcude footer
         $this->load->view('cluster/footer');
     }
-	public function edit()
-	{
-		$cluster = $this->cluster_relawan_model->edit();						
-		$this->sukses();		
-	}
-	
-	public function hapus($id_karyawan)
-	{
-		$data_karyawan= $this->cluster_relawan_model->hapus($id_karyawan);
-		$this->sukses();		
-	}
-	
-	
-	
-	function sukses(){		
-		redirect(base_url('Cluster'));
-	}
-	function gagal(){
-		echo "<script>alert('Input data gagal')</script>";
-		redirect(base_url('Cluster'));
-	}
+
+    public function edit()
+    {
+        $cluster = $this->cluster_relawan_model->edit();
+        $this->sukses();
+    }
+
+    public function hapus($id_karyawan)
+    {
+        $data_karyawan = $this->cluster_relawan_model->hapus($id_karyawan);
+        $this->sukses();
+    }
+
+    function sukses()
+    {
+        redirect(base_url('Cluster'));
+    }
+    function gagal()
+    {
+        echo "<script>alert('Input data gagal')</script>";
+        redirect(base_url('Cluster'));
+    }
 }

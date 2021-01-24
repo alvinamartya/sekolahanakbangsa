@@ -10,7 +10,11 @@ class Sekolah extends CI_Controller
         $this->load->model('sekolah_model');
     }
 
-    // login view
+    /*
+    ==============================================================
+    View School
+    ==============================================================
+    */
     public function index()
     {
         // include header
@@ -19,9 +23,57 @@ class Sekolah extends CI_Controller
         // data sekolah
         $data_sekolah = $this->sekolah_model->getSekolah();
         $data['sekolah'] = $data_sekolah;
-        $this->load->view('sekolah/body', $data);
+        $this->load->view('sekolah/view/body', $data);
 
         // inlcude footer
-        $this->load->view('sekolah/footer');
+        $this->load->view('sekolah/view/footer');
+    }
+
+    /*
+    ==============================================================
+    Add School
+    ==============================================================
+    */
+    public function tambah()
+    {
+        $this->load->view('templates/admin_header');
+        $this->load->view('sekolah/add/body');
+        $this->load->view('sekolah/add/footer');
+    }
+
+    public function tambah_action()
+    {
+        $input = $this->sekolah_model->add();
+
+        if ($input > 0) $this->success();
+        else $this->add_failed();
+    }
+
+    /*
+    ==============================================================
+    Delete School
+    ==============================================================
+    */
+    function destroy($id)
+    {
+        $delete = $this->sekolah_model->delete();
+
+        if ($delete > 0) $this->success();
+        else $this->add_failed();
+    }
+
+    /*
+    ==============================================================
+    Response
+    ==============================================================
+    */
+    function success()
+    {
+        redirect(site_url('sekolah'));
+    }
+
+    function add_failed()
+    {
+        echo "<script>alert('Input data Gagal')</script>";
     }
 }

@@ -1,4 +1,3 @@
-</div>
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->
 <!-- ============================================================== -->
@@ -26,9 +25,16 @@
 <script src="<?= base_url('assets') ?>/extra-libs/c3/c3.min.js"></script>
 <script src="<?= base_url('assets') ?>/libs/chartist/dist/chartist.min.js"></script>
 <script src="<?= base_url('assets') ?>/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+<script src="<?= base_url('assets') ?>/libs/datatables/js/datatables.min.js"></script>
 <script src="<?= base_url('assets') ?>/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
 <script src="<?= base_url('assets') ?>/extra-libs/jvector/jquery-jvectormap-world-mill-en.js"></script>
 <script src="<?= base_url('assets') ?>/js/pages/dashboards/dashboard1.min.js"></script>
+<script src="<?= base_url('assets') ?>/extra-libs/datatables.net/js/jquery.dataTables.min.js"></script>
+
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="<?= base_url('assets/js/school.js') ?>"></script>
 </body>
 
 </html>
