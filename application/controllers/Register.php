@@ -8,7 +8,7 @@ class Register extends CI_Controller
         [
             'field' => 'nama_donatur',
             'label' => 'Nama Donatur',
-            'rules' => 'required|alpha',
+            'rules' => 'required|callback_alpha_space',
         ], [
             'field' => 'email_donatur',
             'label' => 'Email Donatur',
@@ -32,12 +32,16 @@ class Register extends CI_Controller
         ],
     ];
 
+    public function alpha_space($str) {
+        return (preg_match('/^[a-zA-Z ]+$/', $str) ? TRUE : FALSE);
+    }
+
     // form rules error message
     private $errorMessage = [
         'is_unique' => '%s sudah terdaftar.',
         'required' => '%s wajib diisi.',
         'valid_email' => '%s bukan email yang valid.',
-        'alpha' => '%s hanya bisa diisi dengan huruf.',
+        'alpha_space' => '%s hanya bisa diisi dengan huruf.',
         'numeric' => '%s hanya bisa diisi dengan angka.'
     ];
 
