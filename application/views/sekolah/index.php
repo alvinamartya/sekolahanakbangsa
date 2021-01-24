@@ -1,12 +1,12 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Donatur</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Sekolah</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">Donatur</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Sekolah</li>
                     </ol>
                 </nav>
             </div>
@@ -15,9 +15,6 @@
 </div>
 <!-- ============================================================== -->
 <!-- End Bread crumb and right sidebar toggle -->
-<!-- ============================================================== -->
-<!-- ============================================================== -->
-<!-- Container fluid  -->
 <!-- ============================================================== -->
 <div class="container-fluid">
     <!-- ============================================================== -->
@@ -28,7 +25,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Master Donatur</h4>
+                    <h4 class="card-title">Master Sekolah</h4>
                     <?php if ($this->session->flashdata('success')) { ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <?= $this->session->flashdata('success') ?>
@@ -38,30 +35,37 @@
                         </div>
                     <?php } ?>
                     <div class="table-responsive">
+                        <a href="<?= site_url('sekolah/tambah') ?>" class="btn btn-primary mb-2">Tambah Data Sekolah</a>
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Nama</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Email</th>
-                                    <th>No. Telepon</th>
+                                    <th>No</th>
+                                    <th>Nama Sekolah</th>
+                                    <th>Jenis Sekolah</th>
+                                    <th>Alamat Sekolah</th>
+                                    <th>Provinsi</th>
+                                    <th>Kota</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1; ?>
-                                <?php foreach ($data as $d) { ?>
+                                <?php $i = 0; ?>
+                                <?php foreach ($sekolah as $s) { ?>
                                     <tr>
-                                        <td><?= $no++ ?></td>
-                                        <td><?= $d->nama_donatur ?></td>
-                                        <td><?= $d->jenis_kelamin ?></td>
-                                        <td><?= $d->email_donatur ?></td>
-                                        <td><?= $d->no_telepon ?></td>
                                         <td>
-                                            <form action="donatur/destroy/<?= $d->id_donatur ?>" method="post">
-                                                <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
-                                            </form>
+                                            <?php
+                                            $i++;
+                                            echo $i;
+                                            ?>
+                                        </td>
+                                        <td><?= $s->nama_sekolah ?></td>
+                                        <td><?= $s->jenis_sekolah ?></td>
+                                        <td><?= $s->alamat ?></td>
+                                        <td><?= $s->provinsi ?></td>
+                                        <td><?= $s->kota ?></td>
+                                        <td>
+                                            <a href="" class="btn btn-primary">Ubah</a>
+                                            <a href="<?= site_url('sekolah/destroy/' .  $s->id_sekolah) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger">Hapus</a>
                                         </td>
                                     </tr>
                                 <?php } ?>
