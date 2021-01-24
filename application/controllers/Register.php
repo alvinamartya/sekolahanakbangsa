@@ -97,11 +97,11 @@ class Register extends CI_Controller
 
             if ($result > 0) {
                 // success message
-                $this->session->set_flashdata("success", "Register berhasil");
+                $this->session->set_flashdata("success", "Pendaftaran berhasil");
                 redirect(site_url('register/donatur'));
             } else {
                 // error message
-                $this->session->set_flashdata("failed", "Register gagal");
+                $this->session->set_flashdata("failed", "Pendaftaran gagal");
                 redirect(site_url('register/donatur'));
             }
         }

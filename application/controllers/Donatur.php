@@ -17,6 +17,7 @@ class Donatur extends CI_Controller
 
         // set page title
         $header['title'] = 'Donatur';
+
         // get data
         $data['data'] = $donatur->getAll();
 
@@ -40,5 +41,4 @@ class Donatur extends CI_Controller
         $this->session->set_flashdata("success", "Data berhasil dihapus.");
         redirect(site_url('donatur'));
     }
-
 }

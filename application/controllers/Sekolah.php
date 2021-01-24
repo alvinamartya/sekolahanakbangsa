@@ -36,7 +36,7 @@ class Sekolah extends CI_Controller
     */
     public function tambah()
     {
-        $this->load->view('templates/header');
+        $this->load->view('templates/admin_header');
         $this->load->view('sekolah/add/body');
         $this->load->view('sekolah/add/footer');
     }
@@ -54,7 +54,7 @@ class Sekolah extends CI_Controller
     Delete School
     ==============================================================
     */
-    function hapus()
+    function destroy($id)
     {
         $delete = $this->sekolah_model->delete();
 
