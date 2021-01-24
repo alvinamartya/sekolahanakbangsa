@@ -14,7 +14,7 @@ class Sekolah extends CI_Controller
     public function index()
     {
         // include header
-        $this->load->view('templates/header');
+        $this->load->view('templates/admin_header');
 
         // data sekolah
         $data_sekolah = $this->sekolah_model->getSekolah();
