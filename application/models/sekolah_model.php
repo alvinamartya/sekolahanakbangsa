@@ -31,7 +31,7 @@ class sekolah_model extends CI_Model
         $delete = $this->input->post();
         $data = array('row_status' => 'D');
         return $this->db
-            ->where('id_sekolah', $delete["id"])
+            ->where('id_sekolah', $id)
             ->update($this->_table, $data);
     }
 }

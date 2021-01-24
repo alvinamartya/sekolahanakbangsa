@@ -32,7 +32,8 @@ class Register extends CI_Controller
         ],
     ];
 
-    public function alpha_space($str) {
+    public function alpha_space($str)
+    {
         return (preg_match('/^[a-zA-Z ]+$/', $str) ? TRUE : FALSE);
     }
 
@@ -42,7 +43,7 @@ class Register extends CI_Controller
         'required' => '%s wajib diisi.',
         'valid_email' => '%s bukan email yang valid.',
         'alpha_space' => '%s hanya bisa diisi dengan huruf.',
-        'numeric' => '%s hanya bisa diisi dengan angka.'
+        'numeric' => '%s hanya bisa diisi dengan angka.',
     ];
 
     public function __construct()

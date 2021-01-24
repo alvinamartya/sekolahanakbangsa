@@ -20,23 +20,24 @@ class Karyawan extends CI_Controller
 		// data karyawan
 		$data_karyawan = $this->karyawan_model->getAllData();
 		$data['karyawan'] = $data_karyawan;
-		$this->load->view('karyawan/_view', $data);
+		$this->load->view('karyawan/index', $data);
 
 		// inlcude footer
-		$this->load->view('karyawan/footer');
+		$this->load->view('templates/admin_footer');
 	}
 
-	public function page_tambah()
+	public function tambah()
 	{
 		// include header
 		$this->load->view('templates/admin_header');
 
-		$this->load->view('karyawan/_add');
+		$this->load->view('karyawan/add');
 
 		// inlcude footer
-		$this->load->view('karyawan/footer');
+		$this->load->view('templates/admin_footer');
 	}
-	public function tambah()
+
+	public function add()
 	{
 		$karyawan = $this->karyawan_model;
 		$user_login = $this->user_login_model;
@@ -50,7 +51,8 @@ class Karyawan extends CI_Controller
 		if ($result > 0) $this->sukses();
 		else $this->gagal();
 	}
-	public function page_edit($id_karyawan)
+
+	public function ubah($id_karyawan)
 	{
 		// include header
 		$this->load->view('templates/admin_header');
@@ -58,11 +60,12 @@ class Karyawan extends CI_Controller
 		//ambil data karyawan
 		$data_karyawan = $this->karyawan_model->getKaryawan($id_karyawan);
 		$data['data'] = $data_karyawan;
-		$this->load->view('karyawan/_edit', $data);
+		$this->load->view('karyawan/edit', $data);
 
 		// inlcude footer
-		$this->load->view('karyawan/footer');
+		$this->load->view('templates/admin_footer');
 	}
+
 	public function edit()
 	{
 		$karyawan = $this->karyawan_model;
@@ -79,8 +82,6 @@ class Karyawan extends CI_Controller
 		if ($result > 0) $this->sukses();
 		else $this->gagal();
 	}
-
-
 
 	function sukses()
 	{

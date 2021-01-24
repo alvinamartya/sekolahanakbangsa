@@ -19,24 +19,24 @@ class Cluster extends CI_Controller
         // data karyawan
         $data_karyawan = $this->cluster_relawan_model->getAllData();
         $data['cluster'] = $data_karyawan;
-        $this->load->view('cluster/_view', $data);
+        $this->load->view('cluster/index', $data);
 
         // inlcude footer
-        $this->load->view('cluster/footer');
+        $this->load->view('templates/admin_footer');
     }
 
-    public function page_tambah()
+    public function tambah()
     {
         // include header
         $this->load->view('templates/admin_header');
 
-        $this->load->view('cluster/_add');
+        $this->load->view('cluster/add');
 
         // inlcude footer
-        $this->load->view('cluster/footer');
+        $this->load->view('templates/admin_footer');
     }
 
-    public function tambah()
+    public function add()
     {
         $cluster = $this->cluster_relawan_model;
 
@@ -45,7 +45,7 @@ class Cluster extends CI_Controller
         else $this->gagal();
     }
 
-    public function page_edit($id_cluster)
+    public function ubah($id_cluster)
     {
         // include header		
         $this->load->view('templates/admin_header');
@@ -53,10 +53,10 @@ class Cluster extends CI_Controller
         //ambil data cluster
         $data_cluster = $this->cluster_relawan_model->getCluster($id_cluster);
         $data['cluster'] = $data_cluster;
-        $this->load->view('cluster/_edit', $data);
+        $this->load->view('cluster/edit', $data);
 
         // inlcude footer
-        $this->load->view('cluster/footer');
+        $this->load->view('templates/admin_footer');
     }
 
     public function edit()
