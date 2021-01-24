@@ -13,8 +13,11 @@ class Cluster extends CI_Controller
     // login view
     public function index()
     {
+        // set page title
+        $header['title'] = 'Cluster Relawan';
+
         // include header
-        $this->load->view('templates/admin_header');
+        $this->load->view('templates/admin_header', $header);
 
         // data karyawan
         $data_karyawan = $this->cluster_relawan_model->getAllData();
@@ -27,8 +30,11 @@ class Cluster extends CI_Controller
 
     public function tambah()
     {
+        // set page title
+        $header['title'] = 'Tambah Cluster Relawan';
+
         // include header
-        $this->load->view('templates/admin_header');
+        $this->load->view('templates/admin_header', $header);
 
         $this->load->view('cluster/add');
 
@@ -47,8 +53,11 @@ class Cluster extends CI_Controller
 
     public function ubah($id_cluster)
     {
-        // include header		
-        $this->load->view('templates/admin_header');
+        // set page title
+        $header['title'] = 'Ubah Cluster Relawan';
+
+        // include header
+        $this->load->view('templates/admin_header', $header);
 
         //ambil data cluster
         $data_cluster = $this->cluster_relawan_model->getCluster($id_cluster);
