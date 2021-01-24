@@ -1,9 +1,34 @@
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-7 align-self-center">
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Donatur</h4>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0 p-0">
+                        <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Donatur</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Data Sekolah</h4>
-                </h6>
+                <h4 class="card-title">Master Sekolah</h4>
+                <?php if ($this->session->flashdata('success')) { ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?= $this->session->flashdata('success') ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <?php } ?>
                 <div class="table-responsive">
                     <a href="<?= site_url('sekolah/tambah') ?>" class="btn btn-primary mb-2">Tambah Data Sekolah</a>
                     <table id="school_table" class="table table-striped table-bordered no-wrap">
@@ -35,39 +60,11 @@
                                     <td><?= $s->kota ?></td>
                                     <td>
                                         <a href="" class="btn btn-primary">Ubah</a>
-                                        <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteSchool<?= $s->id_sekolah ?>">Hapus</a>
+                                        <form action="sekolah/destroy/<?= $s->id_sekolah ?>" method="post">
+                                            <button type="submit" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Hapus</button>
+                                        </form>
                                     </td>
                                 </tr>
-
-                                <!-- ============================================================== -->
-                                <!-- Start Delete Modal -->
-                                <!-- ============================================================== -->
-                                <div class="modal fade" id="deleteSchool<?= $s->id_sekolah ?>" tabindex="-1" role="dialog" aria-labelledby="ModalLabelSchool<?= $s->id_sekolah ?>" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <form action="<?= site_url('sekolah/hapus') ?>" method="POST">
-                                                <input type="text" name="id" id="id" value="<?= $s->id_sekolah ?>" class="d-none">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Hapus Data Sekolah</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    Apakah anda yakin ingin menghapus <?= $s->nama_sekolah ?>?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                    <button type="submit" class="btn btn-danger">Hapus</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- ============================================================== -->
-                                <!-- End Delete Modal -->
-                                <!-- ============================================================== -->
-
                             <?php } ?>
                         </tbody>
                     </table>

@@ -5,35 +5,28 @@ class sekolah_model extends CI_Model
 {
     private $_table = "sekolah";
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function getSekolah()
     {
-        $where = array('row_status' => 'A');
         $query = $this->db
             ->from($this->_table)
-            ->where($where)
+            ->where(['row_status' => 'A'])
             ->order_by('jenis_sekolah', 'asc')
             ->get();
 
         return $query->result();
     }
 
-    public function add()
+    public function save($data)
     {
-        $data = $this->input->post();
-        $insert_data = array(
-            'nama_sekolah' => $data["nama_sekolah"],
-            'jenis_sekolah' => $data["jenis_sekolah"],
-            'alamat' => $data["alamat"],
-            'provinsi' => $data["provinsi"],
-            'kota' => $data["kota"],
-            'creaby' => "Alvin Amarty",
-            'modiby' => "Alvin Amartya",
-        );
-
-        return $this->db->insert($this->_table, $insert_data);
+        return $this->db->insert($this->_table, $data);
     }
 
-    public function delete()
+    public function delete($id, $modiby)
     {
         $delete = $this->input->post();
         $data = array('row_status' => 'D');

@@ -43,10 +43,31 @@ class Sekolah extends CI_Controller
 
     public function tambah_action()
     {
-        $input = $this->sekolah_model->add();
+        $post = $this->input->post();
 
-        if ($input > 0) $this->success();
-        else $this->add_failed();
+        // insert data
+        $insert_data = array(
+            'nama_sekolah' => $post["nama_sekolah"],
+            'jenis_sekolah' => $post["jenis_sekolah"],
+            'alamat' => $post["alamat"],
+            'provinsi' => $post["provinsi"],
+            'kota' => $post["kota"],
+            'creaby' => "Alvin Amarty",
+            'modiby' => "Alvin Amartya",
+        );
+
+        // save school
+        $result = $this->sekolah_model->save($insert_data);
+
+        if ($result > 0) {
+            // success message
+            $this->session->set_flashdata("success", "Berhasi menambah sekolah");
+            redirect(site_url('sekolah/tambah'));
+        } else {
+            // error message
+            $this->session->set_flashdata("failed", "Gagal menambah sekolah");
+            redirect(site_url('sekolah/tambah'));
+        }
     }
 
     /*
@@ -57,23 +78,5 @@ class Sekolah extends CI_Controller
     function destroy($id)
     {
         $delete = $this->sekolah_model->delete();
-
-        if ($delete > 0) $this->success();
-        else $this->add_failed();
-    }
-
-    /*
-    ==============================================================
-    Response
-    ==============================================================
-    */
-    function success()
-    {
-        redirect(site_url('sekolah'));
-    }
-
-    function add_failed()
-    {
-        echo "<script>alert('Input data Gagal')</script>";
     }
 }

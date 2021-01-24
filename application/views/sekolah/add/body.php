@@ -3,7 +3,14 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Tambah Sekolah</h4>
-                </h6>
+                <?php if ($this->session->flashdata('success')) { ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <?= $this->session->flashdata('success') ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <?php } ?>
                 <form action="<?= site_url('sekolah/tambah_action') ?>" method="POST">
                     <label for="nama_sekolah">Nama Sekolah</label>
                     <div class="form-group">
