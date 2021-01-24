@@ -56,7 +56,7 @@
                 </form>
 
                 <p class="form-footer">Belum punya akun?</p>
-                <p><a href="#">Jadi Relawan</a> atau <a href="#">Donatur</a></p>
+                <p><a href="<?php echo site_url('register/relawan') ?>">Jadi Relawan</a> atau <a href="<?php echo site_url('register/donatur') ?>">Donatur</a></p>
             </div>
         </div>
     </div>

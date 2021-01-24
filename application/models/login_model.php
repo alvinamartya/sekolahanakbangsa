@@ -12,4 +12,27 @@ class login_model extends CI_Model
         $query = $this->db->get_where($this->_table, $where);
         return $query->row();
     }
+
+    public function save($role)
+    {
+        return $this->db->insert($this->_table, $this);
+    }
+
+    public function getLastData()
+    {
+        return $this->db->order_by('id',"desc")->limit(1)->get($this->_table)->row();
+    }
+
+    public function update($id, $data)
+    {
+        return $this->db->update($this->_table, $this, array('id' => $id));
+    }
+
+    public function delete($id)
+    {
+        $this->row_status = 'D';
+        $this->modidate = date("Y-m-d H:i:s");
+
+        return $this->db->update($this->_table, $this, array('id' => $id));
+    }
 }
