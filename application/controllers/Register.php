@@ -29,7 +29,11 @@ class Register extends CI_Controller
             'field' => 'password',
             'label' => 'Kata sandi',
             'rules' => 'required',
-        ],
+        ], [
+            'field' => 'password_confirmation',
+            'label' => 'Konfirmasi Kata sandi',
+            'rules' => 'required|matches[password]'
+        ]
     ];
 
     public function alpha_space($str)
@@ -44,6 +48,7 @@ class Register extends CI_Controller
         'valid_email' => '%s bukan email yang valid.',
         'alpha_space' => '%s hanya bisa diisi dengan huruf.',
         'numeric' => '%s hanya bisa diisi dengan angka.',
+        'matches' => '%s tidak sama'
     ];
 
     public function __construct()
