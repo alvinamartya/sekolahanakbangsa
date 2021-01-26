@@ -45,7 +45,7 @@
 
                         <div class="form-group">
                             <label for="tempat_lahir">Tempat Lahir</label>
-                            <textarea name="tempat_lahir" id="tempat_lahir" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Tempat Lahir"><?php echo set_value('tempat_lahir'); ?></textarea>
+                            <textarea name="tempat_lahir" id="tempat_lahir" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Tempat Lahir"><?= set_value('tempat_lahir'); ?></textarea>
                             <div class="invalid-feedback"><?php echo form_error('tempat_lahir'); ?></div>
                         </div>
 
