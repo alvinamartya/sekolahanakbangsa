@@ -35,7 +35,7 @@
                         </div>
                     <?php } ?>
                     <div class="table-responsive">
-                        <a href="<?= site_url('biaya_lainnya/tambah') ?>" class="btn btn-primary mb-2">Tambah Data Biaya Lainnya</a>
+                        <a href="<?= site_url('biaya-lainnya/tambah') ?>" class="btn btn-primary mb-2">Tambah Data Biaya Lainnya</a>
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
@@ -58,7 +58,7 @@
                                         <td><?= $s->nama_biaya_lainnya ?></td>
                                         <td><?= $s->deskripsi_biaya_lainnya ?></td>
                                         <td>
-                                            <a href="<?= site_url('biaya_lainnya/ubah/' .  $s->id_biaya_lainnya) ?>" class="btn btn-primary">Ubah</a>
+                                            <a href="<?= site_url('biaya-lainnya/ubah/' .  $s->id_biaya_lainnya) ?>" class="btn btn-primary">Ubah</a>
                                             <a href="<?= site_url('biaya_lainnya/destroy/' .  $s->id_biaya_lainnya) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger">Hapus</a>
                                         </td>
                                     </tr>

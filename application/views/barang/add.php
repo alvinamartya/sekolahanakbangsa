@@ -33,13 +33,13 @@
                     <form action="<?= site_url('barang/add') ?>" method="POST">
                         <div class="form-group">
                             <label for="nama_barang">Nama Barang</label>
-                            <input type="text" class="form-control <?php echo (form_error('nama_barang') != null ? 'is-invalid' : '') ?>" id="nama_barang" name="nama_barang" aria-describedby="schoolNameHelp" placeholder="Nama Barang">
+                            <input type="text" class="form-control <?php echo (form_error('nama_barang') != null ? 'is-invalid' : '') ?>" value="<?= isset($barang) ? $barang->nama_barang : '' ?>" id="nama_barang" name="nama_barang" aria-describedby="schoolNameHelp" placeholder="Nama Barang">
                             <div class="invalid-feedback"><?php echo form_error('nama_barang'); ?></div>
                         </div>
 
                         <div class="form-group">
                             <label for="deskripsi_barang">Deskripsi Barang</label>
-                            <textarea name="deskripsi_barang" id="deskripsi_barang" class="form-control <?php echo (form_error('deskripsi_barang') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Deskripsi Barang"></textarea>
+                            <textarea name="deskripsi_barang" id="deskripsi_barang" class="form-control <?php echo (form_error('deskripsi_barang') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Deskripsi Barang"><?= isset($barang) ? $barang->deskripsi_barang : '' ?></textarea>
                             <div class="invalid-feedback"><?php echo form_error('deskripsi_barang'); ?></div>
                         </div>
 

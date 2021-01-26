@@ -14,22 +14,22 @@ class biaya_lainnya_model extends CI_Model
 
     //edit data
     public function edit()
-	{
+    {
         //menampung nilai array
-		$post = $this->input->post();
-		$id_biaya_lainnya = $post['id_biaya_lainnya'];
-		$nama_biaya_lainnya = $post['nama_biaya_lainnya'];
-		$deskripsi_biaya_lainnya = $post['deskripsi_biaya_lainnya'];
-		$modiby = 'arnida';
+        $post = $this->input->post();
+        $id_biaya_lainnya = $post['id_biaya_lainnya'];
+        $nama_biaya_lainnya = $post['nama_biaya_lainnya'];
+        $deskripsi_biaya_lainnya = $post['deskripsi_biaya_lainnya'];
+        $modiby = 'arnida';
 
-		$data = array(
-			'nama_biaya_lainnya'		=> $nama_biaya_lainnya,
-			'deskripsi_biaya_lainnya'	=> $deskripsi_biaya_lainnya,
-			'modidate'		            => $modidate
-		);
-		$this->db->where('id_biaya_lainnya', $id_biaya_lainnya);
-		return $this->db->update($this->_table, $data);
-	}
+        $data = array(
+            'nama_biaya_lainnya'        => $nama_biaya_lainnya,
+            'deskripsi_biaya_lainnya'   => $deskripsi_biaya_lainnya,
+            'modiby'                    => $modiby
+        );
+        $this->db->where('id_biaya_lainnya', $id_biaya_lainnya);
+        return $this->db->update($this->_table, $data);
+    }
 
     //mengambil nilai
     public function getBiayaLainnya()
@@ -51,10 +51,10 @@ class biaya_lainnya_model extends CI_Model
 
     //mengambil data berdasarkan id
     public function getBiayaLainnyaID($id_biaya_lainnya)
-	{
-		$result = $this->db->query('Select * from biaya_lainnya where id_biaya_lainnya = ' . $id_biaya_lainnya . '');
-		return $result->row();
-	}
+    {
+        $result = $this->db->query('Select * from biaya_lainnya where id_biaya_lainnya = ' . $id_biaya_lainnya . '');
+        return $result->row();
+    }
 
     //menghapus data
     public function delete($id, $modiby)

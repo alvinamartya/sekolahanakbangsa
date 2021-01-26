@@ -35,16 +35,17 @@
                         </div>
                     <?php } ?>
                     <div class="table-responsive">
-                        <a href="<?= site_url('relawan/tambah') ?>" class="btn btn-primary mb-2">Tambah Data Relawan</a>
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Nama Relawan</th>
+                                    <th>No</th>
                                     <th>NIK</th>
-                                    <th>Tempat Lahir</th>
-                                    <th>Email</th>
+                                    <th>Nama Relawan</th>
                                     <th>Jenis Kelamin</th>
+                                    <th>No Telepon</th>
+                                    <th>Email</th>
+                                    <th>Tempat Lahir</th>
+                                    <th>Tanggal Lahir</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -58,22 +59,16 @@
                                             echo $i;
                                             ?>
                                         </td>
-                                        <td><?= $r->nama_relawan ?></td>
                                         <td><?= $r->nik ?></td>
-                                        <td><?= $r->tempat_lahir ?></td>
+                                        <td><?= $r->nama_relawan ?></td>
+                                        <td><?= $r->jenis_kelamin == "L" ? "Laki-Laki" : "Perempuan" ?></td>
+                                        <td><?= $r->no_telepon ?></td>
                                         <td><?= $r->email ?></td>
+                                        <td><?= $r->tempat_lahir ?></td>
+                                        <td><?= date_format(date_create($r->tanggal_lahir), "d/m/Y")   ?></td>
                                         <td>
-                                                <?php
-                                                if ($r->jenis_kelamin == "L") {
-                                                    echo "Laki-laki";
-                                                } else {
-                                                    echo "Perempuan";
-                                                }
-                                                ?>
-                                            </td>
-                                        <td>
-                                        <a href="<?= site_url('relawan/ubah/' .  $r->id_relawan) ?>" class="btn btn-primary">Ubah</a>
-                                            <a href="<?= site_url('relawan/hapus/' .  $r->id_relawan) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger">Hapus</a>
+                                            <a href="<?= site_url('relawan/ubah/' .  $r->id_relawan) ?>" class="btn btn-primary">Ubah</a>
+                                            <a href="<?= site_url('relawan/destroy/' .  $r->id_relawan) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger">Hapus</a>
                                         </td>
                                     </tr>
                                 <?php } ?>

@@ -33,22 +33,22 @@
                     <form action="<?= site_url('sekolah/add') ?>" method="POST">
                         <div class="form-group">
                             <label for="nama_sekolah">Nama Sekolah</label>
-                            <input type="text" class="form-control <?php echo (form_error('nama_sekolah') != null ? 'is-invalid' : '') ?>" id="nama_sekolah" name="nama_sekolah" aria-describedby="schoolNameHelp" placeholder="Nama Sekolah" value="<?php echo set_value('nama_sekolah'); ?>">
+                            <input type="text" class="form-control <?php echo (form_error('nama_sekolah') != null ? 'is-invalid' : '') ?>" id="nama_sekolah" name="nama_sekolah" aria-describedby="schoolNameHelp" placeholder="Nama Sekolah">
                             <div class="invalid-feedback"><?php echo form_error('nama_sekolah'); ?></div>
                         </div>
 
                         <div class="form-group">
                             <label for="jenis_sekolah">Jenis Sekolah</label>
                             <select name="jenis_sekolah" id="jenis_sekolah" class="form-control <?php echo (form_error('jenis_sekolah') != null ? 'is-invalid' : '') ?>">
-                                <option value="Rumah Singgah" <?= set_value("jenis_sekolah") == "Rumah Singgah" ? "selected" : "" ?>>Rumah Singgah</option>
-                                <option value="Sekolah Pedalaman" <?= set_value("jenis_sekolah") == "Sekolah Pedalaman" ? "selected" : "" ?>>Sekolah Pedalaman</option>
+                                <option value="Rumah Singgah">Rumah Singgah</option>
+                                <option value="Sekolah Pedalaman">Sekolah Pedalaman</option>
                             </select>
                             <div class="invalid-feedback"><?php echo form_error('jenis_sekolah'); ?></div>
                         </div>
 
                         <div class="form-group">
                             <label for="alamat">Alamat</label>
-                            <textarea name="alamat" id="alamat" class="form-control <?php echo (form_error('alamat') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Alamat"><?php echo set_value('alamat'); ?></textarea>
+                            <textarea name="alamat" id="alamat" class="form-control <?php echo (form_error('alamat') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Alamat"></textarea>
                             <div class="invalid-feedback"><?php echo form_error('alamat'); ?></div>
                         </div>
 
@@ -117,8 +117,7 @@
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
-<script src="<?= base_url('assets/js/add_school.js') ?>"></script>
-
+<script src="<?= base_url('assets/js/edit_school.js') ?>"></script>
 </body>
 
 </html>

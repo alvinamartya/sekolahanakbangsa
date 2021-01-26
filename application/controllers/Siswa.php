@@ -61,13 +61,13 @@ class Siswa extends CI_Controller
         //tittle
         $header['title'] = 'Siswa';
         //template header
-        $this->load->view('templates/admin_header', $header);
+        $this->load->view('templates/relawan_header', $header);
         //menampilkan data
         $data_siswa = $this->siswa_model->getSiswa();
         $data['siswa'] = $data_siswa;
         $this->load->view('siswa/index', $data);
         //template footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/relawan_footer');
     }
 
     public function tambah()
@@ -75,10 +75,10 @@ class Siswa extends CI_Controller
         // set page title
         $header['title'] = 'Tambah Siswa';
         //template header
-        $this->load->view('templates/admin_header', $header);
+        $this->load->view('templates/relawan_header', $header);
         $this->load->view('siswa/add');
         //template footer
-        $this->load->view('templates/add_school_footer');
+        $this->load->view('templates/relawan_footer');
     }
 
     public function add()
@@ -88,7 +88,6 @@ class Siswa extends CI_Controller
 
         //pengecekan
         if ($this->form_validation->run() == true) {
-            var_dump("test");
             //data array
             $insert_data = array(
                 'nama_siswa' => $post["nama_siswa"],
@@ -99,6 +98,7 @@ class Siswa extends CI_Controller
                 'tanggal_lahir' => $post["tanggal_lahir"],
                 'creaby' => "Muhamad Ivan",
             );
+
             //save data
             $result = $this->siswa_model->save($insert_data);
 
@@ -121,13 +121,13 @@ class Siswa extends CI_Controller
         //title
         $header['title'] = 'Ubah Siswa';
         //template header
-        $this->load->view('templates/admin_header', $header);
+        $this->load->view('templates/relawan_header', $header);
 
         $data_siswa = $this->siswa_model->getSiswaID($id_siswa);
         $data['data'] = $data_siswa;
         $this->load->view('siswa/edit', $data);
         //template footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/relawan_footer');
     }
 
     public function edit()

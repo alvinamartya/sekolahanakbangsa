@@ -20,7 +20,7 @@
         </div>
         <div class="login-form register-form">
             <div class="w-50">
-                <h5 class="">Daftar Donatur</h5>
+                <h5 class="">Daftar Relawan</h5>
                 <?php if ($this->session->flashdata('success')) { ?>
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?= $this->session->flashdata('success') ?>
@@ -29,12 +29,29 @@
                         </button>
                     </div>
                 <?php } ?>
-                <form action="<?= site_url("register/register_donatur") ?>" method="POST">
+                <form action="<?= site_url("register/register_relawan") ?>" method="POST">
                     <div class="form-group">
-                        <label for="nama_donatur">Nama Donatur</label>
-                        <input type="text" id="nama_donatur" class="form-control <?php echo (form_error('nama_donatur') != null ? 'is-invalid' : '') ?>" name="nama_donatur" value="<?php echo set_value('nama_donatur'); ?>">
-                        <div class="invalid-feedback"><?php echo form_error('nama_donatur'); ?></div>
+                        <label for="nik_relawan">NIK Relawan</label>
+                        <input type="number" id="nik_relawan" class="form-control <?php echo (form_error('nik_relawan') != null ? 'is-invalid' : '') ?>" name="nik_relawan" value="<?php echo set_value('nik_relawan'); ?>">
+                        <div class="invalid-feedback"><?php echo form_error('nik_relawan'); ?></div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="nama_relawan">Nama Relawan</label>
+                        <input type="text" id="nama_relawan" class="form-control <?php echo (form_error('nama_relawan') != null ? 'is-invalid' : '') ?>" name="nama_relawan" value="<?php echo set_value('nama_relawan'); ?>">
+                        <div class="invalid-feedback"><?php echo form_error('nama_relawan'); ?></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cluster">Cluster</label>
+                        <select name="cluster" id="cluster" class="form-control <?php echo (form_error('cluster') != null ? 'is-invalid' : '') ?>">
+                            <?php foreach ($cluster as $c) { ?>
+                                <option value="<?= $c->id_cluster_relawan ?>"><?= $c->nama_cluster ?></option>
+                            <?php } ?>
+                        </select>
+                        <div class="invalid-feedback"><?php echo form_error('cluster'); ?></div>
+                    </div>
+
                     <div class="form-group">
                         <label for="L" class="d-block">Jenis Kelamin</label>
                         <div class="form-check form-check-inline">
@@ -47,30 +64,41 @@
                         </div>
                         <small class="text-danger"><?php echo form_error('jenis_kelamin') ?></small>
                     </div>
+
                     <div class="form-group">
                         <label for="no_telepon">No. Telepon</label>
                         <input type="number" id="no_telepon" class="form-control <?php echo (form_error('no_telepon') != null ? 'is-invalid' : '') ?>" name="no_telepon" value="<?php echo set_value('no_telepon'); ?>">
                         <div class="invalid-feedback"><?php echo form_error('no_telepon'); ?></div>
                     </div>
+
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" id="email" class="form-control <?php echo (form_error('email_donatur') != null ? 'is-invalid' : '') ?>" name="email_donatur" value="<?php echo set_value('email_donatur'); ?>">
-                        <div class="invalid-feedback"><?php echo form_error('email_donatur'); ?></div>
+                        <input type="text" id="email" class="form-control <?php echo (form_error('email') != null ? 'is-invalid' : '') ?>" name="email" value="<?php echo set_value('email'); ?>">
+                        <div class="invalid-feedback"><?php echo form_error('email'); ?></div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="tempat_lahir">Tempat lahir</label>
+                        <input type="text" id="tempat_lahir" name="tempat_lahir" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>" name="tempat_lahir" value="<?php echo set_value('tempat_lahir'); ?>">
+                        <div class="invalid-feedback"><?php echo form_error('tempat_lahir'); ?></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tanggal_lahir">Tanggal lahir</label>
+                        <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="1971-01-01" class="form-control <?php echo (form_error('tanggal_lahir') != null ? 'is-invalid' : '') ?>">
+                        <div class="invalid-feedback"><?php echo form_error('tanggal_lahir'); ?></div>
+                    </div>
+
                     <div class="form-group">
                         <label for="username">Nama Pengguna</label>
                         <input type="text" id="username" class="form-control <?php echo (form_error('username') != null ? 'is-invalid' : '') ?>" name="username" value="<?php echo set_value('username'); ?>">
                         <div class="invalid-feedback"><?php echo form_error('username'); ?></div>
                     </div>
+
                     <div class="form-group">
                         <label for="password">Kata Sandi</label>
                         <input type="password" id="password" class="form-control <?php echo (form_error('password') != null ? 'is-invalid' : '') ?>" name="password" value="<?php echo set_value('password'); ?>">
                         <div class="invalid-feedback"><?php echo form_error('password'); ?></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password_confirmation">Konfirmasi Kata Sandi</label>
-                        <input type="password" class="form-control <?php echo (form_error('password_confirmation') != null ? 'is-invalid' : '') ?>" name="password_confirmation" value="<?php echo set_value('password_confirmation'); ?>">
-                        <div class="invalid-feedback"><?php echo form_error('password_confirmation'); ?></div>
                     </div>
 
                     <div class="form-group mt-4">

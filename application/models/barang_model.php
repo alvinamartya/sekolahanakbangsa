@@ -14,22 +14,22 @@ class barang_model extends CI_Model
 
     //edit data
     public function edit()
-	{
+    {
         //menampung nilai array
-		$post = $this->input->post();
-		$id_barang = $post['id_barang'];
-		$nama_barang = $post['nama_barang'];
-		$deskripsi_barang = $post['deskripsi_barang'];
-		$modiby = 'arnida';
+        $post = $this->input->post();
+        $id_barang = $post['id_barang'];
+        $nama_barang = $post['nama_barang'];
+        $deskripsi_barang = $post['deskripsi_barang'];
+        $modiby = 'arnida';
 
-		$data = array(
-			'nama_barang'		=> $nama_barang,
-			'deskripsi_barang'	=> $deskripsi_barang,
-			'modidate'		    => $modidate
-		);
-		$this->db->where('id_barang', $id_barang);
-		return $this->db->update($this->_table, $data);
-	}
+        $data = array(
+            'nama_barang'        => $nama_barang,
+            'deskripsi_barang'    => $deskripsi_barang,
+            'modiby'            => $modiby
+        );
+        $this->db->where('id_barang', $id_barang);
+        return $this->db->update($this->_table, $data);
+    }
 
     //mengambil nilai
     public function getBarang()
@@ -51,10 +51,10 @@ class barang_model extends CI_Model
 
     //mengambil data berdasarkan id
     public function getBarangID($id_barang)
-	{
-		$result = $this->db->query('Select * from barang where id_barang = ' . $id_barang . '');
-		return $result->row();
-	}
+    {
+        $result = $this->db->query('Select * from barang where id_barang = ' . $id_barang . '');
+        return $result->row();
+    }
 
     //menghapus data
     public function delete($id, $modiby)

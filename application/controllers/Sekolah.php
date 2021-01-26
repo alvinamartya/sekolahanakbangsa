@@ -85,8 +85,25 @@ class Sekolah extends CI_Controller
     ==============================================================
     */
     // view
-    public function tambah()
+    public function tambah($err = false)
     {
+        if ($err == false) {
+            $cookie_provinsi = array(
+                'name' => 'provinsi',
+                'value' => '',
+                'expire' => 3600,
+            );
+
+            $cookie_kota = array(
+                'name' => 'kota',
+                'value' => '',
+                'expire' => 3600,
+            );
+
+            $this->input->set_cookie($cookie_provinsi);
+            $this->input->set_cookie($cookie_kota);
+        }
+
         // set page title
         $header['title'] = 'Tambah Sekolah';
 
@@ -94,7 +111,7 @@ class Sekolah extends CI_Controller
         $this->load->view('sekolah/add');
 
         // inlcude footer
-        $this->load->view('templates/add_school_footer');
+        $this->load->view('templates/school_footer');
     }
 
     // action
@@ -127,7 +144,22 @@ class Sekolah extends CI_Controller
                 redirect(site_url('sekolah/add'));
             }
         } else {
-            $this->tambah();
+            $cookie_provinsi = array(
+                'name' => 'provinsi',
+                'value' => $post['provinsi'],
+                'expire' => 3600,
+            );
+
+            $cookie_kota = array(
+                'name' => 'kota',
+                'value' => $post['kota'],
+                'expire' => 3600,
+            );
+
+            $this->input->set_cookie($cookie_provinsi);
+            $this->input->set_cookie($cookie_kota);
+
+            $this->tambah(true);
         }
     }
 
@@ -146,5 +178,23 @@ class Sekolah extends CI_Controller
             $this->session->set_flashdata("success", "Data gagal dihapus.");
             redirect(site_url('sekolah'));
         }
+    }
+
+    /*
+    ==============================================================
+    Edit School
+    ==============================================================
+    */
+    // view
+    public function ubah($id)
+    {
+        // set page title
+        $header['title'] = 'Ubah Sekolah';
+
+        $this->load->view('templates/admin_header', $header);
+        $this->load->view('sekolah/edit');
+
+        // inlcude footer
+        $this->load->view('templates/school_footer');
     }
 }

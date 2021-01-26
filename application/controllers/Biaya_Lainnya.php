@@ -73,14 +73,21 @@ class Biaya_Lainnya extends CI_Controller
     // view
     public function tambah()
     {
+        $this->tambahView(null);
+    }
+
+    private function tambahView($data_biaya_lainnya)
+    {
         // set page title
         $header['title'] = 'Tambah Biaya Lainnya';
 
+        $data['biaya_lainnya'] = $data_biaya_lainnya;
+
         $this->load->view('templates/admin_header', $header);
-        $this->load->view('biaya_lainnya/add');
+        $this->load->view('biaya_lainnya/add', $data);
 
         // inlcude footer
-        $this->load->view('templates/add_school_footer');
+        $this->load->view('templates/admin_footer');
     }
 
     // action
@@ -109,7 +116,7 @@ class Biaya_Lainnya extends CI_Controller
                 redirect(site_url('biaya_lainnya/add'));
             }
         } else {
-            $this->tambah();
+            $this->tambahView((object)$post);
         }
     }
 
@@ -120,12 +127,17 @@ class Biaya_Lainnya extends CI_Controller
     */
     public function ubah($id_biaya_lainnya)
     {
+        $data_biaya_lainnya = $this->biaya_lainnya_model->getBiayaLainnyaID($id_biaya_lainnya);
+        $this->ubahView($data_biaya_lainnya);
+    }
+
+    public function ubahView($data_biaya_lainnya)
+    {
         //title
         $header['title'] = 'Ubah Biaya Lainnya';
         //template header
         $this->load->view('templates/admin_header', $header);
 
-        $data_biaya_lainnya = $this->biaya_lainnya_model->getBiayaLainnyaID($id_biaya_lainnya);
         $data['data'] = $data_biaya_lainnya;
         $this->load->view('biaya_lainnya/edit', $data);
         //template footer
@@ -135,8 +147,20 @@ class Biaya_Lainnya extends CI_Controller
     public function edit()
     {
         //models->fungsi edit
-        $biaya_lainnya = $this->biaya_lainnya_model->edit();
-        redirect(site_url('biaya_lainnya'));
+        if ($this->form_validation->run() == true) {
+            $result = $this->biaya_lainnya_model->edit();
+            if ($result > 0) {
+                $this->session->set_flashdata("failed", "Berhasil mengubah biaya lainnya");
+                redirect(site_url('biaya-lainnya'));
+            } else {
+                // error message
+                $this->session->set_flashdata("failed", "Gagal mengubah biaya lainnya");
+                redirect(site_url('biaya-lainnya/edit'));
+            }
+        } else {
+            $data = $this->input->post();
+            $this->ubahView((object)$data);
+        }
     }
 
     /*
