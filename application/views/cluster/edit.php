@@ -24,27 +24,19 @@
 
 				<div class="form-group">
 					<label for="nama_cluster">Nama Cluster</label>
-					<input type="text" name="nama_cluster" class="form-control" required value="<?php echo $cluster->nama_cluster ?>">
+					<input type="text" name="nama_cluster" class="form-control <?php echo (form_error('nama_cluster') != null ? 'is-invalid' : '') ?>" value="<?php echo $cluster->nama_cluster ?>">
+					<div class="invalid-feedback"><?php echo form_error('nama_cluster'); ?></div>
 				</div>
 
 				<div class="form-group">
 					<label for="ideskripsi">Deskripsi Cluster</label>
-					<textarea id="ideskripsi" class="form-control" onkeyup="insert()"><?php echo $cluster->deskripsi_cluster ?></textarea>
-					<input type="hidden" name="deskripsi_cluster" id="deskripsi" value="<?php echo $cluster->deskripsi_cluster ?>">
+					<textarea id="ideskripsi" class="form-control <?php echo (form_error('deskripsi_cluster') != null ? 'is-invalid' : '') ?>" name="deskripsi_cluster"><?php echo $cluster->deskripsi_cluster ?></textarea>
+					<div class="invalid-feedback"><?php echo form_error('deskripsi_cluster'); ?></div>
 				</div>
 
 				<input type="submit" id="btnSubmit" class="btn btn-primary" value="Perbarui">
-				<a href="<?php echo base_url('Cluster') ?>" class="btn btn-danger">Kembali</a>
+				<a href="<?php echo base_url('cluster') ?>" class="btn btn-danger">Kembali</a>
 			</form>
 		</div>
 	</div>
 </div>
-
-<script>
-	function insert() {
-		var des = document.getElementById("ideskripsi").value;
-
-		document.getElementById("deskripsi").value = des;
-
-	}
-</script>

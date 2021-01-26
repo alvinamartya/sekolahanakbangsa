@@ -23,7 +23,7 @@ class cluster_relawan_model extends CI_Model
 
 		/*
 		$this->db->where('id_user_login', $_SESSION['user_id']);
-		$login = $this->db->query('select * from karyawan');		
+		$login = $this->db->query('select * from karyawan');
 		$data = $login->row();
 		$creaby  = $data->nama_karyawan;
 		*/
@@ -62,7 +62,7 @@ class cluster_relawan_model extends CI_Model
 
 		/*
 		$this->db->where('id_user_login', $_SESSION['user_id']);
-		$login = $this->db->query('select * from karyawan');		
+		$login = $this->db->query('select * from karyawan');
 		$data = $login->row();
 		$modiby  = $data->nama_karyawan;
 		*/
@@ -78,7 +78,7 @@ class cluster_relawan_model extends CI_Model
 			'modidate'		=> $modidate
 		);
 
-		// set query dengan where untuk menentukan data yang akan diupdate		
+		// set query dengan where untuk menentukan data yang akan diupdate
 		$this->db->where('id_cluster_relawan', $id_cluster_relawan);
 
 		// update data sekaligus mengembalikan nilai
@@ -90,7 +90,7 @@ class cluster_relawan_model extends CI_Model
 	{
 		/*
 		$this->db->where('id_user_login', $_SESSION['user_id']);
-		$login = $this->db->query('select * from karyawan');		
+		$login = $this->db->query('select * from karyawan');
 		$data = $login->row();
 		$modiby  = $data->nama_karyawan;
 		*/

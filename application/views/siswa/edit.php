@@ -18,35 +18,30 @@
 <div class="container-fluid">
 	<div class="card">
 		<div class="card-body">
-			<form method="post" action="<?php echo base_url('Siswa/edit') ?>" autocomplete="off">
-				<div class="row">
-					<input type="hidden" value=<?php echo $data->id_siswa ?> name="id_siswa">
-					<div class="col">
-						Nama siswa
-						<input type="text" name="nama_siswa" class="form-control <?php echo (form_error('nama_siswa') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->nama_siswa ?>">
-						<div class="invalid-feedback"><?php echo form_error('nama_siswa'); ?></div><br>
-					</div>
+			<form method="post" action="<?php echo base_url('siswa/edit') ?>" autocomplete="off">
+				<input type="hidden" value=<?php echo $data->id_siswa ?> name="id_siswa">
+				<div class="form-group">
+					<label for="nama_siswa">Nama Siswa</label>
+					<input type="text" class="form-control <?php echo (form_error('nama_siswa') != null ? 'is-invalid' : '') ?>" id="nama_siswa" name="nama_siswa" aria-describedby="schoolNameHelp" value="<?php echo $data->nama_siswa ?>" placeholder="Nama Siswa">
+					<div class="invalid-feedback"><?php echo form_error('nama_siswa'); ?></div>
 				</div>
-				<div class="row">
-					<div class="col">
-						NISN
-						<input type="number" name="nisn" class="form-control <?php echo (form_error('nisn') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->nisn ?>">
-						<div class="invalid-feedback"><?php echo form_error('nisn'); ?></div><br>
-					</div>
+
+				<div class="form-group">
+					<label for="nisn">NISN</label>
+					<input type="number" class="form-control <?php echo (form_error('nisn') != null ? 'is-invalid' : '') ?>" id="nisn" name="nisn" aria-describedby="schoolNameHelp" value="<?php echo $data->nisn ?>" placeholder="NISN">
+					<div class="invalid-feedback"><?php echo form_error('nisn'); ?></div>
 				</div>
-				<div class="row">
-					<div class="col">
-						Tempat lahir
-						<input type="text" name="tempat_lahir" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->tempat_lahir ?>">
-						<div class="invalid-feedback"><?php echo form_error('tempat_lahir'); ?></div>
-					</div>
+
+				<div class="form-group">
+					<label for="tempat_lahir">Tempat Lahir</label>
+					<textarea name="tempat_lahir" id="tempat_lahir" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Tempat Lahir"><?= $data->tempat_lahir ?></textarea>
+					<div class="invalid-feedback"><?php echo form_error('tempat_lahir'); ?></div>
 				</div>
-				<div class="row">
-					<div class="col">
-						Tanggal lahir
-						<input type="date" name="tanggal_lahir" class="form-control" value="<?php echo date("Y-m-d", strtotime($data->tanggal_lahir)); ?>">
-						<div class="invalid-feedback"><?php echo form_error('tanggal_lahir'); ?></div>
-					</div>
+
+				<div class="form-group">
+					<label for="tanggal_lahir">Tanggal lahir</label>
+					<input type="date" name="tanggal_lahir" class="form-control" value="<?php echo date('Y-m-d', strtotime($data->tanggal_lahir)) ?>">
+					<div class="invalid-feedback"><?php echo form_error('tanggal_lahir'); ?></div>
 				</div>
 
 				<div class="form-group">
@@ -60,22 +55,23 @@
 					</select>
 					<div class="invalid-feedback"><?php echo form_error('sekolah'); ?></div>
 				</div>
-				<div class="row">
-					<div class="col">
-						<label>Jenis kelamin</label><br>
-						<?php if ($data->jenis_kelamin == 'L') { ?>
-							<label class="radio-inline"> <input type="radio" checked value="L" name="jenis_kelamin"> Laki - laki</label>
-							<label class="radio-inline"><input type="radio" value="P" name="jenis_kelamin"> Perempuan</label>
-						<?php } else { ?>
-							<label class="radio-inline"> <input type="radio" value="L" name="jenis_kelamin"> Laki - laki</label>
-							<label class="radio-inline"><input type="radio" checked value="P" name="jenis_kelamin"> Perempuan</label>
-						<?php  } ?>
+
+				<div class="form-group">
+					<label for="L" class="d-block">Jenis Kelamin</label>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="L" name="jenis_kelamin" id="jenis_kelamin" value="L" <?php echo ($data->jenis_kelamin == 'L' ? 'checked' : '') ?>>
+						<label class="form-check-label" for="L">Laki-laki</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="P" name="jenis_kelamin" id="jenis_kelamin" value="P" <?php echo ($data->jenis_kelamin == 'P' ? 'checked' : '') ?>>
+						<label class="form-check-label" for="P">Perempuan</label>
 					</div>
 					<div class="invalid-feedback"><?php echo form_error('jenis_kelamin'); ?></div>
 				</div>
+
 				<div>
 					<button id="btn-save" type="submit" class="btn btn-primary">Perbarui</button>
-					<a href="<?= site_url('sekolah') ?>" class="btn btn-danger">Kembali</a>
+					<a href="<?= site_url('siswa') ?>" class="btn btn-danger">Kembali</a>
 				</div>
 			</form>
 		</div>

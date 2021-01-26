@@ -8,7 +8,7 @@ class Sekolah extends CI_Controller
         [
             'field' => 'nama_sekolah',
             'label' => 'Nama Sekolah',
-            'rules' => 'required|callback_alpha_space'
+            'rules' => 'required'
         ], [
             'field' => 'jenis_sekolah',
             'label' => 'Jenis Sekolah',
@@ -81,7 +81,7 @@ class Sekolah extends CI_Controller
     */
     public function index()
     {
-        // set employee 
+        // set employee
         $header['name'] =  $this->getKaryawanName();
         $header['role'] =  $this->getKaryawanRole();
 
@@ -128,7 +128,7 @@ class Sekolah extends CI_Controller
         // set page title
         $header['title'] = 'Tambah Sekolah';
 
-        // set employee 
+        // set employee
         $header['name'] =  $this->getKaryawanName();
         $header['role'] =  $this->getKaryawanRole();
 
@@ -159,6 +159,7 @@ class Sekolah extends CI_Controller
             $result = $this->sekolah_model->save($insert_data);
 
             if ($result > 0) {
+                $this->session->set_flashdata("success", "Data berhasil ditambahkan.");
                 redirect(site_url('sekolah'));
             } else {
                 // error message
@@ -219,7 +220,7 @@ class Sekolah extends CI_Controller
         // set page title
         $header['title'] = 'Ubah Sekolah';
 
-        // set employee 
+        // set employee
         $header['name'] =  $this->getKaryawanName();
         $header['role'] =  $this->getKaryawanRole();
 
@@ -265,6 +266,7 @@ class Sekolah extends CI_Controller
             $result = $this->sekolah_model->update($id, $update);
 
             if ($result > 0) {
+                $this->session->set_flashdata("success", "Data berhasil diubah");
                 redirect(site_url('sekolah'));
             } else {
                 // error message

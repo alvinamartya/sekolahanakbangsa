@@ -123,7 +123,7 @@
 				<!-- Sidebar navigation-->
 				<nav class="sidebar-nav">
 					<ul id="sidebarnav">
-						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'dashboard' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
+						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'dashboard' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
 							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'dashboard' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url("dashboard/admin") ?>" aria-expanded="false">
 								<i class="fa fa-home"></i><span class="hide-menu">Dashboard</span>
 							</a>
@@ -131,25 +131,25 @@
 						<li class="list-divider"></li>
 						<li class="nav-small-cap"><span class="hide-menu">Manajemen Data</span></li>
 
-						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'barang' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
+						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'barang' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
 							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'barang' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('barang') ?>" aria-expanded="false">
 								<i class="fa fa-box-open"></i><span class="hide-menu">Barang</span>
 							</a>
 						</li>
 
-						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'biaya-lainnya' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
+						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'biaya-lainnya' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
 							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'biaya-lainnya' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('biaya-lainnya') ?>" aria-expanded="false">
 								<i class="fa fa-boxes"></i><span class="hide-menu">Biaya Lainnya</span>
 							</a>
 						</li>
 
-						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'cluster' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
+						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'cluster' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
 							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'cluster' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('cluster') ?>" aria-expanded="false">
 								<i class="fas fa-cubes"></i><span class="hide-menu">Cluster Relawan</span>
 							</a>
 						</li>
 
-						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'sekolah' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
+						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'sekolah' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
 							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'sekolah' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('sekolah') ?>" aria-expanded="false">
 								<i class="fas fa-graduation-cap"></i><span class="hide-menu">Sekolah</span>
 							</a>
@@ -158,27 +158,27 @@
 						<li class="list-divider"></li>
 						<li class="nav-small-cap"><span class="hide-menu">Manajemen SDM</span></li>
 
-						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'donatur' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
+						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'donatur' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
 							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'donatur' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('donatur') ?>" aria-expanded="false">
 								<i class="fas fa-user-shield"></i><span class="hide-menu">Donatur</span>
 							</a>
 						</li>
 
 						<?php if ($role == 'Super Admin') { ?>
-							<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'karyawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
+							<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'karyawan' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
 								<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'karyawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('karyawan') ?>" aria-expanded="false">
 									<i class="fas fa-user-tie"></i><span class="hide-menu">Karyawan</span>
 								</a>
 							</li>
 						<?php } ?>
 
-						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'sdm-relawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
+						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'sdm-relawan' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
 							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'sdm-relawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('sdm-relawan') ?>" aria-expanded="false">
 								<i class="fa fa-users"></i><span class="hide-menu">Pengolahan SDM</span>
 							</a>
 						</li>
 
-						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'relawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
+						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'relawan' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
 							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'relawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('relawan') ?>" aria-expanded="false">
 								<i class="fas fa-people-carry"></i><span class="hide-menu">Relawan</span>
 							</a>
@@ -187,7 +187,7 @@
 						<li class="list-divider"></li>
 						<li class="nav-small-cap"><span class="hide-menu">Donasi</span></li>
 
-						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'validasi-uang-masuk' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
+						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'validasi-uang-masuk' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
 							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'validasi-uang-masuk' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('validasi-uang-masuk') ?>" aria-expanded="false">
 								<i class="fa fa-check-double"></i><span class="hide-menu">Validasi Uang Masuk</span>
 							</a>

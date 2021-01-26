@@ -101,6 +101,12 @@
                         <div class="invalid-feedback"><?php echo form_error('password'); ?></div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="password_confirmation">Konfirmasi Kata Sandi</label>
+                        <input type="password" id="password_confirmation" class="form-control <?php echo (form_error('password_confirmation') != null ? 'is-invalid' : '') ?>" name="password_confirmation" value="<?php echo set_value('password_confirmation'); ?>">
+                        <div class="invalid-feedback"><?php echo form_error('password_confirmation'); ?></div>
+                    </div>
+
                     <div class="form-group mt-4">
                         <button type="submit" class="btn btn-danger w-100"><i class="fa fa-sign-in"></i> Daftar</button>
                     </div>
