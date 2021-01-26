@@ -24,7 +24,7 @@
 			<form method="post" action="<?php echo base_url('Cluster/tambah') ?>" autocomplete="off">
 				<div class="form-group">
 					<label for="nama_cluster">Nama Cluster</label>
-					<input type="text" name="nama_cluster" class="form-control" required>
+					<input type="text" name="nama_cluster" class="form-control">
 				</div>
 
 				<div class="form-group">

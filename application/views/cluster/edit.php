@@ -19,24 +19,20 @@
 <div class="container-fluid">
 	<div class="card">
 		<div class="card-body">
-			<div class="card-header">Edit Data Cluster</div>
 			<form method="post" action="<?php echo base_url('cluster/edit') ?>" autocomplete="off">
-				<br>
-				<input type="hidden" name="id_cluster_relawan" value="<?php echo $cluster->id_cluster_relawan ?>" >
+				<input type="hidden" name="id_cluster_relawan" value="<?php echo $cluster->id_cluster_relawan ?>">
+
 				<div class="form-group">
-					
 					<label for="nama_cluster">Nama Cluster</label>
 					<input type="text" name="nama_cluster" class="form-control" required value="<?php echo $cluster->nama_cluster ?>">
-					
 				</div>
+
 				<div class="form-group">
-					
 					<label for="ideskripsi">Deskripsi Cluster</label>
 					<textarea id="ideskripsi" class="form-control" onkeyup="insert()"><?php echo $cluster->deskripsi_cluster ?></textarea>
 					<input type="hidden" name="deskripsi_cluster" id="deskripsi" value="<?php echo $cluster->deskripsi_cluster ?>">
-					
-				</div>				
-				<br>				
+				</div>
+
 				<input type="submit" id="btnSubmit" class="btn btn-primary" value="Perbarui">
 				<a href="<?php echo base_url('Cluster') ?>" class="btn btn-danger">Batal</a>
 			</form>
@@ -45,11 +41,10 @@
 </div>
 
 <script>
-	function insert()
-	{	
+	function insert() {
 		var des = document.getElementById("ideskripsi").value;
-		
+
 		document.getElementById("deskripsi").value = des;
-		
+
 	}
 </script>

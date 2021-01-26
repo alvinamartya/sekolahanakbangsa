@@ -8,7 +8,7 @@ class Barang extends CI_Controller
         [
             'field' => 'nama_barang',
             'label' => 'Nama Barang',
-            'rules' => 'required'
+            'rules' => 'required|callback_alpha_space'
         ], [
             'field' => 'deskripsi_barang',
             'label' => 'Deskripsi Barang',
@@ -73,14 +73,21 @@ class Barang extends CI_Controller
     // view
     public function tambah()
     {
+        $this->tambahView(null);
+    }
+
+    private function tambahView($data_barang)
+    {
         // set page title
         $header['title'] = 'Tambah Barang';
 
+        $data['barang'] = $data_barang;
+
         $this->load->view('templates/admin_header', $header);
-        $this->load->view('barang/add');
+        $this->load->view('barang/add', $data);
 
         // inlcude footer
-        $this->load->view('templates/add_school_footer');
+        $this->load->view('templates/admin_footer');
     }
 
     // action
@@ -89,7 +96,6 @@ class Barang extends CI_Controller
         $post = $this->input->post();
 
         if ($this->form_validation->run() == true) {
-            var_dump("test");
 
             // insert data
             $insert_data = array(
@@ -109,7 +115,7 @@ class Barang extends CI_Controller
                 redirect(site_url('barang/add'));
             }
         } else {
-            $this->tambah();
+            $this->tambahView((object)$post);
         }
     }
 
@@ -120,14 +126,21 @@ class Barang extends CI_Controller
     */
     public function ubah($id_barang)
     {
+        $data_barang = $this->barang_model->getBarangID($id_barang);
+        $this->ubahView($data_barang);
+    }
+
+    private function ubahView($data_barang)
+    {
         //title
         $header['title'] = 'Ubah Barang';
         //template header
         $this->load->view('templates/admin_header', $header);
 
-        $data_barang = $this->barang_model->getBarangID($id_barang);
         $data['data'] = $data_barang;
         $this->load->view('barang/edit', $data);
+
+
         //template footer
         $this->load->view('templates/admin_footer');
     }
@@ -135,8 +148,20 @@ class Barang extends CI_Controller
     public function edit()
     {
         //models->fungsi edit
-        $barang = $this->barang_model->edit();
-        redirect(site_url('barang'));
+        if ($this->form_validation->run() == true) {
+            $result = $this->barang_model->edit();
+            if ($result > 0) {
+                $this->session->set_flashdata("failed", "Berhasil mengubah barang");
+                redirect(site_url('barang'));
+            } else {
+                // error message
+                $this->session->set_flashdata("failed", "Gagal mengubah barang");
+                redirect(site_url('barang/edit'));
+            }
+        } else {
+            $data = $this->input->post();
+            $this->ubahView((object)$data);
+        }
     }
 
     /*

@@ -13,7 +13,7 @@ class Relawan extends CI_Controller
             'label' => 'Nama Relawan',
             'rules' => 'required|callback_alpha_space',
         ], [
-            'field' => 'cluster',
+            'field' => 'id_cluster_relawan',
             'label' => 'Cluster Relawan',
             'rules' => 'required',
         ], [
@@ -141,10 +141,11 @@ class Relawan extends CI_Controller
     public function edit($id_relawan)
     {
         $post = $this->input->post();
+
         if ($this->form_validation->run() == true) {
             // relawan data
             $relawan_data = [
-                'id_cluster_relawan' => $post['cluster'],
+                'id_cluster_relawan' => $post['id_cluster_relawan'],
                 'nik' => $post['nik'],
                 'nama_relawan' => $post['nama_relawan'],
                 'jenis_kelamin' => $post['jenis_kelamin'],
@@ -158,6 +159,7 @@ class Relawan extends CI_Controller
             $result = $this
                 ->relawan_model
                 ->update($id_relawan, $relawan_data);
+
             if ($result > 0) {
                 // success message
                 $this->session->set_flashdata("success", "Ubah data relawan berhasil");

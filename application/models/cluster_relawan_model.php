@@ -85,6 +85,7 @@ class cluster_relawan_model extends CI_Model
 		// 0 jika gagal, 1 jika berhasil
 		return $this->db->update($this->_cluster, $data);
 	}
+
 	public function hapus($id_cluster_relawan)
 	{
 		/*

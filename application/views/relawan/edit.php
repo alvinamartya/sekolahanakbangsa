@@ -35,13 +35,15 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="cluster">Cluster</label>
-                    <select name="cluster" id="cluster" class="form-control <?php echo (form_error('cluster') != null ? 'is-invalid' : '') ?>">
+                    <label for="id_cluster_relawan">Cluster</label>
+                    <select name="id_cluster_relawan" id="id_cluster_relawan" class="form-control <?php echo (form_error('id_cluster_relawan') != null ? 'is-invalid' : '') ?>">
                         <?php foreach ($cluster as $c) { ?>
-                            <option value="<?= $c->id_cluster_relawan ?>" <?= $c->id_cluster_relawan == $r->id_cluster_relawan ? 'selected' : '' ?>><?= $c->nama_cluster ?></option>
+                            <option value="<?= $c->id_cluster_relawan ?>" <?= $c->id_cluster_relawan == $r->id_cluster_relawan ? 'selected' : '' ?>>
+                                <?= $c->nama_cluster ?>
+                            </option>
                         <?php } ?>
                     </select>
-                    <div class="invalid-feedback"><?php echo form_error('cluster'); ?></div>
+                    <div class="invalid-feedback"><?php echo form_error('id_cluster_relawan'); ?></div>
                 </div>
 
                 <div class="form-group">
@@ -82,7 +84,7 @@
                 </div>
 
                 <div>
-                    <button id="btn-save" type="submit" class="btn btn-primary">Simpan</button>
+                    <button id="btn-save" type="submit" class="btn btn-primary">Perbarui</button>
                     <a href="<?= site_url('relawan') ?>" class="btn btn-danger">Batal</a>
                 </div>
             </form>

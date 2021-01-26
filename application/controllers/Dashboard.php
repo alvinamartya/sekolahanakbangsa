@@ -7,7 +7,7 @@ class Dashboard extends CI_Controller
     public function admin()
     {
         // set page title
-        $header['title'] = "Dashboard";
+        $header['title'] = "Dashboard Admin";
 
         $this->load->view('templates/admin_header', $header);
         $this->load->view('dashboard/admin');
@@ -17,7 +17,7 @@ class Dashboard extends CI_Controller
     public function relawan()
     {
         // set page title
-        $header['title'] = "Dashboard";
+        $header['title'] = "Dashboard Relawan";
 
         $this->load->view('templates/relawan_header', $header);
         $this->load->view('dashboard/relawan');

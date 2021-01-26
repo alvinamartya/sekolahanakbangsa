@@ -52,3 +52,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['biaya-lainnya'] = 'biaya_lainnya';
+$route['biaya-lainnya/tambah'] = 'biaya_lainnya/tambah';
+$route['biaya-lainnya/ubah/(:any)'] = 'biaya_lainnya/ubah/$1';

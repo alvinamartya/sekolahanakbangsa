@@ -66,4 +66,11 @@ class Login extends CI_Controller
             $this->load->view('login', $data);
         }
     }
+
+    public function logout()
+    {
+        $session_arr = array('user_id' => null, 'role' => null);
+        $this->session->set_userdata($session_arr);
+        redirect(site_url(''));
+    }
 }

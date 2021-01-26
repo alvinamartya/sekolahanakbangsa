@@ -33,19 +33,19 @@
                     <form action="<?= site_url('biaya_lainnya/add') ?>" method="POST">
                         <div class="form-group">
                             <label for="nama_biaya_lainnya">Nama Biaya Lainnya</label>
-                            <input type="text" class="form-control <?php echo (form_error('nama_biaya_lainnya') != null ? 'is-invalid' : '') ?>" id="nama_biaya_lainnya" name="nama_biaya_lainnya" aria-describedby="schoolNameHelp" placeholder="Nama Biaya Lainnya">
+                            <input type="text" class="form-control <?php echo (form_error('nama_biaya_lainnya') != null ? 'is-invalid' : '') ?>" value="<?= isset($biaya_lainnya) ? $biaya_lainnya->nama_biaya_lainnya : '' ?>" id="nama_biaya_lainnya" name="nama_biaya_lainnya" aria-describedby="schoolNameHelp" placeholder="Nama Biaya Lainnya">
                             <div class="invalid-feedback"><?php echo form_error('nama_biaya_lainnya'); ?></div>
                         </div>
 
                         <div class="form-group">
                             <label for="deskripsi_biaya_lainnya">Deskripsi Biaya Lainnya</label>
-                            <textarea name="deskripsi_biaya_lainnya" id="deskripsi_biaya_lainnya" class="form-control <?php echo (form_error('deskripsi_biaya_lainnya') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Deskripsi Biaya Lainnya"></textarea>
+                            <textarea name="deskripsi_biaya_lainnya" id="deskripsi_biaya_lainnya" class="form-control <?php echo (form_error('deskripsi_biaya_lainnya') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Deskripsi Biaya Lainnya"><?= isset($biaya_lainnya) ? $biaya_lainnya->deskripsi_biaya_lainnya : '' ?></textarea>
                             <div class="invalid-feedback"><?php echo form_error('deskripsi_biaya_lainnya'); ?></div>
                         </div>
 
                         <div>
                             <button id="btn-save" type="submit" class="btn btn-primary">Simpan</button>
-                            <a href="<?= site_url('biaya_lainnya') ?>" class="btn btn-danger">Batal</a>
+                            <a href="<?= site_url('biaya_lainnya') ?>" class="btn btn-danger">Kembali</a>
                         </div>
                     </form>
                 </div>
