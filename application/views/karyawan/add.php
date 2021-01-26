@@ -64,9 +64,9 @@
 					</div>
 				</div> -->
 
-				<div class="form-group">					
+				<div class="form-group">
 					<label for="nik">NIK</label>
-					<input type="number" name="nik" class="form-control<?php echo (form_error('nik') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('nik'); ?>"><br>					
+					<input type="number" name="nik" class="form-control<?php echo (form_error('nik') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('nik'); ?>"><br>
 					<div class="invalid-feedback"><?php echo form_error('nik'); ?></div>
 				</div>
 				<div class="form-group">
@@ -110,24 +110,24 @@
 
 				<div>
 					<button id="btn-save" type="submit" class="btn btn-primary">Simpan</button>
-					<a href="<?= site_url('karyawan') ?>" class="btn btn-danger">Batal</a>
+					<a href="<?= site_url('karyawan') ?>" class="btn btn-danger">Kembali</a>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
 <script>
-	function check() {		
+	function check() {
 
 		// ambil data dari inputan password dan verifikasi
 		var pass = document.getElementById("password").value;
 		var vpass = document.getElementById("ver_password").value;
-		
+
 		// pengecekan apakah ada isinya, jika kosong fungsi dihentikan
 		if (pass == "" || vpass == "") {
 			return;
 		}
-		
+
 		// pengecekan apakah password dan verifikasi sudah sama
 		if (pass != vpass) {
 			document.getElementById("ipassword").innerHTML = "Kata sandi tidak sesuai!";

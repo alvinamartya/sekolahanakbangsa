@@ -85,7 +85,7 @@
 
                 <div>
                     <button id="btn-save" type="submit" class="btn btn-primary">Perbarui</button>
-                    <a href="<?= site_url('relawan') ?>" class="btn btn-danger">Batal</a>
+                    <a href="<?= site_url('relawan') ?>" class="btn btn-danger">Kembali</a>
                 </div>
             </form>
         </div>

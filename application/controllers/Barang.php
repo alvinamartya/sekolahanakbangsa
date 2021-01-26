@@ -35,12 +35,30 @@ class Barang extends CI_Controller
 
         //load ke model siswa
         $this->load->model('barang_model');
+        $this->load->model('karyawan_model');
+
         // form validation
         $this->load->library('form_validation');
         // set rules
         $this->form_validation->set_rules($this->rules);
         // set error message
         $this->form_validation->set_message($this->errorMessage);
+    }
+
+    private function getKaryawanName()
+    {
+        $this->load->model('karyawan_model');
+        $user_id = $this->session->user_id;
+        $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+        return $karyawan->nama_karyawan;
+    }
+
+    private function getKaryawanRole()
+    {
+        $this->load->model('karyawan_model');
+        $user_id = $this->session->user_id;
+        $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+        return $karyawan->jabatan_karyawan;
     }
 
     /*
@@ -50,6 +68,10 @@ class Barang extends CI_Controller
     */
     public function index()
     {
+        // set employee
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
         // set page title
         $header['title'] = 'Barang';
 
@@ -62,7 +84,7 @@ class Barang extends CI_Controller
         $this->load->view('barang/index', $data);
 
         // inlcude footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/footer');
     }
 
     /*
@@ -79,15 +101,16 @@ class Barang extends CI_Controller
     private function tambahView($data_barang)
     {
         // set page title
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
         $header['title'] = 'Tambah Barang';
-
         $data['barang'] = $data_barang;
 
         $this->load->view('templates/admin_header', $header);
         $this->load->view('barang/add', $data);
 
         // inlcude footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/footer');
     }
 
     // action
@@ -96,18 +119,19 @@ class Barang extends CI_Controller
         $post = $this->input->post();
 
         if ($this->form_validation->run() == true) {
-
             // insert data
             $insert_data = array(
                 'nama_barang' => $post["nama_barang"],
                 'deskripsi_barang' => $post["deskripsi_barang"],
-                'creaby' => "Arnida",
+                'creaby' => $this->getKaryawanName(),
+                'modiby' => $this->getKaryawanName(),
             );
 
             // save barang
             $result = $this->barang_model->save($insert_data);
 
             if ($result > 0) {
+                $this->session->set_flashdata("success", "Berhasil menambah barang");
                 redirect(site_url('barang'));
             } else {
                 // error message
@@ -134,6 +158,9 @@ class Barang extends CI_Controller
     {
         //title
         $header['title'] = 'Ubah Barang';
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
         //template header
         $this->load->view('templates/admin_header', $header);
 
@@ -142,20 +169,20 @@ class Barang extends CI_Controller
 
 
         //template footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/footer');
     }
 
     public function edit()
     {
         //models->fungsi edit
         if ($this->form_validation->run() == true) {
-            $result = $this->barang_model->edit();
+            $result = $this->barang_model->edit($this->getKaryawanName());
             if ($result > 0) {
-                $this->session->set_flashdata("failed", "Berhasil mengubah barang");
+                $this->session->set_flashdata("success", "Berhasil mengubah barang");
                 redirect(site_url('barang'));
             } else {
                 // error message
-                $this->session->set_flashdata("failed", "Gagal mengubah barang");
+                $this->session->set_flashdata("success", "Gagal mengubah barang");
                 redirect(site_url('barang/edit'));
             }
         } else {
@@ -171,7 +198,7 @@ class Barang extends CI_Controller
     */
     function destroy($id)
     {
-        $delete = $this->barang_model->delete($id, 'Arnidalaili');
+        $delete = $this->barang_model->delete($id, $this->getKaryawanName());
         if ($delete == true) {
             $this->session->set_flashdata("success", "Data berhasil dihapus.");
             redirect(site_url('barang'));

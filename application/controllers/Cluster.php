@@ -8,11 +8,32 @@ class Cluster extends CI_Controller
     {
         parent::__construct();
         $this->load->model('cluster_relawan_model');
+        $this->load->model('karyawan_model');
+    }
+
+    private function getKaryawanName()
+    {
+        $this->load->model('karyawan_model');
+        $user_id = $this->session->user_id;
+        $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+        return $karyawan->nama_karyawan;
+    }
+
+    private function getKaryawanRole()
+    {
+        $this->load->model('karyawan_model');
+        $user_id = $this->session->user_id;
+        $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+        return $karyawan->jabatan_karyawan;
     }
 
     // login view
     public function index()
     {
+        // set employee 
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
         // set page title
         $header['title'] = 'Cluster Relawan';
 
@@ -25,11 +46,16 @@ class Cluster extends CI_Controller
         $this->load->view('cluster/index', $data);
 
         // inlcude footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/footer');
     }
+
 
     public function tambah()
     {
+        // set employee 
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
         // set page title
         $header['title'] = 'Tambah Cluster Relawan';
 
@@ -39,7 +65,7 @@ class Cluster extends CI_Controller
         $this->load->view('cluster/add');
 
         // inlcude footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/footer');
     }
 
     public function add()
@@ -53,6 +79,10 @@ class Cluster extends CI_Controller
 
     public function ubah($id_cluster)
     {
+        // set employee 
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
         // set page title
         $header['title'] = 'Ubah Cluster Relawan';
 
@@ -65,7 +95,7 @@ class Cluster extends CI_Controller
         $this->load->view('cluster/edit', $data);
 
         // inlcude footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/footer');
     }
 
     public function edit()

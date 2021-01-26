@@ -25,12 +25,12 @@ class Donatur_model extends CI_Model
         return $this->db->insert($this->_table, $data);
     }
 
-    public function delete($id)
+    public function delete($id, $modiby)
     {
         $this->row_status = 'D';
+        $this->modiby = $modiby;
         $this->modidate = date("Y-m-d H:i:s");
 
         return $this->db->update($this->_table, $this, array('id_donatur' => $id));
     }
-
 }

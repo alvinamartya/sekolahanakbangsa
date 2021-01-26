@@ -66,7 +66,7 @@
 
                         <div>
                             <button id="btn-save" type="submit" class="btn btn-primary">Simpan</button>
-                            <a href="<?= site_url('sekolah') ?>" class="btn btn-danger">Batal</a>
+                            <a href="<?= site_url('sekolah') ?>" class="btn btn-danger">Kembali</a>
                         </div>
                     </form>
                 </div>
@@ -117,7 +117,7 @@
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
-<script src="<?= base_url('assets/js/add_school.js') ?>"></script>
+<script src="<?= base_url('assets/js/school.js') ?>"></script>
 
 </body>
 

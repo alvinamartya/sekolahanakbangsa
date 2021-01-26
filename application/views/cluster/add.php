@@ -35,7 +35,7 @@
 
 				<div>
 					<button id="btn-save" type="submit" class="btn btn-primary">Simpan</button>
-					<a href="<?= site_url('cluster') ?>" class="btn btn-danger">Batal</a>
+					<a href="<?= site_url('cluster') ?>" class="btn btn-danger">Kembali</a>
 				</div>
 			</form>
 		</div>

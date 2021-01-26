@@ -45,4 +45,11 @@ class Relawan_model extends CI_Model
 
         return $this->db->update($this->_table, $this, array('id_relawan' => $id));
     }
+
+    public function getRelawanByUserLoginId($idUserLoginId)
+    {
+        return $this->db
+            ->get_where($this->_table, ["id_user_login" => $idUserLoginId])
+            ->row();
+    }
 }

@@ -26,10 +26,22 @@ class sekolah_model extends CI_Model
         return $this->db->insert($this->_table, $data);
     }
 
+    public function update($id, $data)
+    {
+        return $this->db
+            ->where('id_sekolah', $id)
+            ->update($this->_table, $data);
+    }
+
+    public function getByID($id)
+    {
+        return $this->db->get_where($this->_table, ["id_sekolah" => $id])->row();
+    }
+
     public function delete($id, $modiby)
     {
-        $delete = $this->input->post();
         $data = array('row_status' => 'D');
+        $data = array('modiby' => $modiby);
         return $this->db
             ->where('id_sekolah', $id)
             ->update($this->_table, $data);

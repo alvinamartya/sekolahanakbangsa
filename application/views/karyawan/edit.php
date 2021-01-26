@@ -23,20 +23,20 @@
 			<form method="post" action="<?php echo base_url('Karyawan/edit') ?>" autocomplete="off">
 				<br>
 				<div class="form-group">
-					<input type="hidden" value=<?php echo $data->id_karyawan ?> name="id_karyawan">				
-					<label for="nama_karyawan">Nama Karyawan</label>						
-					<input type="text" name="nama_karyawan" class="form-control" required value="<?php echo $data->nama_karyawan ?>"><br>					
+					<input type="hidden" value=<?php echo $data->id_karyawan ?> name="id_karyawan">
+					<label for="nama_karyawan">Nama Karyawan</label>
+					<input type="text" name="nama_karyawan" class="form-control" required value="<?php echo $data->nama_karyawan ?>"><br>
 				</div>
-				<div class="form-group">					
+				<div class="form-group">
 					<label for="" class="d-block">Jenis Kelamin</label>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" <?php if($data->jenis_kelamin == "L") echo 'checked' ?> type="radio" id="L" name="jenis_kelamin" value="L" <?php echo (set_value('jenis_kelamin') == 'L' ? 'checked' : '') ?>>
+						<input class="form-check-input" <?php if ($data->jenis_kelamin == "L") echo 'checked' ?> type="radio" id="L" name="jenis_kelamin" value="L" <?php echo (set_value('jenis_kelamin') == 'L' ? 'checked' : '') ?>>
 						<label class="form-check-label" for="L">Laki-laki</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" <?php if($data->jenis_kelamin == "P") echo 'checked' ?> type="radio" id="P" name="jenis_kelamin" value="P" <?php echo (set_value('jenis_kelamin') == 'P' ? 'checked' : '') ?>>
+						<input class="form-check-input" <?php if ($data->jenis_kelamin == "P") echo 'checked' ?> type="radio" id="P" name="jenis_kelamin" value="P" <?php echo (set_value('jenis_kelamin') == 'P' ? 'checked' : '') ?>>
 						<label class="form-check-label" for="P">Perempuan</label>
-					</div>					
+					</div>
 				</div>
 				<!--
 				<div class="form-group">
@@ -50,29 +50,29 @@
 					</div>
 				</div>
 				-->
-				<div class="form-group">					
+				<div class="form-group">
 					<label for="nik">NIK</label>
-					<input type="number" name="nik" class="form-control" value="<?php echo $data->nik ?>" required><br>					
+					<input type="number" name="nik" class="form-control" value="<?php echo $data->nik ?>" required><br>
 				</div>
-				<div class="form-group">					
+				<div class="form-group">
 					<label for="no_telepon">No Telepon</label>
-					<input type="number" name="no_telepon" class="form-control" value="<?php echo $data->no_telepon ?>" required><br>					
+					<input type="number" name="no_telepon" class="form-control" value="<?php echo $data->no_telepon ?>" required><br>
 				</div>
-				<div class="form-group">					
+				<div class="form-group">
 					<label for="email">Email</label>
-					<input type="email" name="email" class="form-control" value="<?php echo $data->email ?>" required><br>					
+					<input type="email" name="email" class="form-control" value="<?php echo $data->email ?>" required><br>
 				</div>
-				<div class="form-group">					
+				<div class="form-group">
 					<label for="tempat_lahir">Tempat Lahir</label>
-					<input type="text" name="tempat_lahir" class="form-control" value="<?php echo $data->tempat_lahir ?>" required><br>					
+					<input type="text" name="tempat_lahir" class="form-control" value="<?php echo $data->tempat_lahir ?>" required><br>
 				</div>
-				<div class="form-group">					
+				<div class="form-group">
 					<label for="tanggal_lahir">Tanggal Lahir</label>
-					<input type="date" name="tanggal_lahir" class="form-control" value="<?php echo date("Y-m-d", strtotime($data->tanggal_lahir)); ?>" required>					
+					<input type="date" name="tanggal_lahir" class="form-control" value="<?php echo date("Y-m-d", strtotime($data->tanggal_lahir)); ?>" required>
 				</div>
-				<br>				
-				<input type="submit" id="btnSubmit" class="btn btn-primary" value="Perbarui">				
-				<a href="<?php echo site_url('Karyawan') ?>" class="btn btn-danger">Batal</a>
+				<br>
+				<input type="submit" id="btnSubmit" class="btn btn-primary" value="Perbarui">
+				<a href="<?php echo site_url('Karyawan') ?>" class="btn btn-danger">Kembali</a>
 			</form>
 		</div>
 	</div>

@@ -39,21 +39,26 @@ class Login extends CI_Controller
         } else if ($data_user != null) {
 
             if (password_verify($data_login['password'], $data_user->password)) {
+                if ($data_user->row_status == 'A') {
+                    // create new session
+                    $session_arr = array('user_id' => $data_user->id, 'role' => $data_user->role);
+                    $this->session->set_userdata($session_arr);
 
-                // create new session
-                $session_arr = array('user_id' => $data_user->id, 'role' => $data_user->role);
-                $this->session->set_userdata($session_arr);
-
-                // redirect another page according to role user
-                if ($data_user->role == 'Karyawan') {
-                    // employee dashboard
-                    redirect(site_url(('dashboard/admin')));
-                } else if ($data_user->role == 'Donatur') {
-                    // landing page
-                    echo '<script>alert("Donatur");</script>';
-                } else if ($data_user->role == 'Relawan') {
-                    // volunteer dashboard
-                    redirect(site_url(('dashboard/relawan')));
+                    // redirect another page according to role user
+                    if ($data_user->role == 'Karyawan') {
+                        // employee dashboard
+                        redirect(site_url(('dashboard/admin')));
+                    } else if ($data_user->role == 'Donatur') {
+                        // landing page
+                        echo '<script>alert("Donatur");</script>';
+                    } else if ($data_user->role == 'Relawan') {
+                        // volunteer dashboard
+                        redirect(site_url(('dashboard/relawan')));
+                    }
+                } else {
+                    // incorrect password
+                    $data['err'] = 'Akun sudah dinonaktifkan!';
+                    $this->load->view('login', $data);
                 }
             } else {
                 // incorrect password
