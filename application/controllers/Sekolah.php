@@ -48,6 +48,7 @@ class Sekolah extends CI_Controller
     {
         parent::__construct();
         $this->load->model('sekolah_model');
+        $this->load->model('karyawan_model');
 
         // form validation
         $this->load->library('form_validation');
@@ -57,6 +58,22 @@ class Sekolah extends CI_Controller
         $this->form_validation->set_message($this->errorMessage);
     }
 
+    private function getKaryawanName()
+    {
+        $this->load->model('karyawan_model');
+        $user_id = $this->session->user_id;
+        $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+        return $karyawan->nama_karyawan;
+    }
+
+    private function getKaryawanRole()
+    {
+        $this->load->model('karyawan_model');
+        $user_id = $this->session->user_id;
+        $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+        return $karyawan->jabatan_karyawan;
+    }
+
     /*
     ==============================================================
     View School
@@ -64,6 +81,10 @@ class Sekolah extends CI_Controller
     */
     public function index()
     {
+        // set employee 
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
         // set page title
         $header['title'] = 'Sekolah';
 
@@ -76,7 +97,7 @@ class Sekolah extends CI_Controller
         $this->load->view('sekolah/index', $data);
 
         // inlcude footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/footer');
     }
 
     /*
@@ -107,6 +128,10 @@ class Sekolah extends CI_Controller
         // set page title
         $header['title'] = 'Tambah Sekolah';
 
+        // set employee 
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
         $this->load->view('templates/admin_header', $header);
         $this->load->view('sekolah/add');
 
@@ -129,8 +154,8 @@ class Sekolah extends CI_Controller
                 'alamat' => $post["alamat"],
                 'provinsi' => $post["provinsi"],
                 'kota' => $post["kota"],
-                'creaby' => "Alvin Amarty",
-                'modiby' => "Alvin Amartya",
+                'creaby' => $this->getKaryawanName(),
+                'modiby' => $this->getKaryawanName(),
             );
 
             // save school
@@ -170,7 +195,7 @@ class Sekolah extends CI_Controller
     */
     function destroy($id)
     {
-        $delete = $this->sekolah_model->delete($id, 'Alvin Amartya');
+        $delete = $this->sekolah_model->delete($id, $this->getKaryawanName());
         if ($delete == true) {
             $this->session->set_flashdata("success", "Data berhasil dihapus.");
             redirect(site_url('sekolah'));
@@ -190,6 +215,10 @@ class Sekolah extends CI_Controller
     {
         // set page title
         $header['title'] = 'Ubah Sekolah';
+
+        // set employee 
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
 
         $this->load->view('templates/admin_header', $header);
         $this->load->view('sekolah/edit');

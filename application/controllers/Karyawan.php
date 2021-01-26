@@ -11,11 +11,31 @@ class Karyawan extends CI_Controller
 		$this->load->model('user_login_model');
 	}
 
+	private function getKaryawanName()
+	{
+		$this->load->model('karyawan_model');
+		$user_id = $this->session->user_id;
+		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+		return $karyawan->nama_karyawan;
+	}
+
+	private function getKaryawanRole()
+	{
+		$this->load->model('karyawan_model');
+		$user_id = $this->session->user_id;
+		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+		return $karyawan->jabatan_karyawan;
+	}
+
 	// login view
 	public function index()
 	{
 		// set page title
 		$header['title'] = 'Karyawan';
+
+		// set employee 
+		$header['name'] =  $this->getKaryawanName();
+		$header['role'] =  $this->getKaryawanRole();
 
 		// include header
 		$this->load->view('templates/admin_header', $header);
@@ -26,7 +46,7 @@ class Karyawan extends CI_Controller
 		$this->load->view('karyawan/index', $data);
 
 		// inlcude footer
-		$this->load->view('templates/admin_footer');
+		$this->load->view('templates/footer');
 	}
 
 	public function tambah()
@@ -34,13 +54,17 @@ class Karyawan extends CI_Controller
 		// set page title
 		$header['title'] = 'Tambah Karyawan';
 
+		// set employee 
+		$header['name'] =  $this->getKaryawanName();
+		$header['role'] =  $this->getKaryawanRole();
+
 		// include header
 		$this->load->view('templates/admin_header', $header);
 
 		$this->load->view('karyawan/add');
 
 		// inlcude footer
-		$this->load->view('templates/admin_footer');
+		$this->load->view('templates/footer');
 	}
 
 	public function add()
@@ -63,6 +87,10 @@ class Karyawan extends CI_Controller
 		// set page title
 		$header['title'] = 'Ubah Karyawan';
 
+		// set employee 
+		$header['name'] =  $this->getKaryawanName();
+		$header['role'] =  $this->getKaryawanRole();
+
 		// include header
 		$this->load->view('templates/admin_header', $header);
 
@@ -72,7 +100,7 @@ class Karyawan extends CI_Controller
 		$this->load->view('karyawan/edit', $data);
 
 		// inlcude footer
-		$this->load->view('templates/admin_footer');
+		$this->load->view('templates/footer');
 	}
 
 	public function edit()

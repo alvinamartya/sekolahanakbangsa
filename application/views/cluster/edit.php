@@ -34,7 +34,7 @@
 				</div>
 
 				<input type="submit" id="btnSubmit" class="btn btn-primary" value="Perbarui">
-				<a href="<?php echo base_url('Cluster') ?>" class="btn btn-danger">Batal</a>
+				<a href="<?php echo base_url('Cluster') ?>" class="btn btn-danger">Kembali</a>
 			</form>
 		</div>
 	</div>

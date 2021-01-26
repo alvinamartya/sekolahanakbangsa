@@ -35,12 +35,29 @@ class Biaya_Lainnya extends CI_Controller
 
         //load ke model siswa
         $this->load->model('biaya_lainnya_model');
+        $this->load->model('karyawan_model');
         // form validation
         $this->load->library('form_validation');
         // set rules
         $this->form_validation->set_rules($this->rules);
         // set error message
         $this->form_validation->set_message($this->errorMessage);
+    }
+
+    private function getKaryawanName()
+    {
+        $this->load->model('karyawan_model');
+        $user_id = $this->session->user_id;
+        $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+        return $karyawan->nama_karyawan;
+    }
+
+    private function getKaryawanRole()
+    {
+        $this->load->model('karyawan_model');
+        $user_id = $this->session->user_id;
+        $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+        return $karyawan->jabatan_karyawan;
     }
 
     /*
@@ -50,6 +67,10 @@ class Biaya_Lainnya extends CI_Controller
     */
     public function index()
     {
+        // set employee
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
         // set page title
         $header['title'] = 'Biaya Lainnya';
 
@@ -62,7 +83,7 @@ class Biaya_Lainnya extends CI_Controller
         $this->load->view('biaya_lainnya/index', $data);
 
         // inlcude footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/footer');
     }
 
     /*
@@ -78,6 +99,10 @@ class Biaya_Lainnya extends CI_Controller
 
     private function tambahView($data_biaya_lainnya)
     {
+        // set employee
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
         // set page title
         $header['title'] = 'Tambah Biaya Lainnya';
 
@@ -87,7 +112,7 @@ class Biaya_Lainnya extends CI_Controller
         $this->load->view('biaya_lainnya/add', $data);
 
         // inlcude footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/footer');
     }
 
     // action
@@ -96,24 +121,24 @@ class Biaya_Lainnya extends CI_Controller
         $post = $this->input->post();
 
         if ($this->form_validation->run() == true) {
-            var_dump("test");
-
             // insert data
             $insert_data = array(
                 'nama_biaya_lainnya' => $post["nama_biaya_lainnya"],
                 'deskripsi_biaya_lainnya' => $post["deskripsi_biaya_lainnya"],
-                'creaby' => "Arnida",
+                'creaby' => $this->getKaryawanName(),
+                'modiby' => $this->getKaryawanName(),
             );
 
             // save barang
             $result = $this->biaya_lainnya_model->save($insert_data);
 
             if ($result > 0) {
-                redirect(site_url('biaya_lainnya'));
+                $this->session->set_flashdata("success", "Berhasil menambah biaya lainnya");
+                redirect(site_url('biaya-lainnya'));
             } else {
                 // error message
-                $this->session->set_flashdata("failed", "Gagal menambah barang");
-                redirect(site_url('biaya_lainnya/add'));
+                $this->session->set_flashdata("success", "Gagal menambah biaya lainnya");
+                redirect(site_url('biaya-lainnya/add'));
             }
         } else {
             $this->tambahView((object)$post);
@@ -133,6 +158,10 @@ class Biaya_Lainnya extends CI_Controller
 
     public function ubahView($data_biaya_lainnya)
     {
+        // set employee
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
         //title
         $header['title'] = 'Ubah Biaya Lainnya';
         //template header
@@ -141,20 +170,20 @@ class Biaya_Lainnya extends CI_Controller
         $data['data'] = $data_biaya_lainnya;
         $this->load->view('biaya_lainnya/edit', $data);
         //template footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/footer');
     }
 
     public function edit()
     {
         //models->fungsi edit
         if ($this->form_validation->run() == true) {
-            $result = $this->biaya_lainnya_model->edit();
+            $result = $this->biaya_lainnya_model->edit($this->getKaryawanName());
             if ($result > 0) {
-                $this->session->set_flashdata("failed", "Berhasil mengubah biaya lainnya");
+                $this->session->set_flashdata("success", "Berhasil mengubah biaya lainnya");
                 redirect(site_url('biaya-lainnya'));
             } else {
                 // error message
-                $this->session->set_flashdata("failed", "Gagal mengubah biaya lainnya");
+                $this->session->set_flashdata("success", "Gagal mengubah biaya lainnya");
                 redirect(site_url('biaya-lainnya/edit'));
             }
         } else {
@@ -170,13 +199,13 @@ class Biaya_Lainnya extends CI_Controller
     */
     function destroy($id)
     {
-        $delete = $this->biaya_lainnya_model->delete($id, 'Arnidalaili');
+        $delete = $this->biaya_lainnya_model->delete($id, $this->getKaryawanName());
         if ($delete == true) {
             $this->session->set_flashdata("success", "Data berhasil dihapus.");
-            redirect(site_url('biaya_lainnya'));
+            redirect(site_url('biaya-lainnya'));
         } else {
             $this->session->set_flashdata("success", "Data gagal dihapus.");
-            redirect(site_url('biaya_lainnya'));
+            redirect(site_url('biaya-lainnya'));
         }
     }
 }

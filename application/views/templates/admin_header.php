@@ -94,7 +94,7 @@
 						<!-- ============================================================== -->
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span class="text-dark">Jason Doe</span> <i data-feather="chevron-down" class="svg-icon"></i></span>
+								<span class="ml-2 d-none d-lg-inline-block"><span>Hello,</span> <span class="text-dark"><?= $name ?></span> <i data-feather="chevron-down" class="svg-icon"></i></span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
 								<a class="dropdown-item" href="javascript:void(0)"><i data-feather="user" class="svg-icon mr-2 ml-1"></i>
@@ -164,11 +164,13 @@
 							</a>
 						</li>
 
-						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'karyawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
-							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'karyawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('karyawan') ?>" aria-expanded="false">
-								<i class="fas fa-user-tie"></i><span class="hide-menu">Karyawan</span>
-							</a>
-						</li>
+						<?php if ($role == 'Super Admin') { ?>
+							<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'karyawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
+								<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'karyawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('karyawan') ?>" aria-expanded="false">
+									<i class="fas fa-user-tie"></i><span class="hide-menu">Karyawan</span>
+								</a>
+							</li>
+						<?php } ?>
 
 						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'sdm-relawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>">
 							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'sdm-relawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('sdm-relawan') ?>" aria-expanded="false">

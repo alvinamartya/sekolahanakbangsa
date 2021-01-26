@@ -20,7 +20,7 @@ class login_model extends CI_Model
 
     public function getLastData()
     {
-        return $this->db->order_by('id',"desc")->limit(1)->get($this->_table)->row();
+        return $this->db->order_by('id', "desc")->limit(1)->get($this->_table)->row();
     }
 
     public function update($id, $data)
@@ -28,9 +28,10 @@ class login_model extends CI_Model
         return $this->db->update($this->_table, $this, array('id' => $id));
     }
 
-    public function delete($id)
+    public function delete($id, $modiby)
     {
         $this->row_status = 'D';
+        $this->modiby = $modiby;
         $this->modidate = date("Y-m-d H:i:s");
 
         return $this->db->update($this->_table, $this, array('id' => $id));

@@ -13,14 +13,13 @@ class barang_model extends CI_Model
     }
 
     //edit data
-    public function edit()
+    public function edit($modiby)
     {
         //menampung nilai array
         $post = $this->input->post();
         $id_barang = $post['id_barang'];
         $nama_barang = $post['nama_barang'];
         $deskripsi_barang = $post['deskripsi_barang'];
-        $modiby = 'arnida';
 
         $data = array(
             'nama_barang'        => $nama_barang,

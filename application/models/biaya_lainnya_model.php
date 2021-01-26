@@ -13,14 +13,13 @@ class biaya_lainnya_model extends CI_Model
     }
 
     //edit data
-    public function edit()
+    public function edit($modiby)
     {
         //menampung nilai array
         $post = $this->input->post();
         $id_biaya_lainnya = $post['id_biaya_lainnya'];
         $nama_biaya_lainnya = $post['nama_biaya_lainnya'];
         $deskripsi_biaya_lainnya = $post['deskripsi_biaya_lainnya'];
-        $modiby = 'arnida';
 
         $data = array(
             'nama_biaya_lainnya'        => $nama_biaya_lainnya,

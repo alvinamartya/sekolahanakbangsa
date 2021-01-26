@@ -60,6 +60,7 @@ class Relawan extends CI_Controller
         parent::__construct();
         $this->load->model('relawan_model');
         $this->load->model('cluster_relawan_model');
+        $this->load->model('login_model');
 
         // form validation
         $this->load->library('form_validation');
@@ -70,6 +71,23 @@ class Relawan extends CI_Controller
         // set error message
         $this->form_validation->set_message($this->errorMessage);
     }
+
+    private function getKaryawanName()
+    {
+        $this->load->model('karyawan_model');
+        $user_id = $this->session->user_id;
+        $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+        return $karyawan->nama_karyawan;
+    }
+
+    private function getKaryawanRole()
+    {
+        $this->load->model('karyawan_model');
+        $user_id = $this->session->user_id;
+        $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+        return $karyawan->jabatan_karyawan;
+    }
+
 
     /*
     ==============================================================
@@ -82,6 +100,10 @@ class Relawan extends CI_Controller
         // set page title
         $header['title'] = 'Relawan';
 
+        // set employee 
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
         // include header
         $this->load->view('templates/admin_header', $header);
 
@@ -90,7 +112,7 @@ class Relawan extends CI_Controller
         $this->load->view('relawan/index', $data);
 
         // inlcude footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/footer');
     }
 
     /*
@@ -100,8 +122,10 @@ class Relawan extends CI_Controller
     */
     function destroy($id)
     {
-        $delete = $this->relawan_model->delete($id, 'Alvin Amartya');
-        if ($delete == true) {
+        $relawan = $this->relawan_model->getByID($id);
+        $delete = $this->relawan_model->delete($id, $this->getKaryawanName());
+        $deleteLogin = $this->login_model->delete($relawan->id_user_login, $this->getKaryawanName());
+        if ($delete == true && $deleteLogin) {
             $this->session->set_flashdata("success", "Data berhasil dihapus.");
             redirect(site_url('relawan'));
         } else {
@@ -126,6 +150,10 @@ class Relawan extends CI_Controller
         // set page title
         $header['title'] = 'Ubah Relawan';
 
+        // set employee 
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
         // include header
         $this->load->view('templates/admin_header', $header);
 
@@ -135,7 +163,7 @@ class Relawan extends CI_Controller
         $this->load->view('relawan/edit', $data);
 
         // inlcude footer
-        $this->load->view('templates/admin_footer');
+        $this->load->view('templates/footer');
     }
 
     public function edit($id_relawan)
@@ -153,6 +181,7 @@ class Relawan extends CI_Controller
                 'email' => $post['email'],
                 'tempat_lahir' => $post['tempat_lahir'],
                 'tanggal_lahir' => $post['tanggal_lahir'],
+                'modiby' => $this->getKaryawanName(),
             ];
 
             // save donatur data

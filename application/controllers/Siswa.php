@@ -25,7 +25,11 @@ class Siswa extends CI_Controller
             'field' => 'jenis_kelamin',
             'label' => 'Jenis Kelamin',
             'rules' => 'required'
-        ],
+        ], [
+            'field' => 'id_sekolah',
+            'label' => 'Sekolah',
+            'rules' => 'required',
+        ]
     ];
 
     //validasi hanya huruf
@@ -46,6 +50,8 @@ class Siswa extends CI_Controller
         parent::__construct();
         //load ke model siswa
         $this->load->model('siswa_model');
+        $this->load->model('relawan_model');
+        $this->load->model('sekolah_model');
 
         // form validation
         $this->load->library('form_validation');
@@ -55,11 +61,20 @@ class Siswa extends CI_Controller
         $this->form_validation->set_message($this->errorMessage);
     }
 
+    private function getRelawanName()
+    {
+        $this->load->model('relawan_model');
+        $user_id = $this->session->user_id;
+        $relawan = $this->relawan_model->getRelawanByUserLoginId($user_id);
+        return $relawan->nama_relawan;
+    }
+
     //tampilan pertama
     public function index()
     {
         //tittle
         $header['title'] = 'Siswa';
+        $header['name'] =  $this->getRelawanName();
         //template header
         $this->load->view('templates/relawan_header', $header);
         //menampilkan data
@@ -67,18 +82,22 @@ class Siswa extends CI_Controller
         $data['siswa'] = $data_siswa;
         $this->load->view('siswa/index', $data);
         //template footer
-        $this->load->view('templates/relawan_footer');
+        $this->load->view('templates/footer');
     }
 
     public function tambah()
     {
         // set page title
         $header['title'] = 'Tambah Siswa';
+        $header['name'] =  $this->getRelawanName();
         //template header
         $this->load->view('templates/relawan_header', $header);
-        $this->load->view('siswa/add');
+
+        $data['sekolah'] = $this->sekolah_model->getSekolah();
+        $this->load->view('siswa/add', $data);
+
         //template footer
-        $this->load->view('templates/relawan_footer');
+        $this->load->view('templates/footer');
     }
 
     public function add()
@@ -94,9 +113,11 @@ class Siswa extends CI_Controller
                 'id_sekolah' => 1,
                 'jenis_kelamin' => $post["jenis_kelamin"],
                 'nisn' => $post["nisn"],
+                'id_sekolah' => $post['id_sekolah'],
                 'tempat_lahir' => $post["tempat_lahir"],
                 'tanggal_lahir' => $post["tanggal_lahir"],
-                'creaby' => "Muhamad Ivan",
+                'creaby' => $this->getRelawanName(),
+                'modiby' => $this->getRelawanName(),
             );
 
             //save data
@@ -112,35 +133,56 @@ class Siswa extends CI_Controller
             }
         } else {
             //ketampilan tambah
-            $this->tambah();
+            $this->edit();
         }
     }
 
     public function ubah($id_siswa)
     {
+        $data_siswa = $this->siswa_model->getSiswaID($id_siswa);
+        $this->ubahView($data_siswa);
+    }
+
+    public function ubahView($data_siswa)
+    {
         //title
         $header['title'] = 'Ubah Siswa';
+        $header['name'] =  $this->getRelawanName();
+
         //template header
         $this->load->view('templates/relawan_header', $header);
-
-        $data_siswa = $this->siswa_model->getSiswaID($id_siswa);
+        $data['sekolah'] = $this->sekolah_model->getSekolah();
         $data['data'] = $data_siswa;
         $this->load->view('siswa/edit', $data);
         //template footer
-        $this->load->view('templates/relawan_footer');
+        $this->load->view('templates/footer');
     }
 
     public function edit()
     {
-        //models->fungsi edit
-        $siswa = $this->siswa_model->edit();
-        redirect(site_url('siswa'));
+        $data = $this->input->post();
+        //pengecekan
+        if ($this->form_validation->run() == true) {
+            //models->fungsi edit
+            $result = $this->siswa_model->edit($this->getRelawanName());
+            if ($result > 0) {
+                //ketampilan view data siswa
+                redirect(site_url('siswa'));
+            } else {
+                // error message
+                $this->session->set_flashdata("failed", "Gagal mengubah sekolah");
+                redirect(site_url('siswa/edit'));
+            }
+        } else {
+            //ketampilan tambah
+            $this->ubahView((object)$data);
+        }
     }
 
     //fungsi menghapus data dengan mengubah status
     function hapus($id)
     {
-        $delete = $this->siswa_model->delete($id, 'muhamad ivan');
+        $delete = $this->siswa_model->delete($id, $this->getRelawanName());
         if ($delete == true) {
             $this->session->set_flashdata("success", "Data berhasil dihapus.");
             redirect(site_url('siswa'));

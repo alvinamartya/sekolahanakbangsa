@@ -63,14 +63,14 @@
                                         <td><?= $s->tempat_lahir ?></td>
                                         <td><?= date("d-m-Y", strtotime($s->tanggal_lahir)) ?></td>
                                         <td>
-                                                <?php
-                                                if ($s->jenis_kelamin == "L") {
-                                                    echo "Laki-laki";
-                                                } else {
-                                                    echo "Perempuan";
-                                                }
-                                                ?>
-                                            </td>
+                                            <?php
+                                            if ($s->jenis_kelamin == "L") {
+                                                echo "Laki-laki";
+                                            } else {
+                                                echo "Perempuan";
+                                            }
+                                            ?>
+                                        </td>
                                         <td>
                                             <a href="<?= site_url('siswa/ubah/' .  $s->id_siswa) ?>" class="btn btn-primary">Ubah</a>
                                             <a href="<?= site_url('siswa/hapus/' .  $s->id_siswa) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger">Hapus</a>
