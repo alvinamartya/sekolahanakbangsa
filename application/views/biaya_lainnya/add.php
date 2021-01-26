@@ -45,7 +45,7 @@
 
                         <div>
                             <button id="btn-save" type="submit" class="btn btn-primary">Simpan</button>
-                            <a href="<?= site_url('biaya_lainnya') ?>" class="btn btn-danger">Kembali</a>
+                            <a href="<?= site_url('biaya-lainnya') ?>" class="btn btn-danger">Kembali</a>
                         </div>
                     </form>
                 </div>

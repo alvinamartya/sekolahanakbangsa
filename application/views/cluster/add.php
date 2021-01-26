@@ -21,16 +21,17 @@
 <div class="container-fluid">
 	<div class="card">
 		<div class="card-body">
-			<form method="post" action="<?php echo base_url('Cluster/tambah') ?>" autocomplete="off">
+			<form method="post" action="<?php echo base_url('Cluster/add') ?>" autocomplete="off">
 				<div class="form-group">
 					<label for="nama_cluster">Nama Cluster</label>
-					<input type="text" name="nama_cluster" class="form-control">
+					<input type="text" name="nama_cluster" class="form-control <?php echo (form_error('nama_cluster') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('nama_cluster'); ?>">
+					<div class="invalid-feedback"><?php echo form_error('nama_cluster'); ?></div>
 				</div>
 
 				<div class="form-group">
 					<label for="ideskripsi">Deskripsi Cluster</label>
-					<textarea id="ideskripsi" class="form-control" onkeyup="insert()"></textarea>
-					<input type="hidden" name="deskripsi_cluster" id="deskripsi">
+					<textarea id="ideskripsi" class="form-control <?php echo (form_error('deskripsi_cluster') != null ? 'is-invalid' : '') ?>" name="deskripsi_cluster"><?php echo set_value('deskripsi_cluster'); ?></textarea>
+					<div class="invalid-feedback"><?php echo form_error('deskripsi_cluster'); ?></div>
 				</div>
 
 				<div>
@@ -41,12 +42,3 @@
 		</div>
 	</div>
 </div>
-
-<script>
-	function insert() {
-		var des = document.getElementById("ideskripsi").value;
-
-		document.getElementById("deskripsi").value = des;
-
-	}
-</script>

@@ -3,12 +3,37 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Cluster extends CI_Controller
 {
+    // rules
+    private $rules = [
+        [
+            'field' => 'nama_cluster',
+            'label' => 'Nama Cluster',
+            'rules' => 'required'
+        ], [
+            'field' => 'deskripsi_cluster',
+            'label' => 'Deskripsi Cluster',
+            'rules' => 'required'
+        ],
+    ];
+
+    // form rules error message
+    private $errorMessage = [
+        'required' => '%s wajib diisi.',
+    ];
+
     // constructor
     public function __construct()
     {
         parent::__construct();
         $this->load->model('cluster_relawan_model');
         $this->load->model('karyawan_model');
+
+        // form validation
+        $this->load->library('form_validation');
+        // set rules
+        $this->form_validation->set_rules($this->rules);
+        // set error message
+        $this->form_validation->set_message($this->errorMessage);
     }
 
     private function getKaryawanName()
@@ -30,7 +55,7 @@ class Cluster extends CI_Controller
     // login view
     public function index()
     {
-        // set employee 
+        // set employee
         $header['name'] =  $this->getKaryawanName();
         $header['role'] =  $this->getKaryawanRole();
 
@@ -52,7 +77,7 @@ class Cluster extends CI_Controller
 
     public function tambah()
     {
-        // set employee 
+        // set employee
         $header['name'] =  $this->getKaryawanName();
         $header['role'] =  $this->getKaryawanRole();
 
@@ -72,14 +97,23 @@ class Cluster extends CI_Controller
     {
         $cluster = $this->cluster_relawan_model;
 
-        $result = $cluster->save();
-        if ($result > 0) $this->sukses();
-        else $this->gagal();
+        if ($this->form_validation->run() == true) {
+            $result = $cluster->save();
+            if ($result > 0)  {
+                $this->session->set_flashdata("success", "Data berhasil ditambahkan.");
+                $this->sukses();
+            } else {
+                $this->session->set_flashdata("failed", "Data gagal ditambahkan.");
+                $this->gagal();
+            }
+        } else {
+            $this->tambah();
+        }
     }
 
     public function ubah($id_cluster)
     {
-        // set employee 
+        // set employee
         $header['name'] =  $this->getKaryawanName();
         $header['role'] =  $this->getKaryawanRole();
 
@@ -98,10 +132,46 @@ class Cluster extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function ubahView($data_siswa)
+    {
+        // set employee
+        $header['name'] =  $this->getKaryawanName();
+        $header['role'] =  $this->getKaryawanRole();
+
+        // set page title
+        $header['title'] = 'Ubah Cluster Relawan';
+
+        // include header
+        $this->load->view('templates/admin_header', $header);
+
+        //ambil data cluster
+        $data['cluster'] = $data_siswa;
+        $this->load->view('cluster/edit', $data);
+
+        // inlcude footer
+        $this->load->view('templates/footer');
+    }
+
     public function edit()
     {
-        $cluster = $this->cluster_relawan_model->edit();
-        $this->sukses();
+        //pengecekan
+        if ($this->form_validation->run() == true) {
+            //models->fungsi edit
+            $cluster = $this->cluster_relawan_model->edit();
+            if ($cluster > 0) {
+                //ketampilan view data siswa
+                $this->session->set_flashdata("success", "Data berhasil diubah.");
+                redirect(site_url('cluster'));
+            } else {
+                // error message
+                $this->session->set_flashdata("failed", "Data gagal diubah.");
+                redirect(site_url('cluster/edit'));
+            }
+        } else {
+            //ketampilan tambah
+            $data = $this->input->post();
+            $this->ubahView((object)$data);
+        }
     }
 
     public function hapus($id_karyawan)
