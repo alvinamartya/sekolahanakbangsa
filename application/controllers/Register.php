@@ -77,7 +77,11 @@ class Register extends CI_Controller
             'field' => 'password',
             'label' => 'Kata sandi',
             'rules' => 'required',
-        ],
+        ], [
+            'field' => 'password_confirmation',
+            'label' => 'Konfirmasi Kata sandi',
+            'rules' => 'required|matches[password]'
+        ]
     ];
 
     public function alpha_space($str)

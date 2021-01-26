@@ -131,7 +131,7 @@ class Barang extends CI_Controller
             $result = $this->barang_model->save($insert_data);
 
             if ($result > 0) {
-                $this->session->set_flashdata("success", "Berhasil menambah barang");
+                $this->session->set_flashdata("success", "Data berhasil ditambahkan.");
                 redirect(site_url('barang'));
             } else {
                 // error message
@@ -178,7 +178,7 @@ class Barang extends CI_Controller
         if ($this->form_validation->run() == true) {
             $result = $this->barang_model->edit($this->getKaryawanName());
             if ($result > 0) {
-                $this->session->set_flashdata("success", "Berhasil mengubah barang");
+                $this->session->set_flashdata("success", "Data berhasil diubah.");
                 redirect(site_url('barang'));
             } else {
                 // error message

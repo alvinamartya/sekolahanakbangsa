@@ -177,6 +177,7 @@ class Cluster extends CI_Controller
     public function hapus($id_karyawan)
     {
         $data_karyawan = $this->cluster_relawan_model->hapus($id_karyawan);
+        $this->session->set_flashdata("success", "Data berhasil dihapus");
         $this->sukses();
     }
 

@@ -159,6 +159,7 @@ class Sekolah extends CI_Controller
             $result = $this->sekolah_model->save($insert_data);
 
             if ($result > 0) {
+                $this->session->set_flashdata("success", "Data berhasil ditambahkan.");
                 redirect(site_url('sekolah'));
             } else {
                 // error message
@@ -265,6 +266,7 @@ class Sekolah extends CI_Controller
             $result = $this->sekolah_model->update($id, $update);
 
             if ($result > 0) {
+                $this->session->set_flashdata("success", "Data berhasil diubah");
                 redirect(site_url('sekolah'));
             } else {
                 // error message

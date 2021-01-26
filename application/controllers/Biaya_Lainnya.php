@@ -133,7 +133,7 @@ class Biaya_Lainnya extends CI_Controller
             $result = $this->biaya_lainnya_model->save($insert_data);
 
             if ($result > 0) {
-                $this->session->set_flashdata("success", "Berhasil menambah biaya lainnya");
+                $this->session->set_flashdata("success", "Data berhasil ditambahkan.");
                 redirect(site_url('biaya-lainnya'));
             } else {
                 // error message
@@ -179,7 +179,7 @@ class Biaya_Lainnya extends CI_Controller
         if ($this->form_validation->run() == true) {
             $result = $this->biaya_lainnya_model->edit($this->getKaryawanName());
             if ($result > 0) {
-                $this->session->set_flashdata("success", "Berhasil mengubah biaya lainnya");
+                $this->session->set_flashdata("success", "Data berhasil diubah.");
                 redirect(site_url('biaya-lainnya'));
             } else {
                 // error message

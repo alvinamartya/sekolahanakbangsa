@@ -125,6 +125,7 @@ class Siswa extends CI_Controller
 
             if ($result > 0) {
                 //ketampilan view data siswa
+                $this->session->set_flashdata("success", "Data berhasil ditambahkan.");
                 redirect(site_url('siswa'));
             } else {
                 // error message
@@ -167,6 +168,7 @@ class Siswa extends CI_Controller
             $result = $this->siswa_model->edit($this->getRelawanName());
             if ($result > 0) {
                 //ketampilan view data siswa
+                $this->session->set_flashdata("success", "Data berhasil diubah.");
                 redirect(site_url('siswa'));
             } else {
                 // error message
