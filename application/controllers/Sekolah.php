@@ -134,9 +134,6 @@ class Sekolah extends CI_Controller
 
         $this->load->view('templates/admin_header', $header);
         $this->load->view('sekolah/add');
-
-        // inlcude footer
-        $this->load->view('templates/school_footer');
     }
 
     // action
@@ -213,6 +210,12 @@ class Sekolah extends CI_Controller
     // view
     public function ubah($id)
     {
+        $data_sekolah = $this->sekolah_model->getByID($id);
+        $this->ubahView($data_sekolah);
+    }
+
+    public function ubahView($data_sekolah)
+    {
         // set page title
         $header['title'] = 'Ubah Sekolah';
 
@@ -220,10 +223,72 @@ class Sekolah extends CI_Controller
         $header['name'] =  $this->getKaryawanName();
         $header['role'] =  $this->getKaryawanRole();
 
-        $this->load->view('templates/admin_header', $header);
-        $this->load->view('sekolah/edit');
+        $data['s'] = $data_sekolah;
 
-        // inlcude footer
-        $this->load->view('templates/school_footer');
+        $cookie_provinsi = array(
+            'name' => 'provinsi',
+            'value' => $data_sekolah->provinsi,
+            'expire' => 3600,
+        );
+
+        $cookie_kota = array(
+            'name' => 'kota',
+            'value' => $data_sekolah->kota,
+            'expire' => 3600,
+        );
+
+        $this->input->set_cookie($cookie_provinsi);
+        $this->input->set_cookie($cookie_kota);
+
+        $this->load->view('templates/admin_header', $header);
+        $this->load->view('sekolah/edit', $data);
+    }
+
+    public function edit($id)
+    {
+        $post = $this->input->post();
+
+        if ($this->form_validation->run() == true) {
+            var_dump("test");
+
+            // insert data
+            $update = array(
+                'nama_sekolah' => $post["nama_sekolah"],
+                'jenis_sekolah' => $post["jenis_sekolah"],
+                'alamat' => $post["alamat"],
+                'provinsi' => $post["provinsi"],
+                'kota' => $post["kota"],
+                'modiby' => $this->getKaryawanName(),
+            );
+
+            // save school
+            $result = $this->sekolah_model->update($id, $update);
+
+            if ($result > 0) {
+                redirect(site_url('sekolah'));
+            } else {
+                // error message
+                $this->session->set_flashdata("failed", "Gagal mengubah sekolah");
+                redirect(site_url('sekolah/edit'));
+            }
+        } else {
+            $cookie_provinsi = array(
+                'name' => 'provinsi',
+                'value' => $post['provinsi'],
+                'expire' => 3600,
+            );
+
+            $cookie_kota = array(
+                'name' => 'kota',
+                'value' => $post['kota'],
+                'expire' => 3600,
+            );
+
+            $this->input->set_cookie($cookie_provinsi);
+            $this->input->set_cookie($cookie_kota);
+            $post['id_sekolah'] = $id;
+
+            $this->ubahView((object)$post);
+        }
     }
 }

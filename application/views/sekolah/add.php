@@ -117,7 +117,7 @@
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
-<script src="<?= base_url('assets/js/add_school.js') ?>"></script>
+<script src="<?= base_url('assets/js/school.js') ?>"></script>
 
 </body>
 
