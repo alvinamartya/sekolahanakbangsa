@@ -36,6 +36,7 @@ class Relawan_model extends CI_Model
             ->update($this->_table, $data);
     }
 
+
     public function delete($id, $modiby)
     {
         $this->row_status = 'D';

@@ -24,12 +24,13 @@
 			<form method="post" action="<?php echo base_url('Cluster/tambah') ?>" autocomplete="off">
 				<div class="form-group">
 					<label for="nama_cluster">Nama Cluster</label>
-					<input type="text" name="nama_cluster" class="form-control" required><br>
+					<input type="text" name="nama_cluster" class="form-control" required>
 				</div>
 
 				<div class="form-group">
-					<label for="deskripsi_cluster">Deskripsi Cluster</label>
-					<textarea id="deskripsi_cluster" class="form-control" onkeyup="insert()"></textarea>
+					<label for="ideskripsi">Deskripsi Cluster</label>
+					<textarea id="ideskripsi" class="form-control" onkeyup="insert()"></textarea>
+					<input type="hidden" name="deskripsi_cluster" id="deskripsi">
 				</div>
 
 				<div>

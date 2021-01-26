@@ -36,13 +36,14 @@
 
 				<div class="form-group">
 					<label for="nama_karyawan">Nama Karyawan</label>
-					<input type="text" name="nama_karyawan" class="form-control" required>
+					<input type="text" name="nama_karyawan" class="form-control <?php echo (form_error('nama_karyawan') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('nama_karyawan'); ?>">
+					<div class="invalid-feedback"><?php echo form_error('nama_karyawan'); ?></div>
 				</div>
 
 				<div class="form-group">
 					<label for="" class="d-block">Jenis Kelamin</label>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="L" name="jenis_kelamin" value="L" <?php echo (set_value('jenis_kelamin') == 'L' ? 'checked' : '') ?>>
+						<input class="form-check-input" checked type="radio" id="L" name="jenis_kelamin" value="L" <?php echo (set_value('jenis_kelamin') == 'L' ? 'checked' : '') ?>>
 						<label class="form-check-label" for="L">Laki-laki</label>
 					</div>
 					<div class="form-check form-check-inline">
@@ -63,39 +64,48 @@
 					</div>
 				</div> -->
 
+				<div class="form-group">					
+					<label for="nik">NIK</label>
+					<input type="number" name="nik" class="form-control<?php echo (form_error('nik') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('nik'); ?>"><br>					
+					<div class="invalid-feedback"><?php echo form_error('nik'); ?></div>
+				</div>
 				<div class="form-group">
 					<label for="no_telepon">No Telepon</label>
-					<input type="number" name="no_telepon" class="form-control" required><br>
+					<input type="number" name="no_telepon" class="form-control <?php echo (form_error('no_telepon') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('no_telepon'); ?>">
+					<div class="invalid-feedback"><?php echo form_error('no_telepon'); ?></div>
 				</div>
 
 				<div class="form-group">
 					<label for="email">Email Pengguna</label>
-					<input type="email" name="email" class="form-control" required><br>
+					<input type="email" name="email" class="form-control <?php echo (form_error('email') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('email'); ?>">
+					<div class="invalid-feedback"><?php echo form_error('email'); ?></div>
 				</div>
 
 				<div class="form-group">
 					<label for="tempat_lahir">Tempat lahir</label>
-					<input type="text" name="tempat_lahir" class="form-control" required><br>
+					<input type="text" name="tempat_lahir" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('tempat_lahir'); ?>">
+					<div class="invalid-feedback"><?php echo form_error('tempat_lahir'); ?></div>
 				</div>
 
 				<div class="form-group">
 					<label for="tempat_lahir">Tanggal lahir</label>
-					<input type="date" name="tanggal_lahir" value="1971-01-01" class="form-control" required><br>
+					<input type="date" name="tanggal_lahir" value="1971-01-01" class="form-control">
 				</div>
 
 				<div class="form-group">
 					<label for="username">Nama Pengguna</label>
-					<input type="text" name="username" class="form-control" required><br>
+					<input type="text" name="username" class="form-control" <?php echo (form_error('username') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('username'); ?>">
 				</div>
 
 				<div class="form-group">
 					<label for="username">Katasandi</label>
-					<input type="password" name="password" class="form-control" required><br>
+					<input type="password" name="password" id="password" class="form-control" onkeyup="check()">
 				</div>
 
 				<div class="form-group">
 					<label for="ver_password">Konfirmasi Katasandi</label>
-					<input type="password" name="ver_password" id="ver_password" class="form-control" required>
+					<input type="password" name="ver_password" id="ver_password" class="form-control" onkeyup="check()">
+					<div id="ipassword"></div>
 				</div>
 
 				<div>
@@ -106,3 +116,27 @@
 		</div>
 	</div>
 </div>
+<script>
+	function check() {		
+
+		// ambil data dari inputan password dan verifikasi
+		var pass = document.getElementById("password").value;
+		var vpass = document.getElementById("ver_password").value;
+		
+		// pengecekan apakah ada isinya, jika kosong fungsi dihentikan
+		if (pass == "" || vpass == "") {
+			return;
+		}
+		
+		// pengecekan apakah password dan verifikasi sudah sama
+		if (pass != vpass) {
+			document.getElementById("ipassword").innerHTML = "Kata sandi tidak sesuai!";
+			document.getElementById("ipassword").style.color = "red";
+			//document.getElementById("btn-save").disabled = true;
+		} else {
+			document.getElementById("ipassword").innerHTML = "Kata sandi sesuai!";
+			document.getElementById("ipassword").style.color = "green"
+			//document.getElementById("btn-save").disabled = false;
+		}
+	}
+</script>

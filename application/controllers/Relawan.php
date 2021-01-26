@@ -39,6 +39,7 @@ class Relawan extends CI_Controller
         ],
     ];
 
+    //validasi hanya huruf
     public function alpha_space($str)
     {
         return (preg_match('/^[a-zA-Z ]+$/', $str) ? TRUE : FALSE);
@@ -75,6 +76,7 @@ class Relawan extends CI_Controller
     View Relawan
     ==============================================================
     */
+    //menampilkan data relawan
     public function index()
     {
         // set page title
@@ -129,6 +131,7 @@ class Relawan extends CI_Controller
 
         $data['r'] = $data_relawan;
         $data['cluster'] = $this->cluster_relawan_model->getAllData();
+
         $this->load->view('relawan/edit', $data);
 
         // inlcude footer
