@@ -117,7 +117,6 @@ class Siswa extends CI_Controller
                 'tempat_lahir' => $post["tempat_lahir"],
                 'tanggal_lahir' => $post["tanggal_lahir"],
                 'creaby' => $this->getRelawanName(),
-                'modiby' => $this->getRelawanName(),
             );
 
             //save data
@@ -134,7 +133,7 @@ class Siswa extends CI_Controller
             }
         } else {
             //ketampilan tambah
-            $this->edit();
+            $this->tambah();
         }
     }
 
