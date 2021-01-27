@@ -66,7 +66,7 @@
 
 				<div class="form-group">
 					<label for="nik">NIK</label>
-					<input type="number" name="nik" class="form-control<?php echo (form_error('nik') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('nik'); ?>"><br>
+					<input type="number" name="nik" class="form-control <?php echo (form_error('nik') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('nik'); ?>">
 					<div class="invalid-feedback"><?php echo form_error('nik'); ?></div>
 				</div>
 				<div class="form-group">
@@ -94,18 +94,22 @@
 
 				<div class="form-group">
 					<label for="username">Nama Pengguna</label>
-					<input type="text" name="username" class="form-control" <?php echo (form_error('username') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('username'); ?>">
+					<input type="text" name="username" class="form-control <?php echo (form_error('username') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('username'); ?>">
+					<div class="invalid-feedback"><?php echo form_error('username'); ?></div>
 				</div>
 
 				<div class="form-group">
-					<label for="username">Katasandi</label>
-					<input type="password" name="password" id="password" class="form-control" onkeyup="check()">
+					<label for="username">Kata Sandi</label>
+					<input type="password" name="password" id="password" class="form-control <?php echo (form_error('password') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('password'); ?>">
+					<div class="invalid-feedback"><?php echo form_error('password'); ?></div>
 				</div>
 
 				<div class="form-group">
-					<label for="ver_password">Konfirmasi Katasandi</label>
-					<input type="password" name="ver_password" id="ver_password" class="form-control" onkeyup="check()">
+					<label for="ver_password">Konfirmasi Kata Sandi</label>
+					<input type="password" name="ver_password" id="ver_password" class="form-control <?php echo (form_error('ver_password') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('ver_password'); ?>">
 					<div id="ipassword"></div>
+					<div class="invalid-feedback"><?php echo form_error('ver_password'); ?></div>
+					
 				</div>
 
 				<div>
