@@ -19,7 +19,6 @@
 <div class="container-fluid">
 	<div class="card">
 		<div class="card-body">
-			<div class="card-header">Edit Data Karyawan</div>
 			<form method="post" action="<?php echo base_url('Karyawan/edit') ?>" autocomplete="off">
 				<br>
 				<div class="form-group">
@@ -38,7 +37,7 @@
 						<input class="form-check-input" <?php if ($data->jenis_kelamin == "P") echo 'checked' ?> type="radio" id="P" name="jenis_kelamin" value="P" <?php echo (set_value('jenis_kelamin') == 'P' ? 'checked' : '') ?>>
 						<label class="form-check-label" for="P">Perempuan</label>
 					</div>
-				</div>			
+				</div>
 				<div class="form-group">
 					<label for="nik">NIK</label>
 					<input type="number" name="nik" class="form-control <?php echo (form_error('nik') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->nik ?>">
@@ -46,7 +45,7 @@
 				</div>
 				<div class="form-group">
 					<label for="no_telepon">No Telepon</label>
-					<input type="number" name="no_telepon" class="form-control <?php echo (form_error('no_telepon') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->no_telepon ?>" >
+					<input type="number" name="no_telepon" class="form-control <?php echo (form_error('no_telepon') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->no_telepon ?>">
 					<div class="invalid-feedback"><?php echo form_error('no_telepon'); ?></div>
 				</div>
 				<div class="form-group">

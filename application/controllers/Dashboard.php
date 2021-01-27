@@ -52,9 +52,13 @@ class Dashboard extends CI_Controller
 
     public function relawan()
     {
+        $user_id = $this->session->user_id;
+        $active = $this->relawan_model->getRelawanByUserLoginId($user_id)->id_sekolah != null;
+
         // set page title
         $header['title'] = "Dashboard Relawan";
         $header['name'] =  $this->getRelawanName();
+        $header['active'] = $active;
 
         $this->load->view('templates/relawan_header', $header);
         $this->load->view('dashboard/relawan');

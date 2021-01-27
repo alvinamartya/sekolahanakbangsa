@@ -40,8 +40,7 @@ class sekolah_model extends CI_Model
 
     public function delete($id, $modiby)
     {
-        $data = array('row_status' => 'D');
-        $data = array('modiby' => $modiby);
+        $data = array('row_status' => 'D', 'modiby' => $modiby);
         return $this->db
             ->where('id_sekolah', $id)
             ->update($this->_table, $data);

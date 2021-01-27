@@ -23,10 +23,10 @@ class cluster_relawan_model extends CI_Model
 
 		$user_id = $this->session->user_id;
 		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
-		$creaby  = $karyawan->nama_karyawan;		
-		
+		$creaby  = $karyawan->nama_karyawan;
+
 		$creadate = date('Y-m-d H:i:s');
-		$modiby = '';
+		$modiby = $karyawan->nama_karyawan;
 		$modidate = date('Y-m-d H:i:s');
 		$row_status = 'A';
 
@@ -58,8 +58,8 @@ class cluster_relawan_model extends CI_Model
 
 		$user_id = $this->session->user_id;
 		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
-		$modiby  = $karyawan->nama_karyawan;		
-		
+		$modiby  = $karyawan->nama_karyawan;
+
 		$modidate = date('Y-m-d H:i:s');
 
 		// memasukkan data ke dalam array
@@ -83,7 +83,7 @@ class cluster_relawan_model extends CI_Model
 		$user_id = $this->session->user_id;
 		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
 		$modiby  = $karyawan->nama_karyawan;
-		
+
 		$modidate = date('Y-m-d H:i:s');
 
 		// set data array yang akan diupdate

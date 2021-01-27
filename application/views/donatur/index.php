@@ -55,7 +55,7 @@
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td><?= $d->nama_donatur ?></td>
-                                        <td><?= ($d->jenis_kelamin == 'L' ? "Laki-Laki" : "Perempuan" ) ?></td>
+                                        <td><?= ($d->jenis_kelamin == 'L' ? "Laki-Laki" : "Perempuan") ?></td>
                                         <td><?= $d->email_donatur ?></td>
                                         <td><?= $d->no_telepon ?></td>
                                         <td>

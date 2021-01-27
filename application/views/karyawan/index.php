@@ -22,7 +22,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-					<?php if ($this->session->flashdata('success')) { ?>
+                    <?php if ($this->session->flashdata('success')) { ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <?= $this->session->flashdata('success') ?>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -77,8 +77,8 @@
                                             <td><?= $k->tempat_lahir ?></td>
                                             <td><?= date("d/m/Y", strtotime($k->tanggal_lahir)) ?></td>
                                             <td>
-                                                <a href="<?php echo base_url('karyawan/ubah/' . $k->id_karyawan . '') ?>" class="btn btn-primary">Ubah</a>
-                                                <a href="<?php echo base_url('karyawan/hapus/' . $k->id_karyawan) ?>" class="btn btn-danger" onclick="return confirm('Dengan menekan OK maka data akan dihapus (dinonaktifkan)')">Hapus</a>
+                                                <a href="<?php echo base_url('karyawan/ubah/' . $k->id_karyawan . '') ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a href="<?php echo base_url('karyawan/hapus/' . $k->id_karyawan) ?>" class="btn btn-danger" onclick="return confirm('Dengan menekan OK maka data akan dihapus (dinonaktifkan)')"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>
                                         </tr>
                                 <?php

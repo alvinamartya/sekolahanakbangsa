@@ -58,8 +58,8 @@
                                         <td><?= $s->nama_biaya_lainnya ?></td>
                                         <td><?= $s->deskripsi_biaya_lainnya ?></td>
                                         <td>
-                                            <a href="<?= site_url('biaya-lainnya/ubah/' .  $s->id_biaya_lainnya) ?>" class="btn btn-primary">Ubah</a>
-                                            <a href="<?= site_url('biaya_lainnya/destroy/' .  $s->id_biaya_lainnya) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger">Hapus</a>
+                                            <a href="<?= site_url('biaya-lainnya/ubah/' .  $s->id_biaya_lainnya) ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
+                                            <a href="<?= site_url('biaya_lainnya/destroy/' .  $s->id_biaya_lainnya) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
                                     </tr>
                                 <?php } ?>

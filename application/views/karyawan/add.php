@@ -89,7 +89,7 @@
 
 				<div class="form-group">
 					<label for="tempat_lahir">Tanggal lahir</label>
-					<input type="date" name="tanggal_lahir" value="1971-01-01" class="form-control">
+					<input type="date" name="tanggal_lahir" value="<?= set_value('tanggal_lahir') != '' ? set_value('tanggal_lahir') : '1971-01-01' ?>" class="form-control">
 				</div>
 
 				<div class="form-group">
@@ -109,7 +109,7 @@
 					<input type="password" name="ver_password" id="ver_password" class="form-control <?php echo (form_error('ver_password') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('ver_password'); ?>">
 					<div id="ipassword"></div>
 					<div class="invalid-feedback"><?php echo form_error('ver_password'); ?></div>
-					
+
 				</div>
 
 				<div>
