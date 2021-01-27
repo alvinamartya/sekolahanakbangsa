@@ -34,7 +34,7 @@
 
 				<div class="form-group">
 					<label for="tempat_lahir">Tempat Lahir</label>
-					<textarea name="tempat_lahir" id="tempat_lahir" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Tempat Lahir"><?= $data->tempat_lahir ?></textarea>
+					<input type="number" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>"" id=" tempat_lahir" name="tempat_lahir" aria-describedby="schoolNameHelp" value="<?= $data->tempat_lahir ?>" placeholder="Tempat Lahir">
 					<div class="invalid-feedback"><?php echo form_error('tempat_lahir'); ?></div>
 				</div>
 
@@ -59,14 +59,14 @@
 				<div class="form-group">
 					<label for="L" class="d-block">Jenis Kelamin</label>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="L" name="jenis_kelamin" id="jenis_kelamin" value="L" <?php echo ($data->jenis_kelamin == 'L' ? 'checked' : '') ?>>
+						<input class="form-check-input" type="radio" id="L" name="jenis_kelamin" value="L" <?php echo (set_value('jenis_kelamin') == 'L' ? 'checked' : '') ?>>
 						<label class="form-check-label" for="L">Laki-laki</label>
 					</div>
 					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" id="P" name="jenis_kelamin" id="jenis_kelamin" value="P" <?php echo ($data->jenis_kelamin == 'P' ? 'checked' : '') ?>>
+						<input class="form-check-input" type="radio" id="P" name="jenis_kelamin" value="P" <?php echo (set_value('jenis_kelamin') == 'P' ? 'checked' : '') ?>>
 						<label class="form-check-label" for="P">Perempuan</label>
 					</div>
-					<div class="invalid-feedback"><?php echo form_error('jenis_kelamin'); ?></div>
+					<small class="text-danger"><?php echo form_error('jenis_kelamin') ?></small>
 				</div>
 
 				<div>

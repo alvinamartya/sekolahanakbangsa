@@ -22,14 +22,14 @@ class Siswa extends CI_Controller
             'label' => 'Tanggal Lahir',
             'rules' => 'required'
         ], [
-            'field' => 'jenis_kelamin',
-            'label' => 'Jenis Kelamin',
-            'rules' => 'required'
-        ], [
             'field' => 'id_sekolah',
             'label' => 'Sekolah',
             'rules' => 'required',
-        ]
+        ], [
+            'field' => 'jenis_kelamin',
+            'label' => 'Jenis Kelamin',
+            'rules' => 'required',
+        ],
     ];
 
     //validasi hanya huruf
@@ -134,7 +134,7 @@ class Siswa extends CI_Controller
             }
         } else {
             //ketampilan tambah
-            $this->edit();
+            $this->tambah();
         }
     }
 
