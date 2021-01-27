@@ -51,7 +51,7 @@
 
                         <div class="form-group">
                             <label for="tanggal_lahir">Tanggal lahir</label>
-                            <input type="date" name="tanggal_lahir" class="form-control" value="<?php echo set_value('tanggal_lahir'); ?>">
+                            <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="1971-01-01" class="form-control <?php echo (form_error('tanggal_lahir') != null ? 'is-invalid' : '') ?>">
                             <div class="invalid-feedback"><?php echo form_error('tanggal_lahir'); ?></div>
                         </div>
 
@@ -60,9 +60,9 @@
                             <select name="id_sekolah" id="id_sekolah" class="form-control">
                                 <?php foreach ($sekolah as $s) { ?>
                                     <option value="<?= $s->id_sekolah ?>" <?php
-                                                                            if (set_value('id_sekolah') !== "") {
-                                                                                echo set_value('id_sekolah') == $s->id_sekolah ? 'selected' : '';
-                                                                            } ?>>
+                                            if (set_value('id_sekolah') !== "") {
+                                                echo set_value('id_sekolah') == $s->id_sekolah ? 'selected' : '';
+                                            } ?>>
                                         <?= $s->nama_sekolah ?>
                                     </option>
                                 <?php } ?>
@@ -73,14 +73,14 @@
                         <div class="form-group">
                             <label for="L" class="d-block">Jenis Kelamin</label>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="L" name="jenis_kelamin" id="jenis_kelamin" value="L" <?php echo (set_value('jenis_kelamin') == 'L' ? 'checked' : '') ?>>
+                                <input class="form-check-input" type="radio" id="L" name="jenis_kelamin" value="L" <?php echo (set_value('jenis_kelamin') == 'L' ? 'checked' : '') ?>>
                                 <label class="form-check-label" for="L">Laki-laki</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" id="P" name="jenis_kelamin" id="jenis_kelamin" value="P" <?php echo (set_value('jenis_kelamin') == 'P' ? 'checked' : '') ?>>
+                                <input class="form-check-input" type="radio" id="P" name="jenis_kelamin" value="P" <?php echo (set_value('jenis_kelamin') == 'P' ? 'checked' : '') ?>>
                                 <label class="form-check-label" for="P">Perempuan</label>
                             </div>
-                            <div class="invalid-feedback"><?php echo form_error('jenis_kelamin'); ?></div>
+                            <small class="text-danger"><?php echo form_error('jenis_kelamin') ?></small>
                         </div>
 
                         <div>

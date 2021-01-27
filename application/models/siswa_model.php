@@ -12,6 +12,14 @@ class siswa_model extends CI_Model
         parent::__construct();
     }
 
+    private function getRelawanName()
+    {
+        $this->load->model('relawan_model');
+        $user_id = $this->session->user_id;
+        $relawan = $this->relawan_model->getRelawanByUserLoginId($user_id);
+        return $relawan->nama_relawan;
+    }
+
     //edit data
     public function edit($modiby)
     {
@@ -27,12 +35,12 @@ class siswa_model extends CI_Model
 
         $data = array(
             'nama_siswa'        => $nama_siswa,
-            'jenis_kelamin'        => $jenis_kelamin,
-            'nisn'                => $nisn,
-            'tempat_lahir'        => $tempat_lahir,
-            'tanggal_lahir'        => $tanggal_lahir,
-            'id_sekolah'    => $id_sekolah,
-            'modiby'            => $modiby,
+            'jenis_kelamin'     => $jenis_kelamin,
+            'nisn'              => $nisn,
+            'tempat_lahir'      => $tempat_lahir,
+            'tanggal_lahir'     => $tanggal_lahir,
+            'id_sekolah'        => $id_sekolah,
+            'modiby'            => $this->getRelawanName(),
         );
         $this->db->where('id_siswa', $id_siswa);
         return $this->db->update($this->_table, $data);

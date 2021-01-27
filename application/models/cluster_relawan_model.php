@@ -21,14 +21,10 @@ class cluster_relawan_model extends CI_Model
 		$nama_cluster = $post['nama_cluster'];
 		$deskripsi_cluster = $post['deskripsi_cluster'];
 
-		/*
-		$this->db->where('id_user_login', $_SESSION['user_id']);
-		$login = $this->db->query('select * from karyawan');
-		$data = $login->row();
-		$creaby  = $data->nama_karyawan;
-		*/
-
-		$creaby  = 'user_login';
+		$user_id = $this->session->user_id;
+		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+		$creaby  = $karyawan->nama_karyawan;		
+		
 		$creadate = date('Y-m-d H:i:s');
 		$modiby = '';
 		$modidate = date('Y-m-d H:i:s');
@@ -60,14 +56,10 @@ class cluster_relawan_model extends CI_Model
 		$nama_cluster = $post['nama_cluster'];
 		$deskripsi_cluster = $post['deskripsi_cluster'];
 
-		/*
-		$this->db->where('id_user_login', $_SESSION['user_id']);
-		$login = $this->db->query('select * from karyawan');
-		$data = $login->row();
-		$modiby  = $data->nama_karyawan;
-		*/
-
-		$modiby = 'user_login';
+		$user_id = $this->session->user_id;
+		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+		$modiby  = $karyawan->nama_karyawan;		
+		
 		$modidate = date('Y-m-d H:i:s');
 
 		// memasukkan data ke dalam array
@@ -88,14 +80,10 @@ class cluster_relawan_model extends CI_Model
 
 	public function hapus($id_cluster_relawan)
 	{
-		/*
-		$this->db->where('id_user_login', $_SESSION['user_id']);
-		$login = $this->db->query('select * from karyawan');
-		$data = $login->row();
-		$modiby  = $data->nama_karyawan;
-		*/
-
-		$modiby = 'user_login';
+		$user_id = $this->session->user_id;
+		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+		$modiby  = $karyawan->nama_karyawan;
+		
 		$modidate = date('Y-m-d H:i:s');
 
 		// set data array yang akan diupdate
