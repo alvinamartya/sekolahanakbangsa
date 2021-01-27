@@ -12,7 +12,7 @@ class Siswa extends CI_Controller
         ], [
             'field' => 'nisn',
             'label' => 'NISN',
-            'rules' => 'required'
+            'rules' => 'numeric'
         ], [
             'field' => 'tempat_lahir',
             'label' => 'Tempat Lahir',
@@ -42,6 +42,7 @@ class Siswa extends CI_Controller
     private $errorMessage = [
         'required' => '%s wajib diisi.',
         'alpha_space' => '%s hanya bisa diisi dengan huruf.',
+		'numeric' => '%s hanya bisa diisi dengan angka.'
     ];
 
     //construct

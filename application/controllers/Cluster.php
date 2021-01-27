@@ -106,7 +106,7 @@ class Cluster extends CI_Controller
                 $this->session->set_flashdata("failed", "Data gagal ditambahkan.");
                 $this->gagal();
             }
-        } else {
+        } else {			
             $this->tambah();
         }
     }

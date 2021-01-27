@@ -22,6 +22,14 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+					<?php if ($this->session->flashdata('success')) { ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <?= $this->session->flashdata('success') ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    <?php } ?>
                     <h4 class="card-title">Master Karyawan</h4>
                     </h6>
                     <div class="table-responsive">

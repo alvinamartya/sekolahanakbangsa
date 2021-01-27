@@ -40,7 +40,7 @@ class Register extends CI_Controller
         [
             'field' => 'nik_relawan',
             'label' => 'Nik Relawan',
-            'rules' => 'required',
+            'rules' => 'required|min_length[16]|max_length[16]',
         ], [
             'field' => 'nama_relawan',
             'label' => 'Nama Relawan',
@@ -96,7 +96,9 @@ class Register extends CI_Controller
         'valid_email' => '%s bukan email yang valid.',
         'alpha_space' => '%s hanya bisa diisi dengan huruf.',
         'numeric' => '%s hanya bisa diisi dengan angka.',
-        'matches' => '%s tidak sama'
+        'matches' => '%s tidak sama',
+		'min_length' => '%s harus terdiri dari 16 angka',
+		'max_length' => '%s harus terdiri dari 16 angka'
     ];
 
     public function __construct()

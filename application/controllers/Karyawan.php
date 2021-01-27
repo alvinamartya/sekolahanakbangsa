@@ -3,12 +3,104 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Karyawan extends CI_Controller
 {
+	// rules
+    private $rules = [
+        [
+            'field' => 'nama_karyawan',
+            'label' => 'Nama Karyawan',
+            'rules' => 'required|callback_alpha_space'
+        ], [
+            'field' => 'nik',
+            'label' => 'NIK',
+            'rules' => 'required|numeric|min_length[16]|max_length[16]'
+        ], [
+            'field' => 'no_telepon',
+            'label' => 'No Telepon',
+            'rules' => 'required|numeric'
+        ], [
+            'field' => 'email',
+            'label' => 'Email Pengguna',
+            'rules' => 'required|valid_email'
+        ], [
+            'field' => 'tempat_lahir',
+            'label' => 'Tempat Lahir',
+            'rules' => 'required'
+        ], [
+            'field' => 'tanggal_lahir',
+            'label' => 'Tanggal Lahir',
+            'rules' => 'required'
+        ], [
+            'field' => 'username',
+            'label' => 'Nama Pengguna',
+            'rules' => 'required|is_unique[user_login.username]'
+        ], [
+            'field' => 'password',
+            'label' => 'Kata sandi',
+            'rules' => 'required'
+        ], [
+            'field' => 'ver_password',
+            'label' => 'Konfirmasi Kata sandi',
+            'rules' => 'required|matches[password]'
+        ]
+		
+    ];
+	private $edit_rules = [
+        [
+            'field' => 'nama_karyawan',
+            'label' => 'Nama Karyawan',
+            'rules' => 'required|callback_alpha_space'
+        ], [
+            'field' => 'nik',
+            'label' => 'NIK',
+            'rules' => 'required|numeric|min_length[16]|max_length[16]'
+        ], [
+            'field' => 'no_telepon',
+            'label' => 'No Telepon',
+            'rules' => 'required|numeric'
+        ], [
+            'field' => 'email',
+            'label' => 'Email Pengguna',
+            'rules' => 'required|valid_email'
+        ], [
+            'field' => 'tempat_lahir',
+            'label' => 'Tempat Lahir',
+            'rules' => 'required'
+        ], [
+            'field' => 'tanggal_lahir',
+            'label' => 'Tanggal Lahir',
+            'rules' => 'required'
+        ]
+		
+    ];
+    
+	public function alpha_space($str)
+    {
+        return (preg_match('/^[a-zA-Z ]+$/', $str) ? TRUE : FALSE);
+    }
+
+    // form rules error message
+    private $errorMessage = [
+        'is_unique' => '%s sudah terdaftar.',
+        'required' => '%s wajib diisi.',
+        'valid_email' => '%s bukan email yang valid.',
+        'alpha_space' => '%s hanya bisa diisi dengan huruf.',
+        'numeric' => '%s hanya bisa diisi dengan angka.',
+        'matches' => '%s tidak sama',
+		'min_length' => '%s harus terdiri dari 16 angka',
+		'max_length' => '%s harus terdiri dari 16 angka'
+    ];
 	// constructor
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('karyawan_model');
 		$this->load->model('user_login_model');
+		
+		// form validation
+        $this->load->library('form_validation');
+        
+        // set error message
+        $this->form_validation->set_message($this->errorMessage);
 	}
 
 	private function getKaryawanName()
@@ -71,15 +163,33 @@ class Karyawan extends CI_Controller
 	{
 		$karyawan = $this->karyawan_model;
 		$user_login = $this->user_login_model;
-
-		$result = $user_login->saveKaryawan();
-		if ($result < 0) {
-			$this->gagal();
-			return;
+		
+		// set rules
+        $this->form_validation->set_rules($this->rules);
+		
+		if ($this->form_validation->run() == true)
+		{
+			$result = $user_login->saveKaryawan();
+			if ($result < 0) {
+				$this->session->set_flashdata("failed", "Data gagal ditambahkan.");	
+				$this->gagal();
+				return;
+			}
+			$result = $karyawan->save();
+			if ($result > 0)
+			{
+				$this->session->set_flashdata("success", "Data berhasil ditambahkan.");
+				$this->sukses();
+			}			
+			else
+			{
+				$this->session->set_flashdata("failed", "Data gagal ditambahkan.");	
+				$this->gagal();	
+			} 
+		}else{
+			$this->tambah();
 		}
-		$result = $karyawan->save();
-		if ($result > 0) $this->sukses();
-		else $this->gagal();
+		
 	}
 
 	public function ubah($id_karyawan)
@@ -106,10 +216,27 @@ class Karyawan extends CI_Controller
 	public function edit()
 	{
 		$karyawan = $this->karyawan_model;
-
-		$result = $karyawan->edit();
-		if ($result > 0) $this->sukses();
-		else $this->gagal();
+		
+		//var_dump($this->form_validation->run());
+		// set rules
+        $this->form_validation->set_rules($this->edit_rules);
+		
+		if ($this->form_validation->run() == true)
+		{
+			$result = $karyawan->edit();
+			if ($result > 0){
+				$this->session->set_flashdata("success", "Data berhasil diubah.");
+				$this->sukses();	
+			}else{
+				$this->session->set_flashdata("failed", "Data gagal diubah.");
+				$this->gagal();	
+			} 
+		}else{
+			//ketampilan tambah
+            $data = $this->input->post();
+            $this->ubah($data['id_karyawan']);
+		}
+		
 	}
 
 	public function hapus($id_karyawan)

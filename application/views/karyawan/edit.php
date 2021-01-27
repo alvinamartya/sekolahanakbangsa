@@ -25,7 +25,8 @@
 				<div class="form-group">
 					<input type="hidden" value=<?php echo $data->id_karyawan ?> name="id_karyawan">
 					<label for="nama_karyawan">Nama Karyawan</label>
-					<input type="text" name="nama_karyawan" class="form-control" required value="<?php echo $data->nama_karyawan ?>"><br>
+					<input type="text" name="nama_karyawan" class="form-control <?php echo (form_error('nama_karyawan') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->nama_karyawan ?>">
+					<div class="invalid-feedback"><?php echo form_error('nama_karyawan'); ?></div>
 				</div>
 				<div class="form-group">
 					<label for="" class="d-block">Jenis Kelamin</label>
@@ -37,38 +38,31 @@
 						<input class="form-check-input" <?php if ($data->jenis_kelamin == "P") echo 'checked' ?> type="radio" id="P" name="jenis_kelamin" value="P" <?php echo (set_value('jenis_kelamin') == 'P' ? 'checked' : '') ?>>
 						<label class="form-check-label" for="P">Perempuan</label>
 					</div>
-				</div>
-				<!--
-				<div class="form-group">
-					
-						Jabatan pengguna
-						<select disabled name="jabatan_karyawan" class="form-control">
-							<option value="Admin" selected>Admin</option>
-							<option value="Super Admin">Super Admin</option>
-						</select>
-						<br>
-					</div>
-				</div>
-				-->
+				</div>			
 				<div class="form-group">
 					<label for="nik">NIK</label>
-					<input type="number" name="nik" class="form-control" value="<?php echo $data->nik ?>" required><br>
+					<input type="number" name="nik" class="form-control <?php echo (form_error('nik') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->nik ?>">
+					<div class="invalid-feedback"><?php echo form_error('nik'); ?></div>
 				</div>
 				<div class="form-group">
 					<label for="no_telepon">No Telepon</label>
-					<input type="number" name="no_telepon" class="form-control" value="<?php echo $data->no_telepon ?>" required><br>
+					<input type="number" name="no_telepon" class="form-control <?php echo (form_error('no_telepon') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->no_telepon ?>" >
+					<div class="invalid-feedback"><?php echo form_error('no_telepon'); ?></div>
 				</div>
 				<div class="form-group">
 					<label for="email">Email</label>
-					<input type="email" name="email" class="form-control" value="<?php echo $data->email ?>" required><br>
+					<input type="email" name="email" class="form-control <?php echo (form_error('email') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->email ?>">
+					<div class="invalid-feedback"><?php echo form_error('email'); ?></div>
 				</div>
 				<div class="form-group">
 					<label for="tempat_lahir">Tempat Lahir</label>
-					<input type="text" name="tempat_lahir" class="form-control" value="<?php echo $data->tempat_lahir ?>" required><br>
+					<input type="text" name="tempat_lahir" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->tempat_lahir ?>">
+					<div class="invalid-feedback"><?php echo form_error('tempat_lahir'); ?></div>
 				</div>
 				<div class="form-group">
 					<label for="tanggal_lahir">Tanggal Lahir</label>
-					<input type="date" name="tanggal_lahir" class="form-control" value="<?php echo date("Y-m-d", strtotime($data->tanggal_lahir)); ?>" required>
+					<input type="date" name="tanggal_lahir" class="form-control <?php echo (form_error('tanggal_lahir') != null ? 'is-invalid' : '') ?>" value="<?php echo date("Y-m-d", strtotime($data->tanggal_lahir)); ?>">
+					<div class="invalid-feedback"><?php echo form_error('tanggal_lahir'); ?></div>
 				</div>
 				<br>
 				<input type="submit" id="btnSubmit" class="btn btn-primary" value="Perbarui">

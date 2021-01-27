@@ -20,7 +20,7 @@
 <!-- TAMBAH CLUSTER -->
 <div class="container-fluid">
 	<div class="card">
-		<div class="card-body">
+		<div class="card-body">					
 			<form method="post" action="<?php echo base_url('Cluster/add') ?>" autocomplete="off">
 				<div class="form-group">
 					<label for="nama_cluster">Nama Cluster</label>
