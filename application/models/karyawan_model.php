@@ -9,7 +9,11 @@ class karyawan_model extends CI_Model
 	public function getAllData()
 	{
 		// mengambil seluruh data dari table karyawan
-		return $this->db->get($this->_karyawan)->result();
+		return $this->db
+			->where('row_status', 'A')
+			->where('jabatan_karyawan', 'Admin')
+			->get($this->_karyawan)
+			->result();
 	}
 
 	public function save()
@@ -34,11 +38,11 @@ class karyawan_model extends CI_Model
 		$email = $post['email'];
 		$tempat_lahir = $post['tempat_lahir'];
 		$tanggal_lahir = $post['tanggal_lahir'];
-		
+
 		$user_id = $this->session->user_id;
 		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
-		$creaby  = $karyawan->nama_karyawan;		
-		
+		$creaby  = $karyawan->nama_karyawan;
+
 		$creadate = date('Y-m-d H:i:s');
 		$modiby = '';
 		$modidate = date('Y-m-d H:i:s');
@@ -73,7 +77,6 @@ class karyawan_model extends CI_Model
 
 		// insert seluruh data post ke variable yang akan diupdate
 		$id_karyawan = $post['id_karyawan'];
-		$id_user_login = $post['id_user_login'];
 		$nama_karyawan = $post['nama_karyawan'];
 		$jenis_kelamin = $post['jenis_kelamin'];
 		$nik = $post['nik'];
@@ -85,7 +88,7 @@ class karyawan_model extends CI_Model
 		$user_id = $this->session->user_id;
 		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
 		$modiby  = $karyawan->nama_karyawan;
-		 
+
 		$modidate = date('Y-m-d H:i:s');
 
 		// memasukkan data ke dalam array
@@ -108,12 +111,13 @@ class karyawan_model extends CI_Model
 		// 0 jika gagal, 1 jika berhasil
 		return $this->db->update($this->_karyawan, $data);
 	}
+
 	public function hapus($id_karyawan)
-	{		
+	{
 		$user_id = $this->session->user_id;
 		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
 		$modiby  = $karyawan->nama_karyawan;
-		
+
 		$modidate = date('Y-m-d H:i:s');
 
 		// set data array yang akan diupdate
@@ -131,6 +135,7 @@ class karyawan_model extends CI_Model
 		// 0 jika gagal, 1 jika berhasil
 		return $this->db->update($this->_karyawan, $data);
 	}
+
 	public function getKaryawan($id_karyawan)
 	{
 		// mengambil data sesuai dengan id_karyawan

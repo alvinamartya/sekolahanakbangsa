@@ -85,7 +85,7 @@
 
                     <div class="form-group">
                         <label for="tanggal_lahir">Tanggal lahir</label>
-                        <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="1971-01-01" class="form-control <?php echo (form_error('tanggal_lahir') != null ? 'is-invalid' : '') ?>">
+                        <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="<?= set_value('tanggal_lahir') != '' ? set_value('tanggal_lahir') : '1971-01-01' ?>" class="form-control <?php echo (form_error('tanggal_lahir') != null ? 'is-invalid' : '') ?>">
                         <div class="invalid-feedback"><?php echo form_error('tanggal_lahir'); ?></div>
                     </div>
 

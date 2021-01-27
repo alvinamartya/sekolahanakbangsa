@@ -4,7 +4,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class user_login_model extends CI_Model
 {
 	private $_user_login = "user_login";
-	private $_karyawan = "karyawan";
 
 	public function getAllData()
 	{
@@ -42,7 +41,6 @@ class user_login_model extends CI_Model
 	{
 		$post = $this->input->post();
 		$id = $post["id"];
-		$username = $post["username"];
 		$password = password_hash($post["username"], PASSWORD_DEFAULT);
 		$modiby = 'user_login';
 		$modidate = date('Y-m-d H:i:s');

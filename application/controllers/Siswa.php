@@ -42,7 +42,7 @@ class Siswa extends CI_Controller
     private $errorMessage = [
         'required' => '%s wajib diisi.',
         'alpha_space' => '%s hanya bisa diisi dengan huruf.',
-		'numeric' => '%s hanya bisa diisi dengan angka.'
+        'numeric' => '%s hanya bisa diisi dengan angka.'
     ];
 
     //construct
@@ -76,6 +76,8 @@ class Siswa extends CI_Controller
         //tittle
         $header['title'] = 'Siswa';
         $header['name'] =  $this->getRelawanName();
+        $header['active'] = true;
+
         //template header
         $this->load->view('templates/relawan_header', $header);
         //menampilkan data
@@ -91,6 +93,8 @@ class Siswa extends CI_Controller
         // set page title
         $header['title'] = 'Tambah Siswa';
         $header['name'] =  $this->getRelawanName();
+        $header['active'] = true;
+
         //template header
         $this->load->view('templates/relawan_header', $header);
 
@@ -149,6 +153,7 @@ class Siswa extends CI_Controller
         //title
         $header['title'] = 'Ubah Siswa';
         $header['name'] =  $this->getRelawanName();
+        $header['active'] = true;
 
         //template header
         $this->load->view('templates/relawan_header', $header);

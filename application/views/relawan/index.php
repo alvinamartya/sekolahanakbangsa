@@ -67,8 +67,8 @@
                                         <td><?= $r->tempat_lahir ?></td>
                                         <td><?= date_format(date_create($r->tanggal_lahir), "d/m/Y")   ?></td>
                                         <td>
-                                            <a href="<?= site_url('relawan/ubah/' .  $r->id_relawan) ?>" class="btn btn-primary">Ubah</a>
-                                            <a href="<?= site_url('relawan/destroy/' .  $r->id_relawan) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger">Hapus</a>
+                                            <a href="<?= site_url('relawan/ubah/' .  $r->id_relawan) ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
+                                            <a href="<?= site_url('relawan/destroy/' .  $r->id_relawan) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
                                     </tr>
                                 <?php } ?>

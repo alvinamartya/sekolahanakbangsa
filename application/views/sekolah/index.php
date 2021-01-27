@@ -64,8 +64,8 @@
                                         <td><?= $s->provinsi ?></td>
                                         <td><?= $s->kota ?></td>
                                         <td>
-                                            <a href="<?= site_url('sekolah/ubah/' .  $s->id_sekolah) ?>" class="btn btn-primary">Ubah</a>
-                                            <a href="<?= site_url('sekolah/destroy/' .  $s->id_sekolah) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger">Hapus</a>
+                                            <a href="<?= site_url('sekolah/ubah/' .  $s->id_sekolah) ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
+                                            <a href="<?= site_url('sekolah/destroy/' .  $s->id_sekolah) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
                                     </tr>
                                 <?php } ?>

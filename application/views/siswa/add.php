@@ -39,7 +39,7 @@
 
                         <div class="form-group">
                             <label for="nisn">NISN</label>
-                            <input type="number" class="form-control <?php echo (form_error('nisn') != null ? 'is-invalid' : '') ?>" id="nisn" name="nisn" aria-describedby="schoolNameHelp" value="<?php echo set_value('nisn'); ?>" placeholder="NISN">
+                            <input type="number" class="form-control <?php echo (form_error('nisn') != null ? 'is-invalid' : '') ?>" id="nisn" name="nisn" value="<?php echo set_value('nisn'); ?>" placeholder="NISN">
                             <div class="invalid-feedback"><?php echo form_error('nisn'); ?></div>
                         </div>
 
@@ -51,8 +51,8 @@
 
                         <div class="form-group">
                             <label for="tanggal_lahir">Tanggal lahir</label>
-                            <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="1971-01-01" class="form-control <?php echo (form_error('tanggal_lahir') != null ? 'is-invalid' : '') ?>">
-                            <div class="invalid-feedback"><?php echo form_error('tanggal_lahir'); ?></div>
+                            <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="<?= set_value('tanggal_lahir') != '' ? set_value('tanggal_lahir') : '1971-01-01' ?>" class="form-control <?php echo (form_error('tanggal_lahir') != null ? 'is-invalid' : '') ?>">
+                            <div class="invalid-feedback"><?php form_error('tanggal_lahir'); ?></div>
                         </div>
 
                         <div class="form-group">
@@ -60,9 +60,9 @@
                             <select name="id_sekolah" id="id_sekolah" class="form-control">
                                 <?php foreach ($sekolah as $s) { ?>
                                     <option value="<?= $s->id_sekolah ?>" <?php
-                                            if (set_value('id_sekolah') !== "") {
-                                                echo set_value('id_sekolah') == $s->id_sekolah ? 'selected' : '';
-                                            } ?>>
+                                                                            if (set_value('id_sekolah') !== "") {
+                                                                                echo set_value('id_sekolah') == $s->id_sekolah ? 'selected' : '';
+                                                                            } ?>>
                                         <?= $s->nama_sekolah ?>
                                     </option>
                                 <?php } ?>
