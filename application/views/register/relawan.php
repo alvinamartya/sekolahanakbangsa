@@ -32,7 +32,7 @@
                 <form action="<?= site_url("register/register_relawan") ?>" method="POST">
                     <div class="form-group">
                         <label for="nik_relawan">NIK Relawan</label>
-                        <input type="number" id="nik_relawan" class="form-control <?php echo (form_error('nik_relawan') != null ? 'is-invalid' : '') ?>" name="nik_relawan" value="<?php echo set_value('nik_relawan'); ?>">
+                        <input type="number" maxlength="16" id="nik_relawan" class="form-control <?php echo (form_error('nik_relawan') != null ? 'is-invalid' : '') ?>" name="nik_relawan" value="<?php echo set_value('nik_relawan'); ?>">
                         <div class="invalid-feedback"><?php echo form_error('nik_relawan'); ?></div>
                     </div>
 
@@ -120,6 +120,7 @@
 
     <script src="<?php echo base_url('assets/js/jquery-3.5.1.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/validation.js') ?>"></script>
 </body>
 
 </html>

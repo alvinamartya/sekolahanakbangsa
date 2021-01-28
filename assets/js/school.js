@@ -15,8 +15,10 @@ $(document).ready(async () => {
     // get province
     await $.get('https://dev.farizdotid.com/api/daerahindonesia/provinsi', (data) => {
         provinces = [];
+        let option;
+        option = '<option value="" hidden>Pilih Provinsi</option>';
+        $("#provinsi").append(option);
         data.provinsi.forEach(e => {
-            let option;
             if (selectedProvince !== undefined) {
                 option = '<option value="' + e.nama + '"' + (e.nama == selectedProvince ? ' selected' : '') + '>' + e.nama + '</option>';
             } else {
@@ -44,10 +46,12 @@ $(document).ready(async () => {
             .find('option')
             .remove();
 
+        let option;
+        option = '<option value="" hidden>Pilih Kota</option>';
+        $("#kota").append(option);
         // binding cities
         await $.get('https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=' + id, (data) => {
             data.kota_kabupaten.forEach(e => {
-                let option;
                 if (selectedProvince !== undefined) {
                     option = '<option value="' + e.nama + '"' + (e.nama == selectedCity ? ' selected' : '') + '>' + e.nama + '</option>';
                 } else {

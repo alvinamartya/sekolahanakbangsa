@@ -115,10 +115,9 @@ class Siswa extends CI_Controller
             //data array
             $insert_data = array(
                 'nama_siswa' => $post["nama_siswa"],
-                'id_sekolah' => 1,
+                'id_sekolah' => $post['id_sekolah'],
                 'jenis_kelamin' => $post["jenis_kelamin"],
                 'nisn' => $post["nisn"],
-                'id_sekolah' => $post['id_sekolah'],
                 'tempat_lahir' => $post["tempat_lahir"],
                 'tanggal_lahir' => $post["tanggal_lahir"],
                 'creaby' => $this->getRelawanName(),

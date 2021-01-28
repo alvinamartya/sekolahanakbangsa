@@ -9,7 +9,7 @@ class cluster_relawan_model extends CI_Model
 	public function getAllData()
 	{
 		// mengambil seluruh data dari table cluster_relawan
-		return $this->db->get($this->_cluster)->result();
+		return $this->db->get_where($this->_cluster, ["row_status" => 'A'])->result();
 	}
 
 	public function save()

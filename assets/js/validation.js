@@ -1,9 +1,4 @@
-$(function () {
-    $('#master-data').DataTable();
-    setTimeout(function () {
-        $(".alert").slideUp(500);
-    }, 3000);
-
+$(document).ready(function() {
     $('body').on('keypress', 'input[type=number][maxlength]', function(event){
         var key = event.keyCode || event.charCode;
         var charcodestring = String.fromCharCode(event.which);
@@ -48,4 +43,4 @@ $(function () {
             ref.val('').val(filteredString)
         },100);
     });
-})
+});
