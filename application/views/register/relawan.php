@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/apercu.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/sf_pro.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/home-style.css') ?>">
 </head>
 
 <body>
@@ -108,12 +108,12 @@
                     </div>
 
                     <div class="form-group mt-4">
-                        <button type="submit" class="btn btn-danger w-100"><i class="fa fa-sign-in"></i> Daftar</button>
+                        <button type="submit" class="btn btn-danger d-inline-block text-center w-100">Daftar</button>
                     </div>
                 </form>
 
                 <p class="form-footer">Sudah punya akun?</p>
-                <p><a href="<?php echo site_url('login') ?>">Masuk</a></p>
+                <p><a href="<?php echo site_url('login') ?>" class="text-primary">Masuk</a></p>
             </div>
         </div>
     </div>

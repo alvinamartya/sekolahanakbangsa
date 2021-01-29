@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/apercu.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/sf_pro.css') ?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css') ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/home-style.css') ?>">
 </head>
 
 <body>
@@ -51,12 +51,12 @@
                     <!-- ============================================================== -->
 
                     <div class="form-group mt-4">
-                        <button type="submit" class="btn btn-danger w-100"><i class="fa fa-sign-in"></i> Masuk</button>
+                        <button type="submit" class="btn btn-danger d-inline-block text-center w-100"><i class="fa fa-sign-in"></i> Masuk</button>
                     </div>
                 </form>
 
                 <p class="form-footer">Belum punya akun?</p>
-                <p><a href="<?php echo site_url('register/relawan') ?>">Jadi Relawan</a> atau <a href="<?php echo site_url('register/donatur') ?>">Donatur</a></p>
+                <p><a href="<?php echo site_url('register/relawan') ?>" class="text-primary">Jadi Relawan</a> atau <a href="<?php echo site_url('register/donatur') ?>" class="text-primary">Donatur</a></p>
             </div>
         </div>
     </div>

@@ -1,10 +1,15 @@
 $(function () {
+    // Datatable - master
     $('#master-data').DataTable();
+
+    // Alert Auto Fade
     setTimeout(function () {
         $(".alert").slideUp(500);
     }, 3000);
 
-    $('body').on('keypress', 'input[type=number][maxlength]', function(event){
+})
+    
+$('body').on('keypress', 'input[type=number][maxlength]', function(event){
         var key = event.keyCode || event.charCode;
         var charcodestring = String.fromCharCode(event.which);
         var txtVal = $(this).val();
