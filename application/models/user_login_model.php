@@ -15,7 +15,7 @@ class user_login_model extends CI_Model
 		$post = $this->input->post();
 		//$id;
 		$username = $post["username"];
-		$password = password_hash($post["username"], PASSWORD_DEFAULT);
+		$password = password_hash($post["password"], PASSWORD_DEFAULT);
 		$role = "Karyawan";
 		$creaby = "user_login";
 		$creadate = date('Y-m-d H:i:s');
