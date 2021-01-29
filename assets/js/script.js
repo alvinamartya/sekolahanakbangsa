@@ -6,7 +6,6 @@ $(function () {
             "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
             "zeroRecords": "Tidak ada data.",
             "search": "Pencarian :",
-            "nextPage": "Selanjutnya",
             "infoFiltered": "(tersaring dari total _MAX_ data)",
             "paginate": {
                 "previous": "Sebelumnya",
