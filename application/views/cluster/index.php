@@ -59,8 +59,8 @@
                                             <td><?= $k->nama_cluster ?></td>
                                             <td><?= $k->deskripsi_cluster ?></td>
                                             <td>
-                                                <a href="<?php echo site_url('cluster/ubah/' . $k->id_cluster_relawan . '') ?>" class="btn btn-primary">Ubah</a>
-                                                <a href="<?php echo site_url('cluster/hapus/' . $k->id_cluster_relawan) ?>" class="btn btn-danger" onclick="return confirm('Dengan menekan OK maka data akan dihapus (dinonaktifkan)')"><i class="fa fa-trash"></i>Hapus</a>
+                                                <a href="<?php echo site_url('cluster/ubah/' . $k->id_cluster_relawan . '') ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
+                                                <a href="<?php echo site_url('cluster/hapus/' . $k->id_cluster_relawan) ?>" class="btn btn-danger" onclick="return confirm('Dengan menekan OK maka data akan dihapus (dinonaktifkan)')"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>
                                         </tr>
                                 <?php
