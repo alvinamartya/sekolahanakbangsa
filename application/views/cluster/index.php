@@ -22,7 +22,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Master Cluster</h4>
+                    <h4 class="card-title text-center" style="font-size: 28px;">Master Cluster Relawan</h4>
                     <?php if ($this->session->flashdata('success')) { ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <?= $this->session->flashdata('success') ?>
@@ -37,10 +37,10 @@
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama Cluster</th>
-                                    <th>Deskripsi</th>
-                                    <th>Aksi</th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Nama Cluster</th>
+                                    <th class="text-center">Deskripsi</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,7 +58,7 @@
                                             </td>
                                             <td><?= $k->nama_cluster ?></td>
                                             <td><?= $k->deskripsi_cluster ?></td>
-                                            <td>
+                                            <td align="center">
                                                 <a href="<?php echo site_url('cluster/ubah/' . $k->id_cluster_relawan . '') ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
                                                 <a href="<?php echo site_url('cluster/hapus/' . $k->id_cluster_relawan) ?>" class="btn btn-danger" onclick="return confirm('Dengan menekan OK maka data akan dihapus (dinonaktifkan)')"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>
