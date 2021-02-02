@@ -21,7 +21,7 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <!-- basic table -->
-    <form action="<?= site_url('aksi/add') ?>" method="POST" enctype="multipart/form-data" id="formUtama">
+    <form action="" method="POST" enctype="multipart/form-data" id="mainForm">
         <div class="row">
 
             <!-- Aksi -->
@@ -51,7 +51,7 @@
                             <div class="col-md-8">
                                 <div class="form-group">
                                     <label for="foto">Pilih Foto</label><br>
-                                    <input type="file" name="foto">
+                                    <input type="file" name="files" id="gambar_aksi" multiple>
                                 </div>
                             </div>
 

@@ -43,6 +43,7 @@ class Aksi extends CI_Controller
         $this->load->model('aksi_barang_model');
         $this->load->model('biaya_lainnya_model');
         $this->load->model('barang_model');
+        $this->load->model('gambar_aksi_model');
 
         // form validation
         $this->load->library('form_validation');
@@ -125,12 +126,53 @@ class Aksi extends CI_Controller
         }
     }
 
+    public function uploadImage($id_aksi, $files)
+    {
+        $relawan = $this->getRelawanSession();
+
+        for($i=0; $i < count($files['name']); $i++){
+
+            if(!empty($files['name'][$i])){
+                $_FILES['file']['name'] = $files['name'][$i];
+                $_FILES['file']['type'] = $files['type'][$i];
+                $_FILES['file']['tmp_name'] = $files['tmp_name'][$i];
+                $_FILES['file']['error'] = $files['error'][$i];
+                $_FILES['file']['size'] = $files['size'][$i];
+
+                $config['upload_path'] = 'assets/images/aksi/';
+                $config['allowed_types'] = 'jpg|jpeg|png|gif';
+                $config['max_size'] = '5000';
+                $config['file_name'] = date('Ymdhis').$i;
+
+                $this->load->library('upload', $config);
+
+                if($this->upload->do_upload('file')){
+                    $uploadData = $this->upload->data();
+                    $filename = $uploadData['file_name'];
+
+                    $gambar = array(
+                        'id_aksi' => $id_aksi,
+                        'gambar' => $filename,
+                        'creaby' => $relawan->nama_relawan,
+                        'modiby' => $relawan->nama_relawan,
+                        'row_status' => 'A'
+                    );
+
+                    $this->gambar_aksi_model->save($gambar);
+
+                }
+            }
+        }
+    }
+
     // action
     public function add()
     {
         // get relawan
         $relawan = $this->getRelawanSession();
         $post = $this->input->post();
+        $biaya = json_decode($post["biaya"]);
+        $barang = json_decode($post["barang"]);
 
         if ($this->form_validation->run() == true) {
             // insert data
@@ -149,13 +191,13 @@ class Aksi extends CI_Controller
 
             $aksi_id = $this->aksi_model->getLastData()->id_aksi;
 
-            if($post["biaya"] != null) {
+            if($biaya != null) {
                 // foreach data biaya
-                foreach($post["biaya"] as $biaya) {
+                foreach($biaya as $b) {
                     $biaya_data = array(
                         'id_aksi' => $aksi_id,
-                        'id_biaya_lainnya' => $biaya["id_biaya"],
-                        'biaya' => $biaya["harga"],
+                        'id_biaya_lainnya' => $b->id_biaya,
+                        'biaya' => $b->harga,
                         'creaby' => $relawan->nama_relawan,
                         'modiby' => $relawan->nama_relawan,
                         'row_status' => 'A'
@@ -165,14 +207,14 @@ class Aksi extends CI_Controller
                 }
             }
 
-            if($post["barang"] != null) {
+            if($barang != null) {
                 // foreach data barang
-                foreach($post["barang"] as $barang) {
+                foreach($barang as $b) {
                     $barang_data = array(
                         'id_aksi' => $aksi_id,
-                        'id_barang' => $barang["id_barang"],
-                        'jumlah' => $barang["jumlah"],
-                        'harga_satuan' => $barang["harga_satuan"],
+                        'id_barang' => $b->id_barang,
+                        'jumlah' => $b->jumlah,
+                        'harga_satuan' => $b->harga_satuan,
                         'creaby' => $relawan->nama_relawan,
                         'modiby' => $relawan->nama_relawan,
                         'row_status' => 'A'
@@ -180,6 +222,11 @@ class Aksi extends CI_Controller
 
                     $this->aksi_barang_model->save($barang_data);
                 }
+            }
+
+            if (!empty($_FILES['files']['name'])) {
+
+                $this->uploadImage($aksi_id, $_FILES["files"]);
             }
 
             $this->session->set_flashdata("success", "Data berhasil ditambahkan.");

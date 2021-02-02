@@ -54,24 +54,33 @@
         var aksiBarang = [];
         $('#validationAlert').hide();
 
-        $('#btnSave').on('click', function() {
+        $("#btnSave").on("click", function() {
+
+            let formData = new FormData();
+            formData.append("nama_aksi", $('#nama_aksi').val())
+            formData.append("tanggal_selesai", $('#tanggal_selesai').val());
+            formData.append("deskripsi_aksi", $('#deskripsi_aksi').val());
+            formData.append("target_donasi", getNumber($('#target_donasi').html()));
+            formData.append("target_donasi", getNumber($('#target_donasi').html()));
+            formData.append("barang", JSON.stringify(aksiBarang));
+            formData.append("biaya", JSON.stringify(aksiBiaya));
+
+            $.each($('#gambar_aksi')[0].files,function(key,input){
+                formData.append('files[]', input);
+            });
+
             $.ajax({
                 url: "<?= site_url('aksi/add') ?>",
                 type: "POST",
-                dataType: "json",
-                data: {
-                    "nama_aksi" : $('#nama_aksi').val(),
-                    "tanggal_selesai" : $('#tanggal_selesai').val(),
-                    "deskripsi_aksi" : $('#deskripsi_aksi').val(),
-                    "target_donasi" : getNumber($('#target_donasi').html()),
-                    "barang": aksiBarang,
-                    "biaya": aksiBiaya
-                },
+                contentType: false,
+                processData: false,
+                data: formData,
                 success:function(res) {
-                    if(res.success) {
+                    var respon = JSON.parse(res);
+                    if(respon.success) {
                         window.location.href = "<?= site_url('aksi') ?>"
                     } else {
-                        $("#validationAlert").html(res.message);
+                        $("#validationAlert").html(respon.message);
                         $("#validationAlert").show();
                     }
 
@@ -153,7 +162,7 @@
             let jumlahBarang = $('#jumlah').val();
             let hargaBarang = $('#harga_satuan').val();
 
-            // check if biaya exists
+            // check if barang exists
             let hasBarang = aksiBarang.some(a => a['id_barang'] === idBarang);
 
             if(hasBarang) {
