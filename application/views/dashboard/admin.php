@@ -28,7 +28,7 @@
     										</select>
     									</div>
     									<div class="col">
-    										<button type="submit" class="btn btn-primary form-control"><span class="fa fa-search float-left"></span> FILTER</button>
+    										<button class="btn btn-primary form-control"><span class="fa fa-search"></span> FILTER</button>
     									</div>
     								</div>
     							</form>
@@ -38,9 +38,11 @@
     			</div>
     			<div class="card">
     				<div class="card-body">
+    					<h4 class="card-title text-center">Diagram batang laporan kebutuhan <?= $nama_sekolah ?> per tahun</h4>
+
     					<div class="barchart-sekolah mt-4 position-relative" style="height:294px;"></div>
     					<ul class="list-inline text-center mt-5 mb-2">
-    						<li class="list-inline-item text-muted font-italic">Laporan Kebutuhan Tahunan <?= $nama_sekolah ?></li>
+    						<li class="list-inline-item text-muted font-italic">Laporan sekolah <?= $nama_sekolah ?> per tahun</li>
     					</ul>
     				</div>
     				<br>
@@ -48,8 +50,8 @@
     			<br>
     			<div class="card">
     				<div class="card-body">
-    					<h4 class="card-title text-center" style="margin-bottom: 40px; font-size:24px">Tabel Laporan Kebutuhan Tahunan <?= $nama_sekolah ?></h4>
-    					<table class="table table-hover">
+    					<h4 class="card-title text-center">Tabel laporan <?= $nama_sekolah ?> per tahun</h4>
+    					<table class="table table-striped">
     						<thead class="thead-light">
     							<tr class="text-center">
     								<td>No</td>
@@ -70,12 +72,16 @@
 									$data = $data . $k->total_kebutuhan . ",";
 								?>
 
+
     								<tr class="text-center">
     									<td><?= $i ?>.</td>
     									<td><?= $k->tahun ?></td>
-    									<td><?= $k->total_kebutuhan ?></td>
+    									<td><?php echo 'Rp ' . number_format($k->total_kebutuhan, 2, ',', '.'); ?></td>
     									<td>
-    										<a href="#"><span class="fa fa-info"></span></a>
+    										<form action="<?php echo base_url('Dashboard/detail_kebutuhan') ?>" method="post" class="d-inline">
+    											<input type="hidden" name="id" value="<?= $k->id ?>">
+    											<button class="btn btn-primary"><span class="fa fa-eye"></span> Detail</button>
+    										</form>
     									</td>
     								</tr>
     							<?php

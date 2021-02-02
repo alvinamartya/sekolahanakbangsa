@@ -23,8 +23,6 @@ class kebutuhan_tahunan_model extends CI_Model
 
         return $query->result();
     }
-
-
     public function getKebutuhanTahunanByRelawan($id_relawan)
     {
         $query = $this->db
@@ -87,6 +85,26 @@ class kebutuhan_tahunan_model extends CI_Model
         return $query->row();
     }
     public function getKebutuhanTahunan($id)
+    {
+        $query = $this->db
+            ->from($this->_table)
+            ->where(['id' => $id])
+            ->get();
+
+        return $query->row();
+    }
+
+    public function getAllDataNotConfirm()
+    {
+        $query = $this->db
+            ->from($this->_table)
+            ->where(['is_approved' => null])
+            ->order_by('tahun', 'asc')
+            ->get();
+
+        return $query->result();
+    }
+    public function getKebutuhanTahunanById($id)
     {
         $query = $this->db
             ->from($this->_table)
