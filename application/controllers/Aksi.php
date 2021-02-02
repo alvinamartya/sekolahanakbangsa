@@ -8,7 +8,7 @@ class Aksi extends CI_Controller
         [
             'field' => 'nama_aksi',
             'label' => 'Nama Aksi',
-            'rules' => 'required|callback_alpha_space'
+            'rules' => 'required'
         ], [
             'field' => 'tanggal_selesai',
             'label' => 'Tanggal Selesai',
@@ -20,16 +20,9 @@ class Aksi extends CI_Controller
         ],
     ];
 
-    //validasi huruf
-    public function alpha_space($str)
-    {
-        return (preg_match('/^[a-zA-Z ]+$/', $str) ? TRUE : FALSE);
-    }
-
     // form rules error message
     private $errorMessage = [
-        'required' => '%s wajib diisi.',
-        'alpha_space' => '%s hanya bisa diisi dengan huruf.',
+        'required' => '%s wajib diisi.'
     ];
 
     // constructor
@@ -39,7 +32,7 @@ class Aksi extends CI_Controller
 
         //load ke model siswa
         $this->load->model('aksi_model');
-        $this->load->model('aksi_biaya_model');
+        $this->load->model('aksi_biaya_lainnya_model');
         $this->load->model('aksi_barang_model');
         $this->load->model('biaya_lainnya_model');
         $this->load->model('barang_model');
@@ -68,7 +61,6 @@ class Aksi extends CI_Controller
     */
     public function index()
     {
-
         $relawan = $this->getRelawanSession();
         // set relawan
         $header['name'] =  $relawan->nama_relawan;
@@ -82,7 +74,7 @@ class Aksi extends CI_Controller
         $this->load->view('templates/relawan_header', $header);
 
         // data sekolah
-        $data_aksi = $this->aksi_model->getAksi($relawan->id_relawan);
+        $data_aksi = $this->aksi_model->getAksiByRelawan($relawan->id_relawan);
         $data['aksi'] = $data_aksi;
         $this->load->view('aksi/index', $data);
 
@@ -203,7 +195,7 @@ class Aksi extends CI_Controller
                         'row_status' => 'A'
                     );
 
-                    $this->aksi_biaya_model->save($biaya_data);
+                    $this->aksi_biaya_lainnya_model->save($biaya_data);
                 }
             }
 
