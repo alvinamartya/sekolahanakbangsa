@@ -75,7 +75,7 @@
 				<div class="card">
 					<div class="card-body">
 						<h4 class="card-title text-center">Tabel laporan <?=$nama_sekolah?> per tahun</h4>
-						<table class="table table-hover">
+						<table class="table table-striped">
 							<thead class="thead-light">
 								<tr class="text-center">
 									<td>No</td>
@@ -99,9 +99,9 @@
 								<tr class="text-center">
 									<td><?= $i ?>.</td>
 									<td><?= $k->tahun ?></td>
-									<td><?= $k->total_kebutuhan ?></td>
+									<td><?php echo 'Rp '.number_format($k->total_kebutuhan,2,',','.'); ?></td>
 									<td>
-										<a href="#"><span class="fa fa-info"></span></a>
+										<button class="btn btn-primary"><span class="fa fa-eye"></span> Detail</button>
 									</td>
 								</tr>
 								<?php

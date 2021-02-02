@@ -31,7 +31,7 @@ class Donasi extends CI_Controller
         // main
 		$data_aksi = $this->aksi_model->getAksi($id);
 		$data_barang = $this->barang_model->getBarang();
-		$data_relawan = $this->relawan_model->getByID($id);
+		$data_relawan = $this->relawan_model->getByID($data_aksi->id_relawan);
 		$data_aksi_barang = $this->aksi_barang_model->getAksiBarangByIdAksi($id);
 		$data_aksi_biaya_lainnya = $this->aksi_biaya_lainnya_model->getBiayaLainnyaByIdAksi($id);
 		$data_biaya_lainnya = $this->biaya_lainnya_model->getBiayaLainnya();

@@ -23,4 +23,29 @@ class kebutuhan_tahunan_model extends CI_Model
 
         return $query->result();
     }
+	public function getAllDataNotConfirm()
+	{
+		$query = $this->db
+            ->from($this->_table)
+            ->where(['is_approved' => null])
+            ->order_by('tahun', 'asc')
+            ->get();
+
+        return $query->result();
+	}
+	public function getKebutuhanTahunanById($id)
+	{
+		$query = $this->db
+            ->from($this->_table)
+            ->where(['id' => $id])            
+            ->get();
+
+        return $query->row();
+	}
+	public function update($id, $data)
+	{
+		return $this->db
+            ->where('id', $id)
+            ->update($this->_table, $data);
+	}
 }

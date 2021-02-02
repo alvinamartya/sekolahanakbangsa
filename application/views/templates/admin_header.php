@@ -192,6 +192,13 @@
 								<i class="fa fa-check-double"></i><span class="hide-menu">Validasi Uang Masuk</span>
 							</a>
 						</li>
+						<li class="nav-small-cap"><span class="hide-menu">Konfirmasi</span></li>
+
+						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'konfirmasi-kebutuhan-tahunan' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
+							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'konfirmasi-kebutuhan-tahunan' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('Bantuan_sekolah') ?>" aria-expanded="false">
+								<i class="fa fa-check-double"></i><span class="hide-menu">Konfirmasi kebutuhan tahunan</span>
+							</a>
+						</li>
 					</ul>
 				</nav>
 				<!-- End Sidebar navigation -->
