@@ -25,62 +25,79 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title text-center" style="font-size: 26px;">Data Kebutuhan Tahunan</h4>
+                    <h4 class="card-title">Kebutuhan Tahunan</h4>
                     <form action="">
                         <div class="form-group">
-                            <label for="year">Pilih Tahun</label>
+                            <label for="year">Tahun</label>
                             <input type="text" id="year" name="year" class="yearpicker form-control" value="" />
                         </div>
 
                         <div class="form-group">
-                            <label for="desc">Deskripsi Kebutuhan</label>
+                            <label for="desc">Deskripsi</label>
                             <textarea name="desc" id="desc" cols="30" rows="5" class="form-control"></textarea>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-7">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title text-center" style="font-size: 26px;">Detail Barang</h4>
-                    <a href="<?php echo base_url('karyawan/tambah') ?>" class="btn btn-primary mb-2">Tambah</a>
-                    <table id="master-data-barang" class="table table-striped table-bordered no-wrap">
-                        <thead>
-                            <tr>
-                                <th class="text-center">No</th>
-                                <th class="text-center">Nama</th>
-                                <th class="text-center">Jumlah</th>
-                                <th class="text-center">Harga Satuan</th>
-                                <th class="text-center">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-5">
+        <!-- Aksi Biaya -->
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title text-center" style="font-size: 26px;">Detail Biaya Lainnya</h4>
-                    <a href="<?php echo base_url('karyawan/tambah') ?>" class="btn btn-primary mb-2">Tambah</a>
-                    <table id="master-data-biaya" class="table table-striped table-bordered no-wrap">
-                        <thead>
-                            <tr>
-                                <th class="text-center">No</th>
-                                <th class="text-center">Nama</th>
-                                <th class="text-center">Biaya</th>
-                                <th class="text-center">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    <div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="messageBiaya">
+                        Biaya berhasil ditambahkan!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBiaya">Tambah</button>
+                        <table id="biaya-table" class="table table-striped table-bordered no-wrap">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Nama Biaya</th>
+                                    <th class="text-center">Biaya</th>
+                                    <th class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Aksi Barang -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title text-center" style="font-size: 26px;">Detail Barang</h4>
+                    <div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="messageBarang">
+                        Barang berhasil ditambahkan!
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBarang">Tambah</button>
+                        <table id="barang-table" class="table table-striped table-bordered no-wrap">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Nama Barang</th>
+                                    <th class="text-center">Jumlah</th>
+                                    <th class="text-center">Harga Satuan</th>
+                                    <th class="text-center">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,13 +107,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-8" style="font-size: 24px;">
-                            Total: Rp.5.000.000,00
-                        </div>
-                        <div class="col-4 d-flex flex-row-reverse">
-                            <a href="<?= site_url('karyawan') ?>" class="btn btn-danger" style="margin-left: 10px;">Kembali</a>
-                            <button id="btn-save" type="submit" class="btn btn-primary">Simpan</button>
+                    <div class="col-12 d-flex justify-content-between">
+                        <h3 class="text-danger font-weight-bold">Total Harga : Rp<span id="target_donasi">0</span></h3>
+                        <div class="d-flex">
+                            <button class="btn btn-primary mr-3" type="button" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
+                            <button class="btn btn-danger" type="button"><i class="fa fa-times"></i> Batal</button>
                         </div>
                     </div>
                 </div>
