@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class gambar_aksi_model extends CI_Model
 {
     private $_table = "gambar_aksi";
-
+  
     public function __construct()
     {
         parent::__construct();
@@ -33,5 +33,16 @@ class gambar_aksi_model extends CI_Model
             ->where('id', $id)
             ->update($this->_table, $data);
     }
+	
+    public function getGambarByIdAksi($id)
+    {
+      $query = $this->db
+              ->from($this->_table)
+              ->where(['id_aksi' => $id])
+              ->get();
 
+          return $query->result();
+    }
 }
+
+?>

@@ -13,19 +13,8 @@ class biaya_lainnya_model extends CI_Model
     }
 
     //edit data
-    public function edit($modiby)
+    public function edit($id_biaya_lainnya, $data)
     {
-        //menampung nilai array
-        $post = $this->input->post();
-        $id_biaya_lainnya = $post['id_biaya_lainnya'];
-        $nama_biaya_lainnya = $post['nama_biaya_lainnya'];
-        $deskripsi_biaya_lainnya = $post['deskripsi_biaya_lainnya'];
-
-        $data = array(
-            'nama_biaya_lainnya'        => $nama_biaya_lainnya,
-            'deskripsi_biaya_lainnya'   => $deskripsi_biaya_lainnya,
-            'modiby'                    => $modiby
-        );
         $this->db->where('id_biaya_lainnya', $id_biaya_lainnya);
         return $this->db->update($this->_table, $data);
     }
@@ -58,8 +47,7 @@ class biaya_lainnya_model extends CI_Model
     //menghapus data
     public function delete($id, $modiby)
     {
-        $delete = $this->input->post();
-        $data = array('row_status' => 'D');
+        $data = array('row_status' => 'D', 'modiby' => $modiby);
         return $this->db
             ->where('id_biaya_lainnya', $id)
             ->update($this->_table, $data);

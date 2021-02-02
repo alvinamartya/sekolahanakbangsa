@@ -21,27 +21,8 @@ class siswa_model extends CI_Model
     }
 
     //edit data
-    public function edit($modiby)
+    public function edit($id_siswa, $data)
     {
-        //menampung nilai array
-        $post = $this->input->post();
-        $id_siswa = $post['id_siswa'];
-        $nama_siswa = $post['nama_siswa'];
-        $jenis_kelamin = $post['jenis_kelamin'];
-        $nisn = $post['nisn'];
-        $tempat_lahir = $post['tempat_lahir'];
-        $tanggal_lahir = $post['tanggal_lahir'];
-        $id_sekolah = $post['id_sekolah'];
-
-        $data = array(
-            'nama_siswa'        => $nama_siswa,
-            'jenis_kelamin'     => $jenis_kelamin,
-            'nisn'              => $nisn,
-            'tempat_lahir'      => $tempat_lahir,
-            'tanggal_lahir'     => $tanggal_lahir,
-            'id_sekolah'        => $id_sekolah,
-            'modiby'            => $this->getRelawanName(),
-        );
         $this->db->where('id_siswa', $id_siswa);
         return $this->db->update($this->_table, $data);
     }

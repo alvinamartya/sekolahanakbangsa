@@ -5,6 +5,7 @@ class aksi_model extends CI_Model
 {
     private $_table = "aksi";
 
+    //contruct
     public function __construct()
     {
         parent::__construct();
@@ -50,4 +51,16 @@ class aksi_model extends CI_Model
     {
         return $this->db->order_by('id_aksi', "desc")->limit(1)->get($this->_table)->row();
     }
+	
+    public function getAksi($id)
+    {
+      $query = $this->db
+              ->from($this->_table)
+              ->where(['id_aksi' => $id])
+              ->get();
+
+          return $query->row();
+    }
 }
+
+?>

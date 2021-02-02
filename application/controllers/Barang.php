@@ -8,7 +8,7 @@ class Barang extends CI_Controller
         [
             'field' => 'nama_barang',
             'label' => 'Nama Barang',
-            'rules' => 'required|callback_alpha_space'
+            'rules' => 'required'
         ], [
             'field' => 'deskripsi_barang',
             'label' => 'Deskripsi Barang',
@@ -175,8 +175,20 @@ class Barang extends CI_Controller
     public function edit()
     {
         //models->fungsi edit
+        $data = $this->input->post();
         if ($this->form_validation->run() == true) {
-            $result = $this->barang_model->edit($this->getKaryawanName());
+            //menampung nilai array
+            $id_barang = $data['id_barang'];
+            $nama_barang = $data['nama_barang'];
+            $deskripsi_barang = $data['deskripsi_barang'];
+
+            $data_barang = array(
+                'nama_barang'       => $nama_barang,
+                'deskripsi_barang'  => $deskripsi_barang,
+                'modiby'            => $this->getKaryawanName()
+            );
+
+            $result = $this->barang_model->edit($id_barang, $data_barang);
             if ($result > 0) {
                 $this->session->set_flashdata("success", "Data berhasil diubah.");
                 redirect(site_url('barang'));

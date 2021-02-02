@@ -176,8 +176,20 @@ class Biaya_Lainnya extends CI_Controller
     public function edit()
     {
         //models->fungsi edit
+        $data = $this->input->post();
         if ($this->form_validation->run() == true) {
-            $result = $this->biaya_lainnya_model->edit($this->getKaryawanName());
+            //menampung nilai array
+            $id_biaya_lainnya = $data['id_biaya_lainnya'];
+            $nama_biaya_lainnya = $data['nama_biaya_lainnya'];
+            $deskripsi_biaya_lainnya = $data['deskripsi_biaya_lainnya'];
+
+            $data = array(
+                'nama_biaya_lainnya'        => $nama_biaya_lainnya,
+                'deskripsi_biaya_lainnya'   => $deskripsi_biaya_lainnya,
+                'modiby'                    => $this->getKaryawanName()
+            );
+
+            $result = $this->biaya_lainnya_model->edit($id_biaya_lainnya, $data);
             if ($result > 0) {
                 $this->session->set_flashdata("success", "Data berhasil diubah.");
                 redirect(site_url('biaya-lainnya'));
@@ -187,7 +199,6 @@ class Biaya_Lainnya extends CI_Controller
                 redirect(site_url('biaya-lainnya/edit'));
             }
         } else {
-            $data = $this->input->post();
             $this->ubahView((object)$data);
         }
     }

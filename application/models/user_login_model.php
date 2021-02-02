@@ -10,63 +10,28 @@ class user_login_model extends CI_Model
 		return $this->db->get($this->_user_login)->result();
 	}
 
-	public function saveKaryawan()
+	public function saveKaryawan($data)
 	{
-		$post = $this->input->post();
-		//$id;
-		$username = $post["username"];
-		$password = password_hash($post["password"], PASSWORD_DEFAULT);
-		$role = "Karyawan";
-		$creaby = "user_login";
-		$creadate = date('Y-m-d H:i:s');
-		$modiby = '';
-		$modidate = date('Y-m-d H:i:s');
-		$row_status = 'A';
-
-		$data = array(
-			'username' 		=> $username,
-			'password'		=> $password,
-			'role'			=> $role,
-			'creaby'		=> $creaby,
-			'creadate'		=> $creadate,
-			'modiby'		=> $modiby,
-			'modidate'		=> $modidate,
-			'row_status'	=> $row_status
-		);
-
 		return $this->db->insert($this->_user_login, $data);
 	}
 
-	public function edit()
+	public function getLastUser()
 	{
-		$post = $this->input->post();
-		$id = $post["id"];
-		$password = password_hash($post["username"], PASSWORD_DEFAULT);
-		$modiby = 'user_login';
-		$modidate = date('Y-m-d H:i:s');
+		return $this->db
+			->order_by('id', 'desc')
+			->get($this->_user_login)
+			->row();
+	}
 
-		$data = array(
-			'password'		=> $password,
-			'modiby'		=> $modiby,
-			'modidate'		=> $modidate
-		);
+	public function edit($id, $data)
+	{
 		$this->db->where('id', $id);
 		return $this->db->update($this->_user_login, $data);
 	}
 
-	public function hapus($id)
+	public function hapus($id, $data)
 	{
-		$post = $this->input->post();
-		$id = $post["id"];
-		$modiby = 'user_login';
-		$modidate = date('Y-m-d H:i:s');
-		$row_status = "D";
 
-		$data = array(
-			'modiby'		=> $modiby,
-			'modidate'		=> $modidate,
-			'row_status'	=> $row_status
-		);
 		$this->db->where('id', $id);
 		return $this->db->update($this->_user_login, $data);
 	}

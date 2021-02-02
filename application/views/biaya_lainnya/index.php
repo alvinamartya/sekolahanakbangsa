@@ -25,7 +25,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Master Biaya Lainnya</h4>
+                    <h4 class="card-title text-center" style="font-size: 28px;">Master Biaya Lainnya</h4>
                     <?php if ($this->session->flashdata('success')) { ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <?= $this->session->flashdata('success') ?>
@@ -39,10 +39,10 @@
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama Biaya Lainnya</th>
-                                    <th>Deskripsi Biaya Lainnya</th>
-                                    <th>Aksi</th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Nama Biaya Lainnya</th>
+                                    <th class="text-center">Deskripsi Biaya Lainnya</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,7 +57,7 @@
                                         </td>
                                         <td><?= $s->nama_biaya_lainnya ?></td>
                                         <td><?= $s->deskripsi_biaya_lainnya ?></td>
-                                        <td>
+                                        <td align="center">
                                             <a href="<?= site_url('biaya-lainnya/ubah/' .  $s->id_biaya_lainnya) ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
                                             <a href="<?= site_url('biaya_lainnya/destroy/' .  $s->id_biaya_lainnya) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                                         </td>

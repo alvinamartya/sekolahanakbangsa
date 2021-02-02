@@ -45,6 +45,7 @@
                     <div class="form-group">
                         <label for="cluster">Cluster</label>
                         <select name="cluster" id="cluster" class="form-control <?php echo (form_error('cluster') != null ? 'is-invalid' : '') ?>">
+                            <option value="" hidden>Pilih Cluster</option>
                             <?php foreach ($cluster as $c) { ?>
                                 <option value="<?= $c->id_cluster_relawan ?>"><?= $c->nama_cluster ?></option>
                             <?php } ?>
