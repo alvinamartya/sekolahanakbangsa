@@ -6,7 +6,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
-                        <li class="breadcrumb-item"><a href="<?php echo base_url('Bantuan_sekolah')?>" class="text-muted">Kebutuhan Tahunan</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo base_url('Dashboard/admin')?>" class="text-muted">Dashbord</a></li>
 						<li class="breadcrumb-item text-muted active" aria-current="page">Detail</li>
                     </ol>
                 </nav>
@@ -133,19 +133,14 @@
 	</div>
 	<div class="row">
 		<div class="col-12 d-flex justify-content-between">
-			<h3 class="text-danger font-weight-bold">Total Kebutuhan : <?php echo 'Rp '.number_format($kebutuhan_tahunan->total_kebutuhan,2,',','.'); ?></h3>						
-			<form action="<?php echo base_url('bantuan_sekolah/page_konfirmasi') ?>" method="post"  class="d-inline float-right">
-				<input type="hidden" name="id" value="<?=$kebutuhan_tahunan->id?>">
-				<button class="btn btn-success">Konfirmasi Sekarang</button>
-			</form>		
+			<h3 class="text-danger font-weight-bold">Total Kebutuhan : <?php echo 'Rp '.number_format($kebutuhan_tahunan->total_kebutuhan,2,',','.'); ?></h3>			
 		</div>
 	</div>
 	<br>
     <div class="row">
 		<div class="col-md-1">
-			<a href="<?php echo base_url("Bantuan_sekolah")?>" class="btn btn-secondary">Kembali</a>
-		</div>
-		
+			<a href="<?php echo base_url("Dashboard/admin")?>" class="btn btn-secondary">Kembali</a>
+		</div>		
 	</div>
 </div>
 

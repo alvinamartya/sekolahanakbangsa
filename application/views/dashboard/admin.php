@@ -52,7 +52,7 @@
 											</select>	
 										</div>
 										<div class="col">
-											<button type="submit" class="btn btn-primary form-control"><span class="fa fa-search float-left"></span> FILTER</button>
+											<button class="btn btn-primary form-control"><span class="fa fa-search"></span> FILTER</button>													
 										</div>
 									</div>																	
 								</form>
@@ -101,7 +101,10 @@
 									<td><?= $k->tahun ?></td>
 									<td><?php echo 'Rp '.number_format($k->total_kebutuhan,2,',','.'); ?></td>
 									<td>
-										<button class="btn btn-primary"><span class="fa fa-eye"></span> Detail</button>
+										<form action="<?php echo base_url('Dashboard/detail_kebutuhan') ?>" method="post" class="d-inline">
+											<input type="hidden" name="id" value="<?=$k->id?>">
+											<button class="btn btn-primary"><span class="fa fa-eye"></span> Detail</button>													
+										</form>
 									</td>
 								</tr>
 								<?php
