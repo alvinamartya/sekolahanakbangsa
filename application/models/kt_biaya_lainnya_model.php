@@ -52,4 +52,14 @@ class kt_biaya_lainnya_model extends CI_Model
     {
         return $this->db->order_by('creadate', "desc")->limit(1)->get($this->_table)->row();
     }
+
+    public function getKtBiayaLainnyaByIdKt($id)
+    {
+        $query = $this->db
+            ->from($this->_table)
+            ->where(['id_kt' => $id])
+            ->get();
+
+        return $query->result();
+    }
 }

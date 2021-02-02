@@ -10,7 +10,6 @@ class kt_barang_model extends CI_Model
     {
         parent::__construct();
     }
-
     public function getKtBarang()
     {
         $query = $this->db
