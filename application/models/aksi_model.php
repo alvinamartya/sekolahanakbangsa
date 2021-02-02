@@ -11,7 +11,7 @@ class aksi_model extends CI_Model
         parent::__construct();
     }
 
-    public function getAksi($id_relawan)
+    public function getAksiByRelawan($id_relawan)
     {
         $query = $this->db
             ->from($this->_table)
@@ -51,7 +51,7 @@ class aksi_model extends CI_Model
     {
         return $this->db->order_by('id_aksi', "desc")->limit(1)->get($this->_table)->row();
     }
-	
+
     public function getAksi($id)
     {
       $query = $this->db
