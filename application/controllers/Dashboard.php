@@ -9,6 +9,8 @@ class Dashboard extends CI_Controller
         parent::__construct();
         $this->load->model('karyawan_model');
         $this->load->model('relawan_model');
+		$this->load->model('kebutuhan_tahunan_model');
+		$this->load->model('sekolah_model');
     }
 
     private function getKaryawanName()
@@ -44,9 +46,28 @@ class Dashboard extends CI_Controller
         // set employee 
         $header['name'] =  $this->getKaryawanName();
         $header['role'] =  $this->getKaryawanRole();
-
+		
+		$post = $this->input->post();
+		if(Isset($post["id_sekolah"])){
+			$id_sekolah = $post["id_sekolah"];
+		}else{
+			$sekolah = $this->sekolah_model->getSekolah();
+			foreach($sekolah as $s){
+				$id_sekolah = $s->id_sekolah;
+				break;
+			}
+		}
+		
+		$kebutuhan_tahunan = $this->kebutuhan_tahunan_model->getKebutuhanTahunanByIdSekolah($id_sekolah);
+		$sekolah = $this->sekolah_model->getSekolah();
+		
+		$data["kebutuhan_tahunan"] = $kebutuhan_tahunan;
+		$data["sekolah"] = $sekolah;
+		$data["id_sekolah"] = $id_sekolah;
         $this->load->view('templates/admin_header', $header);
-        $this->load->view('dashboard/admin');
+		
+        $this->load->view('dashboard/admin',$data);
+		
         $this->load->view('templates/footer');
     }
 

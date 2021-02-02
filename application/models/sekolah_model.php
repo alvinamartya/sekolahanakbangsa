@@ -20,6 +20,16 @@ class sekolah_model extends CI_Model
 
         return $query->result();
     }
+	
+	public function getSekolahById($id_sekolah)
+    {
+        $query = $this->db
+            ->from($this->_table)
+            ->where(['id_sekolah' => $id_sekolah])            
+            ->get();
+
+        return $query->row();
+    }
 
     public function save($data)
     {
