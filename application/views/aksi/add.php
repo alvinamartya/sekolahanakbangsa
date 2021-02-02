@@ -29,29 +29,22 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Galang Bantuan</h4>
-                        <?php if ($this->session->flashdata('success')) { ?>
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <?= $this->session->flashdata('success') ?>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        <?php } ?>
+                        <div class="alert alert-danger alert-dismissible fade show validationAlert" role="alert" id="validationAlert"></div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nama_aksi">Nama Aksi</label>
-                                    <input type="text" class="form-control <?php echo (form_error('nama_aksi') != null ? 'is-invalid' : '') ?>" value="<?= isset($aksi) ? $aksi->nama_aksi : '' ?>" id="nama_aksi" name="nama_aksi" placeholder="Nama Aksi">
+                                    <input type="text" class="form-control <?php echo (form_error('nama_aksi') != null ? 'is-invalid' : '') ?>" value="<?= isset($aksi) ? $aksi["nama_aksi"] : '' ?>" id="nama_aksi" name="nama_aksi" placeholder="Nama Aksi">
                                     <div class="invalid-feedback"><?php echo form_error('nama_aksi'); ?></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="tanggal_selesai">Tanggal Selesai</label>
-                                    <input type="date" class="form-control <?php echo (form_error('tanggal_selesai') != null ? 'is-invalid' : '') ?>" value="<?= isset($aksi) ? $aksi->tanggal_selesai : '' ?>" id="tanggal_selesai" name="tanggal_selesai" placeholder="Tanggal Selesai">
+                                    <input type="date" class="form-control <?php echo (form_error('tanggal_selesai') != null ? 'is-invalid' : '') ?>" value="<?= isset($aksi) ? $aksi["tanggal_selesai"] : '' ?>" id="tanggal_selesai" name="tanggal_selesai" placeholder="Tanggal Selesai">
                                     <div class="invalid-feedback"><?php echo form_error('tanggal_selesai'); ?></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="deskripsi_aksi">Deskripsi Aksi</label>
-                                    <textarea name="deskripsi_aksi" id="deskripsi_aksi" class="form-control <?php echo (form_error('deskripsi_aksi') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Deskripsi Aksi"><?= isset($aksi) ? $aksi->deskripsi_aksi : '' ?></textarea>
+                                    <textarea name="deskripsi_aksi" id="deskripsi_aksi" class="form-control <?php echo (form_error('deskripsi_aksi') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Deskripsi Aksi"><?= isset($aksi) ? $aksi["deskripsi_aksi"] : '' ?></textarea>
                                     <div class="invalid-feedback"><?php echo form_error('deskripsi_aksi'); ?></div>
                                 </div>
                             </div>
@@ -133,7 +126,7 @@
         </div>
         <div class="row">
             <div class="col-12 d-flex justify-content-between">
-                <h3 class="text-danger font-weight-bold">Total Harga : <span id="harga_total">Rp0</span></h3>
+                <h3 class="text-danger font-weight-bold">Total Harga : Rp<span id="target_donasi">0</span></h3>
                 <div class="d-flex">
                     <button class="btn btn-primary mr-3" type="button" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
                     <button class="btn btn-danger" type="button"><i class="fa fa-times"></i> Batal</button>
@@ -221,4 +214,14 @@
             </form>
 		</div>
 	</div>
+</div>
+
+<!-- footer -->
+<!-- ============================================================== -->
+<footer class="footer text-center text-muted">
+    All Rights Reserved by Adminmart. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
+</footer>
+<!-- ============================================================== -->
+<!-- End footer -->
+<!-- ============================================================== -->
 </div>

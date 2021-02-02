@@ -1,12 +1,4 @@
-<!-- footer -->
-<!-- ============================================================== -->
-<footer class="footer text-center text-muted">
-    All Rights Reserved by Adminmart. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
-</footer>
-<!-- ============================================================== -->
-<!-- End footer -->
-<!-- ============================================================== -->
-</div>
+
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->
 <!-- ============================================================== -->
@@ -54,24 +46,35 @@
     function updateHarga(aksiBiaya, aksiBarang) {
         let total = getSumBiaya(aksiBiaya) + getSumBarang(aksiBarang);
 
-        $("#harga_total").html('Rp' + txtMoney(total));
+        $("#target_donasi").html(txtMoney(total));
     }
 
     $(document).ready(() => {
         var aksiBiaya = [];
         var aksiBarang = [];
+        $('#validationAlert').hide();
 
-        $('#btnSave').on('click', () => {
+        $('#btnSave').on('click', function() {
             $.ajax({
                 url: "<?= site_url('aksi/add') ?>",
                 type: "POST",
+                dataType: "json",
                 data: {
-                    biaya : aksiBiaya
+                    "nama_aksi" : $('#nama_aksi').val(),
+                    "tanggal_selesai" : $('#tanggal_selesai').val(),
+                    "deskripsi_aksi" : $('#deskripsi_aksi').val(),
+                    "target_donasi" : getNumber($('#target_donasi').html()),
+                    "barang": aksiBarang,
+                    "biaya": aksiBiaya
                 },
-                success:function(response) {
-                    if(response.result) {
+                success:function(res) {
+                    if(res.success) {
                         window.location.href = "<?= site_url('aksi') ?>"
+                    } else {
+                        $("#validationAlert").html(res.message);
+                        $("#validationAlert").show();
                     }
+
                 },
                 error:function(err){
                     console.log(err);

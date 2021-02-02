@@ -10,6 +10,10 @@ class Aksi extends CI_Controller
             'label' => 'Nama Aksi',
             'rules' => 'required|callback_alpha_space'
         ], [
+            'field' => 'tanggal_selesai',
+            'label' => 'Tanggal Selesai',
+            'rules' => 'required'
+        ], [
             'field' => 'deskripsi_aksi',
             'label' => 'Deskripsi Aksi',
             'rules' => 'required'
@@ -35,6 +39,8 @@ class Aksi extends CI_Controller
 
         //load ke model siswa
         $this->load->model('aksi_model');
+        $this->load->model('aksi_biaya_model');
+        $this->load->model('aksi_barang_model');
         $this->load->model('biaya_lainnya_model');
         $this->load->model('barang_model');
 
@@ -96,66 +102,91 @@ class Aksi extends CI_Controller
 
     private function tambahView($data_aksi)
     {
-        // set page title
-        $relawan = $this->getRelawanSession();
         // set relawan
+        $relawan = $this->getRelawanSession();
+        // set page title
         $header['name'] =  $relawan->nama_relawan;
         $header['role'] =  'Relawan';
         $header['title'] = 'Tambah Aksi';
         $header['active'] = $relawan->id_sekolah != null;
 
-
         $data['aksi'] = $data_aksi;
         $data['biaya_lainnya'] = $this->biaya_lainnya_model->getBiayaLainnya();
         $data['barang'] = $this->barang_model->getBarang();
 
-        $this->load->view('templates/relawan_header', $header);
-        $this->load->view('aksi/add', $data);
+        if($data_aksi != null) {
+            $this->load->view('aksi/add', $data);
+        } else {
+            $this->load->view('templates/relawan_header', $header);
+            $this->load->view('aksi/add', $data);
 
-        // inlcude footer
-        $this->load->view('aksi/footer');
+            // inlcude footer
+            $this->load->view('aksi/footer');
+        }
     }
 
     // action
     public function add()
     {
+        // get relawan
+        $relawan = $this->getRelawanSession();
         $post = $this->input->post();
 
-        include_once(APPPATH . 'libraries\AksiData.php');
-        AksiData::setInstance([
-            'nama' => 'Polman Astra'
-        ]);
+        if ($this->form_validation->run() == true) {
+            // insert data
+            $aksi_data = array(
+                'id_relawan' => $relawan->id_relawan,
+                'nama_aksi' => $post["nama_aksi"],
+                'tanggal_selesai' => $post["tanggal_selesai"],
+                'target_donasi' => $post['target_donasi'],
+                'deskripsi_aksi' => $post["deskripsi_aksi"],
+                'creaby' => $relawan->nama_relawan,
+                'modiby' => $relawan->nama_relawan,
+                'row_status' => 'A'
+            );
 
-        var_dump(AksiData::getInstance());
+            $this->aksi_model->save($aksi_data);
 
+            $aksi_id = $this->aksi_model->getLastData()->id_aksi;
 
-        // $this->session->set_flashdata("success", "Data berhasil ditambahkan.");
-        // header('Content-Type: application/json');
-        // echo json_encode(['result' => true]);
+            if($post["biaya"] != null) {
+                // foreach data biaya
+                foreach($post["biaya"] as $biaya) {
+                    $biaya_data = array(
+                        'id_aksi' => $aksi_id,
+                        'id_biaya_lainnya' => $biaya["id_biaya"],
+                        'biaya' => $biaya["harga"],
+                        'creaby' => $relawan->nama_relawan,
+                        'modiby' => $relawan->nama_relawan,
+                        'row_status' => 'A'
+                    );
 
-        // if ($this->form_validation->run() == true) {
-        //     // insert data
-        //     $insert_data = array(
-        //         'nama_aksi' => $post["nama_aksi"],
-        //         'deskripsi_aksi' => $post["deskripsi_aksi"],
-        //         'creaby' => $this->getKaryawanName(),
-        //         'modiby' => $this->getKaryawanName(),
-        //     );
+                    $this->aksi_biaya_model->save($biaya_data);
+                }
+            }
 
-        //     // save aksi
-        //     $result = $this->aksi_model->save($insert_data);
+            if($post["barang"] != null) {
+                // foreach data barang
+                foreach($post["barang"] as $barang) {
+                    $barang_data = array(
+                        'id_aksi' => $aksi_id,
+                        'id_barang' => $barang["id_barang"],
+                        'jumlah' => $barang["jumlah"],
+                        'harga_satuan' => $barang["harga_satuan"],
+                        'creaby' => $relawan->nama_relawan,
+                        'modiby' => $relawan->nama_relawan,
+                        'row_status' => 'A'
+                    );
 
-        //     if ($result > 0) {
-        //         $this->session->set_flashdata("success", "Data berhasil ditambahkan.");
-        //         redirect(site_url('aksi'));
-        //     } else {
-        //         // error message
-        //         $this->session->set_flashdata("failed", "Gagal menambah aksi");
-        //         redirect(site_url('aksi/add'));
-        //     }
-        // } else {
-        //     $this->tambahView((object)$post);
-        // }
+                    $this->aksi_barang_model->save($barang_data);
+                }
+            }
+
+            $this->session->set_flashdata("success", "Data berhasil ditambahkan.");
+            echo json_encode(['success' => true, 'message' => '']);
+        } else {
+            echo json_encode(['success' => false, 'message' => validation_errors()]);
+        }
     }
 
 }

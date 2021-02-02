@@ -30,7 +30,10 @@ $(function () {
 
     // Alert Auto Fade
     setTimeout(function () {
-        $(".alert").slideUp(500);
+        let alert = $('.alert');
+        if(!alert.hasClass('validationAlert')) {
+            $(".alert").slideUp(500);
+        }
     }, 3000);
 
     $('body').on('keypress', 'input[type=number][maxlength]', function(event){
