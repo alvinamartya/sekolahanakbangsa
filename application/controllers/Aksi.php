@@ -162,6 +162,7 @@ class Aksi extends CI_Controller
         // get relawan
         $relawan = $this->getRelawanSession();
         $post = $this->input->post();
+
         $biaya = json_decode($post["biaya"]);
         $barang = json_decode($post["barang"]);
 
