@@ -29,6 +29,7 @@
     <script src="<?php echo base_url('assets/libs/popper.js/dist/umd/popper.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/libs/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/extra-libs/datatables.net/js/jquery.dataTables.min.js') ?>"></script>
+    <link href="<?php echo base_url('assets/css/custom.css') ?>" rel="stylesheet">
 </head>
 
 <body>
