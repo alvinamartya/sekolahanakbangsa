@@ -60,12 +60,11 @@
                 </div>
             </div>
 
-
             <!-- Aksi Biaya -->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Aksi Biaya</h4>
+                        <h4 class="card-title text-center" style="font-size: 26px;">Detail Biaya Lainnya</h4>
                         <div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="messageBiaya">
                             Biaya berhasil ditambahkan!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -91,12 +90,11 @@
                 </div>
             </div>
 
-
             <!-- Aksi Barang -->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Aksi Barang</h4>
+                        <h4 class="card-title text-center" style="font-size: 26px;">Detail Barang</h4>
                         <div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="messageBarang">
                             Barang berhasil ditambahkan!
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -124,12 +122,19 @@
             </div>
 
         </div>
+
         <div class="row">
-            <div class="col-12 d-flex justify-content-between">
-                <h3 class="text-danger font-weight-bold">Total Harga : Rp<span id="target_donasi">0</span></h3>
-                <div class="d-flex">
-                    <button class="btn btn-primary mr-3" type="button" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
-                    <button class="btn btn-danger" type="button"><i class="fa fa-times"></i> Batal</button>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-12 d-flex justify-content-between">
+                            <h3 class="text-danger font-weight-bold">Total Harga : Rp<span id="target_donasi">0</span></h3>
+                            <div class="d-flex">
+                                <button class="btn btn-primary mr-3" type="button" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
+                                <button class="btn btn-danger" type="button"><i class="fa fa-times"></i> Batal</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -138,14 +143,14 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modalBiaya" tabindex="-1" role="dialog" aria-labelledby="modalBiayaLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="modalBiayaLabel">Tambah Biaya Lainnya</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalBiayaLabel">Tambah Biaya Lainnya</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <form action="" id="frmBiaya">
                 <div class="modal-body">
                     <div class="form-group">
@@ -169,23 +174,22 @@
                     <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
             </form>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 
 <!-- Modal -->
-<div class="modal fade" id="modalBarang" tabindex="-1" role="dialog" aria-labelledby="modalBarangLabel"
-	aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="modalBarangLabel">Tambah Barang</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<form action="" id="frmBarang">
+<div class="modal fade" id="modalBarang" tabindex="-1" role="dialog" aria-labelledby="modalBarangLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalBarangLabel">Tambah Barang</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" id="frmBarang">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="barang">Barang</label>
@@ -212,8 +216,8 @@
                     <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
             </form>
-		</div>
-	</div>
+        </div>
+    </div>
 </div>
 
 <!-- footer -->

@@ -49,8 +49,9 @@ class Login extends CI_Controller
                         // employee dashboard
                         redirect(site_url(('dashboard/admin')));
                     } else if ($data_user->role == 'Donatur') {
-                        // landing page
-                        echo '<script>alert("Donatur");</script>';
+                        $session_login = array('is_login' => true);
+                        $this->session->set_userdata($session_login);
+                        redirect(site_url(('home')));
                     } else if ($data_user->role == 'Relawan') {
                         // volunteer dashboard
                         redirect(site_url(('dashboard/relawan')));

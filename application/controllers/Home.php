@@ -3,7 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Home extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -11,22 +10,22 @@ class Home extends CI_Controller
 
     public function index()
     {
-        $this->load->view('index');
+        $data['isLogin'] = $this->session->is_login == null ? false : $this->session->is_login;
+        $this->load->view('index', $data);
     }
 
-    public function aksi_detail() {
-        $this->load->view('home/aksi-detail');
-    }
-
-    public function donatur() {
+    public function donatur()
+    {
         $this->load->view('home/donatur');
     }
 
-    public function pembayaran() {
+    public function pembayaran()
+    {
         $this->load->view('home/pembayaran');
     }
 
-    public function upload_bukti() {
+    public function upload_bukti()
+    {
         $this->load->view('home/upload-bukti');
     }
 }
