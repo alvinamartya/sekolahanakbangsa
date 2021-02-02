@@ -14,6 +14,20 @@ $(function () {
         },
     });
 
+    $('#master-data2').DataTable({
+        "language": {
+            "lengthMenu": "_MENU_ Data per halaman",
+            "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
+            "zeroRecords": "Tidak ada data.",
+            "search": "Pencarian :",
+            "infoFiltered": "(tersaring dari total _MAX_ data)",
+            "paginate": {
+                "previous": "Sebelumnya",
+                "next": "Selanjutnya"
+            }
+        },
+    });
+
     // Alert Auto Fade
     setTimeout(function () {
         $(".alert").slideUp(500);
@@ -64,3 +78,11 @@ $(function () {
         },100);
     });
 })
+
+function getNumber(str) {
+    return parseInt(str.replace(/[^0-9]/g, ''));
+}
+
+function txtMoney(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
