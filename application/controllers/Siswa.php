@@ -169,7 +169,26 @@ class Siswa extends CI_Controller
         //pengecekan
         if ($this->form_validation->run() == true) {
             //models->fungsi edit
-            $result = $this->siswa_model->edit($this->getRelawanName());
+            //menampung nilai array
+            $id_siswa = $data['id_siswa'];
+            $nama_siswa = $data['nama_siswa'];
+            $jenis_kelamin = $data['jenis_kelamin'];
+            $nisn = $data['nisn'];
+            $tempat_lahir = $data['tempat_lahir'];
+            $tanggal_lahir = $data['tanggal_lahir'];
+            $id_sekolah = $data['id_sekolah'];
+
+            $data = array(
+                'nama_siswa'        => $nama_siswa,
+                'jenis_kelamin'     => $jenis_kelamin,
+                'nisn'              => $nisn,
+                'tempat_lahir'      => $tempat_lahir,
+                'tanggal_lahir'     => $tanggal_lahir,
+                'id_sekolah'        => $id_sekolah,
+                'modiby'            => $this->getRelawanName(),
+            );
+
+            $result = $this->siswa_model->edit($id_siswa, $data);
             if ($result > 0) {
                 //ketampilan view data siswa
                 $this->session->set_flashdata("success", "Data berhasil diubah.");

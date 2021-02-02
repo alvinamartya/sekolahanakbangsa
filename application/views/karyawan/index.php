@@ -30,22 +30,22 @@
                             </button>
                         </div>
                     <?php } ?>
-                    <h4 class="card-title">Master Karyawan</h4>
+                    <h4 class="card-title text-center" style="font-size: 28px;">Master Karyawan</h4>
                     </h6>
                     <div class="table-responsive">
                         <a href="<?php echo base_url('karyawan/tambah') ?>" class="btn btn-primary mb-2">Tambah Data Karyawan</a>
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama karyawan</th>
-                                    <th>Jabatan</th>
-                                    <th>Jenis kelamin</th>
-                                    <th>No telepon</th>
-                                    <th>Email</th>
-                                    <th>Tempat lahir</th>
-                                    <th>Tanggal lahir</th>
-                                    <th>Aksi</th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Nama karyawan</th>
+                                    <th class="text-center">Jabatan</th>
+                                    <th class="text-center">Jenis kelamin</th>
+                                    <th class="text-center">No telepon</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Tempat lahir</th>
+                                    <th class="text-center">Tanggal lahir</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,7 +76,7 @@
                                             <td><?= $k->email ?></td>
                                             <td><?= $k->tempat_lahir ?></td>
                                             <td><?= date("d/m/Y", strtotime($k->tanggal_lahir)) ?></td>
-                                            <td>
+                                            <td align="center">
                                                 <a href="<?php echo base_url('karyawan/ubah/' . $k->id_karyawan . '') ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
                                                 <a href="<?php echo base_url('karyawan/hapus/' . $k->id_karyawan) ?>" class="btn btn-danger" onclick="return confirm('Dengan menekan OK maka data akan dihapus (dinonaktifkan)')"><i class="fa fa-trash"></i> Hapus</a>
                                             </td>

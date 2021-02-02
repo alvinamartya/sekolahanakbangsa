@@ -15,7 +15,7 @@ class Relawan_model extends CI_Model
         return $this->db
             ->where('row_status', 'A')
             ->order_by('nama_relawan', 'asc')
-            ->get($this->_table, ["row_status" => 'A'])
+            ->get($this->_table)
             ->result();
     }
 

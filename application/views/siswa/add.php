@@ -58,6 +58,7 @@
                         <div class="form-group">
                             <label for="id_sekolah">Sekolah</label>
                             <select name="id_sekolah" id="id_sekolah" class="form-control">
+                                <option value="" hidden>Pilih Sekolah</option>
                                 <?php foreach ($sekolah as $s) { ?>
                                     <option value="<?= $s->id_sekolah ?>" <?php
                                                                             if (set_value('id_sekolah') !== "") {

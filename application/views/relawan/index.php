@@ -25,7 +25,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Master Relawan</h4>
+                    <h4 class="card-title text-center" style="font-size: 28px;">Master Relawan</h4>
                     <?php if ($this->session->flashdata('success')) { ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <?= $this->session->flashdata('success') ?>
@@ -38,15 +38,15 @@
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>NIK</th>
-                                    <th>Nama Relawan</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>No Telepon</th>
-                                    <th>Email</th>
-                                    <th>Tempat Lahir</th>
-                                    <th>Tanggal Lahir</th>
-                                    <th>Aksi</th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">NIK</th>
+                                    <th class="text-center">Nama Relawan</th>
+                                    <th class="text-center">Jenis Kelamin</th>
+                                    <th class="text-center">No Telepon</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Tempat Lahir</th>
+                                    <th class="text-center">Tanggal Lahir</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,7 +66,7 @@
                                         <td><?= $r->email ?></td>
                                         <td><?= $r->tempat_lahir ?></td>
                                         <td><?= date_format(date_create($r->tanggal_lahir), "d/m/Y")   ?></td>
-                                        <td>
+                                        <td align="center">
                                             <a href="<?= site_url('relawan/ubah/' .  $r->id_relawan) ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
                                             <a href="<?= site_url('relawan/destroy/' .  $r->id_relawan) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                                         </td>

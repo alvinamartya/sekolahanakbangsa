@@ -162,15 +162,68 @@ class Karyawan extends CI_Controller
 
 	public function add()
 	{
-		$karyawan = $this->karyawan_model;
 		$user_login = $this->user_login_model;
 
 		// set rules
 		$this->form_validation->set_rules($this->rules);
 
 		if ($this->form_validation->run() == true) {
-			$result = $user_login->saveKaryawan();
-			$result2 = $karyawan->save();
+			$user_id = $this->session->user_id;
+			$post = $this->input->post();
+			$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+
+			//$id;
+			$username = $post["username"];
+			$password = password_hash($post["password"], PASSWORD_DEFAULT);
+			$role = "Karyawan";
+			$creaby = $karyawan->nama_karyawan;
+			$creadate = date('Y-m-d H:i:s');
+			$modiby = $karyawan->nama_karyawan;
+			$modidate = date('Y-m-d H:i:s');
+			$row_status = 'A';
+
+			$data_user = array(
+				'username' 		=> $username,
+				'password'		=> $password,
+				'role'			=> $role,
+				'creaby'		=> $creaby,
+				'creadate'		=> $creadate,
+				'modiby'		=> $modiby,
+				'modidate'		=> $modidate,
+				'row_status'	=> $row_status
+			);
+			$result = $user_login->saveKaryawan($data_user);
+			$last_user_login = $user_login->getLastUser();
+
+			// memasukkan seluruh data post ke dalam variable yang akan disimpan
+			$nama_karyawan = $post['nama_karyawan'];
+			$jenis_kelamin = $post['jenis_kelamin'];
+			$jabatan_karyawan = "Admin";
+			$nik = $post['nik'];
+			$no_telepon = $post['no_telepon'];
+			$email = $post['email'];
+			$tempat_lahir = $post['tempat_lahir'];
+			$tanggal_lahir = $post['tanggal_lahir'];
+
+			// membuar array dari data yang akan diinputkan
+			$data_karyawan = array(
+				'id_user_login' 	=> $last_user_login->id,
+				'nama_karyawan'		=> $nama_karyawan,
+				'jenis_kelamin'		=> $jenis_kelamin,
+				'jabatan_karyawan'	=> $jabatan_karyawan,
+				'nik'				=> $nik,
+				'no_telepon'		=> $no_telepon,
+				'email'				=> $email,
+				'tempat_lahir'		=> $tempat_lahir,
+				'tanggal_lahir'		=> $tanggal_lahir,
+				'creaby'		=> $creaby,
+				'creadate'		=> $creadate,
+				'modiby'		=> $modiby,
+				'modidate'		=> $modidate,
+				'row_status'	=> $row_status
+			);
+
+			$result2 = $this->karyawan_model->save($data_karyawan);
 			if ($result > 0 && $result2 > 0) {
 				$this->session->set_flashdata("success", "Data berhasil ditambahkan.");
 				redirect(site_url('karyawan'));
@@ -210,14 +263,44 @@ class Karyawan extends CI_Controller
 
 	public function edit()
 	{
-		$karyawan = $this->karyawan_model;
-
 		//var_dump($this->form_validation->run());
 		// set rules
 		$this->form_validation->set_rules($this->edit_rules);
 
 		if ($this->form_validation->run() == true) {
-			$result = $karyawan->edit();
+			// deklarasi variable dari post(), supaya lebih sederhana;
+			$post = $this->input->post();
+
+			// insert seluruh data post ke variable yang akan diupdate
+			$id_karyawan = $post['id_karyawan'];
+			$nama_karyawan = $post['nama_karyawan'];
+			$jenis_kelamin = $post['jenis_kelamin'];
+			$nik = $post['nik'];
+			$no_telepon = $post['no_telepon'];
+			$email = $post['email'];
+			$tempat_lahir = $post['tempat_lahir'];
+			$tanggal_lahir = $post['tanggal_lahir'];
+
+			$user_id = $this->session->user_id;
+			$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+			$modiby  = $karyawan->nama_karyawan;
+
+			$modidate = date('Y-m-d H:i:s');
+
+			// memasukkan data ke dalam array
+			$data = array(
+				'nama_karyawan'		=> $nama_karyawan,
+				'jenis_kelamin'		=> $jenis_kelamin,
+				'nik'				=> $nik,
+				'no_telepon'		=> $no_telepon,
+				'email'				=> $email,
+				'tempat_lahir'		=> $tempat_lahir,
+				'tanggal_lahir'		=> $tanggal_lahir,
+				'modiby'		=> $modiby,
+				'modidate'		=> $modidate
+			);
+
+			$result = $this->karyawan_model->edit($id_karyawan, $data);
 			if ($result > 0) {
 				$this->session->set_flashdata("success", "Data berhasil diubah.");
 				redirect(site_url('karyawan'));
@@ -239,9 +322,24 @@ class Karyawan extends CI_Controller
 		$user_id = $this->session->user_id;
 		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
 		$modiby  = $karyawan->nama_karyawan;
+		$modidate = date('Y-m-d H:i:s');
 
-		$result = $this->karyawan_model->hapus($id_karyawan);
-		$result2 = $this->login_model->delete($id_user_login, $modiby);
+		// set data array yang akan diupdate
+		// update row_status menjadi D ('Deactive') atau tidak aktif
+		$data_karyawan = array(
+			'row_status' => 'D',
+			'modiby' => $modiby,
+			'modidate' => $modidate
+		);
+
+		$result = $this->karyawan_model->hapus($id_karyawan, $data_karyawan);
+
+		$data_login = array(
+			'modiby'		=> $modiby,
+			'modidate'		=> $modidate,
+			'row_status'	=> 'D',
+		);
+		$result2 = $this->login_model->delete($id_user_login, $data_login);
 
 		if ($result > 0 && $result2 > 0) {
 			$this->session->set_flashdata("success", "Data berhasil dihapus.");

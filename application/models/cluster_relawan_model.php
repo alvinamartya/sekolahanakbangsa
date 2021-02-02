@@ -12,64 +12,13 @@ class cluster_relawan_model extends CI_Model
 		return $this->db->get_where($this->_cluster, ["row_status" => 'A'])->result();
 	}
 
-	public function save()
+	public function save($data)
 	{
-		// deklarasi variable dari post(), supaya sederhana
-		$post = $this->input->post();
-
-		// memasukkan seluruh data post ke dalam variable yang akan diinputkan
-		$nama_cluster = $post['nama_cluster'];
-		$deskripsi_cluster = $post['deskripsi_cluster'];
-
-		$user_id = $this->session->user_id;
-		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
-		$creaby  = $karyawan->nama_karyawan;
-
-		$creadate = date('Y-m-d H:i:s');
-		$modiby = $karyawan->nama_karyawan;
-		$modidate = date('Y-m-d H:i:s');
-		$row_status = 'A';
-
-		// membuat array dari data inputan
-		$data = array(
-			'nama_cluster'	=> $nama_cluster,
-			'deskripsi_cluster' => $deskripsi_cluster,
-			'creaby'		=> $creaby,
-			'creadate'		=> $creadate,
-			'modiby'		=> $modiby,
-			'modidate'		=> $modidate,
-			'row_status'	=> $row_status
-		);
-
-		// return hasil inputan sekaligus menginput
-		// 0 jika gagal, 1 jika berhasil
 		return $this->db->insert($this->_cluster, $data);
 	}
 
-	public function edit()
+	public function edit($id_cluster_relawan, $data)
 	{
-		// deklarasi variable dari post(), supaya lebih sederhana;
-		$post = $this->input->post();
-
-		// insert seluruh data post ke variable yang akan diupdate
-		$id_cluster_relawan = $post['id_cluster_relawan'];
-		$nama_cluster = $post['nama_cluster'];
-		$deskripsi_cluster = $post['deskripsi_cluster'];
-
-		$user_id = $this->session->user_id;
-		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
-		$modiby  = $karyawan->nama_karyawan;
-
-		$modidate = date('Y-m-d H:i:s');
-
-		// memasukkan data ke dalam array
-		$data = array(
-			'nama_cluster'		=> $nama_cluster,
-			'deskripsi_cluster'		=> $deskripsi_cluster,
-			'modiby'				=> $modiby,
-			'modidate'		=> $modidate
-		);
-
 		// set query dengan where untuk menentukan data yang akan diupdate
 		$this->db->where('id_cluster_relawan', $id_cluster_relawan);
 
@@ -78,22 +27,8 @@ class cluster_relawan_model extends CI_Model
 		return $this->db->update($this->_cluster, $data);
 	}
 
-	public function hapus($id_cluster_relawan)
+	public function hapus($id_cluster_relawan, $data)
 	{
-		$user_id = $this->session->user_id;
-		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
-		$modiby  = $karyawan->nama_karyawan;
-
-		$modidate = date('Y-m-d H:i:s');
-
-		// set data array yang akan diupdate
-		// update row_status menjadi D ('Deactive') atau tidak aktif
-		$data = array(
-			'row_status' => 'D',
-			'modiby' => $modiby,
-			'modidate' => $modidate
-		);
-
 		// set query dengan where untuk menentukan data yang akan diupdate
 		$this->db->where('id_cluster_relawan', $id_cluster_relawan);
 

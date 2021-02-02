@@ -40,6 +40,7 @@
                         <div class="form-group">
                             <label for="jenis_sekolah">Jenis Sekolah</label>
                             <select name="jenis_sekolah" id="jenis_sekolah" class="form-control <?php echo (form_error('jenis_sekolah') != null ? 'is-invalid' : '') ?>">
+                                <option value="" hidden>Pilih Jenis Sekolah</option>
                                 <option value="Rumah Singgah" <?= $s->jenis_sekolah == 'Rumah Singgah' ? 'selected' : '' ?>>Rumah Singgah</option>
                                 <option value="Sekolah Pedalaman" <?= $s->jenis_sekolah == 'Sekolah Pedalaman' ? 'selected' : '' ?>>Sekolah Pedalaman</option>
                             </select>

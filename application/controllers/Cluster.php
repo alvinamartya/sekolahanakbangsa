@@ -98,15 +98,42 @@ class Cluster extends CI_Controller
         $cluster = $this->cluster_relawan_model;
 
         if ($this->form_validation->run() == true) {
-            $result = $cluster->save();
-            if ($result > 0)  {
+            // deklarasi variable dari post(), supaya sederhana
+            $post = $this->input->post();
+
+            // memasukkan seluruh data post ke dalam variable yang akan diinputkan
+            $nama_cluster = $post['nama_cluster'];
+            $deskripsi_cluster = $post['deskripsi_cluster'];
+
+            $user_id = $this->session->user_id;
+            $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+            $creaby  = $karyawan->nama_karyawan;
+
+            $creadate = date('Y-m-d H:i:s');
+            $modiby = $karyawan->nama_karyawan;
+            $modidate = date('Y-m-d H:i:s');
+            $row_status = 'A';
+
+            // membuat array dari data inputan
+            $data = array(
+                'nama_cluster'    => $nama_cluster,
+                'deskripsi_cluster' => $deskripsi_cluster,
+                'creaby'        => $creaby,
+                'creadate'        => $creadate,
+                'modiby'        => $modiby,
+                'modidate'        => $modidate,
+                'row_status'    => $row_status
+            );
+
+            $result = $cluster->save($data);
+            if ($result > 0) {
                 $this->session->set_flashdata("success", "Data berhasil ditambahkan.");
-                $this->sukses();
+                redirect(site_url('cluster'));
             } else {
                 $this->session->set_flashdata("failed", "Data gagal ditambahkan.");
-                $this->gagal();
+                redirect(site_url('cluster'));
             }
-        } else {			
+        } else {
             $this->tambah();
         }
     }
@@ -156,8 +183,29 @@ class Cluster extends CI_Controller
     {
         //pengecekan
         if ($this->form_validation->run() == true) {
+            // deklarasi variable dari post(), supaya lebih sederhana;
+            $post = $this->input->post();
+
+            // insert seluruh data post ke variable yang akan diupdate
+            $id_cluster_relawan = $post['id_cluster_relawan'];
+            $nama_cluster = $post['nama_cluster'];
+            $deskripsi_cluster = $post['deskripsi_cluster'];
+
+            $user_id = $this->session->user_id;
+            $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+            $modiby  = $karyawan->nama_karyawan;
+
+            $modidate = date('Y-m-d H:i:s');
+
+            // memasukkan data ke dalam array
+            $data = array(
+                'nama_cluster'        => $nama_cluster,
+                'deskripsi_cluster'        => $deskripsi_cluster,
+                'modiby'                => $modiby,
+                'modidate'        => $modidate
+            );
             //models->fungsi edit
-            $cluster = $this->cluster_relawan_model->edit();
+            $cluster = $this->cluster_relawan_model->edit($id_cluster_relawan, $data);
             if ($cluster > 0) {
                 //ketampilan view data siswa
                 $this->session->set_flashdata("success", "Data berhasil diubah.");
@@ -176,18 +224,27 @@ class Cluster extends CI_Controller
 
     public function hapus($id_karyawan)
     {
-        $data_karyawan = $this->cluster_relawan_model->hapus($id_karyawan);
-        $this->session->set_flashdata("success", "Data berhasil dihapus");
-        $this->sukses();
-    }
+        $user_id = $this->session->user_id;
+        $karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+        $modiby  = $karyawan->nama_karyawan;
 
-    function sukses()
-    {
-        redirect(base_url('Cluster'));
-    }
-    function gagal()
-    {
-        echo "<script>alert('Input data gagal')</script>";
-        redirect(base_url('Cluster'));
+        $modidate = date('Y-m-d H:i:s');
+
+        // set data array yang akan diupdate
+        // update row_status menjadi D ('Deactive') atau tidak aktif
+        $data = array(
+            'row_status' => 'D',
+            'modiby' => $modiby,
+            'modidate' => $modidate
+        );
+
+        $delete = $this->cluster_relawan_model->hapus($id_karyawan, $data);
+        if ($delete == true) {
+            $this->session->set_flashdata("success", "Data berhasil dihapus.");
+            redirect(site_url('cluster'));
+        } else {
+            $this->session->set_flashdata("success", "Data gagal dihapus.");
+            redirect(site_url('cluster'));
+        }
     }
 }

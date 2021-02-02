@@ -12,6 +12,8 @@ $(document).ready(async () => {
     let selectedProvince = getCookie("provinsi") == undefined ? undefined : getCookie("provinsi").replaceAll("%20", " ");
     let selectedCity = getCookie("kota") == undefined ? undefined : getCookie("kota").replaceAll("%20", " ");
 
+    console.log();
+
     // get province
     await $.get('https://dev.farizdotid.com/api/daerahindonesia/provinsi', (data) => {
         provinces = [];
@@ -32,10 +34,11 @@ $(document).ready(async () => {
 
     // get cities
     if (provinces.length > 0) {
-        getCityByProvinceId(provinces[$("#provinsi")[0].selectedIndex].id);
-
+        let province = selectedProvince === undefined ? provinces[$("#provinsi")[0].selectedIndex] : provinces[$("#provinsi")[0].selectedIndex - 1];
+        getCityByProvinceId(province.id);
         $("#provinsi").change(() => {
-            getCityByProvinceId(provinces[$("#provinsi")[0].selectedIndex].id);
+            province = provinces[$("#provinsi")[0].selectedIndex - 1];
+            getCityByProvinceId(province.id);
         });
     }
 

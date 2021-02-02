@@ -25,7 +25,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Master Sekolah</h4>
+                    <h4 class="card-title text-center" style="font-size: 28px;">Master Sekolah</h4>
                     <?php if ($this->session->flashdata('success')) { ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <?= $this->session->flashdata('success') ?>
@@ -39,13 +39,13 @@
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama Sekolah</th>
-                                    <th>Jenis Sekolah</th>
-                                    <th>Alamat Sekolah</th>
-                                    <th>Provinsi</th>
-                                    <th>Kota</th>
-                                    <th>Aksi</th>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Nama Sekolah</th>
+                                    <th class="text-center">Jenis Sekolah</th>
+                                    <th class="text-center">Alamat Sekolah</th>
+                                    <th class="text-center">Provinsi</th>
+                                    <th class="text-center">Kota</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,7 +63,7 @@
                                         <td><?= $s->alamat ?></td>
                                         <td><?= $s->provinsi ?></td>
                                         <td><?= $s->kota ?></td>
-                                        <td>
+                                        <td align="center">
                                             <a href="<?= site_url('sekolah/ubah/' .  $s->id_sekolah) ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah</a>
                                             <a href="<?= site_url('sekolah/destroy/' .  $s->id_sekolah) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
