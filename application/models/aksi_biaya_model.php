@@ -1,17 +1,16 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class aksi_barang_model extends CI_Model
+class aksi_biaya_model extends CI_Model
 {
-    private $_table = "aksi_barang";
+    private $_table = "aksi_biaya_lainnya";
 
-    //contruct
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function getAksiBarang()
+    public function getAksiBiaya()
     {
         $query = $this->db
             ->from($this->_table)
@@ -42,16 +41,4 @@ class aksi_barang_model extends CI_Model
     {
         return $this->db->order_by('creadate', "desc")->limit(1)->get($this->_table)->row();
     }
-	
-    public function getAksiBarangByIdAksi($id)
-    {
-      $query = $this->db
-              ->from($this->_table)
-              ->where(['id_aksi' => $id])
-              ->get();
-
-          return $query->result();
-    }
 }
-
-?>
