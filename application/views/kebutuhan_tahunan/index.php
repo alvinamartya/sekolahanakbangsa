@@ -70,6 +70,7 @@
                                             }
                                             ?></td>
                                         <td align="center">
+                                            <a href="<?= site_url('kebutuhan_tahunan/detail/' .  $kt->id) ?>" class="btn btn-primary"><i class="fa fa-eye"></i> Detail</a>
                                             <a href="<?= site_url('kebutuhan_tahunan/destroy/' .  $kt->id) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
                                         </td>
                                     </tr>

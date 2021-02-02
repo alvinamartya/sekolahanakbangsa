@@ -115,156 +115,33 @@
             </div>
         </div>
         <div class="row mt-4">
-            <div class="col-xs-12 col-sm-6 col-md-4 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="<?php echo base_url('assets/images/sekolah1.jpg') ?>" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title aksi-title">Bantu bangun SD 1 Nagekeo</div>
-                            <div class="card-content">
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="aksi-content">
-                                    <div>
-                                        <p class="mb-2">Sisa Waktu</p>
-                                        <h6 class="font-weight-bold text-danger">43 hari</h6>
+            <?php foreach ($aksi as $a) { ?>
+                <div class="col-xs-12 col-sm-6 col-md-4 my-2">
+                    <a href="<?= site_url('donasi?id=' . $a->id_aksi); ?>">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="<?php echo base_url('assets/images/aksi/' . $a->gambar) ?>" alt="<?= $a->nama_aksi ?>">
+                            <div class="card-body">
+                                <div class="card-title aksi-title"><?= $a->nama_aksi ?></div>
+                                <div class="card-content">
+                                    <div class="progress">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="<?= $a->percentage ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
-                                    <div>
-                                        <p class="mb-2 text-right">Terkumpul</p>
-                                        <h6 class="font-weight-bold text-danger text-right">Rp465.000.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="<?php echo base_url('assets/images/sekolah4.jpg') ?>" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title aksi-title">Renovasi dinding SD 1 Balerejo</div>
-                            <div class="card-content">
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 78%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="aksi-content">
-                                    <div>
-                                        <p class="mb-2">Sisa Waktu</p>
-                                        <h6 class="font-weight-bold text-danger">43 hari</h6>
-                                    </div>
-                                    <div>
-                                        <p class="mb-2 text-right">Terkumpul</p>
-                                        <h6 class="font-weight-bold text-danger text-right">Rp465.000.000</h6>
+                                    <div class="aksi-content">
+                                        <div>
+                                            <p class="mb-2">Sisa Waktu</p>
+                                            <h6 class="font-weight-bold text-danger"><?= $a->selisih_hari ?> hari</h6>
+                                        </div>
+                                        <div>
+                                            <p class="mb-2 text-right">Terkumpul</p>
+                                            <h6 class="font-weight-bold text-danger text-right"><?= 'Rp ' . number_format($a->total_donasi, 2, ',', '.');  ?></h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="<?php echo base_url('assets/images/sekolah3.jpg') ?>" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title aksi-title">Renovasi Rumah Singgah</div>
-                            <div class="card-content">
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 23%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="aksi-content">
-                                    <div>
-                                        <p class="mb-2">Sisa Waktu</p>
-                                        <h6 class="font-weight-bold text-danger">43 hari</h6>
-                                    </div>
-                                    <div>
-                                        <p class="mb-2 text-right">Terkumpul</p>
-                                        <h6 class="font-weight-bold text-danger text-right">Rp465.000.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="<?php echo base_url('assets/images/sekolah5.jpg') ?>" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title aksi-title">SD Yapis 2 butuh donasi kursi</div>
-                            <div class="card-content">
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="aksi-content">
-                                    <div>
-                                        <p class="mb-2">Sisa Waktu</p>
-                                        <h6 class="font-weight-bold text-danger">33 hari</h6>
-                                    </div>
-                                    <div>
-                                        <p class="mb-2 text-right">Terkumpul</p>
-                                        <h6 class="font-weight-bold text-danger text-right">Rp15.548.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="<?php echo base_url('assets/images/sekolah2.jpg') ?>" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title aksi-title">Donasi untuk lantai dan dinding SD Klasaman</div>
-                            <div class="card-content">
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="aksi-content">
-                                    <div>
-                                        <p class="mb-2">Sisa Waktu</p>
-                                        <h6 class="font-weight-bold text-danger">43 hari</h6>
-                                    </div>
-                                    <div>
-                                        <p class="mb-2 text-right">Terkumpul</p>
-                                        <h6 class="font-weight-bold text-danger text-right">Rp5.358.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 my-2">
-                <a href="#">
-                    <div class="card h-100">
-                        <img class="card-img-top" src="<?php echo base_url('assets/images/sekolah6.jpg') ?>" alt="Card image cap">
-                        <div class="card-body">
-                            <div class="card-title aksi-title">SMP 14 Nuni butuh papan tulis</div>
-                            <div class="card-content">
-                                <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <div class="aksi-content">
-                                    <div>
-                                        <p class="mb-2">Sisa Waktu</p>
-                                        <h6 class="font-weight-bold text-danger">63 hari</h6>
-                                    </div>
-                                    <div>
-                                        <p class="mb-2 text-right">Terkumpul</p>
-                                        <h6 class="font-weight-bold text-danger text-right">Rp464.000</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
+            <?php } ?>
         </div>
 
         <div class="d-flex justify-content-center mt-4">

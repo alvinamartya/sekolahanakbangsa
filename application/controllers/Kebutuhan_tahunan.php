@@ -31,6 +31,7 @@ class Kebutuhan_tahunan extends CI_Controller
         $this->load->model('biaya_lainnya_model');
         $this->load->model('barang_model');
         $this->load->model('kebutuhan_tahunan_model');
+        $this->load->model('sekolah_model');
 
         // form validation
         $this->load->library('form_validation');
@@ -187,7 +188,7 @@ class Kebutuhan_tahunan extends CI_Controller
 
     /*
     ==============================================================
-    Add Aksi
+    Delete Kebutuhan Tahunan
     ==============================================================
     */
     function destroy($id)
@@ -207,5 +208,51 @@ class Kebutuhan_tahunan extends CI_Controller
                 redirect(site_url('kebutuhan-tahunan'));
             }
         }
+    }
+
+    /*
+    ==============================================================
+    Delete Kebutuhan Tahunan
+    ==============================================================
+    */
+    public function detail($id)
+    {
+        // set page title
+        $header['title'] = "Dashboard Admin";
+
+        // set employee 
+        $relawan = $this->getRelawanSession();
+
+        // set page title
+        $header['title'] = 'Kebutuhan Tahunan';
+        $header['name'] =  $relawan->nama_relawan;
+        $header['active'] = $relawan->id_sekolah != null;
+
+        $this->load->model('barang_model');
+        $this->load->model('biaya_lainnya_model');
+        $this->load->model('kt_barang_model');
+        $this->load->model('kt_biaya_lainnya_model');
+
+        $data_kebutuhan_tahunan = $this->kebutuhan_tahunan_model->getKebutuhanTahunanById($id);
+        $data_sekolah = $this->sekolah_model->getSekolahById($data_kebutuhan_tahunan->id_sekolah);
+        $data_relawan = $this->relawan_model->getByID($data_kebutuhan_tahunan->id_relawan);
+        $data_barang = $this->barang_model->getBarang();
+        $data_biaya_lainnya = $this->biaya_lainnya_model->getBiayaLainnya();
+        $data_kt_barang = $this->kt_barang_model->getKtBarangByIdKt($id);
+        $data_kt_biaya_lainnya = $this->kt_biaya_lainnya_model->getKtBiayaLainnyaByIdKt($id);
+
+        $data['kebutuhan_tahunan'] = $data_kebutuhan_tahunan;
+        $data['sekolah'] = $data_sekolah;
+        $data['relawan'] = $data_relawan;
+        $data['barang'] = $data_barang;
+        $data['biaya_lainnya'] = $data_biaya_lainnya;
+        $data['kt_barang'] = $data_kt_barang;
+        $data['kt_biaya_lainnya'] = $data_kt_biaya_lainnya;
+
+        $this->load->view('templates/relawan_header', $header);
+
+        $this->load->view('kebutuhan_tahunan/detail', $data);
+
+        $this->load->view('templates/footer');
     }
 }
