@@ -25,7 +25,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Transaksi Aksi Galang Dana</h4>
+                    <h4 class="card-title text-center" style="font-size: 28px;">Transaksi Aksi Galang Dana</h4>
                     <?php if ($this->session->flashdata('success')) { ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <?= $this->session->flashdata('success') ?>
@@ -39,11 +39,11 @@
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Nama Aksi</th>
-                                    <th>Target Donasi</th>
-                                    <th>Tanggal Selesai</th>
-                                    <th>Aksi</th>
+                                    <th class="text-center">No.</th>
+                                    <th class="text-center">Nama Aksi</th>
+                                    <th class="text-center">Target Donasi</th>
+                                    <th class="text-center">Tanggal Selesai</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,7 +54,7 @@
                                         <td><?= $d->nama_aksi ?></td>
                                         <td><?= "Rp" . number_format($d->target_donasi, 0, ",", "."); ?></td>
                                         <td><?= date('d-m-Y', strtotime($d->tanggal_selesai)) ?></td>
-                                        <td>
+                                        <td align="center">
                                             <a href="<?= site_url('aksi/detail/' .  $d->id_aksi) ?>" class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
                                         </td>
                                     </tr>

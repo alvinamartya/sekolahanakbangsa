@@ -16,7 +16,7 @@ class aksi_model extends CI_Model
         $query = $this->db
             ->from($this->_table)
             ->where(['id_relawan' => $id_relawan, 'row_status' => 'A'])
-            ->order_by('creadate', 'desc')
+            ->order_by('tanggal_selesai', 'asc')
             ->get();
 
         return $query->result();
@@ -62,5 +62,3 @@ class aksi_model extends CI_Model
           return $query->row();
     }
 }
-
-?>

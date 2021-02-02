@@ -1,4 +1,3 @@
-
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->
 <!-- ============================================================== -->
@@ -61,34 +60,37 @@
             formData.append("tanggal_selesai", $('#tanggal_selesai').val());
             formData.append("deskripsi_aksi", $('#deskripsi_aksi').val());
             formData.append("target_donasi", getNumber($('#target_donasi').html()));
-            formData.append("target_donasi", getNumber($('#target_donasi').html()));
             formData.append("barang", JSON.stringify(aksiBarang));
             formData.append("biaya", JSON.stringify(aksiBiaya));
+            if (getNumber($('#target_donasi').html()) === 0) {
+                $("#validationAlert").html('<p>Target donasi wajib diisi.<\/p>\n');
+                $("#validationAlert").show();
+            } else {
+                $.each($('#gambar_aksi')[0].files, function(key, input) {
+                    formData.append('files[]', input);
+                });
 
-            $.each($('#gambar_aksi')[0].files,function(key,input){
-                formData.append('files[]', input);
-            });
+                $.ajax({
+                    url: "<?= site_url('aksi/add') ?>",
+                    type: "POST",
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function(res) {
+                        var respon = JSON.parse(res);
+                        if (respon.success) {
+                            window.location.href = "<?= site_url('aksi') ?>"
+                        } else {
+                            $("#validationAlert").html(respon.message);
+                            $("#validationAlert").show();
+                        }
 
-            $.ajax({
-                url: "<?= site_url('aksi/add') ?>",
-                type: "POST",
-                contentType: false,
-                processData: false,
-                data: formData,
-                success:function(res) {
-                    var respon = JSON.parse(res);
-                    if(respon.success) {
-                        window.location.href = "<?= site_url('aksi') ?>"
-                    } else {
-                        $("#validationAlert").html(respon.message);
-                        $("#validationAlert").show();
+                    },
+                    error: function(err) {
+                        console.log(err);
                     }
-
-                },
-                error:function(err){
-                    console.log(err);
-                }
-            });
+                });
+            }
         });
 
         $("#biaya-table, #barang-table").on('click', '.btnDelete', function() {
@@ -96,7 +98,7 @@
             const data_id = tr.find('.btnDelete').data("id").toString();
             const buttonType = tr.find('.btnDelete').data("type").toString();
 
-            if(buttonType == 'biaya') {
+            if (buttonType == 'biaya') {
                 const idx = aksiBiaya.map(i => i.id_biaya).indexOf(data_id);
                 aksiBiaya.splice(idx, 1);
             } else {
@@ -125,7 +127,7 @@
             // check if biaya exists
             let hasBiaya = aksiBiaya.some(a => a['id_biaya'] === idBiaya);
 
-            if(hasBiaya) {
+            if (hasBiaya) {
                 alert('Aksi Biaya sudah ditambahkan!');
             } else {
                 // add data to array
@@ -165,7 +167,7 @@
             // check if barang exists
             let hasBarang = aksiBarang.some(a => a['id_barang'] === idBarang);
 
-            if(hasBarang) {
+            if (hasBarang) {
                 alert('Aksi Barang sudah ditambahkan!');
             } else {
                 // add data to array
