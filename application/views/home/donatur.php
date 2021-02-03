@@ -36,6 +36,7 @@
                                     <div class="navbar-nav align-items-center">
                                         <a class="nav-item-2" href="<?= site_url('/') ?>">Home</a>
                                         <a class="nav-item-2" href="<?= site_url('home/aksi') ?>">Aksi</a>
+                                        <a class="nav-item-2" href="<?= site_url('login/logout') ?>">Keluar</a>
                                         <a class="btn btn-rounded btn-transparent ml-3 h-50" href="<?= site_url('home/donatur') ?>"><i class="fa fa-user mr-2"></i> User</a>
                                     </div>
                                 </div>

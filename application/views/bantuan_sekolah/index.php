@@ -33,9 +33,7 @@
                     <h4 class="card-title text-center" style="font-size: 28px;">Kebutuhan Tahunan belum dikonfirmasi</h4>
                     </h6>
                     <div class="table-responsive">
-                        <!--<a href="<?php echo base_url('karyawan/tambah') ?>" class="btn btn-primary mb-2">Tambah Data Karyawan</a>-->
-						<small>
-                        <table id="master-data" class="table table-striped table-bordered no-wrap">
+                        <table id="master-data" class="table table-striped table-bordered table">
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
@@ -49,7 +47,7 @@
                             <tbody>
                                 <?php $i = 0; ?>
                                 <?php
-                                foreach ($kebutuhan_tahunan as $k) {                                    
+                                foreach ($kebutuhan_tahunan as $k) {
                                 ?>
                                         <tr>
                                             <td>
@@ -66,7 +64,7 @@
 													}
 												}
 											?>
-											</td>											
+											</td>
                                             <td>
 											<?php
 												foreach($sekolah as $s){
@@ -85,20 +83,19 @@
                                             <td align="center">
 												<form action="<?php echo base_url('bantuan_sekolah/page_konfirmasi') ?>" method="post"  class="d-inline">
 													<input type="hidden" name="id" value="<?=$k->id?>">
-													<button class="btn btn-success"><span class="fa fa-check"></span> Konfirmasi</button>													
+													<button class="btn btn-success"><span class="fa fa-check"></span> Konfirmasi</button>
 												</form>
 												<form action="<?php echo base_url('bantuan_sekolah/detail') ?>" method="post" class="d-inline">
 													<input type="hidden" name="id" value="<?=$k->id?>">
-													<button class="btn btn-primary"><span class="fa fa-eye"></span> Detail</button>													
+													<button class="btn btn-primary"><span class="fa fa-eye"></span> Detail</button>
 												</form>
                                             </td>
                                         </tr>
-                                <?php                                   
-                                } 
+                                <?php
+                                }
 								?>
                             </tbody>
                         </table>
-						</small>
                     </div>
                 </div>
             </div>

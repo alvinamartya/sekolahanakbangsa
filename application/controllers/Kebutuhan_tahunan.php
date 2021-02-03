@@ -49,6 +49,13 @@ class Kebutuhan_tahunan extends CI_Controller
         return $relawan;
     }
 
+    private function getKaryawan()
+	{
+		$this->load->model('karyawan_model');
+		$user_id = $this->session->user_id;
+        return $this->karyawan_model->getKaryawanByUserLoginId($user_id);
+    }
+
     /*
     ==============================================================
     View Kebutuhan Tahunan
@@ -220,7 +227,7 @@ class Kebutuhan_tahunan extends CI_Controller
         // set page title
         $header['title'] = "Dashboard Admin";
 
-        // set employee 
+        // set employee
         $relawan = $this->getRelawanSession();
 
         // set page title
@@ -253,6 +260,76 @@ class Kebutuhan_tahunan extends CI_Controller
 
         $this->load->view('kebutuhan_tahunan/detail', $data);
 
+        $this->load->view('templates/footer');
+    }
+
+    /*
+    ==============================================================
+    Upload LPJ Kebutuhan Tahunan
+    ==============================================================
+    */
+    public function unggahlpj($id)
+    {
+        $relawan = $this->getRelawanSession();
+
+        if (!empty($_FILES['lpj']['name'])) {
+
+            $config['upload_path'] = 'assets/lpj/';
+            $config['allowed_types'] = 'docx|doc|xlsx|xls';
+            $config['max_size'] = '5000';
+            $config['file_name'] = date('Ymdhis');
+
+
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('lpj')) {
+                $uploadData = $this->upload->data();
+                $filename = $uploadData['file_name'];
+
+                $kt = $this->kebutuhan_tahunan_model->getByID($id);
+                if (is_file('assets/lpj/'.$kt->laporan_pertanggung_jawaban)) {
+                    unlink('assets/lpj/'.$kt->laporan_pertanggung_jawaban);
+                }
+
+                $kebutuhan_tahunan = array(
+                    'id' => $id,
+                    'laporan_pertanggung_jawaban' => $filename,
+                    'modiby' => $relawan->nama_relawan,
+                    'modidate' => date('Y-m-d H:i:s')
+                );
+
+                $this->kebutuhan_tahunan_model->update($id, $kebutuhan_tahunan);
+                $this->session->set_flashdata("success", "LPJ berhasil diunggah.");
+
+                redirect(site_url('kebutuhan-tahunan/detail/'.$id));
+            } else {
+                $this->session->set_flashdata("failed", $this->upload->display_errors());
+
+                redirect(site_url('kebutuhan-tahunan/detail/'.$id));
+            }
+
+        }
+    }
+
+
+    public function data()
+    {
+        $karyawan = $this->getKaryawan();
+        // set karyawan
+        $header['name'] =  $karyawan->nama_karyawan;
+        $header['role'] =  $karyawan->jabatan_karyawan;
+
+        // set page title
+        $header['title'] = 'Daftar Kebutuhan Tahunan';
+
+        // include header
+        $this->load->view('templates/admin_header', $header);
+
+        $data_kt = $this->kebutuhan_tahunan_model->getAllDataConfirmed();
+        $data['kebutuhan_tahunan'] = $data_kt;
+        $this->load->view('kebutuhan_tahunan/data', $data);
+
+        // inlcude footer
         $this->load->view('templates/footer');
     }
 }
