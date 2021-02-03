@@ -16,7 +16,7 @@
                     $i = 0;
                     foreach ($data_gambar_aksi as $g) {
                     ?>
-                        <div class="carousel-item active">
+                        <div class="carousel-item <?= ($i == 0) ? 'active' : '' ?>">
                             <img class="d-block w-100" src="<?php echo base_url('assets/images/aksi/' . $g->gambar) ?>" alt="First slide">
                         </div>
                     <?php $i++;
@@ -123,17 +123,17 @@
                     <h6><?php echo $data_relawan->nama_relawan ?> <i class="fa fa-check-circle text-success"></i></h6>
 
                     <div class="d-flex flex-column mt-4">
-                        <p class="font-weight-bold text-danger h3">Rp<?php echo number_format($data_aksi->target_donasi, 2, ',', '.'); ?></p>
-                        <p>terkumpul dari target Rp<?php echo number_format($data_donatur_aksi, 2, ',', '.'); ?></p>
+                        <p class="font-weight-bold text-danger h3">Rp<?php echo number_format($data_donatur_aksi, 2, ',', '.'); ?></p>
+                        <p>terkumpul dari target Rp<?php echo number_format($data_aksi->target_donasi, 2, ',', '.'); ?></p>
                     </div>
                     <?php $persen = $data_donatur_aksi * 100 / $data_aksi->target_donasi  ?>
                     <div class="progress">
                         <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $persen ?>%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
-                    <p class="mt-3 mb-4"><?php echo $persen ?>% tercapai</p>
+                    <p class="mt-3 mb-4"><?php echo round($persen) ?>% tercapai</p>
 
-                    <form action="" method="post">
+                    <form action="<?= site_url('donasi') ?>" method="post">
                         <div class="mt-3">
                             <button type="submit" class="btn btn-warning btn-lg font-weight-bold mt-3 d-block w-100">Donasi Sekarang</button>
                         </div>

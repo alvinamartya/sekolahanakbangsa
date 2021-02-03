@@ -62,6 +62,14 @@ class aksi_model extends CI_Model
         return $query->row();
     }
 
+    public function getAksiAll()
+    {
+        $query = $this->db
+            ->from($this->_table)
+            ->get();
+        return $query->result();
+    }
+
     public function getAksiHome()
     {
         $query = $this->db
