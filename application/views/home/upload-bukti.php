@@ -41,7 +41,6 @@
         </nav>
     </header>
 
-
     <section class="bg-gray section-page mb-5 container">
         <div class="row mt-5">
             <div class="col-md-12">
@@ -49,21 +48,22 @@
                     <div class="card-body p-5">
                         <div class="d-flex justify-content-between mb-4">
                             <div class="card-title h4 font-weight-bold">Unggah Bukti Transfer</div>
-                            <h4 class="m-0">Bantu Renovasi Rumah Oky</h4>
+                            <h4 class="m-0"><?= $data_aksi->nama_aksi ?></h4>
                         </div>
                         <div class="mb-5">
-                            <p class="mb-2">Silahkan Transfer dengan nominal <text class="text-danger font-weight-bold">Rp250.000</text> ke</p>
+                            <p class="mb-2">Silahkan Transfer dengan nominal <text class="text-danger font-weight-bold"><?= "Rp" . number_format($data_aksi->donasi, 2, ",", "."); ?></text> ke</p>
                             <p>Rekening BRI <text class="text-danger font-weight-bold">6716172356712536788</text> a.n <text class="font-weight-bold">PT. Sekolah Anak Bangsa</text></p>
                         </div>
-                        <form action="" method="post">
+                        <?php echo form_open_multipart('donasi/update/'. $data_aksi->id_aksi); ?>
                             <div class="form-group">
-                                <input type="file" name="bukti_transfer">
+                                <label for="image">Upload Bukti Transfer:</label><br>
+                                <input type="file" name="foto"/>
                             </div>
                             <div class="mt-3 d-flex">
                                 <button type="submit" class="btn btn-danger font-weight-bold mt-3 d-inline-block mr-2"><i class="far fa-paper-plane mr-2"></i> Kirim</button>
-                                <a href="#" class="btn btn-warning font-weight-bold mt-3 d-inline-block"><i class="far fa-window-close mr-2"></i> Batal</a>
+                                <a href="<?= site_url('donasi/LoadDonatur') ?>" class="btn btn-warning font-weight-bold mt-3 d-inline-block"><i class="far fa-window-close mr-2"></i> Batal</a>
                             </div>
-                        </form>
+                        <?php echo form_close(); ?>
                     </div>
                 </div>
 

@@ -50,57 +50,47 @@
                         <div class="d-flex mb-2">
                             <div class="card-title h4 font-weight-bold">Donasi Anda</div>
                         </div>
-                        <div class="card my-4">
-                            <div class="card-body py-4">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h5 class="font-weight-bold">Bantu Renovasi Rumah Oky</h5>
-                                        <p class="m-0 font-weight-bold text-danger">Rp250.000</p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5 class="text-center font-weight-bold">Status</h5>
-                                        <p class="m-0 text-center">Menunggu Pemabayaran</p>
-                                    </div>
-                                    <div class="col-md-2 d-flex justify-content-end align-items-center">
-                                        <a href="" class="btn btn-danger"><i class="fa fa-money-bill-wave-alt mr-2"></i> Transfer</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card my-4">
-                            <div class="card-body py-4">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h5 class="font-weight-bold">Bantu Renovasi Rumah Oky</h5>
-                                        <p class="m-0 font-weight-bold text-danger">Rp250.000</p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5 class="text-center font-weight-bold">Status</h5>
-                                        <p class="m-0 text-center">Menunggu Pemabayaran</p>
-                                    </div>
-                                    <div class="col-md-2 d-flex justify-content-end align-items-center">
-                                        <a href="" class="btn btn-danger"><i class="fa fa-money-bill-wave-alt mr-2"></i> Transfer</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card my-4">
-                            <div class="card-body py-4">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <h5 class="font-weight-bold">Bantu Renovasi Rumah Oky</h5>
-                                        <p class="m-0 font-weight-bold text-danger">Rp250.000</p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5 class="text-center font-weight-bold">Status</h5>
-                                        <p class="m-0 text-center">Menunggu Pemabayaran</p>
-                                    </div>
-                                    <div class="col-md-2 d-flex justify-content-end align-items-center">
-                                        <a href="" class="btn btn-danger"><i class="fa fa-money-bill-wave-alt mr-2"></i> Transfer</a>
+                        <?php foreach ($data as $d) { ?>
+                            <div class="card my-4">
+                                <div class="card-body py-4">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h5 class="font-weight-bold">
+                                                <?php foreach ($data_aksi as $data2) { ?>
+                                                    <?php
+                                                        if($data2->id_aksi == $d->id_aksi){
+                                                            echo $data2->nama_aksi;
+                                                        }
+                                                    ?>
+                                                <?php } ?>
+                                            </h5>
+                                            <p class="m-0 font-weight-bold text-danger"><?= "Rp" . number_format($d->donasi, 2, ",", "."); ?></p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h5 class="text-center font-weight-bold">Status</h5>
+                                            <p class="m-0 text-center">
+                                            <?php foreach ($status as $s) { ?>
+                                                <?php
+                                                    if($s->id_status_aksi == $d->id_status_aksi){
+                                                        echo $s->nama_status_aksi;
+                                                    }
+                                                ?>
+                                            <?php } ?>
+                                            </p>
+                                        </div>
+                                        <?php
+                                            if ($d->id_status_aksi == 1) {
+                                                ?>
+                                                <div class="col-md-2 d-flex justify-content-end align-items-center">
+                                                    <a href="<?= site_url('donasi/upload_bukti/' .  $d->id) ?>" class="btn btn-danger"><i class="fa fa-money-bill-wave-alt mr-2"></i>Transfer</a>
+                                                </div>
+                                            <?php
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        <?php } ?>
                     </div>
                 </div>
 
