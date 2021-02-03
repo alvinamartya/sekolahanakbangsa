@@ -27,7 +27,7 @@ class Donasi extends CI_Controller
 	{
 		parent::__construct();
 
-		//load ke model siswa
+		//load ke model
 		$this->load->model('barang_model');
 		$this->load->model('aksi_barang_model');
 		$this->load->model('aksi_biaya_lainnya_model');

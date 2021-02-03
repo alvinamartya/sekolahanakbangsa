@@ -11,6 +11,17 @@ class aksi_model extends CI_Model
         parent::__construct();
     }
 
+	public function getAksiBySekolah($id_sekolah)
+    {
+        $query = $this->db
+            ->from($this->_table)
+			->join('relawan', 'relawan.id_relawan = aksi.id_relawan')
+            ->where(['relawan.id_sekolah' => $id_sekolah, 'aksi.row_status' => 'A'])
+            ->order_by('aksi.tanggal_selesai', 'asc')
+            ->get();
+
+        return $query->result();
+    }
     public function getAksiByRelawan($id_relawan)
     {
         $query = $this->db
@@ -67,6 +78,15 @@ class aksi_model extends CI_Model
         $query = $this->db
             ->from($this->_table)
             ->get();
+        return $query->result();
+    }
+	public function getAksiAllActive()
+    {
+        $query = $this->db
+            ->from($this->_table)
+			->where(['row_status' => 'A'])
+            ->get();
+			
         return $query->result();
     }
 

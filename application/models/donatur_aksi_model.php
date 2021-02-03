@@ -27,8 +27,15 @@ class donatur_aksi_model extends CI_Model
         return $jumlah;
 
     }
-
-    public function getAllDanaValid()
+	public function getDanaValid()
+	{
+		$query = $this->db
+            ->from($this->_table)
+            ->where(['is_valid' => 'Y'])
+            ->get();
+		return $query->result();
+	}
+    public function getSumDanaValid()
     {
         $query = $this->db
             ->from($this->_table)

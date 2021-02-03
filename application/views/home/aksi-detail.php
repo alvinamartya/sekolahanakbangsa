@@ -112,7 +112,7 @@
             </div>
 
             <div class="d-flex justify-content-center">
-                <a href="" class="btn btn-danger">Lihat Aksi Lainnya <i class="fa fa-chevron-right ml-2"></i></a>
+                <a href="<?=base_url("#aksi")?>" class="btn btn-danger">Lihat Aksi Lainnya <i class="fa fa-chevron-right ml-2"></i></a>
             </div>
         </div>
 
