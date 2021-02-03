@@ -86,19 +86,19 @@
         <div class="section-summary shadow">
             <div class="row">
                 <div class="col-2">
-                    <h4>88</h4>
+                    <h4><?=$jumlah_aksi?></h4>
                     <p>Aksi</p>
                 </div>
                 <div class="col-4">
-                    <h4>Rp21.856.300</h4>
+                    <h4><?php echo 'Rp ' . number_format($total_donasi, 2, ',', '.'); ?></h4>
                     <p>Donasi Terkumpul</p>
                 </div>
                 <div class="col-3">
-                    <h4>88</h4>
+                    <h4><?=$jumlah_relawan?></h4>
                     <p>Relawan</p>
                 </div>
                 <div class="col-3">
-                    <h4>88</h4>
+                    <h4><?=$jumlah_donatur?></h4>
                     <p>Donatur</p>
                 </div>
             </div>
