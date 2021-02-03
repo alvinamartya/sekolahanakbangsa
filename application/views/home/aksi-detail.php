@@ -17,7 +17,7 @@
                     foreach ($data_gambar_aksi as $g) {
                     ?>
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="<?php echo base_url('assets/images/' . $g->gambar) ?>" alt="First slide">
+                            <img class="d-block w-100" src="<?php echo base_url('assets/images/aksi/' . $g->gambar) ?>" alt="First slide">
                         </div>
                     <?php $i++;
                     } ?>
@@ -131,7 +131,7 @@
                         <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $persen ?>%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
-                    <p class="mt-3 mb-4">%<?php echo $persen ?> tercapai</p>
+                    <p class="mt-3 mb-4"><?php echo $persen ?>% tercapai</p>
 
                     <form action="" method="post">
                         <div class="mt-3">
