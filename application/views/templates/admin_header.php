@@ -188,7 +188,7 @@
 						<li class="nav-small-cap"><span class="hide-menu">Donasi</span></li>
 
 						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'validasi-uang-masuk' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
-							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'validasi-uang-masuk' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('validasi-uang-masuk') ?>" aria-expanded="false">
+							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'validasi-uang-masuk' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('validasi_uang_masuk') ?>" aria-expanded="false">
 								<i class="fa fa-check-double"></i><span class="hide-menu">Validasi Uang Masuk</span>
 							</a>
 						</li>

@@ -47,6 +47,14 @@ class gambar_aksi_model extends CI_Model
 
           return $query->result();
     }
+
+    public function getAksiAll()
+    {
+        $query = $this->db
+            ->from($this->_table)
+            ->get();
+        return $query->result();
+    }
 }
 
 ?>
