@@ -22,18 +22,29 @@
                 <h2 class="font-weight-bold">SBA</h2>
             </a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                <div class="navbar-nav align-items-center">
-                    <a class="nav-item-2" href="#home">Home</a>
-                    <a class="nav-item-2" href="aksi.html">Aksi</a>
-                    <a class="nav-item-2" href="masuk.html">Masuk</a>
-                    <a class="btn btn-rounded btn-transparent ml-3 h-50" href="#"><i class="fa fa-user mr-2"></i> Buat Akun</a>
-                </div>
+                <?php if ($isLogin == true) { ?>
+                    <div class="navbar-nav align-items-center">
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                            <div class="navbar-nav align-items-center">
+                                <a class="nav-item-2" href="#home">Home</a>
+                                <a class="nav-item-2" href="#aksi">Aksi</a>
+                                <a class="btn btn-rounded btn-transparent ml-3 h-50" href="#"><i class="fa fa-user mr-2"></i> User</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } else { ?>
+                    <div class="navbar-nav align-items-center">
+                        <a class="nav-item-2" href="<?= site_url('home') ?>">Home</a>
+                        <a class="nav-item-2" href="aksi.html">Aksi</a>
+                        <a class="nav-item-2" href="masuk.html">Masuk</a>
+                        <a class="btn btn-rounded btn-transparent ml-3 h-50" href="#"><i class="fa fa-user mr-2"></i> Buat Akun</a>
+                    </div>
+                <?php } ?>
             </div>
         </nav>
     </header>

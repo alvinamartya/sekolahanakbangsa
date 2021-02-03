@@ -16,7 +16,7 @@ class aksi_model extends CI_Model
         $query = $this->db
             ->from($this->_table)
             ->where(['id_relawan' => $id_relawan, 'row_status' => 'A'])
-            ->order_by('creadate', 'desc')
+            ->order_by('tanggal_selesai', 'asc')
             ->get();
 
         return $query->result();
@@ -54,13 +54,30 @@ class aksi_model extends CI_Model
 
     public function getAksi($id)
     {
-      $query = $this->db
-              ->from($this->_table)
-              ->where(['id_aksi' => $id])
-              ->get();
+        $query = $this->db
+            ->from($this->_table)
+            ->where(['id_aksi' => $id])
+            ->get();
 
-          return $query->row();
+        return $query->row();
+    }
+
+    public function getAksiHome()
+    {
+        $query = $this->db
+            ->query("SELECT 
+            a.id_aksi, 
+            a.nama_aksi, 
+            DATEDIFF(a.tanggal_selesai,NOW()) as selisih_hari, 
+            SUM(d.donasi) as total_donasi, (SUM(d.donasi) * 100 / a.target_donasi) as percentage, 
+            g.gambar 
+            FROM aksi a 
+            JOIN donatur_aksi d ON a.id_aksi = d.id_aksi 
+            JOIN gambar_aksi g ON g.id_aksi = a.id_aksi 
+            WHERE d.id_status_aksi = 3 and d.is_valid = 'Y' and a.row_status = 'A' 
+            and a.tanggal_selesai >= NOW() GROUP BY a.id_aksi, a.nama_aksi,selisih_hari 
+            ORDER BY a.tanggal_selesai ASC LIMIT 6");
+
+        return $query->result();
     }
 }
-
-?>

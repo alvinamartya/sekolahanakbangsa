@@ -107,10 +107,10 @@ class Aksi extends CI_Controller
         $data['biaya_lainnya'] = $this->biaya_lainnya_model->getBiayaLainnya();
         $data['barang'] = $this->barang_model->getBarang();
 
-        if($data_aksi != null) {
+        if ($data_aksi != null) {
             $this->load->view('aksi/add', $data);
         } else {
-            $this->load->view('templates/relawan_header', $header);
+            $this->load->view('aksi/header', $header);
             $this->load->view('aksi/add', $data);
 
             // inlcude footer
@@ -122,9 +122,9 @@ class Aksi extends CI_Controller
     {
         $relawan = $this->getRelawanSession();
 
-        for($i=0; $i < count($files['name']); $i++){
+        for ($i = 0; $i < count($files['name']); $i++) {
 
-            if(!empty($files['name'][$i])){
+            if (!empty($files['name'][$i])) {
                 $_FILES['file']['name'] = $files['name'][$i];
                 $_FILES['file']['type'] = $files['type'][$i];
                 $_FILES['file']['tmp_name'] = $files['tmp_name'][$i];
@@ -134,11 +134,11 @@ class Aksi extends CI_Controller
                 $config['upload_path'] = 'assets/images/aksi/';
                 $config['allowed_types'] = 'jpg|jpeg|png|gif';
                 $config['max_size'] = '5000';
-                $config['file_name'] = date('Ymdhis').$i;
+                $config['file_name'] = date('Ymdhis') . $i;
 
                 $this->load->library('upload', $config);
 
-                if($this->upload->do_upload('file')){
+                if ($this->upload->do_upload('file')) {
                     $uploadData = $this->upload->data();
                     $filename = $uploadData['file_name'];
 
@@ -151,7 +151,6 @@ class Aksi extends CI_Controller
                     );
 
                     $this->gambar_aksi_model->save($gambar);
-
                 }
             }
         }
@@ -163,6 +162,7 @@ class Aksi extends CI_Controller
         // get relawan
         $relawan = $this->getRelawanSession();
         $post = $this->input->post();
+
         $biaya = json_decode($post["biaya"]);
         $barang = json_decode($post["barang"]);
         $gambar = json_decode($post["gambar"]);
@@ -184,9 +184,9 @@ class Aksi extends CI_Controller
 
             $aksi_id = $this->aksi_model->getLastData()->id_aksi;
 
-            if($biaya != null) {
+            if ($biaya != null) {
                 // foreach data biaya
-                foreach($biaya as $b) {
+                foreach ($biaya as $b) {
                     $biaya_data = array(
                         'id_aksi' => $aksi_id,
                         'id_biaya_lainnya' => $b->id_biaya,
@@ -200,9 +200,9 @@ class Aksi extends CI_Controller
                 }
             }
 
-            if($barang != null) {
+            if ($barang != null) {
                 // foreach data barang
-                foreach($barang as $b) {
+                foreach ($barang as $b) {
                     $barang_data = array(
                         'id_aksi' => $aksi_id,
                         'id_barang' => $b->id_barang,
@@ -384,6 +384,4 @@ class Aksi extends CI_Controller
             echo json_encode(['status' => false, 'message' => validation_errors()]);
         }
     }
-
 }
-?>

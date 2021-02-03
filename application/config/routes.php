@@ -55,3 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 $route['biaya-lainnya'] = 'biaya_lainnya';
 $route['biaya-lainnya/tambah'] = 'biaya_lainnya/tambah';
 $route['biaya-lainnya/ubah/(:any)'] = 'biaya_lainnya/ubah/$1';
+$route['aksi-detail/(:any)'] = 'aksi_detail/index/$1';
+$route['kebutuhan-tahunan'] = 'kebutuhan_tahunan';
+$route['kebutuhan-tahunan/tambah'] = 'kebutuhan_tahunan/tambah';

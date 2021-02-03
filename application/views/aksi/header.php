@@ -20,6 +20,8 @@
     <link href="<?= base_url('assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css') ?>" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="<?php echo base_url('assets/css/style.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/custom.css') ?>" rel="stylesheet">
+
 </head>
 
 <body>

@@ -9,7 +9,6 @@
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
-<script src="<?php echo base_url('assets/libs/jquery/dist/jquery.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/libs/popper.js/dist/umd/popper.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/libs/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <!-- apps -->
@@ -56,30 +55,26 @@
         $("#btnSave").on("click", function() {
 
             let formData = new FormData();
-            formData.append("nama_aksi", $('#nama_aksi').val())
-            formData.append("tanggal_selesai", $('#tanggal_selesai').val());
-            formData.append("deskripsi_aksi", $('#deskripsi_aksi').val());
+            formData.append("year", $('#year').val())
+            formData.append("desc", $('#desc').val());
             formData.append("target_donasi", getNumber($('#target_donasi').html()));
             formData.append("barang", JSON.stringify(aksiBarang));
             formData.append("biaya", JSON.stringify(aksiBiaya));
             if (getNumber($('#target_donasi').html()) === 0) {
-                $("#validationAlert").html('<p>Target donasi wajib diisi.<\/p>\n');
+                $("#validationAlert").html('<p>Total Kebutuhan wajib diisi.<\/p>\n');
                 $("#validationAlert").show();
             } else {
-                $.each($('#gambar_aksi')[0].files, function(key, input) {
-                    formData.append('files[]', input);
-                });
-
                 $.ajax({
-                    url: "<?= site_url('aksi/add') ?>",
+                    url: "<?= site_url('kebutuhan_tahunan/add') ?>",
                     type: "POST",
                     contentType: false,
                     processData: false,
                     data: formData,
                     success: function(res) {
+                        console.log(res);
                         var respon = JSON.parse(res);
                         if (respon.success) {
-                            window.location.href = "<?= site_url('aksi') ?>"
+                            window.location.href = "<?= site_url('kebutuhan-tahunan') ?>"
                         } else {
                             $("#validationAlert").html(respon.message);
                             $("#validationAlert").show();
@@ -102,7 +97,7 @@
                 const idx = aksiBiaya.map(i => i.id_biaya).indexOf(data_id);
                 aksiBiaya.splice(idx, 1);
             } else {
-                const idx = aksiBarang.map(i => i.id_barang).indexOf(data_id);
+                const idx = aksiBarang.map(i => i.id_biaya).indexOf(data_id);
                 aksiBarang.splice(idx, 1);
             }
 
@@ -128,7 +123,7 @@
             let hasBiaya = aksiBiaya.some(a => a['id_biaya'] === idBiaya);
 
             if (hasBiaya) {
-                alert('Aksi Biaya sudah ditambahkan!');
+                alert('Kebutuhan Tahunan Biaya sudah ditambahkan!');
             } else {
                 // add data to array
                 aksiBiaya.push({
@@ -168,7 +163,7 @@
             let hasBarang = aksiBarang.some(a => a['id_barang'] === idBarang);
 
             if (hasBarang) {
-                alert('Aksi Barang sudah ditambahkan!');
+                alert('Kebutuhan Tahunan Barang sudah ditambahkan!');
             } else {
                 // add data to array
                 aksiBarang.push({
