@@ -19,7 +19,7 @@ class Home extends CI_Controller
 		$data_relawan = $this->relawan_model->countAll();
 		$data_donatur = $this->donatur_model->countAll();
 		$data_aksi = $this->aksi_model->countAksi();
-		$data_donatur_aksi = $this->donatur_aksi_model->getAllDanaValid();
+		$data_donatur_aksi = $this->donatur_aksi_model->getSumDanaValid();
 
         $data['aksi'] = $aksi;
 		$data['jumlah_relawan'] = $data_relawan;

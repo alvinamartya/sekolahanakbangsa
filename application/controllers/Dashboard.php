@@ -123,8 +123,106 @@ class Dashboard extends CI_Controller
         $header['name'] =  $this->getRelawanName();
         $header['active'] = $active;
 
+		
+		$post = $this->input->post();
+		if(Isset($post["id_sekolah"])){
+			$id_sekolah = $post["id_sekolah"];
+		}else{
+			$sekolah = $this->sekolah_model->getSekolah();
+			foreach($sekolah as $s){
+				$id_sekolah = $s->id_sekolah;
+				break;
+			}
+		}
+		
+		
+		// set kebutuhan data pada dashboard
+		$this->load->model('barang_model');
+		$this->load->model('aksi_barang_model');
+		$this->load->model('aksi_biaya_lainnya_model');
+		$this->load->model('aksi_model');
+		$this->load->model('biaya_lainnya_model');
+		$this->load->model('donatur_aksi_model');		
+		$this->load->model('relawan_model');
+		$this->load->model('status_aksi_model');
+		$this->load->model('sekolah_model');
+		
+		$data_sekolah = $this->sekolah_model->getSekolah();
+		$data_barang = $this->barang_model->getBarang();
+		$data_aksi_barang = $this->aksi_barang_model->getAksiBarang();
+		$data_aksi_biaya_lainnya = $this->aksi_biaya_lainnya_model->getAksiBiaya();
+		$data_aksi = $this->aksi_model->getAksiBySekolah($id_sekolah);
+		$data_biaya_lainnya = $this->biaya_lainnya_model->getBiayaLainnya();
+		$data_donatur_aksi = $this->donatur_aksi_model->getDanaValid();
+		$data_relawan = $this->relawan_model->getAll();		
+
+		$data['id_sekolah'] = $id_sekolah;
+		$data['sekolah'] = $data_sekolah;
+		$data['barang'] = $data_barang;
+		$data['aksi_barang'] = $data_aksi_barang;
+		$data['aksi_biaya_lainnya'] = $data_aksi_biaya_lainnya;
+		$data['aksi'] = $data_aksi;
+		$data['biaya_lainnya'] = $data_biaya_lainnya;
+		$data['donatur_aksi'] = $data_donatur_aksi;
+		$data['relawan'] = $data_relawan;
+		
+		// set header template
         $this->load->view('templates/relawan_header', $header);
-        $this->load->view('dashboard/relawan');
+		
+        $this->load->view('dashboard/relawan',$data);
+		
+		//set footer template
         $this->load->view('templates/footer');
     }
+	public function detail_donasi()
+	{
+		$user_id = $this->session->user_id;
+        $active = $this->relawan_model->getRelawanByUserLoginId($user_id)->id_sekolah != null;
+
+        // set page title
+        $header['title'] = "Dashboard Relawan";
+        $header['name'] =  $this->getRelawanName();
+        $header['active'] = $active;
+		
+		$post = $this->input->post();
+		$id = $post["id"];
+		
+		
+		//set kebutuhan data
+		$this->load->model('barang_model');
+		$this->load->model('aksi_barang_model');
+		$this->load->model('aksi_biaya_lainnya_model');
+		$this->load->model('aksi_model');
+		$this->load->model('biaya_lainnya_model');
+		$this->load->model('donatur_aksi_model');
+		$this->load->model('donatur_model');
+		$this->load->model('gambar_aksi_model');
+		$this->load->model('relawan_model');
+		$this->load->model('status_aksi_model');
+		
+		$data_aksi = $this->aksi_model->getAksi($id);
+		$data_barang = $this->barang_model->getBarang();
+		$data_relawan = $this->relawan_model->getByID($data_aksi->id_relawan);
+		$data_aksi_barang = $this->aksi_barang_model->getAksiBarangByIdAksi($id);
+		$data_aksi_biaya_lainnya = $this->aksi_biaya_lainnya_model->getBiayaLainnyaByIdAksi($id);
+		$data_biaya_lainnya = $this->biaya_lainnya_model->getBiayaLainnya();
+		$data_donatur_aksi = $this->donatur_aksi_model->getDanaValidByIdAksi($id);
+		$data_gambar_aksi = $this->gambar_aksi_model->getGambarByIdAksi($id);
+
+		$data['data_aksi'] = $data_aksi;
+		$data['data_barang'] = $data_barang;
+		$data['data_relawan'] = $data_relawan;
+		$data['data_aksi_barang'] = $data_aksi_barang;
+		$data['data_aksi_biaya_lainnya'] = $data_aksi_biaya_lainnya;
+		$data['data_biaya_lainnya'] = $data_biaya_lainnya;
+		$data['data_donatur_aksi'] = $data_donatur_aksi;
+		$data['data_gambar_aksi'] = $data_gambar_aksi;						
+		
+		$this->load->view('templates/relawan_header', $header);
+		
+        $this->load->view('dashboard/detail_donasi',$data);
+		
+        $this->load->view('templates/footer');
+		
+	}
 }
