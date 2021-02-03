@@ -1,16 +1,15 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Validasi_uang_masuk extends CI_Controller
+class Sdm_relawan extends CI_Controller
 {
     // constructor
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('aksi_model');
-        $this->load->model('donatur_aksi_model');
-        $this->load->model('status_aksi_model');
-        $this->load->model('donatur_model');
+        $this->load->model('relawan_model');
+        $this->load->model('cluster_relawan_model');
+        $this->load->model('sekolah_model');
         $this->load->model('login_model');
 
         // form validation
@@ -33,17 +32,16 @@ class Validasi_uang_masuk extends CI_Controller
         return $karyawan->jabatan_karyawan;
     }
 
-
     /*
     ==============================================================
-    View Validasi Uang Masuk
+    View Relawan
     ==============================================================
     */
     //menampilkan data relawan
     public function index()
     {
         // set page title
-        $header['title'] = 'View Data';
+        $header['title'] = 'Pengelolaan SDM';
 
         // set employee 
         $header['name'] =  $this->getKaryawanName();
@@ -52,16 +50,10 @@ class Validasi_uang_masuk extends CI_Controller
         // include header
         $this->load->view('templates/admin_header', $header);
 
-        $data_aksi = $this->aksi_model->getAksiAll();
-        $data_status = $this->status_aksi_model->getByStatus();
-        $data_donatur = $this->donatur_model->getAll();
-
-		$data['data_aksi'] = $data_aksi;
-        $data['donatur'] = $data_donatur;
-        $data['status'] = $data_status;
-        // data donatur_aksi
-        $data['donatur_aksi'] = $this->donatur_aksi_model->getAll();
-        $this->load->view('validasi_uang_masuk/index', $data);
+        $data['sekolah'] = $this->sekolah_model->getSekolah();
+        // data relawan
+        $data['relawan'] = $this->relawan_model->getAllBySekolah();
+        $this->load->view('sdm_relawan/index', $data);
 
         // inlcude footer
         $this->load->view('templates/footer');
@@ -72,16 +64,16 @@ class Validasi_uang_masuk extends CI_Controller
     Edit Relawan
     ==============================================================
     */
-    public function ubah($id)
+    public function ubah($id_relawan)
     {
-        $data_donatur_aksi = $this->donatur_aksi_model->getByID($id);
-        $this->loadUbah($data_donatur_aksi);
+        $data_relawan = $this->relawan_model->getByID($id_relawan);
+        $this->loadUbah($data_relawan);
     }
 
-    public function loadUbah($data_donatur_aksi)
+    public function loadUbah($data_relawan)
     {
         // set page title
-        $header['title'] = 'Validasi Uang Masuk';
+        $header['title'] = 'Pengelolaan SDM';
 
         // set employee 
         $header['name'] =  $this->getKaryawanName();
@@ -90,49 +82,45 @@ class Validasi_uang_masuk extends CI_Controller
         // include header
         $this->load->view('templates/admin_header', $header);
 
-        //load data
-        $data_aksi = $this->aksi_model->getAksiAll();
-        $data_donatur = $this->donatur_model->getAll();
+        $data['sekolah'] = $this->sekolah_model->getSekolah();
+        $data['r'] = $data_relawan;
 
-		$data['data_aksi'] = $data_aksi;
-		$data['donatur'] = $data_donatur;
-        $data['donatur_aksi'] = $data_donatur_aksi;
-
-        $this->load->view('validasi_uang_masuk/edit', $data);
+        $this->load->view('sdm_relawan/edit', $data);
 
         // inlcude footer
         $this->load->view('templates/footer');
     }
 
-    public function edit($id)
+    public function edit($id_relawan)
     {
         $post = $this->input->post();
-        $id_status=0;
-        if($post['is_valid']=='Y'){
-            $id_status = 3;
-        }else{
-            $id_status = 4;
-        }
 
-        $data = [
-            'is_valid' => $post['is_valid'],
-            'id_status_aksi' => $id_status,
+        $cek=0;
+        if($post['id_sekolah']==null){
+            $cek=null;
+        }else{
+            $cek = $post['id_sekolah'];
+        }
+        // relawan data
+        $sdm_relawan_data = [
+            'nama_relawan' => $post['nama_relawan'],
+            'id_sekolah' => $cek,
             'modiby' => $this->getKaryawanName(),
         ];
 
         // save donatur data
         $result = $this
-            ->donatur_aksi_model
-            ->update($id, $data);
+            ->relawan_model
+            ->update($id_relawan, $sdm_relawan_data);
 
         if ($result > 0) {
             // success message
-            $this->session->set_flashdata("success", "Ubah data berhasil");
-            redirect(site_url('validasi_uang_masuk/index'));
+            $this->session->set_flashdata("success", "Data Sekolah berhasil Ditambahakan");
+            redirect(site_url('sdm_relawan/index'));
         } else {
             // error message
-            $this->session->set_flashdata("failed", "Ubah data gagal");
-            redirect(site_url('validasi_uang_masuk/index'));
+            $this->session->set_flashdata("failed", "Data Sekolah gagal Ditambahakan");
+            redirect(site_url('sdm_relawan/index'));
         }
     }
 }

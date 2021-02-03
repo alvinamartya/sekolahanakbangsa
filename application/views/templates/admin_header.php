@@ -173,7 +173,7 @@
 						<?php } ?>
 
 						<li class="sidebar-item <?php echo ($this->uri->segment(1) == 'sdm-relawan' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
-							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'sdm-relawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('sdm-relawan') ?>" aria-expanded="false">
+							<a class="sidebar-link <?php echo ($this->uri->segment(1) == 'sdm-relawan' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('sdm_relawan') ?>" aria-expanded="false">
 								<i class="fa fa-users"></i><span class="hide-menu">Pengolahan SDM</span>
 							</a>
 						</li>

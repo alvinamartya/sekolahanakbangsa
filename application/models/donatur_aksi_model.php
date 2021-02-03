@@ -46,6 +46,7 @@ class donatur_aksi_model extends CI_Model
     {
         return $this->db
             ->where('row_status', 'A')
+            ->order_by('id_status_aksi', 'asc')
             ->get($this->_table)
             ->result();
     }

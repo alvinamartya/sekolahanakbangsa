@@ -18,6 +18,16 @@ class Relawan_model extends CI_Model
             ->get($this->_table)
             ->result();
     }
+
+    public function getAllBySekolah()
+    {
+        return $this->db
+            ->where('row_status', 'A')
+            ->order_by('id_sekolah', 'asc')
+            ->get($this->_table)
+            ->result();
+    }
+
 	public function countAll()
     {
         $relawan = $this->db

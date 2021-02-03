@@ -6,7 +6,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
-                        <li class="breadcrumb-item"><a href="<?= site_url('relawan') ?>" class="text-muted">Relawan</a></li>
+                        <li class="breadcrumb-item"><a href="<?= site_url('validasi_uang_masuk') ?>" class="text-muted">View Data</a></li>
                         <li class="breadcrumb-item text-muted active" aria-current="page">Cek Valid</li>
                     </ol>
                 </nav>

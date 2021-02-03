@@ -1,12 +1,12 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-7 align-self-center">
-            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Validasi Uang Masuk</h4>
+            <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Pengelolaan SDM</h4>
             <div class="d-flex align-items-center">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
-                        <li class="breadcrumb-item text-muted active" aria-current="page">View Data</li>
+                        <li class="breadcrumb-item text-muted active" aria-current="page">Pengelolaan SDM</li>
                     </ol>
                 </nav>
             </div>
@@ -25,7 +25,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title text-center" style="font-size: 28px;">Validasi Uang Masuk</h4>
+                    <h4 class="card-title text-center" style="font-size: 28px;">Pengelolaan SDM</h4>
                     <?php if ($this->session->flashdata('success')) { ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <?= $this->session->flashdata('success') ?>
@@ -39,16 +39,15 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">No</th>
-                                    <th class="text-center">Aksi</th>
-                                    <th class="text-center">Nama donatur</th>
-                                    <th class="text-center">Nominal</th>
-                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Nama Relawan</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Sekolah</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i = 0; ?>
-                                <?php foreach ($donatur_aksi as $da) { ?>
+                                <?php foreach ($relawan as $r) { ?>
                                     <tr>
                                         <td>
                                             <?php
@@ -56,44 +55,24 @@
                                             echo $i;
                                             ?>
                                         </td>
-                                        <td>
-                                            <?php foreach ($data_aksi as $data2) { ?>
+                                        <td><?= $r->nama_relawan ?></td>
+                                        <td><?= $r->email ?></td>
+                                        <td align="center">
+                                            <?php 
+                                            if($r->id_sekolah==null){
+                                                echo "-";
+                                            }else{
+                                                foreach ($sekolah as $s) { ?>
                                                 <?php
-                                                    if($data2->id_aksi == $da->id_aksi){
-                                                        echo $data2->nama_aksi;
+                                                    if($s->id_sekolah == $r->id_sekolah){
+                                                        echo $s->nama_sekolah;
                                                     }
                                                 ?>
-                                            <?php } ?>
-                                        </td>
-                                        <td>
-                                            <?php foreach ($donatur as $d) { ?>
-                                                <?php
-                                                    if($d->id_donatur == $da->id_donatur){
-                                                        echo $d->nama_donatur;
-                                                    }
-                                                ?>
-                                            <?php } ?>
-                                        </td>
-                                        <td><?= "Rp " . number_format($da->donasi, 2, ",", "."); ?></td>
-                                        <td>
-                                            <?php foreach ($status as $s) { ?>
-                                                <?php
-                                                    if($s->id_status_aksi == $da->id_status_aksi){
-                                                        echo $s->nama_status_aksi;
-                                                    }
-                                                ?>
+                                                <?php } ?>
                                             <?php } ?>
                                         </td>
                                         <td align="center">
-                                            <?php 
-                                            if($da->id_status_aksi == 1){
-                                            ?>
-                                                <a href="<?= site_url('validasi_uang_masuk/ubah/' .  $da->id) ?>" class="btn btn-primary"><i class="fa fa-check-circle"></i> Konfirmasi</a>
-                                            <?php
-                                            }else{
-                                                echo "-";
-                                            }
-                                            ?>
+                                            <a href="<?= site_url('sdm_relawan/ubah/' .  $r->id_relawan) ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Sekolah</a>
                                         </td>
                                     </tr>
                                 <?php } ?>
