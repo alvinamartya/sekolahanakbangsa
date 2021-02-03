@@ -24,7 +24,7 @@
                             </div>
                             <div class="mt-3 row">
                                 <div class="col-md-6">
-                                    <a href="<?= site_url('donasi') ?>" class="btn btn-warning btn-lg font-weight-bold mt-3 d-block w-100"><i class="fa fa-chevron-left mr-2"></i> Kembali</a>
+                                    <a href="<?= site_url('donasi?id='. $idkembali) ?>" class="btn btn-warning btn-lg font-weight-bold mt-3 d-block w-100"><i class="fa fa-chevron-left mr-2"></i> Kembali</a>
                                     <!-- <button type="submit" class="btn btn-warning btn-lg font-weight-bold mt-3 d-block w-100"><i class="fa fa-chevron-left mr-2"></i> Kembali</button> -->
                                 </div>
                                 <div class="col-md-6 pl-0">

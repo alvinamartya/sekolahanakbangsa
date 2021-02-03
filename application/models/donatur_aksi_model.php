@@ -40,7 +40,14 @@ class donatur_aksi_model extends CI_Model
             $jumlah += $a->donasi;
         }
         return $jumlah;
+    }
 
+    public function getAll()
+    {
+        return $this->db
+            ->where('row_status', 'A')
+            ->get($this->_table)
+            ->result();
     }
 
     public function getLastData()
@@ -57,13 +64,13 @@ class donatur_aksi_model extends CI_Model
     public function update($id, $data)
     {
         return $this->db
-            ->where('id_aksi', $id)
+            ->where('id', $id)
             ->update($this->_table, $data);
     }
 
     public function getByID($id)
     {
-        return $this->db->get_where($this->_table, ["id_aksi" => $id])->row();
+        return $this->db->get_where($this->_table, ["id" => $id])->row();
     }
 
     public function getAksi($id)

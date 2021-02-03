@@ -92,6 +92,7 @@ class Donasi extends CI_Controller
 		// include header
 		$this->load->view('templates/donatur_header', $header);
 
+		$data['idkembali'] = $get["id"];
 		$data_aksi = $this->aksi_model->getAksi($id);
 		$data['data_aksi'] = $data_aksi;
 

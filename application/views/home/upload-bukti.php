@@ -67,14 +67,14 @@
                             <p class="mb-2">Silahkan Transfer dengan nominal <text class="text-danger font-weight-bold"><?= "Rp" . number_format($data_aksi->donasi, 2, ",", "."); ?></text> ke</p>
                             <p>Rekening BRI <text class="text-danger font-weight-bold">6716172356712536788</text> a.n <text class="font-weight-bold">PT. Sekolah Anak Bangsa</text></p>
                         </div>
-                        <?php echo form_open_multipart('donasi/update/'. $data_aksi->id_aksi); ?>
+                        <?php echo form_open_multipart('donasi/update/'. $data_aksi->id); ?>
                             <div class="form-group">
                                 <label for="image">Upload Bukti Transfer:</label><br>
                                 <input type="file" name="foto"/>
                             </div>
                             <div class="mt-3 d-flex">
                                 <button type="submit" class="btn btn-danger font-weight-bold mt-3 d-inline-block mr-2"><i class="far fa-paper-plane mr-2"></i> Kirim</button>
-                                <a href="<?= site_url('donasi/LoadDonatur') ?>" class="btn btn-warning font-weight-bold mt-3 d-inline-block"><i class="far fa-window-close mr-2"></i> Batal</a>
+                                <a href="<?= site_url('home/donatur') ?>" class="btn btn-warning font-weight-bold mt-3 d-inline-block"><i class="far fa-window-close mr-2"></i> Batal</a>
                             </div>
                         <?php echo form_close(); ?>
                     </div>
