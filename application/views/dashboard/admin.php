@@ -11,7 +11,7 @@
     							<h4 class="card-title form-control" style="border:0px">LAPORAN KEBUTUHAN SEKOLAH</h4>
     						</div>
     						<div class="col">
-    							<form id="ddlsekolah" class="d-inline" action="<?= base_url("Dashboard/admin") ?>" method="post">
+    							<form id="ddlsekolah" class="d-inline" action="<?= base_url("dashboard/admin") ?>" method="post">
     								<div class="row">
     									<div class="col-8">
     										<select class="form-control" id="id_sekolah" name="id_sekolah">
@@ -150,7 +150,7 @@
     	}
     	/*
     	function formSubmit() {
-    		
+
     	    document.getElementById("ddlsekolah").submit();
     	}
     	$( "#id_sekolah" ).change(function() {

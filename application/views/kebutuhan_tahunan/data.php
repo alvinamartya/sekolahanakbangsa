@@ -25,7 +25,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title text-center" style="font-size: 28px;">Transaksi Kebutuhan Tahunan</h4>
+                    <h4 class="card-title text-center" style="font-size: 28px;">Daftar Kebutuhan Tahunan</h4>
                     <?php if ($this->session->flashdata('success')) { ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <?= $this->session->flashdata('success') ?>
@@ -42,25 +42,31 @@
                         </div>
                     <?php } ?>
                     <div class="table-responsive">
-                        <a href="<?= site_url('kebutuhan-tahunan/tambah') ?>" class="btn btn-primary mb-2">Tambah</a>
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
                                     <th class="text-center">No.</th>
                                     <th class="text-center">Tahun</th>
                                     <th class="text-center">Total Kebutuhan</th>
+                                    <th class="text-center">LPJ</th>
                                     <th class="text-center">Status</th>
-                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>
                                 <?php foreach ($kebutuhan_tahunan as $kt) { ?>
                                     <tr>
-                                        <td><?= $no++ ?></td>
-                                        <td><?= $kt->tahun ?></td>
-                                        <td><?= "Rp" . number_format($kt->total_kebutuhan, 0, ",", "."); ?></td>
-                                        <td><?php
+                                        <td class="text-center"><?= $no++ ?></td>
+                                        <td class="text-center"><?= $kt->tahun ?></td>
+                                        <td class="text-right"><?= "Rp" . number_format($kt->total_kebutuhan, 0, ",", "."); ?></td>
+                                        <td class="text-center">
+                                            <?php if($kt->laporan_pertanggung_jawaban == null) {
+                                                echo '-';
+                                            } else { ?>
+                                                <a href="<?= site_url('assets/lpj/'. $kt->laporan_pertanggung_jawaban) ?>"><?= $kt->laporan_pertanggung_jawaban ?></a>
+                                            <?php } ?>
+                                        </td>
+                                        <td class="text-center"><?php
                                             if ($kt->is_approved == null) {
                                                 echo 'Menunggu Persetujuan';
                                             } else if ($kt->is_approved == 'Y') {
@@ -69,10 +75,6 @@
                                                 echo 'Ditolak';
                                             }
                                             ?></td>
-                                        <td align="center">
-                                            <a href="<?= site_url('kebutuhan-tahunan/detail/' .  $kt->id) ?>" class="btn btn-primary"><i class="fa fa-eye"></i> Detail</a>
-                                            <a href="<?= site_url('kebutuhan-tahunan/destroy/' .  $kt->id) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
-                                        </td>
                                     </tr>
                                 <?php } ?>
                             </tbody>

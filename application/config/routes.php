@@ -58,3 +58,6 @@ $route['biaya-lainnya/ubah/(:any)'] = 'biaya_lainnya/ubah/$1';
 $route['aksi-detail/(:any)'] = 'aksi_detail/index/$1';
 $route['kebutuhan-tahunan'] = 'kebutuhan_tahunan';
 $route['kebutuhan-tahunan/tambah'] = 'kebutuhan_tahunan/tambah';
+$route['kebutuhan-tahunan/detail/(:any)'] = 'kebutuhan_tahunan/detail/$1';
+$route['kebutuhan-tahunan/destroy/(:any)'] = 'kebutuhan_tahunan/destroy/$1';
+$route['kebutuhan-tahunan/data'] = 'kebutuhan_tahunan/data';

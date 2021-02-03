@@ -6,7 +6,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb m-0 p-0">
                         <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
-                        <li class="breadcrumb-item"><a href="<?php echo base_url('Bantuan_sekolah')?>" class="text-muted">Kebutuhan Tahunan</a></li>
+                        <li class="breadcrumb-item"><a href="<?php echo base_url('bantuan_sekolah')?>" class="text-muted">Kebutuhan Tahunan</a></li>
 						<li class="breadcrumb-item text-muted active" aria-current="page">Detail</li>
                     </ol>
                 </nav>
@@ -22,10 +22,10 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <!-- basic table -->
-  
-            
-			
-	<h4 class="card-title">Kebutuhan Tahunan</h4>			
+
+
+
+	<h4 class="card-title">Kebutuhan Tahunan</h4>
 	<div class="row">
 		<div class="col-md-2">
 			<label class="form-control">Tahun : <?=$kebutuhan_tahunan->tahun?><label>
@@ -58,7 +58,7 @@
 								<tr>
 									<th>No</th>
 									<th>Nama Biaya</th>
-									<th>Biaya</th>									
+									<th>Biaya</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -77,7 +77,7 @@
 								</td>
 								<td>
 									<?php echo 'Rp '.number_format($kt->biaya,2,',','.'); ?>
-								</td>								
+								</td>
 							</tr>
 							<?php $i++; }?>
 							</tbody>
@@ -93,7 +93,7 @@
 		<div class="col-md-6">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">Kebutuhan Tahunan Barang</h4>                        
+					<h4 class="card-title">Kebutuhan Tahunan Barang</h4>
 					<div class="table-responsive">
 					<small>
 						<table id="barang-table" class="table table-striped table-bordered no-wrap">
@@ -102,7 +102,7 @@
 									<th>No</th>
 									<th>Nama Barang</th>
 									<th>Jumlah</th>
-									<th>Harga Satuan</th>									
+									<th>Harga Satuan</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -120,7 +120,7 @@
 									<td><?=$kt->jumlah?></td>
 									<td>
 									<?php echo 'Rp '.number_format($kt->harga_satuan,2,',','.'); ?>
-									</td>									
+									</td>
 								</tr>
 							<?php $i++; } ?>
 							</tbody>
@@ -133,11 +133,11 @@
 	</div>
 	<div class="row">
 		<div class="col-12 d-flex justify-content-between">
-			<h3 class="text-danger font-weight-bold">Total Kebutuhan : <?php echo 'Rp '.number_format($kebutuhan_tahunan->total_kebutuhan,2,',','.'); ?></h3>						
+			<h3 class="text-danger font-weight-bold">Total Kebutuhan : <?php echo 'Rp '.number_format($kebutuhan_tahunan->total_kebutuhan,2,',','.'); ?></h3>
 			<form action="<?php echo base_url('bantuan_sekolah/page_konfirmasi') ?>" method="post"  class="d-inline float-right">
 				<input type="hidden" name="id" value="<?=$kebutuhan_tahunan->id?>">
 				<button class="btn btn-success">Konfirmasi Sekarang</button>
-			</form>		
+			</form>
 		</div>
 	</div>
 	<br>
@@ -145,7 +145,7 @@
 		<div class="col-md-1">
 			<a href="<?php echo base_url("Bantuan_sekolah")?>" class="btn btn-secondary">Kembali</a>
 		</div>
-		
+
 	</div>
 </div>
 
