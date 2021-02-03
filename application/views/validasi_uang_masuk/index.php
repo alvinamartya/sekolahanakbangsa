@@ -59,18 +59,18 @@
                                         <td>
                                             <?php foreach ($data_aksi as $data2) { ?>
                                                 <?php
-                                                    if($data2->id_aksi == $da->id_aksi){
-                                                        echo $data2->nama_aksi;
-                                                    }
+                                                if ($data2->id_aksi == $da->id_aksi) {
+                                                    echo $data2->nama_aksi;
+                                                }
                                                 ?>
                                             <?php } ?>
                                         </td>
                                         <td>
                                             <?php foreach ($donatur as $d) { ?>
                                                 <?php
-                                                    if($d->id_donatur == $da->id_donatur){
-                                                        echo $d->nama_donatur;
-                                                    }
+                                                if ($d->id_donatur == $da->id_donatur) {
+                                                    echo $d->nama_donatur;
+                                                }
                                                 ?>
                                             <?php } ?>
                                         </td>
@@ -78,19 +78,19 @@
                                         <td>
                                             <?php foreach ($status as $s) { ?>
                                                 <?php
-                                                    if($s->id_status_aksi == $da->id_status_aksi){
-                                                        echo $s->nama_status_aksi;
-                                                    }
+                                                if ($s->id_status_aksi == $da->id_status_aksi) {
+                                                    echo $s->nama_status_aksi;
+                                                }
                                                 ?>
                                             <?php } ?>
                                         </td>
                                         <td align="center">
-                                            <?php 
-                                            if($da->id_status_aksi == 1){
+                                            <?php
+                                            if ($da->id_status_aksi == 2) {
                                             ?>
                                                 <a href="<?= site_url('validasi_uang_masuk/ubah/' .  $da->id) ?>" class="btn btn-primary"><i class="fa fa-check-circle"></i> Konfirmasi</a>
                                             <?php
-                                            }else{
+                                            } else {
                                                 echo "-";
                                             }
                                             ?>

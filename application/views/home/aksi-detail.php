@@ -112,7 +112,7 @@
             </div>
 
             <div class="d-flex justify-content-center">
-                <a href="<?=base_url("#aksi")?>" class="btn btn-danger">Lihat Aksi Lainnya <i class="fa fa-chevron-right ml-2"></i></a>
+                <a href="<?= site_url('home/aksi') ?>" class="btn btn-danger">Lihat Aksi Lainnya <i class="fa fa-chevron-right ml-2"></i></a>
             </div>
         </div>
 
@@ -134,7 +134,7 @@
                     <p class="mt-3 mb-4"><?php echo round($persen) ?>% tercapai</p>
 
                     <div class="mt-3">
-                        <a href="<?= site_url('donasi/pembayaran?id='.$data_aksi->id_aksi) ?>" class="btn btn-warning btn-lg font-weight-bold mt-3 d-block w-100">Donasi Sekarang</a>
+                        <a href="<?= $is_login ? site_url('donasi/pembayaran?id=' . $data_aksi->id_aksi) : site_url('login')  ?>" class="btn btn-warning btn-lg font-weight-bold mt-3 d-block w-100">Donasi Sekarang</a>
                     </div>
 
                 </div>

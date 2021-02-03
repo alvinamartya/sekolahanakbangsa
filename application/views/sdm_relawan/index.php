@@ -58,21 +58,21 @@
                                         <td><?= $r->nama_relawan ?></td>
                                         <td><?= $r->email ?></td>
                                         <td align="center">
-                                            <?php 
-                                            if($r->id_sekolah==null){
+                                            <?php
+                                            if ($r->id_sekolah == null) {
                                                 echo "-";
-                                            }else{
+                                            } else {
                                                 foreach ($sekolah as $s) { ?>
-                                                <?php
-                                                    if($s->id_sekolah == $r->id_sekolah){
+                                                    <?php
+                                                    if ($s->id_sekolah == $r->id_sekolah) {
                                                         echo $s->nama_sekolah;
                                                     }
-                                                ?>
+                                                    ?>
                                                 <?php } ?>
                                             <?php } ?>
                                         </td>
                                         <td align="center">
-                                            <a href="<?= site_url('sdm_relawan/ubah/' .  $r->id_relawan) ?>" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Sekolah</a>
+                                            <a href="<?= site_url('sdm_relawan/ubah/' .  $r->id_relawan) ?>" class="btn btn-primary"><i class="fa fa-edit"></i> Ubah Sekolah</a>
                                         </td>
                                     </tr>
                                 <?php } ?>

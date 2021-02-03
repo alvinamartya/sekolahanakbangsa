@@ -3,23 +3,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Donasi extends CI_Controller
 {
-	 // rules
-	 private $rules = [
-        [
-            'field' => 'donasi',
-            'label' => 'Donasi',
-            'rules' => 'required'
-        ], [
-            'field' => 'keterangan',
-            'label' => 'Keterangan',
-            'rules' => 'required'
-        ],
-    ];
+	// rules
+	private $rules = [
+		[
+			'field' => 'donasi',
+			'label' => 'Donasi',
+			'rules' => 'required'
+		], [
+			'field' => 'keterangan',
+			'label' => 'Keterangan',
+			'rules' => 'required'
+		],
+	];
 
-    // form rules error message
-    private $errorMessage = [
-        'required' => '%s wajib diisi.',
-        'alpha_space' => '%s hanya bisa diisi dengan huruf.',
+	// form rules error message
+	private $errorMessage = [
+		'required' => '%s wajib diisi.',
+		'alpha_space' => '%s hanya bisa diisi dengan huruf.',
 	];
 
 	// constructor
@@ -41,10 +41,10 @@ class Donasi extends CI_Controller
 
 		//validasi
 		$this->load->library('form_validation');
-        // set rules
-        $this->form_validation->set_rules($this->rules);
-        // set error message
-        $this->form_validation->set_message($this->errorMessage);
+		// set rules
+		$this->form_validation->set_rules($this->rules);
+		// set error message
+		$this->form_validation->set_message($this->errorMessage);
 	}
 
 	public function index()
@@ -52,8 +52,9 @@ class Donasi extends CI_Controller
 		$get = $this->input->get();
 
 		$id = $get["id"];
+		$isLogin = $this->session->is_login == null ? false : $this->session->is_login;
 
-		$header['isLogin'] = $this->session->is_login == null ? false : $this->session->is_login;
+		$header['isLogin'] = $isLogin;
 		// include header
 		$this->load->view('templates/donatur_header', $header);
 
@@ -75,6 +76,7 @@ class Donasi extends CI_Controller
 		$data['data_biaya_lainnya'] = $data_biaya_lainnya;
 		$data['data_donatur_aksi'] = $data_donatur_aksi;
 		$data['data_gambar_aksi'] = $data_gambar_aksi;
+		$data['is_login'] = $isLogin;
 
 		$this->load->view('home/aksi-detail', $data);
 
@@ -82,28 +84,69 @@ class Donasi extends CI_Controller
 		$this->load->view('templates/donatur_footer');
 	}
 
-    public function pembayaran()
-    {
+	public function pembayaran()
+	{
 		$get = $this->input->get();
 		$id = $get["id"];
 
+		$this->pembayaranView($id, null);
+	}
+
+	public function pembayaranView($id, $data_post)
+	{
 		$header['isLogin'] = $this->session->is_login == null ? false : $this->session->is_login;
 
 		// include header
 		$this->load->view('templates/donatur_header', $header);
 
-		$data['idkembali'] = $get["id"];
+		$data['idkembali'] = $id;
 		$data_aksi = $this->aksi_model->getAksi($id);
 		$data['data_aksi'] = $data_aksi;
+		$data['post'] = $data_post;
 
 		$this->load->view('home/pembayaran', $data);
 
 		// inlcude footer
 		$this->load->view('templates/donatur_footer');
-    }
+	}
 
-    public function upload_bukti($id)
-    {
+
+	public function add()
+	{
+		$post = $this->input->post();
+		$id = $post['id'];
+		if ($this->form_validation->run() == true) {
+
+			// insert data
+			$insert_data = array(
+				'id_donatur' => $this->session->id_donatur,
+				'id_aksi' => $id,
+				'id_status_aksi' => 1,
+				'donasi' => $this->getnumber($post["donasi"]),
+				'keterangan' => $post["keterangan"],
+				'creaby' => $this->session->nama_donatur,
+				'modiby' => $this->session->nama_donatur,
+			);
+
+			//save
+			$result = $this->donatur_aksi_model->save($insert_data);
+
+			if ($result > 0) {
+				$idgetlast = $this->donatur_aksi_model->getLastData();
+				$this->session->set_flashdata("success", "Data berhasil ditambahkan.");
+				redirect(site_url('donasi/upload_bukti/' . $idgetlast->id));
+			} else {
+				// error message
+				$this->session->set_flashdata("failed", "Gagal menambah donasi");
+				redirect(site_url('pembayaran'));
+			}
+		} else {
+			$this->pembayaranView($id, (object)$post);
+		}
+	}
+
+	public function upload_bukti($id)
+	{
 
 		$get = $this->input->get();
 
@@ -126,72 +169,39 @@ class Donasi extends CI_Controller
 		return intval(preg_replace('/[^0-9]+/', '', $string), 10);
 	}
 
-	public function add($id)
-    {
-        $post = $this->input->post();
-		var_dump($this->session->id_donatur);
-        if ($this->form_validation->run() == true) {
-
-            // insert data
-            $insert_data = array(
-                'id_donatur' => $this->session->id_donatur,
-                'id_aksi' => $id,
-                'id_status_aksi' => 1,
-                'donasi' => $this->getnumber($post["donasi"]),
-                'keterangan' => $post["keterangan"],
-                'creaby' => $this->session->nama_donatur,
-                'modiby' => $this->session->nama_donatur,
-            );
-
-            //save
-            $result = $this->donatur_aksi_model->save($insert_data);
-
-            if ($result > 0) {
-				$idgetlast = $this->donatur_aksi_model->getLastData();
-                $this->session->set_flashdata("success", "Data berhasil ditambahkan.");
-                redirect(site_url('donasi/upload_bukti/'. $idgetlast->id));
-            } else {
-                // error message
-                $this->session->set_flashdata("failed", "Gagal menambah donasi");
-                redirect(site_url('pembayaran'));
-            }
-        } else {
-            $this->pembayaran((object)$post);
-        }
-	}
-
 	public function update($id)
-    {
-        $post = $this->input->post();
+	{
+		$post = $this->input->post();
 
-        $bukti = $_FILES['foto'];
+		$bukti = $_FILES['foto'];
 
-        if($bukti=''){}else{
-            $config['upload_path']      = './assets/images/bukti_transfer';
-            $config['allowed_types']    = 'jpg|jpeg|png';
-            $this->load->library('upload',$config);
-            if(!$this->upload->do_upload('foto')){
-                redirect(site_url('home/donatur'));
-            }else{
-                $bukti=$this->upload->data('file_name');
-            }
-        }
-        // insert data
-        $update = array(
-            'id_status_aksi' => 2,
-            'bukti_transfer' => $bukti,
-        );
+		if ($bukti = '') {
+		} else {
+			$config['upload_path']      = './assets/images/bukti_transfer';
+			$config['allowed_types']    = 'jpg|jpeg|png';
+			$this->load->library('upload', $config);
+			if (!$this->upload->do_upload('foto')) {
+				redirect(site_url('home/donatur'));
+			} else {
+				$bukti = $this->upload->data('file_name');
+			}
+		}
+		// insert data
+		$update = array(
+			'id_status_aksi' => 2,
+			'bukti_transfer' => $bukti,
+		);
 
-        // save school
-        $result = $this->donatur_aksi_model->update($id, $update);
+		// save school
+		$result = $this->donatur_aksi_model->update($id, $update);
 
-        if ($result > 0) {
-            $this->session->set_flashdata("success", "Data berhasil diubah");
-            redirect(site_url('home/donatur'));
-        } else {
-            // error message
-            $this->session->set_flashdata("failed", "Gagal mengubah sekolah");
-            redirect(site_url('home/donatur'));
-        }
+		if ($result > 0) {
+			$this->session->set_flashdata("success", "Data berhasil diubah");
+			redirect(site_url('home/donatur'));
+		} else {
+			// error message
+			$this->session->set_flashdata("failed", "Gagal mengubah sekolah");
+			redirect(site_url('home/donatur'));
+		}
 	}
 }

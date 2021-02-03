@@ -87,7 +87,7 @@
         <div class="section-summary shadow">
             <div class="row">
                 <div class="col-2">
-                    <h4><?=$jumlah_aksi?></h4>
+                    <h4><?= $jumlah_aksi ?></h4>
                     <p>Aksi</p>
                 </div>
                 <div class="col-4">
@@ -95,11 +95,11 @@
                     <p>Donasi Terkumpul</p>
                 </div>
                 <div class="col-3">
-                    <h4><?=$jumlah_relawan?></h4>
+                    <h4><?= $jumlah_relawan ?></h4>
                     <p>Relawan</p>
                 </div>
                 <div class="col-3">
-                    <h4><?=$jumlah_donatur?></h4>
+                    <h4><?= $jumlah_donatur ?></h4>
                     <p>Donatur</p>
                 </div>
             </div>
@@ -146,7 +146,7 @@
         </div>
 
         <div class="d-flex justify-content-center mt-4">
-            <a href="#" class="btn btn-danger">Lihat Semua Aksi <i class="fa fa-chevron-right ml-2"></i></a>
+            <a href="<?= site_url('home/aksi') ?>" class="btn btn-danger">Lihat Semua Aksi <i class="fa fa-chevron-right ml-2"></i></a>
         </div>
     </section>
     <!-- End Section Aksi -->

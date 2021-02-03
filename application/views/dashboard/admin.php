@@ -38,11 +38,9 @@
     			</div>
     			<div class="card">
     				<div class="card-body">
-    					<h4 class="card-title text-center">Diagram batang laporan kebutuhan <?= $nama_sekolah ?> per tahun</h4>
-
     					<div class="barchart-sekolah mt-4 position-relative" style="height:294px;"></div>
     					<ul class="list-inline text-center mt-5 mb-2">
-    						<li class="list-inline-item text-muted font-italic">Laporan sekolah <?= $nama_sekolah ?> per tahun</li>
+    						<li class="list-inline-item text-muted font-italic">Laporan Kebutuhan Tahunan <?= $nama_sekolah ?></li>
     					</ul>
     				</div>
     				<br>
@@ -50,7 +48,7 @@
     			<br>
     			<div class="card">
     				<div class="card-body">
-    					<h4 class="card-title text-center">Tabel laporan <?= $nama_sekolah ?> per tahun</h4>
+    					<h4 class="card-title text-center">Tabel Laporan Kebutuhan Tahunan <?= $nama_sekolah ?></h4>
     					<table class="table table-striped">
     						<thead class="thead-light">
     							<tr class="text-center">

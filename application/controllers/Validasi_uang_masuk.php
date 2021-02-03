@@ -43,7 +43,7 @@ class Validasi_uang_masuk extends CI_Controller
     public function index()
     {
         // set page title
-        $header['title'] = 'View Data';
+        $header['title'] = 'Validasi Uang Masuk';
 
         // set employee 
         $header['name'] =  $this->getKaryawanName();
@@ -56,7 +56,7 @@ class Validasi_uang_masuk extends CI_Controller
         $data_status = $this->status_aksi_model->getByStatus();
         $data_donatur = $this->donatur_model->getAll();
 
-		$data['data_aksi'] = $data_aksi;
+        $data['data_aksi'] = $data_aksi;
         $data['donatur'] = $data_donatur;
         $data['status'] = $data_status;
         // data donatur_aksi
@@ -94,8 +94,8 @@ class Validasi_uang_masuk extends CI_Controller
         $data_aksi = $this->aksi_model->getAksiAll();
         $data_donatur = $this->donatur_model->getAll();
 
-		$data['data_aksi'] = $data_aksi;
-		$data['donatur'] = $data_donatur;
+        $data['data_aksi'] = $data_aksi;
+        $data['donatur'] = $data_donatur;
         $data['donatur_aksi'] = $data_donatur_aksi;
 
         $this->load->view('validasi_uang_masuk/edit', $data);
@@ -107,10 +107,10 @@ class Validasi_uang_masuk extends CI_Controller
     public function edit($id)
     {
         $post = $this->input->post();
-        $id_status=0;
-        if($post['is_valid']=='Y'){
+        $id_status = 0;
+        if ($post['is_valid'] == 'Y') {
             $id_status = 3;
-        }else{
+        } else {
             $id_status = 4;
         }
 

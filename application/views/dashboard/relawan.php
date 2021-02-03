@@ -38,7 +38,7 @@
     			</div>
     			<div class="card">
     				<div class="card-body">
-    					<h4 class="card-title text-center">Diagram batang laporan galang dana <?=$nama_sekolah ?></h4>
+    					<h4 class="card-title text-center">Diagram batang laporan galang dana <?= $nama_sekolah ?></h4>
 
     					<div class="barchart-sekolah mt-4 position-relative" style="height:294px;"></div>
     					<ul class="list-inline text-center mt-5 mb-2">
@@ -55,13 +55,13 @@
     						<thead class="thead-light">
     							<tr class="text-center">
     								<td>No</td>
-									<td>Penanggung jawab</td>
-    								<td>Nama aski</td>
-									<td>Donasi terkumpul</td>
+    								<td>Penanggung jawab</td>
+    								<td>Nama aksi</td>
+    								<td>Donasi terkumpul</td>
     								<td>Target donasi</td>
-									<td>Prosentase</td>
-    								<td>Tanggal selesai</td>									
-									<td>Aksi</td>
+    								<td>Prosentase</td>
+    								<td>Tanggal selesai</td>
+    								<td>Aksi</td>
     							</tr>
     						</thead>
     						<tbody>
@@ -80,31 +80,31 @@
     								<tr class="text-center">
     									<td><?= $i ?>.</td>
     									<td>
-										<?php
-											foreach($relawan as $r){
-												if($r->id_relawan == $k->id_relawan){
+    										<?php
+											foreach ($relawan as $r) {
+												if ($r->id_relawan == $k->id_relawan) {
 													echo $r->nama_relawan;
 												}
-											}										
-										?>
-										</td>
-										<td><?=$k->nama_aksi?></td>
-										<td class="text-right">
-										<?php
-											foreach($donatur_aksi as $d){
+											}
+											?>
+    									</td>
+    									<td><?= $k->nama_aksi ?></td>
+    									<td class="text-right">
+    										<?php
+											foreach ($donatur_aksi as $d) {
 												$jumlah = 0;
-												if($d->id_aksi == $k->id_aksi){
+												if ($d->id_aksi == $k->id_aksi) {
 													$jumlah += $d->donasi;
 												}
 											}
 											echo 'Rp ' . number_format($jumlah, 2, ',', '.');
-										?>
-										</td>										
+											?>
+    									</td>
     									<td class="text-right"><?php echo 'Rp ' . number_format($k->target_donasi, 2, ',', '.'); ?></td>
-										<td>
-										<?php echo $jumlah*100/$k->target_donasi ?>%
-										</td>
-										<td><?php echo date("d-m-Y", strtotime($k->tanggal_selesai)); ?></td>
+    									<td>
+    										<?php echo $jumlah * 100 / $k->target_donasi ?>%
+    									</td>
+    									<td><?php echo date("d-m-Y", strtotime($k->tanggal_selesai)); ?></td>
     									<td>
     										<form action="<?php echo base_url('Dashboard/detail_donasi') ?>" method="post" class="d-inline">
     											<input type="hidden" name="id" value="<?= $k->id_aksi ?>">

@@ -24,6 +24,17 @@ class kebutuhan_tahunan_model extends CI_Model
         return $query->result();
     }
 
+    public function getApprovedKebutuhanTahunanByIdSekolah($id)
+    {
+        $query = $this->db
+            ->from($this->_table)
+            ->where(['id_sekolah' => $id, 'is_approved' => 'Y'])
+            ->order_by('tahun', 'asc')
+            ->get();
+
+        return $query->result();
+    }
+
     public function getKebutuhanTahunanByRelawan($id_relawan)
     {
         $query = $this->db

@@ -4,19 +4,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Bantuan_sekolah extends CI_Controller
 {
 	// constructor
-    public function __construct()
-    {
-        parent::__construct();
+	public function __construct()
+	{
+		parent::__construct();
 
-        //load ke model
+		//load ke model
 		$this->load->model('kebutuhan_tahunan_model');
 		$this->load->model('sekolah_model');
 		$this->load->model('relawan_model');
 		$this->load->model('barang_model');
 		$this->load->model('biaya_lainnya_model');
-        $this->load->model('kt_barang_model');
+		$this->load->model('kt_barang_model');
 		$this->load->model('kt_biaya_lainnya_model');
-    }
+	}
 
 	private function getKaryawanName()
 	{
@@ -32,12 +32,12 @@ class Bantuan_sekolah extends CI_Controller
 		$user_id = $this->session->user_id;
 		$karyawan = $this->karyawan_model->getKaryawanByUserLoginId($user_id);
 		return $karyawan->jabatan_karyawan;
-    }
+	}
 
 	public function index()
 	{
 		// set page title
-		$header['title'] = 'Karyawan';
+		$header['title'] = 'Konfirmasi Kebutuhan';
 
 		// set employee
 		$header['name'] =  $this->getKaryawanName();
@@ -58,7 +58,6 @@ class Bantuan_sekolah extends CI_Controller
 
 		// inlcude footer
 		$this->load->view('templates/footer');
-
 	}
 	public function page_konfirmasi()
 	{
@@ -147,7 +146,7 @@ class Bantuan_sekolah extends CI_Controller
 			'modidate' => $modidate
 		);
 
-		$this->kebutuhan_tahunan_model->update($id,$data);
+		$this->kebutuhan_tahunan_model->update($id, $data);
 		$this->index();
 	}
 	public function tolak()
@@ -164,7 +163,7 @@ class Bantuan_sekolah extends CI_Controller
 			'modidate' => $modidate
 		);
 
-		$this->kebutuhan_tahunan_model->update($id,$data);
+		$this->kebutuhan_tahunan_model->update($id, $data);
 		$this->index();
 	}
 }

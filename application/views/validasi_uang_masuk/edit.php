@@ -26,9 +26,9 @@
                     <label for="nik">Nama Aksi : </label>
                     <?php foreach ($data_aksi as $data2) { ?>
                         <?php
-                            if($data2->id_aksi == $donatur_aksi->id_aksi){
-                                echo $data2->nama_aksi;
-                            }
+                        if ($data2->id_aksi == $donatur_aksi->id_aksi) {
+                            echo $data2->nama_aksi;
+                        }
                         ?>
                     <?php } ?>
                 </div>
@@ -37,9 +37,9 @@
                     <label for="nama_relawan">Nama Donatur : </label>
                     <?php foreach ($donatur as $d) { ?>
                         <?php
-                            if($d->id_donatur == $donatur_aksi->id_donatur){
-                                echo $d->nama_donatur;
-                            }
+                        if ($d->id_donatur == $donatur_aksi->id_donatur) {
+                            echo $d->nama_donatur;
+                        }
                         ?>
                     <?php } ?>
                 </div>
@@ -51,13 +51,13 @@
 
                 <div class="form-group">
                     <label for="nama_relawan">Bukti Transfer : </label><br>
-                        <?php
-                            if($donatur_aksi->bukti_transfer != null ){
-                                ?>
-                                <img class="d-block w-30" src="<?php echo base_url('assets/images/bukti_transfer/' . $donatur_aksi->bukti_transfer) ?>" alt="First slide">
-                            <?php
-                            }
-                        ?>
+                    <?php
+                    if ($donatur_aksi->bukti_transfer != null) {
+                    ?>
+                        <img class="d-block w-30" src="<?php echo base_url('assets/images/bukti_transfer/' . $donatur_aksi->bukti_transfer) ?>" alt="First slide">
+                    <?php
+                    }
+                    ?>
                 </div>
 
                 <div class="form-group">
@@ -68,7 +68,7 @@
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" id="N" name="is_valid" value="N" <?= ($donatur_aksi->is_valid == 'N' ? 'checked' : '') ?>>
-                        <label class="form-check-label" for="N">No Valid</label>
+                        <label class="form-check-label" for="N">Tidak Valid</label>
                     </div>
                     <small class="text-danger"><?php echo form_error('is_valid') ?></small>
                 </div>
