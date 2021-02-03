@@ -14,6 +14,15 @@ class Donatur_model extends CI_Model
     {
         return $this->db->get_where($this->_table, ["row_status" => 'A'])->result();
     }
+	public function countAll()
+    {
+        $donatur = $this->db->get_where($this->_table, ["row_status" => 'A'])->result();
+		$jumlah = 0;
+		foreach($donatur as $d){
+			$jumlah++;
+		}
+		return $jumlah;
+    }
 
     public function getDOnaturByUserLoginId($idUserLoginId)
 	{
