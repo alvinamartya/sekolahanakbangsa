@@ -62,6 +62,14 @@ class aksi_model extends CI_Model
         return $query->row();
     }
 
+    public function getAksiAll()
+    {
+        $query = $this->db
+            ->from($this->_table)
+            ->get();
+        return $query->result();
+    }
+
     public function getAksiHome()
     {
         $query = $this->db
@@ -80,4 +88,16 @@ class aksi_model extends CI_Model
 
         return $query->result();
     }
+	public function countAksi()
+	{
+		$aksi = $this->db
+            ->from($this->_table)
+            ->where(['row_status' => 'A'])
+            ->get()->result();
+		$jumlah = 0;
+		foreach($aksi as $a){
+			$jumlah++;
+		}
+		return $jumlah;
+	}
 }
