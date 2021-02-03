@@ -45,7 +45,10 @@ class aksi_biaya_lainnya_model extends CI_Model
 
     public function getByID($id)
     {
-        return $this->db->get_where($this->_table, ["id" => $id])->row();
+        $this->db->select('*');
+        $this->db->from('aksi_biaya_lainnya as a');
+        $this->db->join('biaya_lainnya as b', 'b.id_biaya_lainnya = a.id_biaya_lainnya');
+        return $this->db->where(["a.id_aksi" => $id, "a.row_status" => "A"])->get()->result();
     }
 
     public function getLastData()
