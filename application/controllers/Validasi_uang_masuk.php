@@ -127,11 +127,11 @@ class Validasi_uang_masuk extends CI_Controller
 
         if ($result > 0) {
             // success message
-            $this->session->set_flashdata("success", "Ubah data relawan berhasil");
+            $this->session->set_flashdata("success", "Ubah data berhasil");
             redirect(site_url('validasi_uang_masuk/index'));
         } else {
             // error message
-            $this->session->set_flashdata("failed", "Ubah data relawan gagal");
+            $this->session->set_flashdata("failed", "Ubah data gagal");
             redirect(site_url('validasi_uang_masuk/index'));
         }
     }

@@ -51,15 +51,13 @@
 
                 <div class="form-group">
                     <label for="nama_relawan">Bukti Transfer : </label><br>
-                    <?php foreach ($gambar as $g) { ?>
                         <?php
-                            if($g->id_aksi == $donatur_aksi->id_aksi){
+                            if($donatur_aksi->bukti_transfer != null ){
                                 ?>
-                                <img class="d-block w-30" src="<?php echo base_url('assets/images/aksi/' . $g->gambar) ?>" alt="First slide">
+                                <img class="d-block w-30" src="<?php echo base_url('assets/images/bukti_transfer/' . $donatur_aksi->bukti_transfer) ?>" alt="First slide">
                             <?php
                             }
                         ?>
-                    <?php } ?>
                 </div>
 
                 <div class="form-group">
