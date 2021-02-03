@@ -34,11 +34,11 @@
 <script src="<?php echo base_url('assets/js/script.js') ?>"></script>
 <script>
     function getSumBiaya(aksi) {
-        return aksi.map(item => item.harga).reduce((prev, next) => prev + next, 0);
+        return aksi.filter((a) => a.row_status == "A").map(item => item.harga).reduce((prev, next) => prev + next, 0);
     }
 
     function getSumBarang(aksi) {
-        return aksi.reduce((acc, barang) => {
+        return aksi.filter((a) => a.row_status == "A").reduce((acc, barang) => {
             return acc + (barang.harga_satuan * barang.jumlah)
         }, 0);
     }
@@ -50,12 +50,42 @@
     }
 
     $(document).ready(() => {
+        $('#validationAlert').hide();
         var aksiBiaya = [];
         var aksiBarang = [];
-        $('#validationAlert').hide();
+        var aksiGambar = [];
+
+        var barangs = <?php echo json_encode($aksi_barang) ?>;
+        $.each(barangs, function(key, value) {
+            aksiBarang.push({
+                id: value.id,
+                id_barang: value.id_barang,
+                jumlah: parseInt(value.jumlah),
+                harga_satuan: parseInt(value.harga_satuan),
+                row_status: 'A'
+            })
+        });
+
+        var biayas = <?php echo json_encode($aksi_biaya) ?>;
+        $.each(biayas, function(key, value) {
+            aksiBiaya.push({
+                id: value.id,
+                id_biaya: value.id_biaya_lainnya,
+                harga: parseInt(value.biaya),
+                row_status: 'A'
+            })
+        });
+
+        var gambars = <?php echo json_encode($aksi_gambar) ?>;
+        $.each(gambars, function(key, value) {
+            aksiGambar.push({
+                id: value.id,
+                gambar: value.gambar,
+                row_status: 'A'
+            })
+        });
 
         $("#btnSave").on("click", function() {
-
             let formData = new FormData();
             formData.append("nama_aksi", $('#nama_aksi').val())
             formData.append("tanggal_selesai", $('#tanggal_selesai').val());
@@ -64,20 +94,21 @@
             formData.append("target_donasi", getNumber($('#target_donasi').html()));
             formData.append("barang", JSON.stringify(aksiBarang));
             formData.append("biaya", JSON.stringify(aksiBiaya));
+            formData.append("gambar", JSON.stringify(aksiGambar));
 
             $.each($('#gambar_aksi')[0].files,function(key,input){
                 formData.append('files[]', input);
             });
 
             $.ajax({
-                url: "<?= site_url('aksi/add') ?>",
+                url: "<?= site_url('aksi/edit/'.$aksi->id_aksi) ?>",
                 type: "POST",
                 contentType: false,
                 processData: false,
                 data: formData,
                 success:function(res) {
                     var respon = JSON.parse(res);
-                    if(respon.success) {
+                    if(respon.status) {
                         window.location.href = "<?= site_url('aksi') ?>"
                     } else {
                         $("#validationAlert").html(respon.message);
@@ -98,15 +129,24 @@
 
             if(buttonType == 'biaya') {
                 const idx = aksiBiaya.map(i => i.id_biaya).indexOf(data_id);
-                aksiBiaya.splice(idx, 1);
+                aksiBiaya[idx].row_status = 'D';
             } else {
                 const idx = aksiBarang.map(i => i.id_barang).indexOf(data_id);
-                aksiBarang.splice(idx, 1);
+                aksiBarang[idx].row_status = 'D';
             }
 
             tr.remove();
 
             updateHarga(aksiBiaya, aksiBarang);
+        });
+
+        $(".btnHapusFoto").on('click', function() {
+            const data_id = $(this).data("id").toString();
+            const idx = aksiGambar.map(i => i.id).indexOf(data_id);
+
+            aksiGambar[idx].row_status = 'D';
+
+            $(this).parents('.col-md-4.mt-3').remove();
         });
 
         $('#harga_satuan, #biaya').priceFormat({
@@ -123,7 +163,7 @@
             let hargaBiaya = $('#biaya').val();
 
             // check if biaya exists
-            let hasBiaya = aksiBiaya.some(a => a['id_biaya'] === idBiaya);
+            let hasBiaya = aksiBiaya.filter(a => a.row_status == 'A').some(a => a['id_biaya'] === idBiaya);
 
             if(hasBiaya) {
                 alert('Aksi Biaya sudah ditambahkan!');
@@ -131,7 +171,8 @@
                 // add data to array
                 aksiBiaya.push({
                     id_biaya: idBiaya,
-                    harga: getNumber(hargaBiaya)
+                    harga: getNumber(hargaBiaya),
+                    row_status: 'A'
                 });
 
                 // Add row
@@ -139,7 +180,7 @@
                     <td>${namaBiaya}</td>
                     <td>${hargaBiaya}</td>
                     <td>
-                        <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="${idBiaya}" data-type="biaya">Hapus</button>
+                        <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="${idBiaya}" data-type="biaya"><i class="fa fa-trash"></i> Hapus</button>
                     </td>
                 </tr>`);
 
@@ -172,7 +213,8 @@
                 aksiBarang.push({
                     id_barang: idBarang,
                     jumlah: getNumber(jumlahBarang),
-                    harga_satuan: getNumber(hargaBarang)
+                    harga_satuan: getNumber(hargaBarang),
+                    row_status: 'A'
                 });
 
                 // Add row
@@ -181,7 +223,7 @@
                     <td>${jumlahBarang}</td>
                     <td>${hargaBarang}</td>
                     <td>
-                        <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="${idBarang}" data-type="barang">Hapus</button>
+                        <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="${idBarang}" data-type="barang"><i class="fa fa-trash"></i> Hapus</button>
                     </td>
                 </tr>`);
 

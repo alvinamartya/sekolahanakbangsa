@@ -165,6 +165,7 @@ class Aksi extends CI_Controller
         $post = $this->input->post();
         $biaya = json_decode($post["biaya"]);
         $barang = json_decode($post["barang"]);
+        $gambar = json_decode($post["gambar"]);
 
         if ($this->form_validation->run() == true) {
             // insert data
@@ -217,7 +218,6 @@ class Aksi extends CI_Controller
             }
 
             if (!empty($_FILES['files']['name'])) {
-
                 $this->uploadImage($aksi_id, $_FILES["files"]);
             }
 
@@ -225,6 +225,163 @@ class Aksi extends CI_Controller
             echo json_encode(['success' => true, 'message' => '']);
         } else {
             echo json_encode(['success' => false, 'message' => validation_errors()]);
+        }
+    }
+
+    /*
+    ==============================================================
+    Edit Aksi
+    ==============================================================
+    */
+    public function ubah($id_aksi)
+    {
+        $aksi = $this->aksi_model->getByID($id_aksi);
+        $this->ubahView($aksi);
+    }
+
+    private function ubahView($aksi)
+    {
+        //title
+        // set relawan
+        $relawan = $this->getRelawanSession();
+        // set page title
+        $header['name'] =  $relawan->nama_relawan;
+        $header['role'] =  'Relawan';
+        $header['title'] = 'Ubah Aksi';
+        $header['active'] = $relawan->id_sekolah != null;
+
+        $data['aksi'] = $aksi;
+        $data['biaya_lainnya'] = $this->biaya_lainnya_model->getBiayaLainnya();
+        $data['barang'] = $this->barang_model->getBarang();
+        $data['aksi_biaya'] = $this->aksi_biaya_lainnya_model->getByID($aksi->id_aksi);
+        $data['aksi_barang'] = $this->aksi_barang_model->getByID($aksi->id_aksi);
+        $data['aksi_gambar'] = $this->gambar_aksi_model->getGambarByIdAksi($aksi->id_aksi);
+
+
+        //template header
+        $this->load->view('templates/relawan_header', $header);
+
+        $this->load->view('aksi/edit', $data);
+
+        //template footer
+        $this->load->view('aksi/footer_edit');
+    }
+
+    public function edit($aksi_id)
+    {
+        // get relawan
+        $relawan = $this->getRelawanSession();
+        $post = $this->input->post();
+        $biaya = json_decode(isset($post["biaya"]) ? $post["biaya"] : null);
+        $barang = json_decode(isset($post["barang"]) ? $post["barang"] : null);
+        $gambar = json_decode(isset($post["gambar"]) ? $post["gambar"] : null);
+
+        if ($this->form_validation->run() == true) {
+            // insert data
+            $aksi_data = array(
+                'id_relawan' => $relawan->id_relawan,
+                'nama_aksi' => $post["nama_aksi"],
+                'tanggal_selesai' => $post["tanggal_selesai"],
+                'target_donasi' => $post['target_donasi'],
+                'deskripsi_aksi' => $post["deskripsi_aksi"],
+                'modiby' => $relawan->nama_relawan,
+                'modidate' => date("Y-m-d H:i:s"),
+                'row_status' => 'A'
+            );
+
+            $this->aksi_model->update($aksi_id, $aksi_data);
+            if($biaya != null) {
+                // foreach data biaya
+                foreach($biaya as $b) {
+
+                    $biaya_data = array(
+                        'id_aksi' => $aksi_id,
+                        'id_biaya_lainnya' => $b->id_biaya,
+                        'biaya' => $b->harga,
+                        'modiby' => $relawan->nama_relawan,
+                        'modidate' => date("Y-m-d H:i:s"),
+                        'row_status' => $b->row_status
+                    );
+
+                    // Check apakah id kosong, jika belum punya id, tambah data, jika sudah punya id, update data
+                    if(!isset($b->id)) {
+                        // hanya menambahkan data dengan row_status A
+                        if($b->row_status == 'A') {
+                            $this->aksi_biaya_lainnya_model->save($biaya_data);
+                        }
+                    } else {
+                        // Update data
+                        $this->aksi_biaya_lainnya_model->update($b->id, $biaya_data);
+                    }
+                }
+            }
+
+            if($barang != null) {
+                // foreach data barang
+                foreach($barang as $b) {
+                    $barang_data = array(
+                        'id_aksi' => $aksi_id,
+                        'id_barang' => $b->id_barang,
+                        'jumlah' => $b->jumlah,
+                        'harga_satuan' => $b->harga_satuan,
+                        'modiby' => $relawan->nama_relawan,
+                        'modidate' => date("Y-m-d H:i:s"),
+                        'row_status' => $b->row_status
+                    );
+
+                    // Check apakah id kosong, jika belum punya id, tambah data, jika sudah punya id, update data
+                    if(!isset($b->id)) {
+                        // hanya menambahkan data dengan row_status A
+                        if($b->row_status == 'A') {
+                            $this->aksi_barang_model->save($barang_data);
+                        }
+                    } else {
+                        // Update data
+                        $this->aksi_barang_model->update($b->id, $barang_data);
+                    }
+                }
+            }
+
+            if($gambar != null) {
+                // foreach data barang
+                foreach($gambar as $b) {
+                    $gambar_data = array(
+                        'id_aksi' => $aksi_id,
+                        'gambar' => $b->gambar,
+                        'modiby' => $relawan->nama_relawan,
+                        'modidate' => date('Y-m-d'),
+                        'row_status' => $b->row_status
+                    );
+
+
+                    // Check apakah id kosong, jika belum punya id, tambah data, jika sudah punya id, update data
+                    if(!isset($b->id)) {
+                        // hanya menambahkan data dengan row_status A
+                        if($b->row_status == 'A') {
+                            $this->gambar_aksi_model->save($gambar_data);
+                        }
+                    } else {
+                        //hapus image jika row_status == D
+                        if($b->row_status == 'D') {
+                            // delete image
+                            if (is_file('assets/images/aksi/'.$b->gambar)) {
+                                unlink('assets/images/aksi/'.$b->gambar);
+                            }
+
+                            $this->gambar_aksi_model->delete($b->id);
+                        }
+                    }
+                }
+            }
+
+            if (!empty($_FILES['files']['name'])) {
+                $this->uploadImage($aksi_id, $_FILES["files"]);
+            }
+
+            $this->session->set_flashdata("success", "Data berhasil diubah.");
+            echo json_encode(['status' => true, 'message' => '']);
+        } else {
+            echo json_encode(['status' => false, 'message' => validation_errors()]);
         }
     }
 

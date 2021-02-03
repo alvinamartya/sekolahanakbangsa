@@ -15,11 +15,11 @@
 							$i = 0;
 							foreach($data_gambar_aksi as $g){
 						?>
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="<?php echo base_url('assets/images/'.$g->gambar) ?>" alt="First slide">
-                        </div> 
+                        <div class="carousel-item <?php echo ($i==0) ? 'active' : '' ?>">
+                            <img class="d-block w-100" src="<?php echo base_url('assets/images/aksi/'.$g->gambar) ?>" alt="First slide">
+                        </div>
 						<?php $i++;} ?>
-						
+
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -73,7 +73,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Biaya Lainnya</th>
-                                    <th>Biaya</th>                                    
+                                    <th>Biaya</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,9 +91,9 @@
 										}
 									?>
 									</td>
-                                    <td><?php echo 'Rp '.number_format($biaya_lainnya->biaya,2,',','.');?></td>                                    
+                                    <td><?php echo 'Rp '.number_format($biaya_lainnya->biaya,2,',','.');?></td>
                                 </tr>
-								<?php $i++; }?>								
+								<?php $i++; }?>
                             </tbody>
                         </table>
                     </div>
@@ -126,7 +126,7 @@
                         <div class="progress">
                             <div class="progress-bar bg-danger" role="progressbar" style="width: <?php echo $persen ?>%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-						
+
                         <p class="mt-3 mb-4">%<?php echo $persen ?> tercapai</p>
 
                         <form action="" method="post">

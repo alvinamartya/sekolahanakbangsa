@@ -55,7 +55,7 @@
                                         <td><?= "Rp" . number_format($d->target_donasi, 0, ",", "."); ?></td>
                                         <td><?= date('d-m-Y', strtotime($d->tanggal_selesai)) ?></td>
                                         <td>
-                                            <a href="<?= site_url('aksi/detail/' .  $d->id_aksi) ?>" class="btn btn-info"><i class="fa fa-eye"></i> Detail</a>
+                                            <a href="<?= site_url('aksi/ubah/' .  $d->id_aksi) ?>" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
                                         </td>
                                     </tr>
                                 <?php } ?>

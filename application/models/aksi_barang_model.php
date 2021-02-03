@@ -35,14 +35,17 @@ class aksi_barang_model extends CI_Model
 
     public function getByID($id)
     {
-        return $this->db->get_where($this->_table, ["id" => $id])->row();
+        $this->db->select('*');
+        $this->db->from('aksi_barang as a');
+        $this->db->join('barang as b', 'b.id_barang = a.id_barang');
+        return $this->db->where(["a.id_aksi" => $id, "a.row_status" => "A"])->get()->result();
     }
 
     public function getLastData()
     {
         return $this->db->order_by('creadate', "desc")->limit(1)->get($this->_table)->row();
     }
-	
+
     public function getAksiBarangByIdAksi($id)
     {
       $query = $this->db
