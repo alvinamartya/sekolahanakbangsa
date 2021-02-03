@@ -22,8 +22,8 @@ class Donasi extends CI_Controller
 	public function index()
 	{
 		$get = $this->input->get();
-		//$id = $get["id"];
-		$id = 1;
+		$id = $get["id"];
+
 		$header['isLogin'] = $this->session->is_login == null ? false : $this->session->is_login;
 		// include header
 		$this->load->view('templates/donatur_header', $header);

@@ -158,7 +158,7 @@
             <div class="col-12 d-flex justify-content-between">
                 <h3 class="text-danger font-weight-bold">Total Harga : Rp<span id="target_donasi"><?= number_format($aksi->target_donasi, 0, ",", ".");  ?></span></h3>
                 <div class="d-flex">
-                    <button class="btn btn-primary mr-3" type="button" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
+                    <button class="btn btn-primary mr-3" type="submit" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
                     <button class="btn btn-danger" type="button"><i class="fa fa-times"></i> Batal</button>
                 </div>
             </div>

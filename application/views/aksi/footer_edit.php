@@ -85,7 +85,8 @@
             })
         });
 
-        $("#btnSave").on("click", function() {
+        $("#mainForm").submit((e) => {
+            e.preventDefault();
             let formData = new FormData();
             formData.append("nama_aksi", $('#nama_aksi').val())
             formData.append("tanggal_selesai", $('#tanggal_selesai').val());
