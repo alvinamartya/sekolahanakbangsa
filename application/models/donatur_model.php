@@ -15,6 +15,13 @@ class Donatur_model extends CI_Model
         return $this->db->get_where($this->_table, ["row_status" => 'A'])->result();
     }
 
+    public function getDOnaturByUserLoginId($idUserLoginId)
+	{
+		return $this->db
+			->get_where($this->_table, ["id_user_login" => $idUserLoginId])
+			->row();
+    }
+    
     public function getByID($id)
     {
         return $this->db->get_where($this->_table, ["id_donatur" => $id])->row();

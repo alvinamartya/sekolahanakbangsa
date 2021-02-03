@@ -17,7 +17,7 @@
                     foreach ($data_gambar_aksi as $g) {
                     ?>
                         <div class="carousel-item active">
-                            <img class="d-block w-100" src="<?php echo base_url('assets/images/' . $g->gambar) ?>" alt="First slide">
+                            <img class="d-block w-100" src="<?php echo base_url('assets/images/'. $g->gambar) ?>" alt="First slide">
                         </div>
                     <?php $i++;
                     } ?>
@@ -133,7 +133,7 @@
 
                     <p class="mt-3 mb-4">%<?php echo $persen ?> tercapai</p>
 
-                    <form action="" method="post">
+                    <form action="<?= site_url('donasi') ?>" method="post">
                         <div class="mt-3">
                             <button type="submit" class="btn btn-warning btn-lg font-weight-bold mt-3 d-block w-100">Donasi Sekarang</button>
                         </div>
