@@ -19,7 +19,7 @@
     <header class="bg-gray">
         <nav class="navbar navbar-expand-lg fixed-top py-0 nav-sticky">
             <a class="navbar-brand" href="#">
-                <h2 class="font-weight-bold">SBA</h2>
+                <h2 class="font-weight-bold">SAB</h2>
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -30,11 +30,24 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav align-items-center">
                     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                        <div class="navbar-nav align-items-center">
-                            <a class="nav-item-2" href="#home">Home</a>
-                            <a class="nav-item-2" href="#aksi">Aksi</a>
-                            <a class="btn btn-rounded btn-transparent ml-3 h-50" href="#"><i class="fa fa-user mr-2"></i> User</a>
-                        </div>
+                        <?php if ($isLogin == true) { ?>
+                            <div class="navbar-nav align-items-center">
+                                <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                                    <div class="navbar-nav align-items-center">
+                                        <a class="nav-item-2" href="<?= site_url('/') ?>">Home</a>
+                                        <a class="nav-item-2" href="<?= site_url('home/aksi') ?>">Aksi</a>
+                                        <a class="btn btn-rounded btn-transparent ml-3 h-50" href="<?= site_url('home/donatur') ?>"><i class="fa fa-user mr-2"></i> User</a>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } else { ?>
+                            <div class="navbar-nav align-items-center">
+                                <a class="nav-item-2" href="<?= site_url('/') ?>">Home</a>
+                                <a class="nav-item-2" href="<?= site_url('home/aksi') ?>">Aksi</a>
+                                <a class="nav-item-2" href="<?= site_url('login') ?>">Masuk</a>
+                                <a class="btn btn-rounded btn-transparent ml-3 h-50" href="<?= site_url('register/donatur') ?>"><i class="fa fa-user mr-2"></i> Buat Akun</a>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

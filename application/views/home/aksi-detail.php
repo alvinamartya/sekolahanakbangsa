@@ -133,11 +133,10 @@
 
                     <p class="mt-3 mb-4"><?php echo round($persen) ?>% tercapai</p>
 
-                    <form action="<?= site_url('donasi') ?>" method="post">
-                        <div class="mt-3">
-                            <button type="submit" class="btn btn-warning btn-lg font-weight-bold mt-3 d-block w-100">Donasi Sekarang</button>
-                        </div>
-                    </form>
+                    <div class="mt-3">
+                        <a href="<?= site_url('donasi/pembayaran?id='.$data_aksi->id_aksi) ?>" class="btn btn-warning btn-lg font-weight-bold mt-3 d-block w-100">Donasi Sekarang</a>
+                    </div>
+
                 </div>
             </div>
 
