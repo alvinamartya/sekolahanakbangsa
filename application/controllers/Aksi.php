@@ -163,9 +163,9 @@ class Aksi extends CI_Controller
         $relawan = $this->getRelawanSession();
         $post = $this->input->post();
 
-        $biaya = json_decode($post["biaya"]);
-        $barang = json_decode($post["barang"]);
-        $gambar = json_decode($post["gambar"]);
+        $biaya = json_decode(isset($post["biaya"]) ? $post["biaya"] : null);
+        $barang = json_decode(isset($post["barang"]) ? $post["barang"] : null);
+        $gambar = json_decode(isset($post["gambar"]) ? $post["gambar"] : null);
 
         if ($this->form_validation->run() == true) {
             // insert data
