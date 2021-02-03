@@ -35,7 +35,7 @@ class Donatur extends CI_Controller
         // set page title
         $header['title'] = 'Donatur';
 
-        // set employee 
+        // set employee
         $header['name'] =  $this->getKaryawanName();
         $header['role'] =  $this->getKaryawanRole();
 

@@ -8,6 +8,7 @@ class Login extends CI_Controller
     {
         parent::__construct();
         $this->load->model('login_model');
+        $this->load->model('donatur_model');
     }
 
     // login view
@@ -49,8 +50,13 @@ class Login extends CI_Controller
                         // employee dashboard
                         redirect(site_url(('dashboard/admin')));
                     } else if ($data_user->role == 'Donatur') {
-                        $session_login = array('is_login' => true);
+                        $donatur = $this->donatur_model->getDonaturByUserLoginId($data_user->id);
+                        $session_login = array(
+                            'is_login' => true,
+                            'id_donatur' => $donatur->id_donatur,
+                            'nama_donatur' => $donatur->nama_donatur);
                         $this->session->set_userdata($session_login);
+
                         redirect(site_url(('home')));
                     } else if ($data_user->role == 'Relawan') {
                         // volunteer dashboard
@@ -75,8 +81,7 @@ class Login extends CI_Controller
 
     public function logout()
     {
-        $session_arr = array('user_id' => null, 'role' => null);
-        $this->session->set_userdata($session_arr);
-        redirect(site_url(''));
+        $this->session->sess_destroy();
+        redirect(site_url('/'));
     }
 }
