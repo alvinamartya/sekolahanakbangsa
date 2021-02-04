@@ -18,7 +18,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg fixed-top py-0 navbar-dark">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="<?= site_url('/') ?>">
                 <h2 class="font-weight-bold">SAB</h2>
             </a>
 
@@ -125,7 +125,7 @@
                                 <div class="card-title aksi-title"><?= $a->nama_aksi ?></div>
                                 <div class="card-content">
                                     <div class="progress">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="<?= $a->percentage ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: <?= $a->percentage ?>%" aria-valuenow="<?= $a->percentage ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                     <div class="aksi-content">
                                         <div>

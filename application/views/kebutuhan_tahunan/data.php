@@ -46,6 +46,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">No.</th>
+                                    <th class="text-center">Sekolah</th>
                                     <th class="text-center">Tahun</th>
                                     <th class="text-center">Total Kebutuhan</th>
                                     <th class="text-center">LPJ</th>
@@ -57,6 +58,7 @@
                                 <?php foreach ($kebutuhan_tahunan as $kt) { ?>
                                     <tr>
                                         <td class="text-center"><?= $no++ ?></td>
+                                        <td class="text-center"><?= $kt->nama_sekolah ?></td>
                                         <td class="text-center"><?= $kt->tahun ?></td>
                                         <td class="text-right"><?= "Rp" . number_format($kt->total_kebutuhan, 0, ",", "."); ?></td>
                                         <td class="text-center">

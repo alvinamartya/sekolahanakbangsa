@@ -18,7 +18,7 @@
 <body class="page-1">
     <header>
         <nav class="navbar navbar-expand-lg fixed-top py-0 nav-sticky">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="<?= site_url('/') ?>">
                 <h2 class="font-weight-bold">SAB</h2>
             </a>
 
