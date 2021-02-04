@@ -120,7 +120,8 @@ class kebutuhan_tahunan_model extends CI_Model
     public function getAllDataConfirmed()
     {
         $query = $this->db
-            ->from($this->_table)
+            ->from($this->_table.' a')
+            ->join('sekolah s', 's.id_sekolah = a.id_sekolah')
             ->where(['is_approved' => 'Y'])
             ->order_by('tahun', 'asc')
             ->get();
