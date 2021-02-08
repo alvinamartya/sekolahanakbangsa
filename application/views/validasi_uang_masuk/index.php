@@ -74,7 +74,7 @@
                                                 ?>
                                             <?php } ?>
                                         </td>
-                                        <td><?= "Rp " . number_format($da->donasi, 2, ",", "."); ?></td>
+                                        <td align="right"><?= "Rp " . number_format($da->donasi, 2, ",", "."); ?></td>
                                         <td>
                                             <?php foreach ($status as $s) { ?>
                                                 <?php

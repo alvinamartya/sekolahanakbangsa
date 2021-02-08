@@ -58,8 +58,8 @@
                                 <?php foreach ($kebutuhan_tahunan as $kt) { ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
-                                        <td><?= $kt->tahun ?></td>
-                                        <td><?= "Rp" . number_format($kt->total_kebutuhan, 0, ",", "."); ?></td>
+                                        <td align="center"><?= $kt->tahun ?></td>
+                                        <td align="right"><?= "Rp " . number_format($kt->total_kebutuhan, 2, ",", "."); ?></td>
                                         <td><?php
                                             if ($kt->is_approved == null) {
                                                 echo 'Menunggu Persetujuan';

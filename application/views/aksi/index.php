@@ -52,9 +52,9 @@
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td><?= $d->nama_aksi ?></td>
-                                        <td><?= "Rp" . number_format($d->target_donasi, 0, ",", "."); ?></td>
-                                        <td><?= date('d-m-Y', strtotime($d->tanggal_selesai)) ?></td>
-                                        <td>
+                                        <td align="right"><?= "Rp " . number_format($d->target_donasi, 2, ",", "."); ?></td>
+                                        <td align="center"><?= date('d-m-Y', strtotime($d->tanggal_selesai)) ?></td>
+                                        <td align="center">
                                             <a href="<?= site_url('aksi/ubah/' .  $d->id_aksi) ?>" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
                                         </td>
                                     </tr>

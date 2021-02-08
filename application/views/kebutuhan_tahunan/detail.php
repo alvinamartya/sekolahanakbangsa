@@ -129,7 +129,7 @@
                                             }
                                             ?>
                                         </td>
-                                        <td>
+                                        <td align="right">
                                             <?php echo 'Rp ' . number_format($kt->biaya, 2, ',', '.'); ?>
                                         </td>
                                     </tr>
@@ -170,7 +170,7 @@
                                             } ?>
                                         </td>
                                         <td><?= $kt->jumlah ?></td>
-                                        <td>
+                                        <td align="right">
                                             <?php echo 'Rp ' . number_format($kt->harga_satuan, 2, ',', '.'); ?>
                                         </td>
                                     </tr>
