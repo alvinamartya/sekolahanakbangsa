@@ -140,7 +140,7 @@
 	<br>
 	<div class="row">
 		<div class="col-md-1">
-			<a href="<?php echo base_url("Dashboard/admin") ?>" class="btn btn-secondary">Kembali</a>
+			<a href="<?php echo base_url("dashboard/admin") ?>" class="btn btn-secondary">Kembali</a>
 		</div>
 	</div>
 </div>

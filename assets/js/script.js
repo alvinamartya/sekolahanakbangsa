@@ -36,6 +36,8 @@ $(function () {
         }
     }, 3000);
 
+    $('.zoom-image').zoom();
+
     $('body').on('keypress', 'input[type=number][maxlength]', function(event){
         var key = event.keyCode || event.charCode;
         var charcodestring = String.fromCharCode(event.which);

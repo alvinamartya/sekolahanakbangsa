@@ -39,6 +39,7 @@
 <script src="<?php echo base_url('assets/extra-libs/jvector/jquery-jvectormap-world-mill-en.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/pages/dashboards/dashboard1.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/jquery.priceformat.min.js') ?>"></script>
+<script src="<?php echo base_url('assets/js/jquery.zoom.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/js/script.js') ?>"></script>
 
 </body>

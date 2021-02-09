@@ -78,6 +78,7 @@
                         } else {
                             $("#validationAlert").html(respon.message);
                             $("#validationAlert").show();
+                            $('html, body').animate({scrollTop: '0px'}, 300);
                         }
 
                     },
