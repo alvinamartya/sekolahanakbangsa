@@ -52,38 +52,36 @@
 				<div class="card-body">
 					<h4 class="card-title">Kebutuhan Tahunan Biaya</h4>
 					<div class="table-responsive">
-						<small>
-							<table id="biaya-table" class="table table-striped table-bordered no-wrap">
-								<thead>
+						<table id="biaya-table" class="table table-striped table-bordered no-wrap">
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Nama Biaya</th>
+									<th>Biaya</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php $i = 1; ?>
+								<?php foreach ($kt_biaya_lainnya as $kt) { ?>
 									<tr>
-										<th>No</th>
-										<th>Nama Biaya</th>
-										<th>Biaya</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php $i = 1; ?>
-									<?php foreach ($kt_biaya_lainnya as $kt) { ?>
-										<tr>
-											<td><?= $i ?>.</td>
-											<td>
-												<?php
-												foreach ($biaya_lainnya as $bl) {
-													if ($bl->id_biaya_lainnya == $kt->id_biaya_lainnya) {
-														echo $bl->nama_biaya_lainnya;
-													}
+										<td><?= $i ?>.</td>
+										<td>
+											<?php
+											foreach ($biaya_lainnya as $bl) {
+												if ($bl->id_biaya_lainnya == $kt->id_biaya_lainnya) {
+													echo $bl->nama_biaya_lainnya;
 												}
-												?>
-											</td>
-											<td align="right">
-												<?php echo 'Rp ' . number_format($kt->biaya, 2, ',', '.'); ?>
-											</td>
-										</tr>
-									<?php $i++;
-									} ?>
-								</tbody>
-							</table>
-						</small>
+											}
+											?>
+										</td>
+										<td align="right">
+											<?php echo 'Rp ' . number_format($kt->biaya, 2, ',', '.'); ?>
+										</td>
+									</tr>
+								<?php $i++;
+								} ?>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -95,38 +93,36 @@
 				<div class="card-body">
 					<h4 class="card-title">Kebutuhan Tahunan Barang</h4>
 					<div class="table-responsive">
-						<small>
-							<table id="barang-table" class="table table-striped table-bordered no-wrap">
-								<thead>
+						<table id="barang-table" class="table table-striped table-bordered no-wrap">
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Nama Barang</th>
+									<th>Jumlah</th>
+									<th>Harga Satuan</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php $i = 1; ?>
+								<?php foreach ($kt_barang as $kt) { ?>
 									<tr>
-										<th>No</th>
-										<th>Nama Barang</th>
-										<th>Jumlah</th>
-										<th>Harga Satuan</th>
+										<td><?= $i ?>.</td>
+										<td>
+											<?php foreach ($barang as $b) {
+												if ($b->id_barang == $kt->id_barang) {
+													echo $b->nama_barang;
+												}
+											} ?>
+										</td>
+										<td><?= $kt->jumlah ?></td>
+										<td align="right">
+											<?php echo 'Rp ' . number_format($kt->harga_satuan, 2, ',', '.'); ?>
+										</td>
 									</tr>
-								</thead>
-								<tbody>
-									<?php $i = 1; ?>
-									<?php foreach ($kt_barang as $kt) { ?>
-										<tr>
-											<td><?= $i ?>.</td>
-											<td>
-												<?php foreach ($barang as $b) {
-													if ($b->id_barang == $kt->id_barang) {
-														echo $b->nama_barang;
-													}
-												} ?>
-											</td>
-											<td><?= $kt->jumlah ?></td>
-											<td align="right">
-												<?php echo 'Rp ' . number_format($kt->harga_satuan, 2, ',', '.'); ?>
-											</td>
-										</tr>
-									<?php $i++;
-									} ?>
-								</tbody>
-							</table>
-						</small>
+								<?php $i++;
+								} ?>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -140,7 +136,7 @@
 	<br>
 	<div class="row">
 		<div class="col-md-1">
-			<a href="<?php echo base_url("Dashboard/admin") ?>" class="btn btn-secondary">Kembali</a>
+			<a href="<?php echo base_url("dashboard/admin") ?>" class="btn btn-secondary">Kembali</a>
 		</div>
 	</div>
 </div>

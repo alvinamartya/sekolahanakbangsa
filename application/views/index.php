@@ -19,7 +19,7 @@
     <header>
         <nav class="navbar navbar-expand-lg fixed-top py-0 navbar-dark">
             <a class="navbar-brand" href="<?= site_url('/') ?>">
-                <h2 class="font-weight-bold">SAB</h2>
+                <img src="<?php echo base_url('assets/images/logo-sab-white.png') ?>" id="logo" alt="homepage" class="dark-logo sab-logo" />
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">

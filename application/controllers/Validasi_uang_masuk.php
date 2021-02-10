@@ -45,7 +45,7 @@ class Validasi_uang_masuk extends CI_Controller
         // set page title
         $header['title'] = 'Validasi Uang Masuk';
 
-        // set employee 
+        // set employee
         $header['name'] =  $this->getKaryawanName();
         $header['role'] =  $this->getKaryawanRole();
 
@@ -83,7 +83,7 @@ class Validasi_uang_masuk extends CI_Controller
         // set page title
         $header['title'] = 'Validasi Uang Masuk';
 
-        // set employee 
+        // set employee
         $header['name'] =  $this->getKaryawanName();
         $header['role'] =  $this->getKaryawanRole();
 
@@ -94,8 +94,8 @@ class Validasi_uang_masuk extends CI_Controller
         $data_aksi = $this->aksi_model->getAksiAll();
         $data_donatur = $this->donatur_model->getAll();
 
-        $data['data_aksi'] = $data_aksi;
-        $data['donatur'] = $data_donatur;
+        // $data['data_aksi'] = $data_aksi;
+        // $data['donatur'] = $data_donatur;
         $data['donatur_aksi'] = $data_donatur_aksi;
 
         $this->load->view('validasi_uang_masuk/edit', $data);

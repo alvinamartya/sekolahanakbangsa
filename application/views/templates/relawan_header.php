@@ -50,22 +50,16 @@
                     <!-- ============================================================== -->
                     <div class="navbar-brand">
                         <!-- Logo icon -->
-                        <a href="index.html">
-                            <b class="logo-icon">
-                                <!-- Dark Logo icon -->
-                                <img src="<?php echo base_url('assets/images/logo-icon.png') ?>" alt="homepage" class="dark-logo" />
-                                <!-- Light Logo icon -->
-                                <img src="<?php echo base_url('assets/images/logo-icon.png') ?>" alt="homepage" class="light-logo" />
-                            </b>
-                            <!--End Logo icon -->
-                            <!-- Logo text -->
-                            <span class="logo-text">
-                                <!-- dark Logo text -->
-                                <img src="<?php echo base_url('assets/images/logo-text.png') ?>" alt="homepage" class="dark-logo" />
-                                <!-- Light Logo text -->
-                                <img src="<?php echo base_url('assets/images/logo-light-text.png') ?>" class="light-logo" alt="homepage" />
-                            </span>
-                        </a>
+                        <a href="<?= site_url('/') ?>">
+							<!--End Logo icon -->
+							<!-- Logo text -->
+							<span class="logo-text ml-4">
+								<!-- dark Logo text -->
+								<img src="<?php echo base_url('assets/images/logo-sab-red.png') ?>" alt="homepage" class="dark-logo sab-logo" />
+								<!-- Light Logo text -->
+								<img src="<?php echo base_url('assets/images/logo-sab-red.png') ?>" class="light-logo sab-logo" alt="homepage" />
+							</span>
+						</a>
                     </div>
                     <!-- ============================================================== -->
                     <!-- End Logo -->

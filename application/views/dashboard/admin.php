@@ -76,7 +76,7 @@
     									<td align="center"><?= $k->tahun ?></td>
     									<td align="right"><?php echo 'Rp ' . number_format($k->total_kebutuhan, 2, ',', '.'); ?></td>
     									<td align="center">
-    										<form action="<?php echo base_url('Dashboard/detail_kebutuhan') ?>" method="post" class="d-inline">
+    										<form action="<?php echo base_url('dashboard/detail_kebutuhan') ?>" method="post" class="d-inline">
     											<input type="hidden" name="id" value="<?= $k->id ?>">
     											<button class="btn btn-primary"><span class="fa fa-eye"></span> Detail</button>
     										</form>
@@ -120,7 +120,7 @@
     					<?php } ?>
     				</div>
     				<div class="modal-footer">
-    					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    					<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
     					<button type="submit" class="btn btn-primary">Export</button>
     				</div>
     			</form>

@@ -23,3 +23,15 @@
     transition: .3s ease-in;
     opacity: 0;
 }
+
+.zoom {
+    display:inline-block;
+    position: relative;
+}
+
+.zoom img::selection { background-color: transparent; }
+
+.sab-logo {
+    height: 50px;
+
+}

@@ -8,8 +8,10 @@ $(window).scroll(function () {
       if (windowWidth > 992) {
         if (scroll >= 100) {
           sticky.removeClass('navbar-dark').addClass('nav-sticky navbar-light')
+          $('#logo').attr("src", "assets/images/logo-sab-red.png");
         } else {
           sticky.removeClass('nav-sticky navbar-light').addClass('navbar-dark');
+          $('#logo').attr("src", "assets/images/logo-sab-white.png");
         }
       }
     }

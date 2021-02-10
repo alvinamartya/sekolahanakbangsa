@@ -61,3 +61,7 @@ $route['kebutuhan-tahunan/tambah'] = 'kebutuhan_tahunan/tambah';
 $route['kebutuhan-tahunan/detail/(:any)'] = 'kebutuhan_tahunan/detail/$1';
 $route['kebutuhan-tahunan/destroy/(:any)'] = 'kebutuhan_tahunan/destroy/$1';
 $route['kebutuhan-tahunan/data'] = 'kebutuhan_tahunan/data';
+$route['kebutuhan-tahunan/edit'] = 'kebutuhan_tahunan/edit';
+$route['kebutuhan-tahunan/edit/(:any)'] = 'kebutuhan_tahunan/edit/$1';
+$route['kebutuhan-tahunan/ubah/(:any)'] = 'kebutuhan_tahunan/ubah/$1';
+$route['kebutuhan-tahunan/kirim/(:any)'] = 'kebutuhan_tahunan/kirim/$1';

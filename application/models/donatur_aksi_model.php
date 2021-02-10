@@ -78,7 +78,14 @@ class donatur_aksi_model extends CI_Model
 
     public function getByID($id)
     {
-        return $this->db->get_where($this->_table, ["id" => $id])->row();
+        return $this->db->select('*')
+        ->from($this->_table." u")
+        ->join('donatur d', 'd.id_donatur = u.id_donatur')
+        ->join('aksi a', 'a.id_aksi = u.id_aksi')
+        ->join('status_aksi s', 's.id_status_aksi = u.id_status_aksi')
+        ->order_by('u.id', 'asc')
+        ->get()
+        ->row();
     }
 
     public function getAksi($id)

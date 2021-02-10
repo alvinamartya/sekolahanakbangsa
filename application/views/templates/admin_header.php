@@ -20,6 +20,7 @@
 	<link href="<?= base_url('assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css') ?>" rel="stylesheet">
 	<!-- Custom CSS -->
 	<link href="<?php echo base_url('assets/css/style.min.css') ?>" rel="stylesheet">
+	<link href="<?php echo base_url('assets/css/custom.css') ?>" rel="stylesheet">
 
 
 </head>
@@ -51,20 +52,14 @@
 					<!-- ============================================================== -->
 					<div class="navbar-brand">
 						<!-- Logo icon -->
-						<a href="index.html">
-							<b class="logo-icon">
-								<!-- Dark Logo icon -->
-								<img src="<?php echo base_url('assets/images/logo-icon.png') ?>" alt="homepage" class="dark-logo" />
-								<!-- Light Logo icon -->
-								<img src="<?php echo base_url('assets/images/logo-icon.png') ?>" alt="homepage" class="light-logo" />
-							</b>
+						<a href="<?= site_url('/') ?>">
 							<!--End Logo icon -->
 							<!-- Logo text -->
-							<span class="logo-text">
+							<span class="logo-text ml-4">
 								<!-- dark Logo text -->
-								<img src="<?php echo base_url('assets/images/logo-text.png') ?>" alt="homepage" class="dark-logo" />
+								<img src="<?php echo base_url('assets/images/logo-sab-red.png') ?>" alt="homepage" class="dark-logo sab-logo" />
 								<!-- Light Logo text -->
-								<img src="<?php echo base_url('assets/images/logo-light-text.png') ?>" class="light-logo" alt="homepage" />
+								<img src="<?php echo base_url('assets/images/logo-sab-red.png') ?>" class="light-logo sab-logo" alt="homepage" />
 							</span>
 						</a>
 					</div>

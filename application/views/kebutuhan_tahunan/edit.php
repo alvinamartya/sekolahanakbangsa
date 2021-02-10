@@ -24,7 +24,7 @@
     <!-- Start Page Content -->
     <!-- ============================================================== -->
     <!-- basic table -->
-    <form action="" method="POST" enctype="multipart/form-data" id="mainForm">
+    <form action="<?=site_url('kebutuhan_tahunan/ubah') ?>" method="POST" enctype="multipart/form-data" id="mainForm">
         <div class="row">
 
             <!-- Aksi -->
@@ -33,14 +33,15 @@
                     <div class="card-body">
                         <h4 class="card-title">Kebutuhan Tahunan</h4>
                         <div class="alert alert-danger alert-dismissible fade show validationAlert" role="alert" id="validationAlert"></div>
+						<input type="hidden" name="id" value="<?=$kt->id?>" >
                         <div class="form-group">
                             <label for="year">Tahun</label>
-                            <input type="text" id="year" name="year" class="yearpicker form-control" value="" />
+                            <input type="text" id="year" name="year" class="yearpicker form-control" value="<?= $kt->tahun ?>" />
                         </div>
 
                         <div class="form-group">
                             <label for="desc">Deskripsi</label>
-                            <textarea name="desc" id="desc" cols="30" rows="5" class="form-control"></textarea>
+                            <textarea name="desc" id="desc" cols="30" rows="5" class="form-control"><?=$kt->deskripsi?></textarea>
                         </div>
                     </div>
                 </div>
@@ -58,7 +59,7 @@
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBiaya">Tambah</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBiaya" id="#btnTambahBiaya">Tambah</button>
                             <table id="biaya-table" class="table table-striped table-bordered no-wrap">
                                 <thead>
                                     <tr>
@@ -68,7 +69,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+								<?php foreach($kt_biaya_lainnya as $b) { ?>
+									<tr>
+										<td>
+										<?php
+										foreach($biaya_lainnya as $a) {
+											if($a->id_biaya_lainnya == $b->id_biaya_lainnya){
+												echo $a->nama_biaya_lainnya;
+											}
+										}
+										?>
+										</td>
+										<td><?php echo 'Rp '.number_format($b->biaya,0,',','.'); ?></td>
+										<td>
+                                            <button type="button" class="btn btn-primary btn-sm btnEdit" data-id="<?= $b->id_biaya_lainnya ?>" data-type="biaya">Ubah</button>
+											<button type="button" class="btn btn-danger btn-sm btnDelete" data-id="<?= $b->id_biaya_lainnya ?>" data-type="biaya">Hapus</button>
+										</td>
+									</tr>
+								<?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -88,7 +106,7 @@
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBarang">Tambah</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBarang" id="#btnTambahBarang">Tambah</button>
                             <table id="barang-table" class="table table-striped table-bordered no-wrap">
                                 <thead>
                                     <tr>
@@ -99,7 +117,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+									<?php foreach($kt_barang as $b) { ?>
+									<tr>
+										<td>
+										<?php
+										foreach($barang as $a){
+											if($a->id_barang == $b->id_barang){
+												echo $a->nama_barang;
+											}
+										}
+										?>
+										</td>
+										<td><?=$b->jumlah?></td>
+										<td><?php echo 'Rp '.number_format($b->harga_satuan,0,',','.'); ?></td>
+										<td>
+                                            <button type="button" class="btn btn-primary btn-sm btnEdit" data-id="<?= $b->id_barang ?>" data-type="barang">Ubah</button>
+                                            <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="<?= $b->id_barang ?>" data-type="barang">Hapus</button>
+										</td>
+									</tr>
+									<?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -114,9 +150,10 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="col-12 d-flex justify-content-between">
-                            <h3 class="text-danger font-weight-bold">Total Kebutuhan : Rp<span id="target_donasi">0</span></h3>
+                            <h3 class="text-danger font-weight-bold">Total Kebutuhan : Rp<span id="target_donasi"><?php echo number_format($kt->total_kebutuhan,0,',','.'); ?></span></h3>
+							<input	type="hidden" name="target_donasi" value="<?=$kt->total_kebutuhan?>" />
                             <div class="d-flex">
-                                <button class="btn btn-primary mr-3" type="button" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
+                                <button class="btn btn-primary mr-3" type="submit" id="btnUpdate"><i class="fa fa-save"></i> Simpan perubahan</button>
                                 <a href="<?= site_url('kebutuhan-tahunan') ?>" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
                             </div>
                         </div>
@@ -190,7 +227,7 @@
                     </div>
                     <div class="form-group">
                         <label for="jumlah">Jumlah</label>
-                        <input type="number" min="1" class="form-control" id="jumlah" name="jumlah" required>
+                        <input type="number" min="0" class="form-control" id="jumlah" name="jumlah" required>
                     </div>
                     <div class="form-group">
                         <label for="harga_satuan">Harga Satuan</label>
@@ -211,9 +248,10 @@
     $(document).ready(function() {
         const dd = new Date();
         $(".yearpicker").yearpicker({
-            year: dd.getFullYear(),
+            year: <?= $kt->tahun ?>,
             startYear: 2012,
             endYear: 2030
         });
+
     });
 </script>

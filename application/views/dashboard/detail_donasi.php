@@ -17,7 +17,7 @@
 <div class="container-fluid">
 	<div class="card">
 		<div class="card-body">
-		
+
 			<div class="row mt-5">
 				<div class="col-md-8">
 					<div id="carouselExampleIndicators" class="carousel slide carousel-aksi" data-ride="carousel">
@@ -53,13 +53,13 @@
 					</div>
 
 					<h3 class="mt-5 font-weight-bold"><?php echo $data_aksi->nama_aksi ?></h3>
-					
+
 					<div class="row my-5">
 						<div class="col-12">
 							<p class="font-weight-bold">Deskripsi</p>
 							<p class="form-control text-muted"><?php echo $data_aksi->deskripsi_aksi ?></p>
 						</div>
-					</div>					
+					</div>
 				</div>
 
 				<div class="col-md-4">
@@ -153,7 +153,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-1">
-					<a href="<?=base_url('Dashboard/relawan')?>" class="btn btn-secondary">Kembali</a>
+					<a href="<?=base_url('dashboard/relawan')?>" class="btn btn-secondary">Kembali</a>
 				</div>
 			</div>
 		</div>

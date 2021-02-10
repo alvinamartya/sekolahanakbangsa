@@ -135,7 +135,7 @@
                             <h3 class="text-danger font-weight-bold">Target Donasi : Rp<span id="target_donasi">0</span></h3>
                             <div class="d-flex">
                                 <button class="btn btn-primary mr-3" type="button" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
-                                <button class="btn btn-danger" type="button"><i class="fa fa-times"></i> Batal</button>
+                                <a href="<?= site_url('aksi') ?>" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
                             </div>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <button type="submit" id="btnSubmitBiaya" class="btn btn-primary" data-type="add">Simpan</button>
                 </div>
             </form>
         </div>
@@ -208,7 +208,7 @@
                     </div>
                     <div class="form-group">
                         <label for="jumlah">Jumlah</label>
-                        <input type="number" min="0" class="form-control" id="jumlah" name="jumlah" required>
+                        <input type="number" min="1" class="form-control" id="jumlah" name="jumlah" required>
                     </div>
                     <div class="form-group">
                         <label for="harga_satuan">Harga Satuan</label>
@@ -217,7 +217,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <button type="submit" id="btnSubmitBarang" class="btn btn-primary" data-type="add">Simpan</button>
                 </div>
             </form>
         </div>

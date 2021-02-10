@@ -36,6 +36,8 @@ $(function () {
         }
     }, 3000);
 
+    $('.zoom-image').zoom();
+
     $('body').on('keypress', 'input[type=number][maxlength]', function(event){
         var key = event.keyCode || event.charCode;
         var charcodestring = String.fromCharCode(event.which);
@@ -89,3 +91,18 @@ function getNumber(str) {
 function txtMoney(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+function minmax(value, min, max)
+{
+    if(parseInt(value) < min || isNaN(parseInt(value)))
+        return min;
+    else if(parseInt(value) > max)
+        return max;
+    else return value;
+}
+
+const currencyFormat = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0
+})

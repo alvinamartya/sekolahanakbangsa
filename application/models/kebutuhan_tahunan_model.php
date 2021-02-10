@@ -28,7 +28,7 @@ class kebutuhan_tahunan_model extends CI_Model
     {
         $query = $this->db
             ->from($this->_table)
-            ->where(['id_sekolah' => $id, 'is_approved' => 'Y'])
+            ->where(['id_sekolah' => $id, 'kt_status' => 'Disetujui'])
             ->order_by('tahun', 'asc')
             ->get();
 
@@ -41,7 +41,7 @@ class kebutuhan_tahunan_model extends CI_Model
             ->from($this->_table)
             ->where(['id_relawan' => $id_relawan, 'row_status' => 'A'])
             ->order_by('tahun', 'asc')
-            ->order_by('is_approved', 'asc')
+            ->order_by('kt_status', 'asc')
             ->get();
 
         return $query->result();
@@ -81,7 +81,7 @@ class kebutuhan_tahunan_model extends CI_Model
     {
         $query = $this->db
             ->from($this->_table)
-            ->where(['tahun' => $year, 'id_sekolah' => $id_sekolah, 'is_approved' => 'Y'])
+            ->where(['tahun' => $year, 'id_sekolah' => $id_sekolah, 'kt_status' => 'Disetujui'])
             ->get();
 
         return $query->row();
@@ -91,11 +91,22 @@ class kebutuhan_tahunan_model extends CI_Model
     {
         $query = $this->db
             ->from($this->_table)
-            ->where(['tahun' => $year, 'id_sekolah' => $id_sekolah, 'is_approved =' => null])
+            ->where(['tahun' => $year, 'id_sekolah' => $id_sekolah, 'kt_status' => 'Menunggu Persetujuan'])
             ->get();
 
         return $query->row();
     }
+
+    public function getKebutuhanTahunanByYearAndSchoolAll($year, $id_sekolah)
+    {
+        $query = $this->db
+            ->from($this->_table)
+            ->where(['tahun' => $year, 'id_sekolah' => $id_sekolah])
+            ->get();
+
+        return $query->row();
+    }
+
     public function getKebutuhanTahunan($id)
     {
         $query = $this->db
@@ -110,7 +121,7 @@ class kebutuhan_tahunan_model extends CI_Model
     {
         $query = $this->db
             ->from($this->_table)
-            ->where(['is_approved' => null])
+            ->where(['kt_status' => 'Menunggu Persetujuan'])
             ->order_by('tahun', 'asc')
             ->get();
 
@@ -122,7 +133,7 @@ class kebutuhan_tahunan_model extends CI_Model
         $query = $this->db
             ->from($this->_table.' a')
             ->join('sekolah s', 's.id_sekolah = a.id_sekolah')
-            ->where(['is_approved' => 'Y'])
+            ->where(['kt_status' => 'Diterima'])
             ->order_by('tahun', 'asc')
             ->get();
 

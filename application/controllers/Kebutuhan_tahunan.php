@@ -195,6 +195,134 @@ class Kebutuhan_tahunan extends CI_Controller
 
     /*
     ==============================================================
+    Edit Kebutuhan Tahunan
+    ==============================================================
+    */
+	public function edit($kt_id)
+    {
+        $this->editView($kt_id);
+    }
+	private function editView($kt_id)
+    {
+        // set relawan
+        $relawan = $this->getRelawanSession();
+        // set page title
+        $header['title'] = 'Kebutuhan Tahunan';
+        $header['name'] =  $relawan->nama_relawan;
+        $header['active'] = $relawan->id_sekolah != null;
+
+        $data['kt'] = $this->kebutuhan_tahunan_model->getKebutuhanTahunan($kt_id);
+		$data['kt_biaya_lainnya'] = $this->kt_biaya_lainnya_model->getByID($kt_id);
+		$data['kt_barang'] = $this->kt_barang_model->getByID($kt_id);
+        $data['biaya_lainnya'] = $this->biaya_lainnya_model->getBiayaLainnya();
+        $data['barang'] = $this->barang_model->getBarang();
+
+		$this->load->view('kebutuhan_tahunan/header', $header);
+		$this->load->view('kebutuhan_tahunan/edit', $data);
+
+		// inlcude footer
+		$this->load->view('kebutuhan_tahunan/footer_edit');
+
+    }
+
+
+	public function ubah($kt_id)
+    {
+        // get relawan
+        $relawan = $this->getRelawanSession();
+        $post = $this->input->post();
+
+        $biaya = json_decode(isset($post["biaya"]) ? $post["biaya"] : null);
+        $barang = json_decode(isset($post["barang"]) ? $post["barang"] : null);
+
+        if ($this->form_validation->run() == true) {
+            $kt_data = $this->kebutuhan_tahunan_model->getByID($kt_id);
+            $is_process_data = $this->kebutuhan_tahunan_model->getKebutuhanTahunanByYearAndSchoolAll($post["year"], $relawan->id_sekolah);
+
+            if ($is_process_data != null) {
+                if($is_process_data->tahun != $kt_data->tahun) {
+                    echo json_encode(['success' => false, 'message' => '<p>Kebutuhan tahun ' . $post["year"] . ' sudah terbuat.</p>']);
+                    return;
+                }
+            }
+
+            $aksi_data = array(
+                'id_relawan' => $relawan->id_relawan,
+                'id_sekolah' => $relawan->id_sekolah,
+                'tahun' => $post["year"],
+                'total_kebutuhan' => $post['target_donasi'],
+                'deskripsi' => $post["desc"],
+                'creaby' => $relawan->nama_relawan,
+                'modiby' => $relawan->nama_relawan,
+                'row_status' => 'A'
+            );
+
+            $this->kebutuhan_tahunan_model->update($kt_id, $aksi_data);
+            if($biaya != null) {
+                // foreach data biaya
+                foreach($biaya as $b) {
+
+                    $biaya_data = array(
+                        'id_kt' => $kt_id,
+                        'id_biaya_lainnya' => $b->id_biaya,
+                        'biaya' => $b->harga,
+                        'modiby' => $relawan->nama_relawan,
+                        'modidate' => date("Y-m-d H:i:s"),
+                        'row_status' => $b->row_status
+                    );
+
+                    // Check apakah id kosong, jika belum punya id, tambah data, jika sudah punya id, update data
+                    if(!isset($b->id)) {
+                        // hanya menambahkan data dengan row_status A
+                        if($b->row_status == 'A') {
+                            $this->kt_biaya_lainnya_model->save($biaya_data);
+                        }
+                    } else {
+                        // Update data
+                        $this->kt_biaya_lainnya_model->update($b->id, $biaya_data);
+                    }
+                }
+            }
+
+            if($barang != null) {
+                // foreach data barang
+                foreach($barang as $b) {
+                    $barang_data = array(
+                        'id_kt' => $kt_id,
+                        'id_barang' => $b->id_barang,
+                        'jumlah' => $b->jumlah,
+                        'harga_satuan' => $b->harga_satuan,
+                        'modiby' => $relawan->nama_relawan,
+                        'modidate' => date("Y-m-d H:i:s"),
+                        'row_status' => $b->row_status
+                    );
+
+                    // Check apakah id kosong, jika belum punya id, tambah data, jika sudah punya id, update data
+                    if(!isset($b->id)) {
+                        // hanya menambahkan data dengan row_status A
+                        if($b->row_status == 'A') {
+                            $this->kt_barang_model->save($barang_data);
+                        }
+                    } else {
+                        // Update data
+                        $this->kt_barang_model->update($b->id, $barang_data);
+                    }
+                }
+            }
+
+            $this->session->set_flashdata("success", "Data berhasil diubah.");
+            echo json_encode(['status' => true, 'message' => '']);
+
+        } else {
+            echo json_encode(['status' => false, 'message' => validation_errors()]);
+        }
+
+
+    }
+    /*
+
+    /*
+    ==============================================================
     Delete Kebutuhan Tahunan
     ==============================================================
     */
@@ -202,7 +330,7 @@ class Kebutuhan_tahunan extends CI_Controller
     {
         $relawan = $this->getRelawanSession();
         $kebutuhan_tahunan = $this->kebutuhan_tahunan_model->getKebutuhanTahunan($id);
-        if ($kebutuhan_tahunan->is_approved == 'Y') {
+        if ($kebutuhan_tahunan->is_approved == 'Disetujui') {
             $this->session->set_flashdata("failed", "Kebutuhan tahunan yang sudah disetujui tidak dapat dihapus");
             redirect(site_url('kebutuhan-tahunan'));
         } else {
@@ -303,12 +431,31 @@ class Kebutuhan_tahunan extends CI_Controller
 
                 redirect(site_url('kebutuhan-tahunan/detail/'.$id));
             } else {
-                $this->session->set_flashdata("failed", $this->upload->display_errors());
+                $this->session->set_flashdata("failed", "LPJ tidak dapat diunggah");
 
                 redirect(site_url('kebutuhan-tahunan/detail/'.$id));
             }
 
         }
+    }
+
+    /*
+    ==============================================================
+    Kirim Kebutuhan Tahunan
+    ==============================================================
+    */
+    public function kirim($id)
+    {
+        $relawan = $this->getRelawanSession();
+
+        $kebutuhan_tahunan = array(
+            'kt_status' => 'Menunggu Persetujuan',
+        );
+
+        $this->kebutuhan_tahunan_model->update($id, $kebutuhan_tahunan);
+        $this->session->set_flashdata("success", "Kebutuhan Tahunan berhasil dikirim.");
+
+        redirect(site_url('kebutuhan-tahunan'));
     }
 
 

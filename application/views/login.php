@@ -14,6 +14,9 @@
 <body>
     <div class="login-container">
         <div class="login-aside">
+            <a href="<?= site_url('/') ?>">
+                <img src="<?php echo base_url('assets/images/sab-icon-white.png') ?>" alt="SAB Icon" width="125" height="125" class="mb-4">
+            </a>
             <h2 class="">Sekolah Anak Bangsa</h2>
             <p>Jadilah bagian dari Sekolah Anak Bangsa</p>
             <p>Mari bantu mereka yang membutuhkan, demi Indonesia yang lebih baik</p>

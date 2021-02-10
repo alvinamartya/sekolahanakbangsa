@@ -21,43 +21,30 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-body">
+            <h4 class="card-title" style="font-size: 28px;">Detail Donasi</h4>
             <form method="post" action="<?php echo base_url('validasi_uang_masuk/edit/' . $donatur_aksi->id) ?>" autocomplete="off">
+                <table class="table table-sm table-borderless mb-0">
+                    <tbody>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Nama Aksi</strong></th>
+                            <td><?= $donatur_aksi->nama_aksi ?></td>
+                        </tr>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Nama Donatur</strong></th>
+                            <td><?= $donatur_aksi->nama_donatur ?></td>
+                        </tr>
+                        <tr>
+                            <th class="pl-0 w-25" scope="row"><strong>Pesan</strong></th>
+                            <td><?= $donatur_aksi->keterangan ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <div class="form-group">
-                    <label for="nik">Nama Aksi : </label>
-                    <?php foreach ($data_aksi as $data2) { ?>
-                        <?php
-                        if ($data2->id_aksi == $donatur_aksi->id_aksi) {
-                            echo $data2->nama_aksi;
-                        }
-                        ?>
+                    <label for="nama_relawan"><strong> Bukti Transfer</strong> </label><br>
+                    <?php if ($donatur_aksi->bukti_transfer != null) { ?>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Lihat Bukti</button>
                     <?php } ?>
-                </div>
-
-                <div class="form-group">
-                    <label for="nama_relawan">Nama Donatur : </label>
-                    <?php foreach ($donatur as $d) { ?>
-                        <?php
-                        if ($d->id_donatur == $donatur_aksi->id_donatur) {
-                            echo $d->nama_donatur;
-                        }
-                        ?>
-                    <?php } ?>
-                </div>
-
-                <div class="form-group">
-                    <label for="nama_relawan">Pesan : </label>
-                    <?= $donatur_aksi->keterangan ?>
-                </div>
-
-                <div class="form-group">
-                    <label for="nama_relawan">Bukti Transfer : </label><br>
-                    <?php
-                    if ($donatur_aksi->bukti_transfer != null) {
-                    ?>
-                        <img class="d-block w-30" src="<?php echo base_url('assets/images/bukti_transfer/' . $donatur_aksi->bukti_transfer) ?>" alt="First slide">
-                    <?php
-                    }
-                    ?>
                 </div>
 
                 <div class="form-group">
@@ -80,4 +67,22 @@
             </form>
         </div>
     </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Bukti Transfer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-content">
+            <span class="zoom zoom-image">
+                <img class="d-block w-100" src="<?php echo base_url('assets/images/bukti_transfer/' . $donatur_aksi->bukti_transfer) ?>" alt="First slide">
+            </span>
+        </div>
+    </div>
+  </div>
 </div>
