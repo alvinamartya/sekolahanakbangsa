@@ -38,7 +38,7 @@
         </div>
     </div>
     <!-- Deskripsi Kebutuhan tahunan -->
-    <?php if($kebutuhan_tahunan->is_approved == 'Y') { ?>
+    <?php if($kebutuhan_tahunan->kt_status == 'Disetujui') { ?>
     <div class="row">
         <div class="col-md-6 d-flex align-self-stretch">
             <div class="card w-100">
