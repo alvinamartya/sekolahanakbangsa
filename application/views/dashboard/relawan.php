@@ -38,7 +38,6 @@
     			</div>
     			<div class="card">
     				<div class="card-body">
-    					<h4 class="card-title text-center">Diagram batang laporan galang dana <?= $nama_sekolah ?></h4>
 
     					<div class="barchart-sekolah mt-4 position-relative" style="height:294px;"></div>
     					<ul class="list-inline text-center mt-5 mb-2">
@@ -59,7 +58,7 @@
     								<td>Nama aksi</td>
     								<td>Donasi terkumpul</td>
     								<td>Target donasi</td>
-    								<td>Prosentase</td>
+    								<td>Persentase</td>
     								<td>Tanggal selesai</td>
     								<td>Aksi</td>
     							</tr>
@@ -75,8 +74,6 @@
 									$label = $label . "'" . $k->nama_aksi . "',";
 									$data = $data . $k->target_donasi . ",";
 								?>
-
-
     								<tr class="text-center">
     									<td><?= $i ?>.</td>
     									<td>
@@ -89,18 +86,20 @@
 											?>
     									</td>
     									<td><?= $k->nama_aksi ?></td>
-    									<td class="text-right">
+    									<td align="right">
     										<?php
-											foreach ($donatur_aksi as $d) {
-												$jumlah = 0;
-												if ($d->id_aksi == $k->id_aksi) {
-													$jumlah += $d->donasi;
+											$jumlah = 0;
+											if ($donatur_aksi != null) {
+												foreach ($donatur_aksi as $d) {
+													if ($d->id_aksi == $k->id_aksi) {
+														$jumlah += $d->donasi;
+													}
 												}
 											}
 											echo 'Rp ' . number_format($jumlah, 2, ',', '.');
 											?>
     									</td>
-    									<td class="text-right"><?php echo 'Rp ' . number_format($k->target_donasi, 2, ',', '.'); ?></td>
+    									<td align="right"><?php echo 'Rp ' . number_format($k->target_donasi, 2, ',', '.'); ?></td>
     									<td>
     										<?php echo round($jumlah * 100 / $k->target_donasi) ?>%
     									</td>
@@ -127,8 +126,36 @@
     			</div>
     		</div>
     	</div>
+    	<a class="btn btn-success" href="<?= site_url('dashboard/export_laporan_relawan/' . $id_sekolah) ?>">Export Laporan</a>
+    	<a class="btn btn-warning" style="margin-left: 10px;" href="" data-toggle="modal" data-target=".bd-example-modal-lg">Export Semua</a>
     </div>
 
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    	<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+    			<form action="<?= site_url('dashboard/export_all_relawan') ?>" method="POST">
+    				<div class="modal-header">
+    					<h5 class="modal-title" id="exampleModalLabel">Pilih Sekolah/Rumah Singgah</h5>
+    					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    						<span aria-hidden="true">&times;</span>
+    					</button>
+    				</div>
+    				<div class="modal-body">
+    					<?php foreach ($sekolah as $s) { ?>
+    						<div class="form-check form-check-inline">
+    							<input class="form-check-input" type="checkbox" id="<?= $s->id_sekolah ?>" name="sekolah[]" value="<?= $s->id_sekolah ?>">
+    							<label class="form-check-label" for="<?= $s->id_sekolah ?>"><?= $s->nama_sekolah ?></label>
+    						</div>
+    					<?php } ?>
+    				</div>
+    				<div class="modal-footer">
+    					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    					<button type="submit" class="btn btn-primary">Export</button>
+    				</div>
+    			</form>
+    		</div>
+    	</div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script>

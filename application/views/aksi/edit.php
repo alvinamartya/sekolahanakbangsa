@@ -37,6 +37,10 @@
                                     <input type="text" class="form-control" value="<?= isset($aksi) ? $aksi->nama_aksi : '' ?>" id="nama_aksi" name="nama_aksi" placeholder="Nama Aksi">
                                 </div>
                                 <div class="form-group">
+                                    <label for="tanggal_selesai">Tanggal Mulai</label>
+                                    <input type="date" class="form-control" name="tanggal_mulai" value="<?php echo isset($tglmulai) ? set_value('tanggal_mulai', date('Y-m-d', strtotime($tglmulai))) : set_value('tanggal_mulai'); ?>" disabled>
+                                </div>
+                                <div class="form-group">
                                     <label for="tanggal_selesai">Tanggal Selesai</label>
                                     <input type="date" class="form-control" value="<?= isset($aksi) ? date('Y-m-d', strtotime($aksi->tanggal_selesai)) : '' ?>" id="tanggal_selesai" name="tanggal_selesai" placeholder="Tanggal Selesai">
                                 </div>

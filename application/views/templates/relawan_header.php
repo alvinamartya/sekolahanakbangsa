@@ -116,8 +116,8 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'dashboard' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
-                            <a class="sidebar-link <?php echo ($this->uri->segment(1) == 'dashboard' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url("dashboard/relawan") ?>" aria-expanded="false">
+                        <li class="sidebar-item <?php echo (strtolower($this->uri->segment(1)) == 'dashboard' || strtolower($this->uri->segment(1)) == '' ? 'active selected' : '') ?>">
+                            <a class="sidebar-link <?php echo (strtolower($this->uri->segment(1)) == 'dashboard' || strtolower($this->uri->segment(1)) == '' ? 'active' : '') ?>" href="<?php echo site_url("dashboard/relawan") ?>" aria-expanded="false">
                                 <i class="fa fa-home"></i><span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
@@ -125,8 +125,8 @@
                             <li class="list-divider"></li>
                             <li class="nav-small-cap"><span class="hide-menu">Manajemen Data</span></li>
 
-                            <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'siswa' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
-                                <a class="sidebar-link <?php echo ($this->uri->segment(1) == 'siswa' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('siswa') ?>" aria-expanded="false">
+                            <li class="sidebar-item <?php echo (strtolower($this->uri->segment(1)) == 'siswa' || strtolower($this->uri->segment(1)) == '' ? 'active selected' : '') ?>">
+                                <a class="sidebar-link <?php echo (strtolower($this->uri->segment(1)) == 'siswa' || strtolower($this->uri->segment(1)) == '' ? 'active' : '') ?>" href="<?php echo site_url('siswa') ?>" aria-expanded="false">
                                     <i class="fas fa-user-graduate"></i><span class="hide-menu">Siswa</span>
                                 </a>
                             </li>
@@ -134,14 +134,14 @@
                             <li class="list-divider"></li>
                             <li class="nav-small-cap"><span class="hide-menu">Galang Bantuan</span></li>
 
-                            <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'aksi' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
-                                <a class="sidebar-link <?php echo ($this->uri->segment(1) == 'aksi' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('aksi') ?>" aria-expanded="false">
+                            <li class="sidebar-item <?php echo (strtolower($this->uri->segment(1)) == 'aksi' || strtolower($this->uri->segment(1)) == '' ? 'active selected' : '') ?>">
+                                <a class="sidebar-link <?php echo (strtolower($this->uri->segment(1)) == 'aksi' || strtolower($this->uri->segment(1)) == '' ? 'active' : '') ?>" href="<?php echo site_url('aksi') ?>" aria-expanded="false">
                                     <i class="fa fa-users"></i><span class="hide-menu">Aksi</span>
                                 </a>
                             </li>
 
-                            <li class="sidebar-item <?php echo ($this->uri->segment(1) == 'kebutuhan-tahunan' || $this->uri->segment(1) == '' ? 'active selected' : '') ?>">
-                                <a class="sidebar-link <?php echo ($this->uri->segment(1) == 'kebutuhan-tahunan' || $this->uri->segment(1) == '' ? 'active' : '') ?>" href="<?php echo site_url('kebutuhan-tahunan') ?>" aria-expanded="false">
+                            <li class="sidebar-item <?php echo (strtolower($this->uri->segment(1)) == 'kebutuhan-tahunan' || strtolower($this->uri->segment(1)) == 'kebutuhan_tahunan' || strtolower($this->uri->segment(1)) == '' ? 'active selected' : '') ?>">
+                                <a class="sidebar-link <?php echo (strtolower($this->uri->segment(1)) == 'kebutuhan-tahunan' || strtolower($this->uri->segment(1)) == 'kebutuhan_tahunan' || strtolower($this->uri->segment(1)) == '' ? 'active' : '') ?>" href="<?php echo site_url('kebutuhan-tahunan') ?>" aria-expanded="false">
                                     <i class="fa fa-calendar-alt"></i><span class="hide-menu">Kebutuhan Tahunan</span>
                                 </a>
                             </li>

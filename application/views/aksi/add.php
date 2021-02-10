@@ -38,6 +38,10 @@
                                     <div class="invalid-feedback"><?php echo form_error('nama_aksi'); ?></div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="tanggal_selesai">Tanggal Mulai</label>
+                                    <input type="date" class="form-control" name="tanggal_mulai" value="<?php echo isset($tglmulai) ? set_value('tanggal_mulai', date('Y-m-d', strtotime($tglmulai))) : set_value('tanggal_mulai'); ?>" disabled>
+                                </div>
+                                <div class="form-group">
                                     <label for="tanggal_selesai">Tanggal Selesai</label>
                                     <input type="date" class="form-control <?php echo (form_error('tanggal_selesai') != null ? 'is-invalid' : '') ?>" value="<?= isset($aksi) ? $aksi["tanggal_selesai"] : '' ?>" id="tanggal_selesai" name="tanggal_selesai" placeholder="Tanggal Selesai">
                                     <div class="invalid-feedback"><?php echo form_error('tanggal_selesai'); ?></div>

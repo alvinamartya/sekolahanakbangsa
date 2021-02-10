@@ -103,6 +103,8 @@ class Aksi extends CI_Controller
         $header['title'] = 'Tambah Aksi';
         $header['active'] = $relawan->id_sekolah != null;
 
+        $now = date('Y-m-d H:i:s');
+        $data['tglmulai'] = $now;
         $data['aksi'] = $data_aksi;
         $data['biaya_lainnya'] = $this->biaya_lainnya_model->getBiayaLainnya();
         $data['barang'] = $this->barang_model->getBarang();
@@ -250,6 +252,8 @@ class Aksi extends CI_Controller
         $header['title'] = 'Ubah Aksi';
         $header['active'] = $relawan->id_sekolah != null;
 
+        $now = date('Y-m-d H:i:s');
+        $data['tglmulai'] = $now;
         $data['aksi'] = $aksi;
         $data['biaya_lainnya'] = $this->biaya_lainnya_model->getBiayaLainnya();
         $data['barang'] = $this->barang_model->getBarang();

@@ -78,7 +78,7 @@
                                                     ?>
                                                 <?php } ?>
                                             </h5>
-                                            <p class="m-0 font-weight-bold text-danger"><?= "Rp" . number_format($d->donasi, 2, ",", "."); ?></p>
+                                            <p class="m-0 font-weight-bold text-danger"><?= "Rp " . number_format($d->donasi, 2, ",", "."); ?></p>
                                         </div>
                                         <div class="col-md-4">
                                             <h5 class="text-center font-weight-bold">Status</h5>

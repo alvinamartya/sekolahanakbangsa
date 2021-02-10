@@ -74,10 +74,10 @@
 												}
 											?>
 											</td>
-											<td>
+											<td align="center">
 												<?=$k->tahun?>
 											</td>
-                                            <td>
+                                            <td align="right">
 												<?php echo 'Rp '.number_format($k->total_kebutuhan,2,',','.'); ?>
 											</td>
                                             <td align="center">

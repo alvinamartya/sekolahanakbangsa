@@ -111,7 +111,7 @@
 										?>
 									</td>
 									<td><?php echo $barang->jumlah ?></td>
-									<td><?php echo 'Rp ' . number_format($barang->harga_satuan, 2, ',', '.'); ?></td>
+									<td align="right"><?php echo 'Rp ' . number_format($barang->harga_satuan, 2, ',', '.'); ?></td>
 								</tr>
 							<?php $i++;
 							} ?>
@@ -143,7 +143,7 @@
 										}
 										?>
 									</td>
-									<td><?php echo 'Rp ' . number_format($biaya_lainnya->biaya, 2, ',', '.'); ?></td>
+									<td align="right"><?php echo 'Rp ' . number_format($biaya_lainnya->biaya, 2, ',', '.'); ?></td>
 								</tr>
 							<?php $i++;
 							} ?>
