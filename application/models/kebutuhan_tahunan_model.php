@@ -133,7 +133,7 @@ class kebutuhan_tahunan_model extends CI_Model
         $query = $this->db
             ->from($this->_table.' a')
             ->join('sekolah s', 's.id_sekolah = a.id_sekolah')
-            ->where(['kt_status' => 'Diterima'])
+            ->where(['kt_status' => 'Disetujui'])
             ->order_by('tahun', 'asc')
             ->get();
 
