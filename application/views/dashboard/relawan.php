@@ -101,7 +101,7 @@
     									</td>
     									<td class="text-right"><?php echo 'Rp ' . number_format($k->target_donasi, 2, ',', '.'); ?></td>
     									<td>
-    										<?php echo $jumlah * 100 / $k->target_donasi ?>%
+    										<?php echo round($jumlah * 100 / $k->target_donasi) ?>%
     									</td>
     									<td><?php echo date("d-m-Y", strtotime($k->tanggal_selesai)); ?></td>
     									<td>
