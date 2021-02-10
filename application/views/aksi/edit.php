@@ -86,7 +86,7 @@
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBiaya">Tambah</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBiaya" id="#btnTambahBiaya">Tambah</button>
                             <table id="biaya-table" class="table table-striped table-bordered no-wrap">
                                 <thead>
                                     <tr>
@@ -101,7 +101,8 @@
                                             <td><?= $d->nama_biaya_lainnya ?></td>
                                             <td><?= "Rp". number_format($d->biaya, 0, ",", "."); ?></td>
                                             <td>
-                                                <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="<?= $d->id_biaya_lainnya ?>" data-type="biaya"><i class="fa fa-trash"></i> Hapus</button>
+                                                <button type="button" class="btn btn-primary btn-sm btnEdit" data-id="<?= $d->id_biaya_lainnya ?>" data-type="biaya">Ubah</button>
+                                                <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="<?= $d->id_biaya_lainnya ?>" data-type="biaya">Hapus</button>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -125,7 +126,7 @@
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBarang">Tambah</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBarang" id="#btnTambahBarang">Tambah</button>
                             <table id="barang-table" class="table table-striped table-bordered no-wrap">
                                 <thead>
                                     <tr>
@@ -142,7 +143,8 @@
                                             <td><?= $d->jumlah ?></td>
                                             <td><?= "Rp". number_format($d->harga_satuan, 0, ",", "."); ?></td>
                                             <td>
-                                                <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="<?= $d->id_barang ?>" data-type="barang"><i class="fa fa-trash"></i> Hapus</button>
+                                                <button type="button" class="btn btn-primary btn-sm btnEdit" data-id="<?= $d->id_barang ?>" data-type="barang">Ubah</button>
+                                                <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="<?= $d->id_barang ?>" data-type="barang">Hapus</button>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -159,7 +161,7 @@
                 <h3 class="text-danger font-weight-bold">Total Harga : Rp<span id="target_donasi"><?= number_format($aksi->target_donasi, 0, ",", ".");  ?></span></h3>
                 <div class="d-flex">
                     <button class="btn btn-primary mr-3" type="submit" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
-                    <button class="btn btn-danger" type="button"><i class="fa fa-times"></i> Batal</button>
+                    <a href="<?= site_url('aksi') ?>" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
                 </div>
             </div>
         </div>
@@ -196,7 +198,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <button type="submit" id="btnSubmitBiaya" class="btn btn-primary" data-type="add">Simpan</button>
                 </div>
             </form>
 		</div>
@@ -230,7 +232,7 @@
                     </div>
                     <div class="form-group">
                         <label for="jumlah">Jumlah</label>
-                        <input type="number" min="0" class="form-control" id="jumlah" name="jumlah" required>
+                        <input type="number" class="form-control" id="jumlah" name="jumlah" required>
                     </div>
                     <div class="form-group">
                         <label for="harga_satuan">Harga Satuan</label>
@@ -239,7 +241,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <button type="submit" id="btnSubmitBarang" class="btn btn-primary" data-type="add">Simpan</button>
                 </div>
             </form>
 		</div>

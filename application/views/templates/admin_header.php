@@ -59,7 +59,7 @@
 								<!-- dark Logo text -->
 								<img src="<?php echo base_url('assets/images/logo-sab-red.png') ?>" alt="homepage" class="dark-logo sab-logo" />
 								<!-- Light Logo text -->
-								<img src="<?php echo base_url('assets/images/logo-sab-red.png') ?>" class="light-logo" alt="homepage" />
+								<img src="<?php echo base_url('assets/images/logo-sab-red.png') ?>" class="light-logo sab-logo" alt="homepage" />
 							</span>
 						</a>
 					</div>
