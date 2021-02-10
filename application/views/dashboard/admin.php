@@ -97,8 +97,36 @@
     			</div>
     		</div>
     	</div>
+    	<a class="btn btn-success" href="<?= site_url('dashboard/export_laporan_admin/' . $id_sekolah) ?>">Export Laporan</a>
+    	<a class="btn btn-warning" style="margin-left: 10px;" href="" data-toggle="modal" data-target=".bd-example-modal-lg">Export Semua</a>
     </div>
 
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    	<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+    			<form action="<?= site_url('dashboard/export_all_admin') ?>" method="POST">
+    				<div class="modal-header">
+    					<h5 class="modal-title" id="exampleModalLabel">Pilih Sekolah/Rumah Singgah</h5>
+    					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    						<span aria-hidden="true">&times;</span>
+    					</button>
+    				</div>
+    				<div class="modal-body">
+    					<?php foreach ($sekolah as $s) { ?>
+    						<div class="form-check form-check-inline">
+    							<input class="form-check-input" type="checkbox" id="<?= $s->id_sekolah ?>" name="sekolah[]" value="<?= $s->id_sekolah ?>">
+    							<label class="form-check-label" for="<?= $s->id_sekolah ?>"><?= $s->nama_sekolah ?></label>
+    						</div>
+    					<?php } ?>
+    				</div>
+    				<div class="modal-footer">
+    					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    					<button type="submit" class="btn btn-primary">Export</button>
+    				</div>
+    			</form>
+    		</div>
+    	</div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script>

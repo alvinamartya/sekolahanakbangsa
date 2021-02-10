@@ -11,11 +11,11 @@ class aksi_model extends CI_Model
         parent::__construct();
     }
 
-	public function getAksiBySekolah($id_sekolah)
+    public function getAksiBySekolah($id_sekolah)
     {
         $query = $this->db
             ->from($this->_table)
-			->join('relawan', 'relawan.id_relawan = aksi.id_relawan')
+            ->join('relawan', 'relawan.id_relawan = aksi.id_relawan')
             ->where(['relawan.id_sekolah' => $id_sekolah, 'aksi.row_status' => 'A'])
             ->order_by('aksi.tanggal_selesai', 'asc')
             ->get();
@@ -80,44 +80,109 @@ class aksi_model extends CI_Model
             ->get();
         return $query->result();
     }
-	public function getAksiAllActive()
+    public function getAksiAllActive()
     {
         $query = $this->db
             ->from($this->_table)
-			->where(['row_status' => 'A'])
+            ->where(['row_status' => 'A'])
             ->get();
-			
+
+        return $query->result();
+    }
+
+    public function getHope()
+    {
+        return $this
+            ->db
+            ->query("SELECT
+        d.nama_donatur,
+        da.keterangan
+        FROM
+        donatur_aksi da
+        JOIN donatur d on d.id_donatur = da.id_donatur")
+            ->result();
+    }
+
+    public function getAksiDetail()
+    {
+        $query = $this->db
+            ->query("SELECT * FROM (
+                SELECT 
+                        a.id_aksi, 
+                        a.nama_aksi, 
+                        DATEDIFF(a.tanggal_selesai,NOW()) as selisih_hari, 
+                        SUM(d.donasi) as total_donasi, (SUM(d.donasi) * 100 / a.target_donasi) as percentage, 
+                        (SELECT get_gambar_aksi(a.id_aksi)) as gambar,
+                        a.tanggal_selesai
+                        FROM aksi a 
+                        LEFT JOIN donatur_aksi d ON a.id_aksi = d.id_aksi
+                        WHERE d.id_status_aksi = 3 and d.is_valid = 'Y' and a.row_status = 'A' 
+                        and a.tanggal_selesai >= NOW() GROUP BY a.id_aksi, a.nama_aksi,selisih_hari 
+            ) filled
+            UNION
+            SELECT * FROM (
+                SELECT 
+                        a.id_aksi, 
+                        a.nama_aksi, 
+                        DATEDIFF(a.tanggal_selesai,NOW()) as selisih_hari, 
+                        0 as total_donasi,
+                        0 as percentage, 
+                        (SELECT get_gambar_aksi(a.id_aksi)) as gambar,
+                        a.tanggal_selesai
+                        FROM aksi a 
+                        LEFT JOIN donatur_aksi d ON a.id_aksi = d.id_aksi 
+                        WHERE a.row_status = 'A' and a.tanggal_selesai >= NOW() and d.id IS NULL
+                        GROUP BY a.id_aksi, a.nama_aksi,selisih_hari
+            ) empty");
+
         return $query->result();
     }
 
     public function getAksiHome()
     {
         $query = $this->db
-            ->query("SELECT 
-            a.id_aksi, 
-            a.nama_aksi, 
-            DATEDIFF(a.tanggal_selesai,NOW()) as selisih_hari, 
-            SUM(d.donasi) as total_donasi, (SUM(d.donasi) * 100 / a.target_donasi) as percentage, 
-            g.gambar 
-            FROM aksi a 
-            JOIN donatur_aksi d ON a.id_aksi = d.id_aksi 
-            JOIN gambar_aksi g ON g.id_aksi = a.id_aksi 
-            WHERE d.id_status_aksi = 3 and d.is_valid = 'Y' and a.row_status = 'A' 
-            and a.tanggal_selesai >= NOW() GROUP BY a.id_aksi, a.nama_aksi,selisih_hari 
-            ORDER BY a.tanggal_selesai ASC LIMIT 6");
+            ->query("SELECT * FROM (
+                SELECT 
+                        a.id_aksi, 
+                        a.nama_aksi, 
+                        DATEDIFF(a.tanggal_selesai,NOW()) as selisih_hari, 
+                        SUM(d.donasi) as total_donasi, (SUM(d.donasi) * 100 / a.target_donasi) as percentage, 
+                        (SELECT get_gambar_aksi(a.id_aksi)) as gambar,
+                        a.tanggal_selesai
+                        FROM aksi a 
+                        LEFT JOIN donatur_aksi d ON a.id_aksi = d.id_aksi 
+                        WHERE d.id_status_aksi = 3 and d.is_valid = 'Y' and a.row_status = 'A' 
+                        and a.tanggal_selesai >= NOW() GROUP BY a.id_aksi, a.nama_aksi,selisih_hari 
+            ) filled
+            UNION
+            SELECT * FROM (
+                SELECT 
+                        a.id_aksi, 
+                        a.nama_aksi, 
+                        DATEDIFF(a.tanggal_selesai,NOW()) as selisih_hari, 
+                        0 as total_donasi,
+                        0 as percentage, 
+                        (SELECT get_gambar_aksi(a.id_aksi)) as gambar,
+                        a.tanggal_selesai
+                        FROM aksi a 
+                        LEFT JOIN donatur_aksi d ON a.id_aksi = d.id_aksi 
+                        WHERE a.row_status = 'A' and a.tanggal_selesai >= NOW() and d.id IS NULL
+                        GROUP BY a.id_aksi, a.nama_aksi,selisih_hari
+            ) empty
+            ORDER BY tanggal_selesai ASC LIMIT 6");
 
         return $query->result();
     }
-	public function countAksi()
-	{
-		$aksi = $this->db
+    public function countAksi()
+    {
+        $aksi = $this->db
             ->from($this->_table)
             ->where(['row_status' => 'A'])
             ->get()->result();
-		$jumlah = 0;
-		foreach($aksi as $a){
-			$jumlah++;
-		}
-		return $jumlah;
-	}
+        $jumlah = 0;
+        foreach ($aksi as $a) {
+            $jumlah++;
+        }
+        return $jumlah;
+    }
 }

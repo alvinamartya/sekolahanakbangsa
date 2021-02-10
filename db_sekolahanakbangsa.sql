@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2021 at 06:34 AM
+-- Generation Time: Feb 09, 2021 at 05:40 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -20,6 +20,16 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_sekolahanakbangsa`
 --
+
+DELIMITER $$
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `get_gambar_aksi` (`idAksi` INT) RETURNS VARCHAR(100) CHARSET utf8mb4 BEGIN
+    return (SELECT gambar FROM gambar_aksi where id_aksi = idAksi LIMIT 1);
+    end$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -218,7 +228,7 @@ CREATE TABLE `karyawan` (
 --
 
 INSERT INTO `karyawan` (`id_karyawan`, `id_user_login`, `nama_karyawan`, `jenis_kelamin`, `jabatan_karyawan`, `nik`, `no_telepon`, `email`, `tempat_lahir`, `tanggal_lahir`, `creaby`, `creadate`, `modiby`, `modidate`, `row_status`) VALUES
-(2, 1, 'Alvin Amartya', 'L', 'Super Admin', '', '', '', '', '1971-01-01 00:00:00', 'user_login', '2021-01-26 11:24:28', 'user_login', '2021-01-26 11:24:33', 'A');
+(7, 1, 'Alvin Amartya', 'L', 'Super Admin', '1123156785431236-', '08123456789', 'alvinamartya@gmail.com', 'Bengkulu', '2000-05-02 23:38:47', '', '2021-02-09 23:40:07', '', '2021-02-09 23:40:07', 'A');
 
 -- --------------------------------------------------------
 
@@ -355,6 +365,16 @@ CREATE TABLE `status_aksi` (
   `id_status_aksi` int(11) NOT NULL,
   `nama_status_aksi` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `status_aksi`
+--
+
+INSERT INTO `status_aksi` (`id_status_aksi`, `nama_status_aksi`) VALUES
+(1, 'Menunggu Pembayaran'),
+(2, 'Sedang Diproses'),
+(3, 'Terkonfirmasi'),
+(4, 'Ditolak');
 
 -- --------------------------------------------------------
 
@@ -522,13 +542,13 @@ ALTER TABLE `user_login`
 -- AUTO_INCREMENT for table `aksi`
 --
 ALTER TABLE `aksi`
-  MODIFY `id_aksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_aksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `aksi_barang`
 --
 ALTER TABLE `aksi_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `aksi_biaya_lainnya`
@@ -540,91 +560,91 @@ ALTER TABLE `aksi_biaya_lainnya`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `biaya_lainnya`
 --
 ALTER TABLE `biaya_lainnya`
-  MODIFY `id_biaya_lainnya` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_biaya_lainnya` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `cluster_relawan`
 --
 ALTER TABLE `cluster_relawan`
-  MODIFY `id_cluster_relawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_cluster_relawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `donatur`
 --
 ALTER TABLE `donatur`
-  MODIFY `id_donatur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_donatur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `donatur_aksi`
 --
 ALTER TABLE `donatur_aksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `gambar_aksi`
 --
 ALTER TABLE `gambar_aksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `kebutuhan_tahunan`
 --
 ALTER TABLE `kebutuhan_tahunan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `kt_barang`
 --
 ALTER TABLE `kt_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `kt_biaya_lainnya`
 --
 ALTER TABLE `kt_biaya_lainnya`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `relawan`
 --
 ALTER TABLE `relawan`
-  MODIFY `id_relawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_relawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `sekolah`
 --
 ALTER TABLE `sekolah`
-  MODIFY `id_sekolah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_sekolah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `status_aksi`
 --
 ALTER TABLE `status_aksi`
-  MODIFY `id_status_aksi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_status_aksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables

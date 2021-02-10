@@ -15,7 +15,7 @@
                             <div class="card-title aksi-title"><?= $a->nama_aksi ?></div>
                             <div class="card-content">
                                 <div class="progress">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="<?= $a->percentage ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: <?= $a->percentage ?>%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <div class="aksi-content">
                                     <div>
