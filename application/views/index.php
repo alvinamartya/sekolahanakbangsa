@@ -125,7 +125,8 @@
                                 <div class="card-title aksi-title"><?= $a->nama_aksi ?></div>
                                 <div class="card-content">
                                     <div class="progress">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 50%" aria-valuenow="<?= $a->percentage ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: <?= $a->percentage ?>%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
                                     </div>
                                     <div class="aksi-content">
                                         <div>
@@ -160,38 +161,18 @@
             </div>
         </div>
         <div class="owl-carousel owl-theme mt-5">
-            <div class="item doa-items">
-                <div class="doa-box card p-2">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Teddyanto Jamal</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pretium at nunc vitae scelerisque. Fusce rutrum sem dapibus lorem ornare aliquet</p>
+            <?php if ($hope != null) {
+                foreach ($hope as $h) { ?>
+                    <div class="item doa-items">
+                        <div class="doa-box card p-2">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold"><?= $h->nama_donatur ?></h5>
+                                <p class="card-text"><?= $h->keterangan ?></p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="item doa-items">
-                <div class="doa-box card p-2">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Alvin Amartya</h5>
-                        <p class="card-text">Orci varius natoque penatibus et magnis dis parturient montes.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item doa-items">
-                <div class="doa-box card p-2">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Ivan Firman</h5>
-                        <p class="card-text">Nascetur ridiculus mus. Quisque eget volutpat purus. Nulla facilisi. Morbi pharetra leo urna</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item doa-items">
-                <div class="doa-box card p-2">
-                    <div class="card-body">
-                        <h5 class="card-title font-weight-bold">Arnida Laili</h5>
-                        <p class="card-text">Vestibulum lectus lectus, porttitor vitae risus in, semper ullamcorper ligula. </p>
-                    </div>
-                </div>
-            </div>
+            <?php }
+            } ?> -->
         </div>
     </section>
     <!-- End Section Do'a donatur -->

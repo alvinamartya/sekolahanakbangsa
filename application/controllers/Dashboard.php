@@ -71,6 +71,499 @@ class Dashboard extends CI_Controller
 
 		$this->load->view('templates/footer');
 	}
+
+	public function export_all_relawan()
+	{
+		include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
+
+		$this->load->model('aksi_model');
+		$this->load->model('relawan_model');
+		$this->load->model('donatur_aksi_model');
+		$this->load->model('sekolah_model');
+
+		$data = $this->input->post();
+
+		if ($data['sekolah'] != null) {
+			$excel = new PHPExcel();
+
+			// style
+			$style_col = array(
+				'font' => array("bold" => true),
+				'alignment' => array(
+					'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+					'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+				),
+				'borders' => array(
+					'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+					'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+					'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+					'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				)
+			);
+
+			$style_row = array(
+				'alignment' => array(
+					'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+				),
+				'borders' => array(
+					'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+					'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+					'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+					'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+				)
+			);
+
+			$sheet = $excel->getActiveSheet();
+			$i = 0;
+			$first = true;
+			foreach ($data['sekolah'] as $s) {
+				if ($first == true) {
+					$first = false;
+				} else {
+					$sheet = $excel->createSheet($i);
+				}
+
+				// header
+				$sheet->setCellValue('A1', 'Laporan Aksi Galang Dana');
+				$sheet->mergeCells("A1:G1");
+				$sheet->getStyle("A1")->getFont()->setBold(TRUE);
+				$sheet->getStyle("A1")->getFont()->setSize(16);
+				$sheet->getStyle("A1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+				// table header
+				$sheet->setCellValue('A3', 'No');
+				$sheet->setCellValue('B3', 'Penanggung Jawab');
+				$sheet->setCellValue('C3', 'Nama Aksi');
+				$sheet->setCellValue('D3', 'Donasi Terkumpul');
+				$sheet->setCellValue('E3', 'Target Donasi');
+				$sheet->setCellValue('F3', 'Persentase');
+				$sheet->setCellValue('G3', 'Tanggal Selesai');
+
+				// style
+				$sheet->getStyle("A3")->applyFromArray($style_col);
+				$sheet->getStyle("B3")->applyFromArray($style_col);
+				$sheet->getStyle("C3")->applyFromArray($style_col);
+				$sheet->getStyle("D3")->applyFromArray($style_col);
+				$sheet->getStyle("E3")->applyFromArray($style_col);
+				$sheet->getStyle("F3")->applyFromArray($style_col);
+				$sheet->getStyle("G3")->applyFromArray($style_col);
+
+				$data_aksi = $this->aksi_model->getAksiBySekolah($s);
+				$data_sekolah = $this->sekolah_model->getByID($s);
+				$data_relawan = $this->relawan_model->getAll();
+				$data_donatur_aksi = $this->donatur_aksi_model->getDanaValid();
+
+				$no = 1;
+				$numrow = 4;
+				foreach ($data_aksi as $k) {
+					$sheet->setCellValue('A' . $numrow, $no);
+					foreach ($data_relawan as $r) {
+						$sheet->setCellValue('B' . $numrow,  $r->nama_relawan);
+					}
+
+					$sheet->setCellValue('C' . $numrow,  $k->nama_aksi);
+
+					$jumlah = 0;
+					if ($data_donatur_aksi != null) {
+						foreach ($data_donatur_aksi as $d) {
+							if ($d->id_aksi == $k->id_aksi) {
+								$jumlah += $d->donasi;
+							}
+						}
+					}
+
+					$percentage = $jumlah * 100 / $k->target_donasi;
+
+					$sheet->setCellValue('D' . $numrow, 'Rp ' . number_format($jumlah, 2, ',', '.'));
+					$sheet->setCellValue('E' . $numrow,  'Rp ' . number_format($k->target_donasi, 2, ',', '.'));
+					$sheet->setCellValue('F' . $numrow,  $percentage . '%');
+					$sheet->setCellValue('G' . $numrow, date("d-m-Y", strtotime($k->tanggal_selesai)));
+
+
+					$sheet->getStyle("A" . $numrow)->applyFromArray($style_row);
+					$sheet->getStyle("B" . $numrow)->applyFromArray($style_row);
+					$sheet->getStyle("C" . $numrow)->applyFromArray($style_row);
+					$sheet->getStyle("D" . $numrow)->applyFromArray($style_row);
+					$sheet->getStyle("E" . $numrow)->applyFromArray($style_row);
+					$sheet->getStyle("F" . $numrow)->applyFromArray($style_row);
+					$sheet->getStyle("G" . $numrow)->applyFromArray($style_row);
+
+					$no++;
+					$numrow++;
+				}
+
+				$sheet->getColumnDimension("A")->setWidth(5);
+				$sheet->getColumnDimension("B")->setWidth(30);
+				$sheet->getColumnDimension("C")->setWidth(30);
+				$sheet->getColumnDimension("D")->setWidth(20);
+				$sheet->getColumnDimension("E")->setWidth(30);
+				$sheet->getColumnDimension("F")->setWidth(20);
+				$sheet->getColumnDimension("G")->setWidth(20);
+
+				$sheet->getDefaultRowDimension()->setRowHeight(-1);
+
+				$sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+
+				$sheet->setTitle($data_sekolah->nama_sekolah);
+				$i++;
+			}
+
+			$excel->setActiveSheetIndex(0);
+
+			// ouput file
+			ob_end_clean();
+			header("Content-type: application/vnd.ms-excel");
+			header('Content-Disposition: attachment; filename="Laporan Aksi.xls"');
+			header("Pragma: no-cache");
+			header("Expires: 0");
+
+			$objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel5');
+			$objWriter->save('php://output');
+			redirect(site_url('dashboard/relawan'));
+		}
+	}
+
+	public function export_all_admin()
+	{
+		include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
+
+		$this->load->model('kebutuhan_tahunan_model');
+		$this->load->model('sekolah_model');
+
+		$data = $this->input->post();
+
+		if ($data['sekolah'] != null) {
+			$excel = new PHPExcel();
+
+			// style
+			$style_col = array(
+				'font' => array("bold" => true),
+				'alignment' => array(
+					'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+					'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+				),
+				'borders' => array(
+					'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+					'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+					'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+					'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				)
+			);
+
+			$style_row = array(
+				'alignment' => array(
+					'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+				),
+				'borders' => array(
+					'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+					'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+					'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+					'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+				)
+			);
+
+			$sheet = $excel->getActiveSheet();
+			$i = 0;
+			$first = true;
+			foreach ($data['sekolah'] as $s) {
+				if ($first == true) {
+					$first = false;
+				} else {
+					$sheet = $excel->createSheet($i);
+				}
+
+				// header
+				$sheet->setCellValue('A1', 'Laporan Aksi Kebutuhan Tahunan');
+				$sheet->mergeCells("A1:C1");
+				$sheet->getStyle("A1")->getFont()->setBold(TRUE);
+				$sheet->getStyle("A1")->getFont()->setSize(16);
+				$sheet->getStyle("A1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+				// table header
+				$sheet->setCellValue('A3', 'No');
+				$sheet->setCellValue('B3', 'Tahun');
+				$sheet->setCellValue('C3', 'Kebutuhan');
+
+				// style
+				$sheet->getStyle("A3")->applyFromArray($style_col);
+				$sheet->getStyle("B3")->applyFromArray($style_col);
+				$sheet->getStyle("C3")->applyFromArray($style_col);
+
+				$kebutuhan_tahunan = $this->kebutuhan_tahunan_model->getApprovedKebutuhanTahunanByIdSekolah($s);
+				$data_sekolah = $this->sekolah_model->getByID($s);
+
+				$no = 1;
+				$numrow = 4;
+				foreach ($kebutuhan_tahunan as $k) {
+					$excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
+
+					$excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $k->tahun);
+					$excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow,  'Rp ' . number_format($k->total_kebutuhan, 2, ',', '.'));
+
+					$excel->getActiveSheet()->getStyle("A" . $numrow)->applyFromArray($style_row);
+					$excel->getActiveSheet()->getStyle("B" . $numrow)->applyFromArray($style_col);
+					$excel->getActiveSheet()->getStyle("C" . $numrow)->applyFromArray($style_col);
+
+					$no++;
+					$numrow++;
+				}
+
+				$excel->getActiveSheet()->getColumnDimension("A")->setWidth(5);
+				$excel->getActiveSheet()->getColumnDimension("B")->setWidth(30);
+				$excel->getActiveSheet()->getColumnDimension("C")->setWidth(30);
+
+				$sheet->getDefaultRowDimension()->setRowHeight(-1);
+
+				$sheet->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+
+				$sheet->setTitle($data_sekolah->nama_sekolah);
+				$i++;
+			}
+
+			$excel->setActiveSheetIndex(0);
+
+			// ouput file
+			ob_end_clean();
+			header("Content-type: application/vnd.ms-excel");
+			header('Content-Disposition: attachment; filename="Laporan Aksi.xls"');
+			header("Pragma: no-cache");
+			header("Expires: 0");
+
+			$objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel5');
+			$objWriter->save('php://output');
+			redirect(site_url('dashboard/relawan'));
+		}
+	}
+
+	public function export_laporan_admin($id)
+	{
+		include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
+
+		$this->load->model('kebutuhan_tahunan_model');
+		$this->load->model('sekolah_model');
+
+		$excel = new PHPExcel();
+
+		// style
+		$style_col = array(
+			'font' => array("bold" => true),
+			'alignment' => array(
+				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+				'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+			),
+			'borders' => array(
+				'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+			)
+		);
+
+		$style_row = array(
+			'alignment' => array(
+				'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+			),
+			'borders' => array(
+				'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+			)
+		);
+
+		// header
+		$excel->setActiveSheetIndex(0)->setCellValue('A1', 'Laporan Kebutuhan Tahunan');
+		$excel->getActiveSheet()->mergeCells("A1:C1");
+		$excel->getActiveSheet()->getStyle("A1")->getFont()->setBold(TRUE);
+		$excel->getActiveSheet()->getStyle("A1")->getFont()->setSize(16);
+		$excel->getActiveSheet()->getStyle("A1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+		// table header
+		$excel->setActiveSheetIndex(0)->setCellValue('A3', 'No');
+		$excel->setActiveSheetIndex(0)->setCellValue('B3', 'Tahun');
+		$excel->setActiveSheetIndex(0)->setCellValue('C3', 'Kebutuhan');
+
+		// style
+		$excel->getActiveSheet()->getStyle("A3")->applyFromArray($style_col);
+		$excel->getActiveSheet()->getStyle("B3")->applyFromArray($style_col);
+		$excel->getActiveSheet()->getStyle("C3")->applyFromArray($style_col);
+
+		$kebutuhan_tahunan = $this->kebutuhan_tahunan_model->getApprovedKebutuhanTahunanByIdSekolah($id);
+		$data_sekolah = $this->sekolah_model->getByID($id);
+
+		$no = 1;
+		$numrow = 4;
+		foreach ($kebutuhan_tahunan as $k) {
+			$excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
+
+			$excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $k->tahun);
+			$excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow,  'Rp ' . number_format($k->total_kebutuhan, 2, ',', '.'));
+
+			$excel->getActiveSheet()->getStyle("A" . $numrow)->applyFromArray($style_row);
+			$excel->getActiveSheet()->getStyle("B" . $numrow)->applyFromArray($style_col);
+			$excel->getActiveSheet()->getStyle("C" . $numrow)->applyFromArray($style_col);
+
+			$no++;
+			$numrow++;
+		}
+
+		$excel->getActiveSheet()->getColumnDimension("A")->setWidth(5);
+		$excel->getActiveSheet()->getColumnDimension("B")->setWidth(30);
+		$excel->getActiveSheet()->getColumnDimension("C")->setWidth(30);
+
+		$excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+
+		$excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+
+		$excel->getActiveSheet()->setTitle($data_sekolah->nama_sekolah);
+		$excel->setActiveSheetIndex(0);
+
+		// ouput file
+		ob_end_clean();
+		header("Content-type: application/vnd.ms-excel");
+		header('Content-Disposition: attachment; filename="Laporan Tahunan ' . $data_sekolah->nama_sekolah . '.xls"');
+		header("Pragma: no-cache");
+		header("Expires: 0");
+
+		$objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel5');
+		$objWriter->save('php://output');
+		redirect(site_url('dashboard/admin'));
+	}
+
+	public function export_laporan_relawan($id)
+	{
+		include APPPATH . 'third_party/PHPExcel/PHPExcel.php';
+
+		$this->load->model('aksi_model');
+		$this->load->model('relawan_model');
+		$this->load->model('donatur_aksi_model');
+		$this->load->model('sekolah_model');
+
+		$excel = new PHPExcel();
+
+		// style
+		$style_col = array(
+			'font' => array("bold" => true),
+			'alignment' => array(
+				'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+				'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+			),
+			'borders' => array(
+				'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+			)
+		);
+
+		$style_row = array(
+			'alignment' => array(
+				'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+			),
+			'borders' => array(
+				'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+				'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+			)
+		);
+
+		// header
+		$excel->setActiveSheetIndex(0)->setCellValue('A1', 'Laporan Aksi Galang Dana');
+		$excel->getActiveSheet()->mergeCells("A1:G1");
+		$excel->getActiveSheet()->getStyle("A1")->getFont()->setBold(TRUE);
+		$excel->getActiveSheet()->getStyle("A1")->getFont()->setSize(16);
+		$excel->getActiveSheet()->getStyle("A1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+		// table header
+		$excel->setActiveSheetIndex(0)->setCellValue('A3', 'No');
+		$excel->setActiveSheetIndex(0)->setCellValue('B3', 'Penanggung Jawab');
+		$excel->setActiveSheetIndex(0)->setCellValue('C3', 'Nama Aksi');
+		$excel->setActiveSheetIndex(0)->setCellValue('D3', 'Donasi Terkumpul');
+		$excel->setActiveSheetIndex(0)->setCellValue('E3', 'Target Donasi');
+		$excel->setActiveSheetIndex(0)->setCellValue('F3', 'Persentase');
+		$excel->setActiveSheetIndex(0)->setCellValue('G3', 'Tanggal Selesai');
+
+		// style
+		$excel->getActiveSheet()->getStyle("A3")->applyFromArray($style_col);
+		$excel->getActiveSheet()->getStyle("B3")->applyFromArray($style_col);
+		$excel->getActiveSheet()->getStyle("C3")->applyFromArray($style_col);
+		$excel->getActiveSheet()->getStyle("D3")->applyFromArray($style_col);
+		$excel->getActiveSheet()->getStyle("E3")->applyFromArray($style_col);
+		$excel->getActiveSheet()->getStyle("F3")->applyFromArray($style_col);
+		$excel->getActiveSheet()->getStyle("G3")->applyFromArray($style_col);
+
+		$data_aksi = $this->aksi_model->getAksiBySekolah($id);
+		$data_sekolah = $this->sekolah_model->getByID($id);
+		$data_relawan = $this->relawan_model->getAll();
+		$data_donatur_aksi = $this->donatur_aksi_model->getDanaValid();
+
+		$no = 1;
+		$numrow = 4;
+		foreach ($data_aksi as $k) {
+			$excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, $no);
+			foreach ($data_relawan as $r) {
+				$excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow,  $r->nama_relawan);
+			}
+
+			$excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow,  $k->nama_aksi);
+
+			$jumlah = 0;
+			if ($data_donatur_aksi != null) {
+				foreach ($data_donatur_aksi as $d) {
+					if ($d->id_aksi == $k->id_aksi) {
+						$jumlah += $d->donasi;
+					}
+				}
+			}
+
+			$percentage = $jumlah * 100 / $k->target_donasi;
+
+			$excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, 'Rp ' . number_format($jumlah, 2, ',', '.'));
+			$excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow,  'Rp ' . number_format($k->target_donasi, 2, ',', '.'));
+			$excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow,  $percentage . '%');
+			$excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, date("d-m-Y", strtotime($k->tanggal_selesai)));
+
+
+			$excel->getActiveSheet()->getStyle("A" . $numrow)->applyFromArray($style_row);
+			$excel->getActiveSheet()->getStyle("B" . $numrow)->applyFromArray($style_row);
+			$excel->getActiveSheet()->getStyle("C" . $numrow)->applyFromArray($style_row);
+			$excel->getActiveSheet()->getStyle("D" . $numrow)->applyFromArray($style_row);
+			$excel->getActiveSheet()->getStyle("E" . $numrow)->applyFromArray($style_row);
+			$excel->getActiveSheet()->getStyle("F" . $numrow)->applyFromArray($style_row);
+			$excel->getActiveSheet()->getStyle("G" . $numrow)->applyFromArray($style_row);
+
+			$no++;
+			$numrow++;
+		}
+
+		$excel->getActiveSheet()->getColumnDimension("A")->setWidth(5);
+		$excel->getActiveSheet()->getColumnDimension("B")->setWidth(30);
+		$excel->getActiveSheet()->getColumnDimension("C")->setWidth(30);
+		$excel->getActiveSheet()->getColumnDimension("D")->setWidth(20);
+		$excel->getActiveSheet()->getColumnDimension("E")->setWidth(30);
+		$excel->getActiveSheet()->getColumnDimension("F")->setWidth(20);
+		$excel->getActiveSheet()->getColumnDimension("G")->setWidth(20);
+
+		$excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(-1);
+
+		$excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+
+		$excel->getActiveSheet()->setTitle($data_sekolah->nama_sekolah);
+		$excel->setActiveSheetIndex(0);
+
+		// ouput file
+		ob_end_clean();
+		header("Content-type: application/vnd.ms-excel");
+		header('Content-Disposition: attachment; filename="Laporan Aksi ' . $data_sekolah->nama_sekolah . '.xls"');
+		header("Pragma: no-cache");
+		header("Expires: 0");
+
+		$objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel5');
+		$objWriter->save('php://output');
+		redirect(site_url('dashboard/relawan'));
+	}
+
 	public function detail_kebutuhan()
 	{
 		// set page title
@@ -111,6 +604,7 @@ class Dashboard extends CI_Controller
 
 		$this->load->view('templates/footer');
 	}
+
 	public function relawan()
 	{
 		$user_id = $this->session->user_id;
@@ -132,7 +626,6 @@ class Dashboard extends CI_Controller
 				break;
 			}
 		}
-
 
 		// set kebutuhan data pada dashboard
 		$this->load->model('barang_model');
@@ -172,6 +665,7 @@ class Dashboard extends CI_Controller
 		//set footer template
 		$this->load->view('templates/footer');
 	}
+
 	public function detail_donasi()
 	{
 		$user_id = $this->session->user_id;
