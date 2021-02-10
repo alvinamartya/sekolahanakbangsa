@@ -60,19 +60,17 @@
                                         <td><?= $no++ ?></td>
                                         <td align="center"><?= $kt->tahun ?></td>
                                         <td align="right"><?= "Rp " . number_format($kt->total_kebutuhan, 2, ",", "."); ?></td>
-                                        <td><?php
-                                            if ($kt->is_approved == null) {
-                                                echo 'Menunggu Persetujuan';
-                                            } else if ($kt->is_approved == 'Y') {
-                                                echo 'Disetujui';
-                                            } else if ($kt->is_approved == 'N') {
-                                                echo 'Ditolak';
-                                            }
-                                            ?></td>
+                                        <td><?php echo $kt->kt_status ?></td>
                                         <td align="center">
-                                            <a href="<?= site_url('kebutuhan-tahunan/edit/' .  $kt->id) ?>" class="btn btn-primary"><i class="fa fa-eye"></i> Edit</a>
-                                            <a href="<?= site_url('kebutuhan-tahunan/detail/' .  $kt->id) ?>" class="btn btn-primary"><i class="fa fa-eye"></i> Detail</a>
+                                            <a href="<?= site_url('kebutuhan-tahunan/detail/' .  $kt->id) ?>" class="btn btn-secondary"><i class="fa fa-eye"></i> Detail</a>
+                                            <?php if ($kt->kt_status == 'Draft') { ?>
+                                            <form action="<?= site_url('kebutuhan-tahunan/kirim/' .  $kt->id) ?>" method="post" class="d-inline">
+                                                <button type="submit" class="btn btn-info"><i class="fa fa-paper-plane"></i> Kirim</button>
+                                            </form>
+                                            <a href="<?= site_url('kebutuhan-tahunan/edit/' .  $kt->id) ?>" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
                                             <a href="<?= site_url('kebutuhan-tahunan/destroy/' .  $kt->id) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>
+                                            <?php } ?>
+
                                         </td>
                                     </tr>
                                 <?php } ?>

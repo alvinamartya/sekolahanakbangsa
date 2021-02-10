@@ -248,19 +248,10 @@
     $(document).ready(function() {
         const dd = new Date();
         $(".yearpicker").yearpicker({
-            year: dd.getFullYear(),
+            year: <?= $kt->tahun ?>,
             startYear: 2012,
             endYear: 2030
         });
 
-        $('.yearpicker-current').html("<?= $kt->tahun ?>");
-        $('.yearpicker-items').removeClass('selected');
-        $('.yearpicker-items').each(function(i, obj) {
-            var year = $(this).html();
-            console.log(year, "<?= $kt->tahun ?>")
-            if(year == "<?= $kt->tahun ?>") {
-                $(this).addClass('selected');
-            }
-        });
     });
 </script>

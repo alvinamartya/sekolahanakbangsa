@@ -236,6 +236,16 @@ class Kebutuhan_tahunan extends CI_Controller
         $barang = json_decode(isset($post["barang"]) ? $post["barang"] : null);
 
         if ($this->form_validation->run() == true) {
+            $kt_data = $this->kebutuhan_tahunan_model->getByID($kt_id);
+            $is_process_data = $this->kebutuhan_tahunan_model->getKebutuhanTahunanByYearAndSchoolAll($post["year"], $relawan->id_sekolah);
+
+            if ($is_process_data != null) {
+                if($is_process_data->tahun != $kt_data->tahun) {
+                    echo json_encode(['success' => false, 'message' => '<p>Kebutuhan tahun ' . $post["year"] . ' sudah terbuat.</p>']);
+                    return;
+                }
+            }
+
             $aksi_data = array(
                 'id_relawan' => $relawan->id_relawan,
                 'id_sekolah' => $relawan->id_sekolah,
@@ -302,6 +312,7 @@ class Kebutuhan_tahunan extends CI_Controller
 
             $this->session->set_flashdata("success", "Data berhasil diubah.");
             echo json_encode(['status' => true, 'message' => '']);
+
         } else {
             echo json_encode(['status' => false, 'message' => validation_errors()]);
         }
@@ -319,7 +330,7 @@ class Kebutuhan_tahunan extends CI_Controller
     {
         $relawan = $this->getRelawanSession();
         $kebutuhan_tahunan = $this->kebutuhan_tahunan_model->getKebutuhanTahunan($id);
-        if ($kebutuhan_tahunan->is_approved == 'Y') {
+        if ($kebutuhan_tahunan->is_approved == 'Disetujui') {
             $this->session->set_flashdata("failed", "Kebutuhan tahunan yang sudah disetujui tidak dapat dihapus");
             redirect(site_url('kebutuhan-tahunan'));
         } else {
@@ -426,6 +437,25 @@ class Kebutuhan_tahunan extends CI_Controller
             }
 
         }
+    }
+
+    /*
+    ==============================================================
+    Kirim Kebutuhan Tahunan
+    ==============================================================
+    */
+    public function kirim($id)
+    {
+        $relawan = $this->getRelawanSession();
+
+        $kebutuhan_tahunan = array(
+            'kt_status' => 'Menunggu Persetujuan',
+        );
+
+        $this->kebutuhan_tahunan_model->update($id, $kebutuhan_tahunan);
+        $this->session->set_flashdata("success", "Kebutuhan Tahunan berhasil dikirim.");
+
+        redirect(site_url('kebutuhan-tahunan'));
     }
 
 

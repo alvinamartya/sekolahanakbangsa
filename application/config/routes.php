@@ -64,3 +64,4 @@ $route['kebutuhan-tahunan/data'] = 'kebutuhan_tahunan/data';
 $route['kebutuhan-tahunan/edit'] = 'kebutuhan_tahunan/edit';
 $route['kebutuhan-tahunan/edit/(:any)'] = 'kebutuhan_tahunan/edit/$1';
 $route['kebutuhan-tahunan/ubah/(:any)'] = 'kebutuhan_tahunan/ubah/$1';
+$route['kebutuhan-tahunan/kirim/(:any)'] = 'kebutuhan_tahunan/kirim/$1';
