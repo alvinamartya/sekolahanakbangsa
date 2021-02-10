@@ -52,7 +52,6 @@
 				<div class="card-body">
 					<h4 class="card-title">Kebutuhan Tahunan Biaya</h4>
 					<div class="table-responsive">
-					<small>
 						<table id="biaya-table" class="table table-striped table-bordered no-wrap">
 							<thead>
 								<tr>
@@ -82,7 +81,6 @@
 							<?php $i++; }?>
 							</tbody>
 						</table>
-					</small>
 					</div>
 				</div>
 			</div>
@@ -95,7 +93,6 @@
 				<div class="card-body">
 					<h4 class="card-title">Kebutuhan Tahunan Barang</h4>
 					<div class="table-responsive">
-					<small>
 						<table id="barang-table" class="table table-striped table-bordered no-wrap">
 							<thead>
 								<tr>
@@ -125,7 +122,6 @@
 							<?php $i++; } ?>
 							</tbody>
 						</table>
-					</small>
 					</div>
 				</div>
 			</div>

@@ -141,7 +141,7 @@ class Bantuan_sekolah extends CI_Controller
 		$modidate = date('Y-m-d H:i:s');
 
 		$data = array(
-			'is_approved' => 'Y',
+			'kt_status' => 'Disetujui',
 			'modiby' => $modiby,
 			'modidate' => $modidate
 		);
@@ -158,7 +158,7 @@ class Bantuan_sekolah extends CI_Controller
 		$modidate = date('Y-m-d H:i:s');
 
 		$data = array(
-			'is_approved' => 'N',
+			'kt_status' => 'Ditolak',
 			'modiby' => $modiby,
 			'modidate' => $modidate
 		);
