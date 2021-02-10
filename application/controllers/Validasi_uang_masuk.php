@@ -75,6 +75,7 @@ class Validasi_uang_masuk extends CI_Controller
     public function ubah($id)
     {
         $data_donatur_aksi = $this->donatur_aksi_model->getByID($id);
+
         $this->loadUbah($data_donatur_aksi);
     }
 

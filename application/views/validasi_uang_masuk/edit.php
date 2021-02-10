@@ -43,7 +43,9 @@
                 <div class="form-group">
                     <label for="nama_relawan"><strong> Bukti Transfer</strong> </label><br>
                     <?php if ($donatur_aksi->bukti_transfer != null) { ?>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Lihat Bukti</button>
+                        <a href="" data-toggle="modal" data-target=".bd-example-modal-lg">
+                            <img class="d-block w-25" src="<?php echo base_url('assets/images/bukti_transfer/' . $donatur_aksi->bukti_transfer) ?>" alt="First slide">
+                        </a>
                     <?php } ?>
                 </div>
 
