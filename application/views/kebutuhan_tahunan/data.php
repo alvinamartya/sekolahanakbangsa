@@ -68,15 +68,7 @@
                                                 <a href="<?= site_url('assets/lpj/'. $kt->laporan_pertanggung_jawaban) ?>"><?= $kt->laporan_pertanggung_jawaban ?></a>
                                             <?php } ?>
                                         </td>
-                                        <td class="text-center"><?php
-                                            if ($kt->is_approved == null) {
-                                                echo 'Menunggu Persetujuan';
-                                            } else if ($kt->is_approved == 'Y') {
-                                                echo 'Disetujui';
-                                            } else if ($kt->is_approved == 'N') {
-                                                echo 'Ditolak';
-                                            }
-                                            ?></td>
+                                        <td class="text-center"><?= $kt->kt_status ?></td>
                                     </tr>
                                 <?php } ?>
                             </tbody>
