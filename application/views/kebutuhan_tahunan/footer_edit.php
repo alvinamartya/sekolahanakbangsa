@@ -1,3 +1,4 @@
+
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->
 <!-- ============================================================== -->
@@ -9,7 +10,6 @@
 <!-- ============================================================== -->
 <!-- All Jquery -->
 <!-- ============================================================== -->
-<script src="<?php echo base_url('assets/libs/jquery/dist/jquery.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/libs/popper.js/dist/umd/popper.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/libs/bootstrap/dist/js/bootstrap.min.js') ?>"></script>
 <!-- apps -->
@@ -34,11 +34,11 @@
 <script src="<?php echo base_url('assets/js/script.js') ?>"></script>
 <script>
     function getSumBiaya(aksi) {
-        return aksi.map(item => item.harga).reduce((prev, next) => prev + next, 0);
+        return aksi.filter((a) => a.row_status == "A").map(item => item.harga).reduce((prev, next) => prev + next, 0);
     }
 
     function getSumBarang(aksi) {
-        return aksi.reduce((acc, barang) => {
+        return aksi.filter((a) => a.row_status == "A").reduce((acc, barang) => {
             return acc + (barang.harga_satuan * barang.jumlah)
         }, 0);
     }
@@ -51,7 +51,7 @@
 
     function updateBiayaTable(aksiBiaya) {
         $("#biaya-table tbody").html("");
-        aksiBiaya.forEach(data => {
+        aksiBiaya.filter(a => a.row_status == "A").forEach(data => {
             $("#biaya-table tbody").append(`<tr>
                 <td>${data.nama_biaya}</td>
                 <td>${currencyFormat.format(data.harga)}</td>
@@ -65,7 +65,7 @@
 
     function updateBarangTable(aksiBarang) {
         $("#barang-table tbody").html("");
-        aksiBarang.forEach(data => {
+        aksiBarang.filter(a => a.row_status == "A").forEach(data => {
             $("#barang-table tbody").append(`<tr>
                 <td>${data.nama_barang}</td>
                 <td>${data.jumlah}</td>
@@ -79,50 +79,95 @@
     }
 
     $(document).ready(() => {
+        $('#validationAlert').hide();
         var aksiBiaya = [];
         var aksiBarang = [];
-        $('#validationAlert').hide();
 
-        $("#btnSave").on("click", function() {
+        var barangs = <?php echo json_encode($kt_barang) ?>;
+        $.each(barangs, function(key, value) {
+            aksiBarang.push({
+                id: value.id,
+                id_barang: value.id_barang,
+                nama_barang: value.nama_barang,
+                jumlah: parseInt(value.jumlah),
+                harga_satuan: parseInt(value.harga_satuan),
+                row_status: 'A'
+            })
+        });
 
+        var biayas = <?php echo json_encode($kt_biaya_lainnya) ?>;
+        $.each(biayas, function(key, value) {
+            aksiBiaya.push({
+                id: value.id,
+                id_biaya: value.id_biaya_lainnya,
+                nama_biaya: value.nama_biaya_lainnya,
+                harga: parseInt(value.biaya),
+                row_status: 'A'
+            })
+        });
+
+        // Show biaya edit modal
+        $("#biaya-table").on('click', '.btnEdit', function() {
+            $('#modalBiaya').modal('show');
+            $("#btnSubmitBiaya").data('type', 'edit');
+            let idbiaya = $(this).data('id').toString();
+            const idx = aksiBiaya.findIndex(e => e.id_biaya == idbiaya && e.row_status == 'A');
+
+            $('#id_biaya_lainnya').data('idx', idx);
+            $('#id_biaya_lainnya').val(aksiBiaya[idx].id_biaya);
+            $('#biaya').val(currencyFormat.format(aksiBiaya[idx].harga));
+        });
+
+        // Show barang edit modal
+        $("#barang-table").on('click', '.btnEdit', function() {
+            debugger;
+            $('#modalBarang').modal('show');
+            $("#btnSubmitBarang").data('type', 'edit');
+            let idbarang = $(this).data('id').toString();
+            const idx = aksiBarang.findIndex(e => e.id_barang == idbarang && e.row_status == 'A');
+
+            $('#id_barang').data('idx', idx);
+            $('#id_barang').val(aksiBarang[idx].id_barang);
+            $('#jumlah').val(aksiBarang[idx].jumlah);
+            $('#harga_satuan').val(currencyFormat.format(aksiBarang[idx].harga_satuan));
+        });
+
+        // Clear form on modal close
+        $('#modalBiaya, #modalBarang').on('hidden.bs.modal', function (e) {
+            $(this).find("input,textarea,select").val('');
+            $(this).find("button[type='submit']").data('type', 'add');
+        });
+
+        $("#mainForm").submit((e) => {
+            e.preventDefault();
             let formData = new FormData();
-            formData.append("nama_aksi", $('#nama_aksi').val())
-            formData.append("tanggal_selesai", $('#tanggal_selesai').val());
-            formData.append("deskripsi_aksi", $('#deskripsi_aksi').val());
+            formData.append("year", $('#year').val())
+            formData.append("desc", $('#desc').val());
             formData.append("target_donasi", getNumber($('#target_donasi').html()));
             formData.append("barang", JSON.stringify(aksiBarang));
             formData.append("biaya", JSON.stringify(aksiBiaya));
 
-            if (getNumber($('#target_donasi').html()) === 0) {
-                $("#validationAlert").html('<p>Target donasi wajib diisi.<\/p>\n');
-                $("#validationAlert").show();
-            } else {
-                $.each($('#gambar_aksi')[0].files, function(key, input) {
-                    formData.append('files[]', input);
-                });
-
-                $.ajax({
-                    url: "<?= site_url('aksi/add') ?>",
-                    type: "POST",
-                    contentType: false,
-                    processData: false,
-                    data: formData,
-                    success: function(res) {
-                        var respon = JSON.parse(res);
-                        if (respon.success) {
-                            window.location.href = "<?= site_url('aksi') ?>"
-                        } else {
-                            $("#validationAlert").html(respon.message);
-                            $("#validationAlert").show();
-                            $('html, body').animate({scrollTop: '0px'}, 300);
-                        }
-
-                    },
-                    error: function(err) {
-                        console.log(err);
+            $.ajax({
+                url: "<?= site_url('kebutuhan_tahunan/ubah/'.$kt->id) ?>",
+                type: "POST",
+                contentType: false,
+                processData: false,
+                data: formData,
+                success:function(res) {
+                    var respon = JSON.parse(res);
+                    if(respon.status) {
+                        window.location.href = "<?= site_url('kebutuhan-tahunan') ?>"
+                    } else {
+                        $("#validationAlert").html(respon.message);
+                        $("#validationAlert").show();
+                        $('html, body').animate({scrollTop: '0px'}, 300);
                     }
-                });
-            }
+
+                },
+                error:function(err){
+                    console.log(err);
+                }
+            });
         });
 
         $("#biaya-table, #barang-table").on('click', '.btnDelete', function() {
@@ -131,12 +176,12 @@
                 const data_id = tr.find('.btnDelete').data("id").toString();
                 const buttonType = tr.find('.btnDelete').data("type").toString();
 
-                if (buttonType == 'biaya') {
-                    const idx = aksiBiaya.map(i => i.id_biaya).indexOf(data_id);
-                    aksiBiaya.splice(idx, 1);
+                if(buttonType == 'biaya') {
+                    const idx = aksiBiaya.findIndex(e => e.id_biaya == data_id && e.row_status == 'A');
+                    aksiBiaya[idx].row_status = 'D';
                 } else {
-                    const idx = aksiBarang.map(i => i.id_barang).indexOf(data_id);
-                    aksiBarang.splice(idx, 1);
+                    const idx = aksiBarang.findIndex(e => e.id_barang == data_id && e.row_status == 'A');
+                    aksiBarang[idx].row_status = 'D';
                 }
 
                 tr.remove();
@@ -151,37 +196,6 @@
             thousandsSeparator: '.'
         });
 
-        // Show biaya edit modal
-        $("#biaya-table").on('click', '.btnEdit', function() {
-            $('#modalBiaya').modal('show');
-            $("#btnSubmitBiaya").data('type', 'edit');
-            let idbiaya = $(this).data('id').toString();
-            const idx = aksiBiaya.map(i => i.id_biaya).indexOf(idbiaya);
-
-            $('#id_biaya_lainnya').data('idx', idx);
-            $('#id_biaya_lainnya').val(aksiBiaya[idx].id_biaya);
-            $('#biaya').val(currencyFormat.format(aksiBiaya[idx].harga));
-        });
-
-        // Show barang edit modal
-        $("#barang-table").on('click', '.btnEdit', function() {
-            $('#modalBarang').modal('show');
-            $("#btnSubmitBarang").data('type', 'edit');
-            let idbarang = $(this).data('id').toString();
-            const idx = aksiBarang.map(i => i.id_barang).indexOf(idbarang);
-
-            $('#id_barang').data('idx', idx);
-            $('#id_barang').val(aksiBarang[idx].id_barang);
-            $('#jumlah').val(aksiBarang[idx].jumlah);
-            $('#harga_satuan').val(currencyFormat.format(aksiBarang[idx].harga_satuan));
-        });
-
-        // Clear form on modal close
-        $('#modalBiaya, #modalBarang').on('hidden.bs.modal', function (e) {
-            $(this).find("input,textarea,select").val('');
-            $(this).find("button[type='submit']").data('type', 'add');
-        });
-
         $("#frmBiaya").submit((e) => {
             e.preventDefault();
 
@@ -191,17 +205,18 @@
             let formType = $("#frmBiaya").find("button[type='submit']").data('type');
 
             // check if biaya exists
-            let hasBiaya = aksiBiaya.some(a => a['id_biaya'] === idBiaya);
+            let hasBiaya = aksiBiaya.filter(a => a.row_status == 'A').some(a => a['id_biaya'] === idBiaya);
 
             if (hasBiaya && formType == "add") {
-                alert('Aksi Biaya sudah ditambahkan!');
+                alert('Kebutuhan Tahunan Biaya sudah ditambahkan!');
             } else {
                 if(formType == "add") {
                     // add data to array
                     aksiBiaya.push({
                         id_biaya: idBiaya,
                         nama_biaya: namaBiaya,
-                        harga: getNumber(hargaBiaya)
+                        harga: getNumber(hargaBiaya),
+                        row_status: 'A'
                     });
                 } else {
                     let idx = $("#id_biaya_lainnya").data('idx');
@@ -209,6 +224,8 @@
                     aksiBiaya[idx].nama_biaya = namaBiaya;
                     aksiBiaya[idx].harga = getNumber(hargaBiaya);
                 }
+
+                console.log(aksiBiaya);
 
                 // Clear Form
                 $("#id_biaya_lainnya").val("");
@@ -232,26 +249,36 @@
             let formType = $("#frmBarang").find("button[type='submit']").data('type');
 
             // check if barang exists
-            let hasBarang = aksiBarang.some(a => a['id_barang'] === idBarang);
+            let hasBarang = aksiBarang.filter(a => a.row_status == 'A').some(a => a['id_barang'] === idBarang);
 
-            if (hasBarang && formType == "add") {
-                alert('Aksi Barang sudah ditambahkan!');
+            if(hasBarang && formType == "add") {
+                alert('Kebutuhan Tahunan Barang sudah ditambahkan!');
             } else {
+                // if form type add, add data to array, else edit data from array
                 if(formType == "add") {
                     // add data to array
                     aksiBarang.push({
                         id_barang: idBarang,
                         nama_barang: namaBarang,
                         jumlah: getNumber(jumlahBarang),
-                        harga_satuan: getNumber(hargaBarang)
+                        harga_satuan: getNumber(hargaBarang),
+                        row_status: 'A'
                     });
                 } else {
+                    // if jumlah barang 0, remove barang from table, and update array data with status D
                     let idx = $("#id_barang").data('idx');
-                    aksiBarang[idx].id_barang = idBarang;
-                    aksiBarang[idx].nama_barang = namaBarang;
-                    aksiBarang[idx].jumlah = getNumber(jumlahBarang);
-                    aksiBarang[idx].harga_satuan = getNumber(hargaBarang);
+                    if(getNumber(jumlahBarang) == 0) {
+                        aksiBarang[idx].row_status = 'D';
+                    } else {
+                        // edit data from array
+                        aksiBarang[idx].id_barang = idBarang;
+                        aksiBarang[idx].nama_barang = namaBarang;
+                        aksiBarang[idx].jumlah = getNumber(jumlahBarang);
+                        aksiBarang[idx].harga_satuan = getNumber(hargaBarang);
+                    }
                 }
+
+                console.log(aksiBarang);
 
                 // Clear Form
                 $("#id_barang").val("");
@@ -264,8 +291,6 @@
                 updateBarangTable(aksiBarang);
                 updateHarga(aksiBiaya, aksiBarang);
             }
-
-
         });
     });
 </script>

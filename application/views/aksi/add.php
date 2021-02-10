@@ -208,7 +208,7 @@
                     </div>
                     <div class="form-group">
                         <label for="jumlah">Jumlah</label>
-                        <input type="number" min="0" class="form-control" id="jumlah" name="jumlah" required>
+                        <input type="number" min="1" class="form-control" id="jumlah" name="jumlah" required>
                     </div>
                     <div class="form-group">
                         <label for="harga_satuan">Harga Satuan</label>
