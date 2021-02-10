@@ -86,7 +86,7 @@
 											?>
     									</td>
     									<td><?= $k->nama_aksi ?></td>
-    									<td class="text-right">
+    									<td align="right">
     										<?php
 											$jumlah = 0;
 											if ($donatur_aksi != null) {
@@ -99,7 +99,7 @@
 											echo 'Rp ' . number_format($jumlah, 2, ',', '.');
 											?>
     									</td>
-    									<td class="text-right"><?php echo 'Rp ' . number_format($k->target_donasi, 2, ',', '.'); ?></td>
+    									<td align="right"><?php echo 'Rp ' . number_format($k->target_donasi, 2, ',', '.'); ?></td>
     									<td>
     										<?php echo round($jumlah * 100 / $k->target_donasi) ?>%
     									</td>

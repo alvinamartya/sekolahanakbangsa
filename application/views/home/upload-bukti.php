@@ -65,7 +65,7 @@
                             <h4 class="m-0"><?= $data_aksi->nama_aksi ?></h4>
                         </div>
                         <div class="mb-5">
-                            <p class="mb-2">Silahkan Transfer dengan nominal <text class="text-danger font-weight-bold"><?= "Rp" . number_format($data_aksi->donasi, 2, ",", "."); ?></text> ke</p>
+                            <p class="mb-2">Silahkan Transfer dengan nominal <text class="text-danger font-weight-bold"><?= "Rp " . number_format($data_aksi->donasi, 2, ",", "."); ?></text> ke</p>
                             <p>Rekening BRI <text class="text-danger font-weight-bold">6716172356712536788</text> a.n <text class="font-weight-bold">PT. Sekolah Anak Bangsa</text></p>
                         </div>
                         <?php echo form_open_multipart('donasi/update/'. $data_aksi->id); ?>

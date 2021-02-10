@@ -53,7 +53,8 @@
         <div class="col-md-6 d-flex align-self-stretch">
             <div class="card w-100">
                 <div class="card-body">
-                    <h4 class="card-title">Unggah Laporan Pertanggungjawaban</h4>
+                    <h4 class="card-title">Format LPJ : (<a href="<?php echo base_url('')?>assets/lpj/FORMAT LPJ.xlsx">Download</a>)</h4>
+                    <h4 class="card-title">Unggah Laporan Pertanggungjawaban (docx/xlsx)</h4>
                     <?php if ($this->session->flashdata('success')) { ?>
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <?= $this->session->flashdata('success') ?>
@@ -129,7 +130,7 @@
                                             }
                                             ?>
                                         </td>
-                                        <td>
+                                        <td align="right">
                                             <?php echo 'Rp ' . number_format($kt->biaya, 2, ',', '.'); ?>
                                         </td>
                                     </tr>
@@ -170,7 +171,7 @@
                                             } ?>
                                         </td>
                                         <td><?= $kt->jumlah ?></td>
-                                        <td>
+                                        <td align="right">
                                             <?php echo 'Rp ' . number_format($kt->harga_satuan, 2, ',', '.'); ?>
                                         </td>
                                     </tr>

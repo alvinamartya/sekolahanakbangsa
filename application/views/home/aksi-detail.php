@@ -62,7 +62,7 @@
                                         ?>
                                     </td>
                                     <td><?php echo $barang->jumlah ?></td>
-                                    <td><?php echo 'Rp ' . number_format($barang->harga_satuan, 2, ',', '.'); ?></td>
+                                    <td align="right"><?php echo 'Rp ' . number_format($barang->harga_satuan, 2, ',', '.'); ?></td>
                                 </tr>
                             <?php $i++;
                             } ?>
@@ -94,7 +94,7 @@
                                         }
                                         ?>
                                     </td>
-                                    <td><?php echo 'Rp ' . number_format($biaya_lainnya->biaya, 2, ',', '.'); ?></td>
+                                    <td style="width:150px" align="right"><?php echo 'Rp ' . number_format($biaya_lainnya->biaya, 2, ',', '.'); ?></td>
                                 </tr>
                             <?php $i++;
                             } ?>
@@ -123,8 +123,8 @@
                     <h6><?php echo $data_relawan->nama_relawan ?> <i class="fa fa-check-circle text-success"></i></h6>
 
                     <div class="d-flex flex-column mt-4">
-                        <p class="font-weight-bold text-danger h3">Rp<?php echo number_format($data_donatur_aksi, 2, ',', '.'); ?></p>
-                        <p>terkumpul dari target Rp<?php echo number_format($data_aksi->target_donasi, 2, ',', '.'); ?></p>
+                        <p class="font-weight-bold text-danger h3">Rp <?php echo number_format($data_donatur_aksi, 2, ',', '.'); ?></p>
+                        <p>terkumpul dari target Rp <?php echo number_format($data_aksi->target_donasi, 2, ',', '.'); ?></p>
                     </div>
                     <?php $persen = $data_donatur_aksi * 100 / $data_aksi->target_donasi  ?>
                     <div class="progress">

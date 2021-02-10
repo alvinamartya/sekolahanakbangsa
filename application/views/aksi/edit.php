@@ -37,6 +37,10 @@
                                     <input type="text" class="form-control" value="<?= isset($aksi) ? $aksi->nama_aksi : '' ?>" id="nama_aksi" name="nama_aksi" placeholder="Nama Aksi">
                                 </div>
                                 <div class="form-group">
+                                    <label for="tanggal_selesai">Tanggal Mulai</label>
+                                    <input type="date" class="form-control" name="tanggal_mulai" value="<?php echo isset($tglmulai) ? set_value('tanggal_mulai', date('Y-m-d', strtotime($tglmulai))) : set_value('tanggal_mulai'); ?>" disabled>
+                                </div>
+                                <div class="form-group">
                                     <label for="tanggal_selesai">Tanggal Selesai</label>
                                     <input type="date" class="form-control" value="<?= isset($aksi) ? date('Y-m-d', strtotime($aksi->tanggal_selesai)) : '' ?>" id="tanggal_selesai" name="tanggal_selesai" placeholder="Tanggal Selesai">
                                 </div>
@@ -159,7 +163,7 @@
                 <h3 class="text-danger font-weight-bold">Total Harga : Rp<span id="target_donasi"><?= number_format($aksi->target_donasi, 0, ",", ".");  ?></span></h3>
                 <div class="d-flex">
                     <button class="btn btn-primary mr-3" type="submit" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
-                    <button class="btn btn-danger" type="button"><i class="fa fa-times"></i> Batal</button>
+                    <a class="btn btn-danger" href="<?= site_url('aksi') ?>" type="button"><i class="fa fa-times"></i> Batal</a>
                 </div>
             </div>
         </div>
