@@ -35,7 +35,7 @@
                         </div>
                     <?php } ?>
                     <div class="table-responsive">
-                        <a href="<?= site_url('barang/tambah') ?>" class="btn btn-primary mb-2">Tambah Data Barang</a>
+                        <a href="<?= site_url('barang/tambah') ?>" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Data Barang</a>
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>

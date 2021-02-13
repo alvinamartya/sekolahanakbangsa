@@ -25,7 +25,7 @@
 
                 <div class="form-group">
                     <label for="nama_relawan">Nama Relawan</label>
-                    <input type="text" class="form-control <?php echo (form_error('nama_relawan') != null ? 'is-invalid' : '') ?>" id="nama_relawan" name="nama_relawan" placeholder="Nama Relawan" value="<?= $r->nama_relawan ?>">
+                    <input type="text" class="form-control <?php echo (form_error('nama_relawan') != null ? 'is-invalid' : '') ?>" id="nama_relawan" name="nama_relawan" placeholder="Nama Relawan" value="<?= $r->nama_relawan ?>" readonly>
                     <div class="invalid-feedback"><?php echo form_error('nama_relawan'); ?></div>
                 </div>
 
@@ -47,8 +47,8 @@
                 </div>
 
                 <div>
-                    <button id="btn-save" type="submit" class="btn btn-primary">Simpan</button>
-                    <a href="<?= site_url('sdm_relawan') ?>" class="btn btn-danger">Kembali</a>
+                    <button id="btn-save" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                    <a href="<?= site_url('sdm_relawan') ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Kembali</a>
                 </div>
             </form>
         </div>

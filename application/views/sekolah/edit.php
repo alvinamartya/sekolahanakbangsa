@@ -32,13 +32,13 @@
                     <?php } ?>
                     <form action="<?= site_url('sekolah/edit/' . $s->id_sekolah) ?>" method="POST">
                         <div class="form-group">
-                            <label for="nama_sekolah">Nama Sekolah</label>
+                            <label for="nama_sekolah">Nama Sekolah <span class="text-danger font-weight-bold">*</span></label>
                             <input type="text" class="form-control <?php echo (form_error('nama_sekolah') != null ? 'is-invalid' : '') ?>" value="<?= $s->nama_sekolah ?>" id="nama_sekolah" name="nama_sekolah" aria-describedby="schoolNameHelp" placeholder="Nama Sekolah">
                             <div class="invalid-feedback"><?php echo form_error('nama_sekolah'); ?></div>
                         </div>
 
                         <div class="form-group">
-                            <label for="jenis_sekolah">Jenis Sekolah</label>
+                            <label for="jenis_sekolah">Jenis Sekolah <span class="text-danger font-weight-bold">*</span></label>
                             <select name="jenis_sekolah" id="jenis_sekolah" class="form-control <?php echo (form_error('jenis_sekolah') != null ? 'is-invalid' : '') ?>">
                                 <option value="" hidden>Pilih Jenis Sekolah</option>
                                 <option value="Rumah Singgah" <?= $s->jenis_sekolah == 'Rumah Singgah' ? 'selected' : '' ?>>Rumah Singgah</option>
@@ -48,26 +48,26 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="alamat">Alamat</label>
+                            <label for="alamat">Alamat <span class="text-danger font-weight-bold">*</span></label>
                             <textarea name="alamat" id="alamat" class="form-control <?php echo (form_error('alamat') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Alamat"><?= $s->alamat ?></textarea>
                             <div class="invalid-feedback"><?php echo form_error('alamat'); ?></div>
                         </div>
 
                         <div class="form-group">
-                            <label for="provinsi">Provinsi</label>
+                            <label for="provinsi">Provinsi <span class="text-danger font-weight-bold">*</span></label>
                             <select name="provinsi" id="provinsi" class="form-control <?php echo (form_error('provinsi') != null ? 'is-invalid' : '') ?>"></select>
                             <div class="invalid-feedback"><?php echo form_error('provinsi'); ?></div>
                         </div>
 
                         <div class="form-group">
-                            <label for="kota">Kota</label>
+                            <label for="kota">Kota <span class="text-danger font-weight-bold">*</span></label>
                             <select name="kota" id="kota" class="form-control <?php echo (form_error('kota') != null ? 'is-invalid' : '') ?>"></select>
                             <div class="invalid-feedback"><?php echo form_error('kota'); ?></div>
                         </div>
 
                         <div>
-                            <button id="btn-save" type="submit" class="btn btn-primary">Perbarui</button>
-                            <a href="<?= site_url('sekolah') ?>" class="btn btn-danger">Kembali</a>
+				            <button type="submit" id="btnSubmit" class="btn btn-primary"><i class="fa fa-pencil-alt"></i> Perbarui</button>
+                            <a href="<?= site_url('sekolah') ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Kembali</a>
                         </div>
                     </form>
                 </div>

@@ -22,18 +22,18 @@
 				<input type="hidden" value=<?php echo $data->id_biaya_lainnya ?> name="id_biaya_lainnya">
 
 				<div class="form-group">
-					<label for="nama_biaya_lainnya">Nama Biaya Lainnya</label>
+					<label for="nama_biaya_lainnya">Nama Biaya Lainnya <span class="text-danger font-weight-bold">*</span></label>
 					<input type="text" name="nama_biaya_lainnya" class="form-control <?php echo (form_error('nama_biaya_lainnya') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->nama_biaya_lainnya ?>">
 					<div class="invalid-feedback"><?php echo form_error('nama_biaya_lainnya'); ?></div>
 				</div>
 				<div class="form-group">
-					<label for="deskripsi_biaya_lainnya">Deskripsi Biaya Lainnya</label>
+					<label for="deskripsi_biaya_lainnya">Deskripsi Biaya Lainnya <span class="text-danger font-weight-bold">*</span></label>
 					<textarea name="deskripsi_biaya_lainnya" id="deskripsi_biaya_lainnya" class="form-control <?php echo (form_error('deskripsi_biaya_lainnya') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Deskripsi Biaya Lainnya"><?php echo $data->deskripsi_biaya_lainnya ?></textarea>
 					<div class="invalid-feedback"><?php echo form_error('deskripsi_biaya_lainnya'); ?></div>
 				</div>
 
-				<input type="submit" id="btnSubmit" class="btn btn-primary" value="Perbarui">
-				<a href="<?php echo site_url('biaya-lainnya') ?>" class="btn btn-danger">Kembali</a>
+				<button type="submit" id="btnSubmit" class="btn btn-primary"><i class="fa fa-pencil-alt"></i> Perbarui</button>
+				<a href="<?php echo site_url('biaya-lainnya') ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Kembali</a>
 			</form>
 		</div>
 	</div>

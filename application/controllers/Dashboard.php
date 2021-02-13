@@ -43,7 +43,7 @@ class Dashboard extends CI_Controller
 		// set page title
 		$header['title'] = "Dashboard Admin";
 
-		// set employee 
+		// set employee
 		$header['name'] =  $this->getKaryawanName();
 		$header['role'] =  $this->getKaryawanRole();
 
@@ -176,7 +176,7 @@ class Dashboard extends CI_Controller
 
 					$sheet->setCellValue('D' . $numrow, 'Rp ' . number_format($jumlah, 2, ',', '.'));
 					$sheet->setCellValue('E' . $numrow,  'Rp ' . number_format($k->target_donasi, 2, ',', '.'));
-					$sheet->setCellValue('F' . $numrow,  $percentage . '%');
+					$sheet->setCellValue('F' . $numrow,  round($percentage) . '%');
 					$sheet->setCellValue('G' . $numrow, date("d-m-Y", strtotime($k->tanggal_selesai)));
 
 
@@ -521,7 +521,7 @@ class Dashboard extends CI_Controller
 
 			$excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, 'Rp ' . number_format($jumlah, 2, ',', '.'));
 			$excel->setActiveSheetIndex(0)->setCellValue('E' . $numrow,  'Rp ' . number_format($k->target_donasi, 2, ',', '.'));
-			$excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow,  $percentage . '%');
+			$excel->setActiveSheetIndex(0)->setCellValue('F' . $numrow,  round($percentage) . '%');
 			$excel->setActiveSheetIndex(0)->setCellValue('G' . $numrow, date("d-m-Y", strtotime($k->tanggal_selesai)));
 
 
@@ -569,7 +569,7 @@ class Dashboard extends CI_Controller
 		// set page title
 		$header['title'] = "Dashboard Admin";
 
-		// set employee 
+		// set employee
 		$header['name'] =  $this->getKaryawanName();
 		$header['role'] =  $this->getKaryawanRole();
 

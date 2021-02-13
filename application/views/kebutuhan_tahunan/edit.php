@@ -35,12 +35,12 @@
                         <div class="alert alert-danger alert-dismissible fade show validationAlert" role="alert" id="validationAlert"></div>
 						<input type="hidden" name="id" value="<?=$kt->id?>" >
                         <div class="form-group">
-                            <label for="year">Tahun</label>
+                            <label for="year">Tahun <span class="text-danger font-weight-bold">*</span></label>
                             <input type="text" id="year" name="year" class="yearpicker form-control" value="<?= $kt->tahun ?>" />
                         </div>
 
                         <div class="form-group">
-                            <label for="desc">Deskripsi</label>
+                            <label for="desc">Deskripsi <span class="text-danger font-weight-bold">*</span></label>
                             <textarea name="desc" id="desc" cols="30" rows="5" class="form-control"><?=$kt->deskripsi?></textarea>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBiaya" id="#btnTambahBiaya">Tambah</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBiaya" id="#btnTambahBiaya"><i class="fa fa-plus-circle"></i> Tambah</button>
                             <table id="biaya-table" class="table table-striped table-bordered no-wrap">
                                 <thead>
                                     <tr>
@@ -82,8 +82,8 @@
 										</td>
 										<td><?php echo 'Rp '.number_format($b->biaya,0,',','.'); ?></td>
 										<td>
-                                            <button type="button" class="btn btn-primary btn-sm btnEdit" data-id="<?= $b->id_biaya_lainnya ?>" data-type="biaya">Ubah</button>
-											<button type="button" class="btn btn-danger btn-sm btnDelete" data-id="<?= $b->id_biaya_lainnya ?>" data-type="biaya">Hapus</button>
+                                            <button type="button" class="btn btn-warning btn-sm btnEdit" data-id="<?= $b->id_biaya_lainnya ?>" data-type="biaya"><i class="fa fa-edit"></i> Ubah</button>
+											<button type="button" class="btn btn-danger btn-sm btnDelete" data-id="<?= $b->id_biaya_lainnya ?>" data-type="biaya"><i class="fa fa-trash"></i> Hapus</button>
 										</td>
 									</tr>
 								<?php } ?>
@@ -106,7 +106,7 @@
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBarang" id="#btnTambahBarang">Tambah</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBarang" id="#btnTambahBarang"><i class="fa fa-plus-circle"></i> Tambah</button>
                             <table id="barang-table" class="table table-striped table-bordered no-wrap">
                                 <thead>
                                     <tr>
@@ -131,8 +131,8 @@
 										<td><?=$b->jumlah?></td>
 										<td><?php echo 'Rp '.number_format($b->harga_satuan,0,',','.'); ?></td>
 										<td>
-                                            <button type="button" class="btn btn-primary btn-sm btnEdit" data-id="<?= $b->id_barang ?>" data-type="barang">Ubah</button>
-                                            <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="<?= $b->id_barang ?>" data-type="barang">Hapus</button>
+                                            <button type="button" class="btn btn-warning btn-sm btnEdit" data-id="<?= $b->id_barang ?>" data-type="barang"><i class="fa fa-edit"></i> Ubah</button>
+                                            <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="<?= $b->id_barang ?>" data-type="barang"><i class="fa fa-trash"></i> Hapus</button>
 										</td>
 									</tr>
 									<?php } ?>
@@ -153,8 +153,8 @@
                             <h3 class="text-danger font-weight-bold">Total Kebutuhan : Rp<span id="target_donasi"><?php echo number_format($kt->total_kebutuhan,0,',','.'); ?></span></h3>
 							<input	type="hidden" name="target_donasi" value="<?=$kt->total_kebutuhan?>" />
                             <div class="d-flex">
-                                <button class="btn btn-primary mr-3" type="submit" id="btnUpdate"><i class="fa fa-save"></i> Simpan perubahan</button>
-                                <a href="<?= site_url('kebutuhan-tahunan') ?>" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
+                                <button class="btn btn-primary mr-3" type="submit" id="btnUpdate"><i class="fa fa-save"></i> Simpan</button>
+                                <a href="<?= site_url('kebutuhan-tahunan') ?>" class="btn btn-secondary"><i class="fa fa-times"></i> Batal</a>
                             </div>
                         </div>
                     </div>

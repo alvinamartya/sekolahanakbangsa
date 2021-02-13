@@ -34,12 +34,12 @@
                         <h4 class="card-title">Kebutuhan Tahunan</h4>
                         <div class="alert alert-danger alert-dismissible fade show validationAlert" role="alert" id="validationAlert"></div>
                         <div class="form-group">
-                            <label for="year">Tahun</label>
+                            <label for="year">Tahun <span class="text-danger font-weight-bold">*</span></label>
                             <input type="text" id="year" name="year" class="yearpicker form-control" value="" />
                         </div>
 
                         <div class="form-group">
-                            <label for="desc">Deskripsi</label>
+                            <label for="desc">Deskripsi <span class="text-danger font-weight-bold">*</span></label>
                             <textarea name="desc" id="desc" cols="30" rows="5" class="form-control"></textarea>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBiaya">Tambah</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBiaya"><i class="fa fa-plus-circle"></i> Tambah</button>
                             <table id="biaya-table" class="table table-striped table-bordered no-wrap">
                                 <thead>
                                     <tr>
@@ -88,7 +88,7 @@
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBarang">Tambah</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBarang"><i class="fa fa-plus-circle"></i> Tambah</button>
                             <table id="barang-table" class="table table-striped table-bordered no-wrap">
                                 <thead>
                                     <tr>
@@ -117,7 +117,7 @@
                             <h3 class="text-danger font-weight-bold">Total Kebutuhan : Rp<span id="target_donasi">0</span></h3>
                             <div class="d-flex">
                                 <button class="btn btn-primary mr-3" type="button" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
-                                <a href="<?= site_url('kebutuhan-tahunan') ?>" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
+                                <a href="<?= site_url('kebutuhan-tahunan') ?>" class="btn btn-secondary"><i class="fa fa-times"></i> Batal</a>
                             </div>
                         </div>
                     </div>

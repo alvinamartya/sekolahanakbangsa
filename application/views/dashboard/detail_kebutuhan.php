@@ -136,7 +136,7 @@
 	<br>
 	<div class="row">
 		<div class="col-md-1">
-			<a href="<?php echo base_url("dashboard/admin") ?>" class="btn btn-secondary">Kembali</a>
+			<a href="<?php echo base_url("dashboard/admin") ?>" class="btn btn-secondary"><i class="fa fa-reply"></i> Kembali</a>
 		</div>
 	</div>
 </div>

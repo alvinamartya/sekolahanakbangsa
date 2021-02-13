@@ -33,7 +33,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="nama_aksi">Nama Aksi</label>
+                                    <label for="nama_aksi">Nama Aksi <span class="text-danger font-weight-bold">*</span></label>
                                     <input type="text" class="form-control <?php echo (form_error('nama_aksi') != null ? 'is-invalid' : '') ?>" value="<?= isset($aksi) ? $aksi["nama_aksi"] : '' ?>" id="nama_aksi" name="nama_aksi" placeholder="Nama Aksi">
                                     <div class="invalid-feedback"><?php echo form_error('nama_aksi'); ?></div>
                                 </div>
@@ -42,12 +42,12 @@
                                     <input type="date" class="form-control" name="tanggal_mulai" value="<?php echo isset($tglmulai) ? set_value('tanggal_mulai', date('Y-m-d', strtotime($tglmulai))) : set_value('tanggal_mulai'); ?>" disabled>
                                 </div>
                                 <div class="form-group">
-                                    <label for="tanggal_selesai">Tanggal Selesai</label>
+                                    <label for="tanggal_selesai">Tanggal Selesai <span class="text-danger font-weight-bold">*</span></label>
                                     <input type="date" class="form-control <?php echo (form_error('tanggal_selesai') != null ? 'is-invalid' : '') ?>" value="<?= isset($aksi) ? $aksi["tanggal_selesai"] : '' ?>" id="tanggal_selesai" name="tanggal_selesai" placeholder="Tanggal Selesai">
                                     <div class="invalid-feedback"><?php echo form_error('tanggal_selesai'); ?></div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="deskripsi_aksi">Deskripsi Aksi</label>
+                                    <label for="deskripsi_aksi">Deskripsi Aksi <span class="text-danger font-weight-bold">*</span></label>
                                     <textarea name="deskripsi_aksi" id="deskripsi_aksi" class="form-control <?php echo (form_error('deskripsi_aksi') != null ? 'is-invalid' : '') ?>" cols="100" rows="4" placeholder="Deskripsi Aksi"><?= isset($aksi) ? $aksi["deskripsi_aksi"] : '' ?></textarea>
                                     <div class="invalid-feedback"><?php echo form_error('deskripsi_aksi'); ?></div>
                                 </div>
@@ -76,7 +76,7 @@
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBiaya">Tambah</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBiaya"><i class="fa fa-plus-circle"></i> Tambah</button>
                             <table id="biaya-table" class="table table-striped table-bordered no-wrap">
                                 <thead>
                                     <tr>
@@ -106,7 +106,7 @@
                             </button>
                         </div>
                         <div class="table-responsive">
-                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBarang">Tambah</button>
+                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modalBarang"><i class="fa fa-plus-circle"></i> Tambah</button>
                             <table id="barang-table" class="table table-striped table-bordered no-wrap">
                                 <thead>
                                     <tr>
@@ -135,7 +135,7 @@
                             <h3 class="text-danger font-weight-bold">Target Donasi : Rp<span id="target_donasi">0</span></h3>
                             <div class="d-flex">
                                 <button class="btn btn-primary mr-3" type="button" id="btnSave"><i class="fa fa-save"></i> Simpan</button>
-                                <a href="<?= site_url('aksi') ?>" class="btn btn-danger"><i class="fa fa-times"></i> Batal</a>
+                                <a href="<?= site_url('aksi') ?>" class="btn btn-secondary"><i class="fa fa-times"></i> Batal</a>
                             </div>
                         </div>
                     </div>
@@ -158,7 +158,7 @@
             <form action="" id="frmBiaya">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="biaya_lainnya">Biaya Lainnya</label>
+                        <label for="biaya_lainnya">Biaya Lainnya <span class="text-danger font-weight-bold">*</span></label>
                         <select name="id_biaya_lainnya" id="id_biaya_lainnya" class="form-control" required>
                             <option value="" hidden>Pilih Biaya</option>
                             <?php foreach ($biaya_lainnya as $d) { ?>
@@ -169,13 +169,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="biaya">Biaya</label>
+                        <label for="biaya">Biaya <span class="text-danger font-weight-bold">*</span></label>
                         <input type="text" class="form-control" name="biaya" id="biaya" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" id="btnSubmitBiaya" class="btn btn-primary" data-type="add">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Batal</button>
+                    <button type="submit" id="btnSubmitBiaya" class="btn btn-primary" data-type="add"><i class="fa fa-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
@@ -196,7 +196,7 @@
             <form action="" id="frmBarang">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="barang">Barang</label>
+                        <label for="barang">Barang <span class="text-danger font-weight-bold">*</span></label>
                         <select name="id_barang" id="id_barang" class="form-control">
                             <option value="" hidden>Pilih Barang</option>
                             <?php foreach ($barang as $d) { ?>
@@ -207,17 +207,17 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="jumlah">Jumlah</label>
+                        <label for="jumlah">Jumlah <span class="text-danger font-weight-bold">*</span></label>
                         <input type="number" min="1" class="form-control" id="jumlah" name="jumlah" required>
                     </div>
                     <div class="form-group">
-                        <label for="harga_satuan">Harga Satuan</label>
+                        <label for="harga_satuan">Harga Satuan <span class="text-danger font-weight-bold">*</span></label>
                         <input type="text" class="form-control" name="harga_satuan" id="harga_satuan" required>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" id="btnSubmitBarang" class="btn btn-primary" data-type="add">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Batal</button>
+                    <button type="submit" id="btnSubmitBarang" class="btn btn-primary" data-type="add"><i class="fa fa-save"></i> Simpan</button>
                 </div>
             </form>
         </div>

@@ -22,26 +22,15 @@
 <div class="container-fluid">
 	<div class="card">
 		<div class="card-body">
-			<form method="post" action="<?php echo base_url('Karyawan/add') ?>" autocomplete="off">
-				<!-- <div class="row">
-					<div class="col">
-						Hak Akses
-						<select name="role" class="form-control" disabled>
-							<option value="Donatur">Donatur</option>
-							<option value="Relawan">Relawan</option>
-							<option value="Karyawan" selected>Karyawan</option>
-						</select>
-					</div>
-				</div> -->
-
+			<form method="post" action="<?php echo base_url('karyawan/add') ?>" autocomplete="off">
 				<div class="form-group">
-					<label for="nama_karyawan">Nama Karyawan</label>
+					<label for="nama_karyawan">Nama Karyawan <span class="text-danger font-weight-bold">*</span></label>
 					<input type="text" name="nama_karyawan" class="form-control <?php echo (form_error('nama_karyawan') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('nama_karyawan'); ?>">
 					<div class="invalid-feedback"><?php echo form_error('nama_karyawan'); ?></div>
 				</div>
 
 				<div class="form-group">
-					<label for="" class="d-block">Jenis Kelamin</label>
+					<label for="" class="d-block">Jenis Kelamin <span class="text-danger font-weight-bold">*</span></label>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" checked type="radio" id="L" name="jenis_kelamin" value="L" <?php echo (set_value('jenis_kelamin') == 'L' ? 'checked' : '') ?>>
 						<label class="form-check-label" for="L">Laki-laki</label>
@@ -50,62 +39,51 @@
 						<input class="form-check-input" type="radio" id="P" name="jenis_kelamin" value="P" <?php echo (set_value('jenis_kelamin') == 'P' ? 'checked' : '') ?>>
 						<label class="form-check-label" for="P">Perempuan</label>
 					</div>
-					<!-- <small class="text-danger"><?php echo form_error('jenis_kelamin') ?></small> -->
+					<small class="text-danger"><?php echo form_error('jenis_kelamin') ?></small>
 				</div>
 
-				<!-- <div class="row">
-					<div class="col">
-						Jabatan pengguna
-						<select disabled name="jabatan_karyawan" class="form-control">
-							<option value="Admin" selected>Admin</option>
-							<option value="Super Admin">Super Admin</option>
-						</select>
-						<br>
-					</div>
-				</div> -->
-
 				<div class="form-group">
-					<label for="nik">NIK</label>
+					<label for="nik">NIK <span class="text-danger font-weight-bold">*</span></label>
 					<input type="number" maxlength="16" name="nik" class="form-control <?php echo (form_error('nik') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('nik'); ?>">
 					<div class="invalid-feedback"><?php echo form_error('nik'); ?></div>
 				</div>
 				<div class="form-group">
-					<label for="no_telepon">No Telepon</label>
+					<label for="no_telepon">No. Telepon <span class="text-danger font-weight-bold">*</span></label>
 					<input type="number" name="no_telepon" class="form-control <?php echo (form_error('no_telepon') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('no_telepon'); ?>">
 					<div class="invalid-feedback"><?php echo form_error('no_telepon'); ?></div>
 				</div>
 
 				<div class="form-group">
-					<label for="email">Email Pengguna</label>
+					<label for="email">Email Pengguna <span class="text-danger font-weight-bold">*</span></label>
 					<input type="email" name="email" class="form-control <?php echo (form_error('email') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('email'); ?>">
 					<div class="invalid-feedback"><?php echo form_error('email'); ?></div>
 				</div>
 
 				<div class="form-group">
-					<label for="tempat_lahir">Tempat lahir</label>
+					<label for="tempat_lahir">Tempat lahir <span class="text-danger font-weight-bold">*</span></label>
 					<input type="text" name="tempat_lahir" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('tempat_lahir'); ?>">
 					<div class="invalid-feedback"><?php echo form_error('tempat_lahir'); ?></div>
 				</div>
 
 				<div class="form-group">
-					<label for="tempat_lahir">Tanggal lahir</label>
+					<label for="tempat_lahir">Tanggal lahir <span class="text-danger font-weight-bold">*</span></label>
 					<input type="date" name="tanggal_lahir" value="<?= set_value('tanggal_lahir') != '' ? set_value('tanggal_lahir') : '1971-01-01' ?>" class="form-control">
 				</div>
 
 				<div class="form-group">
-					<label for="username">Nama Pengguna</label>
+					<label for="username">Nama Pengguna <span class="text-danger font-weight-bold">*</span></label>
 					<input type="text" name="username" class="form-control <?php echo (form_error('username') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('username'); ?>">
 					<div class="invalid-feedback"><?php echo form_error('username'); ?></div>
 				</div>
 
 				<div class="form-group">
-					<label for="username">Kata Sandi</label>
+					<label for="username">Kata Sandi <span class="text-danger font-weight-bold">*</span></label>
 					<input type="password" name="password" id="password" class="form-control <?php echo (form_error('password') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('password'); ?>">
 					<div class="invalid-feedback"><?php echo form_error('password'); ?></div>
 				</div>
 
 				<div class="form-group">
-					<label for="ver_password">Konfirmasi Kata Sandi</label>
+					<label for="ver_password">Konfirmasi Kata Sandi <span class="text-danger font-weight-bold">*</span></label>
 					<input type="password" name="ver_password" id="ver_password" class="form-control <?php echo (form_error('ver_password') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('ver_password'); ?>">
 					<div id="ipassword"></div>
 					<div class="invalid-feedback"><?php echo form_error('ver_password'); ?></div>
@@ -113,8 +91,8 @@
 				</div>
 
 				<div>
-					<button id="btn-save" type="submit" class="btn btn-primary">Simpan</button>
-					<a href="<?= site_url('karyawan') ?>" class="btn btn-danger">Kembali</a>
+					<button id="btn-save" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+					<a href="<?= site_url('karyawan') ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Kembali</a>
 				</div>
 			</form>
 		</div>

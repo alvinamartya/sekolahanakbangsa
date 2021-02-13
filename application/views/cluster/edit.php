@@ -23,19 +23,19 @@
 				<input type="hidden" name="id_cluster_relawan" value="<?php echo $cluster->id_cluster_relawan ?>">
 
 				<div class="form-group">
-					<label for="nama_cluster">Nama Cluster</label>
+					<label for="nama_cluster">Nama Cluster <span class="text-danger font-weight-bold">*</span></label>
 					<input type="text" name="nama_cluster" class="form-control <?php echo (form_error('nama_cluster') != null ? 'is-invalid' : '') ?>" value="<?php echo $cluster->nama_cluster ?>">
 					<div class="invalid-feedback"><?php echo form_error('nama_cluster'); ?></div>
 				</div>
 
 				<div class="form-group">
-					<label for="ideskripsi">Deskripsi Cluster</label>
+					<label for="ideskripsi">Deskripsi Cluster <span class="text-danger font-weight-bold">*</span></label>
 					<textarea id="ideskripsi" class="form-control <?php echo (form_error('deskripsi_cluster') != null ? 'is-invalid' : '') ?>" name="deskripsi_cluster"><?php echo $cluster->deskripsi_cluster ?></textarea>
 					<div class="invalid-feedback"><?php echo form_error('deskripsi_cluster'); ?></div>
 				</div>
 
-				<input type="submit" id="btnSubmit" class="btn btn-primary" value="Perbarui">
-				<a href="<?php echo base_url('cluster') ?>" class="btn btn-danger">Kembali</a>
+				<button type="submit" id="btnSubmit" class="btn btn-primary"><i class="fa fa-pencil-alt"></i> Perbarui</button>
+				<a href="<?php echo base_url('cluster') ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Kembali</a>
 			</form>
 		</div>
 	</div>

@@ -12,13 +12,13 @@
                     <form action="<?= site_url('donasi/add') ?>" method="POST">
                         <input type="hidden" id="id" name="id" value="<?= $idkembali ?>">
                         <div class="form-group">
-                            <label for="nominal">Nominal Donasi</label>
+                            <label for="nominal">Nominal Donasi <span class="text-danger font-weight-bold">*</span></label>
                             <input type="text" class="priceformat form-control <?php echo (form_error('donasi') != null ? 'is-invalid' : '') ?>" id="donasi" name="donasi" aria-describedby="schoolNameHelp" value="<?= $post != null ? $post->donasi : '' ?>" placeholder="Rp. " required>
                             <div class="invalid-feedback"><?php echo form_error('donasi'); ?></div>
                         </div>
 
                         <div class="form-group">
-                            <label for="pesan">Pesan</label>
+                            <label for="pesan">Pesan <span class="text-danger font-weight-bold">*</span></label>
                             <textarea name="keterangan" id="keterangan" class="form-control <?php echo (form_error('keterangan') != null ? 'is-invalid' : '') ?>" rows="10" placeholder="Tulis Keterangan / Pesan"><?= $post != null ? $post->keterangan : '' ?></textarea>
                             <div class="invalid-feedback"><?php echo form_error('keterangan'); ?></div>
                         </div>
