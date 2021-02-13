@@ -64,7 +64,7 @@
                                         <td align="center">
                                             <a href="<?= site_url('kebutuhan-tahunan/detail/' .  $kt->id) ?>" class="btn btn-secondary"><i class="fa fa-eye"></i> Detail</a>
                                             <?php if ($kt->kt_status == 'Draft') { ?>
-                                            <form action="<?= site_url('kebutuhan-tahunan/kirim/' .  $kt->id) ?>" method="post" class="d-inline">
+                                            <form action="<?= site_url('kebutuhan-tahunan/kirim/' .  $kt->id) ?>" onclick="return confirm('Apakah anda yakin ingin mengirim kebutuhan tahunan ini?')" method="post" class="d-inline">
                                                 <button type="submit" class="btn btn-info"><i class="fa fa-paper-plane"></i> Kirim</button>
                                             </form>
                                             <a href="<?= site_url('kebutuhan-tahunan/edit/' .  $kt->id) ?>" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
