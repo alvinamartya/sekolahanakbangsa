@@ -33,7 +33,7 @@
                     <h4 class="card-title text-center" style="font-size: 28px;">Master Karyawan</h4>
                     </h6>
                     <div class="table-responsive">
-                        <a href="<?php echo base_url('karyawan/tambah') ?>" class="btn btn-primary mb-2">Tambah Data Karyawan</a>
+                        <a href="<?php echo base_url('karyawan/tambah') ?>" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Data Karyawan</a>
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>

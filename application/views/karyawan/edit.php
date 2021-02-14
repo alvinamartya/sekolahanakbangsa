@@ -20,15 +20,14 @@
 	<div class="card">
 		<div class="card-body">
 			<form method="post" action="<?php echo base_url('Karyawan/edit') ?>" autocomplete="off">
-				<br>
 				<div class="form-group">
 					<input type="hidden" value=<?php echo $data->id_karyawan ?> name="id_karyawan">
-					<label for="nama_karyawan">Nama Karyawan</label>
+					<label for="nama_karyawan">Nama Karyawan <span class="text-danger font-weight-bold">*</span></label>
 					<input type="text" name="nama_karyawan" class="form-control <?php echo (form_error('nama_karyawan') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->nama_karyawan ?>">
 					<div class="invalid-feedback"><?php echo form_error('nama_karyawan'); ?></div>
 				</div>
 				<div class="form-group">
-					<label for="" class="d-block">Jenis Kelamin</label>
+					<label for="" class="d-block">Jenis Kelamin <span class="text-danger font-weight-bold">*</span></label>
 					<div class="form-check form-check-inline">
 						<input class="form-check-input" <?php if ($data->jenis_kelamin == "L") echo 'checked' ?> type="radio" id="L" name="jenis_kelamin" value="L" <?php echo (set_value('jenis_kelamin') == 'L' ? 'checked' : '') ?>>
 						<label class="form-check-label" for="L">Laki-laki</label>
@@ -39,27 +38,27 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="nik">NIK</label>
+					<label for="nik">NIK <span class="text-danger font-weight-bold">*</span></label>
 					<input type="number" name="nik" class="form-control <?php echo (form_error('nik') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->nik ?>">
 					<div class="invalid-feedback"><?php echo form_error('nik'); ?></div>
 				</div>
 				<div class="form-group">
-					<label for="no_telepon">No Telepon</label>
+					<label for="no_telepon">No Telepon <span class="text-danger font-weight-bold">*</span></label>
 					<input type="number" name="no_telepon" class="form-control <?php echo (form_error('no_telepon') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->no_telepon ?>">
 					<div class="invalid-feedback"><?php echo form_error('no_telepon'); ?></div>
 				</div>
 				<div class="form-group">
-					<label for="email">Email</label>
+					<label for="email">Email <span class="text-danger font-weight-bold">*</span></label>
 					<input type="email" name="email" class="form-control <?php echo (form_error('email') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->email ?>">
 					<div class="invalid-feedback"><?php echo form_error('email'); ?></div>
 				</div>
 				<div class="form-group">
-					<label for="tempat_lahir">Tempat Lahir</label>
+					<label for="tempat_lahir">Tempat Lahir <span class="text-danger font-weight-bold">*</span></label>
 					<input type="text" name="tempat_lahir" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>" value="<?php echo $data->tempat_lahir ?>">
 					<div class="invalid-feedback"><?php echo form_error('tempat_lahir'); ?></div>
 				</div>
 				<div class="form-group">
-					<label for="tanggal_lahir">Tanggal Lahir</label>
+					<label for="tanggal_lahir">Tanggal Lahir <span class="text-danger font-weight-bold">*</span></label>
 					<input type="date" name="tanggal_lahir" class="form-control <?php echo (form_error('tanggal_lahir') != null ? 'is-invalid' : '') ?>" value="<?php echo date("Y-m-d", strtotime($data->tanggal_lahir)); ?>">
 					<div class="invalid-feedback"><?php echo form_error('tanggal_lahir'); ?></div>
 				</div>

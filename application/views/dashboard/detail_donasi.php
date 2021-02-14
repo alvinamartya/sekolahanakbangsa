@@ -52,11 +52,11 @@
 						</a>
 					</div>
 
-					<h3 class="mt-5 font-weight-bold"><?php echo $data_aksi->nama_aksi ?></h3>
+					<h4 class="mt-5 font-weight-bold"><?php echo $data_aksi->nama_aksi ?></h4>
 
-					<div class="row my-5">
+					<div class="row mt-3">
 						<div class="col-12">
-							<p class="font-weight-bold">Deskripsi</p>
+							<strong><p>Deskripsi</p></strong>
 							<p class="form-control text-muted"><?php echo $data_aksi->deskripsi_aksi ?></p>
 						</div>
 					</div>
@@ -151,11 +151,8 @@
 					</table>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-1">
-					<a href="<?=base_url('dashboard/relawan')?>" class="btn btn-secondary">Kembali</a>
-				</div>
-			</div>
+
+			<a href="<?=base_url('dashboard/relawan')?>" class="btn btn-secondary mt-4"><i class="fa fa-reply"></i> Kembali</a>
 		</div>
 	</div>
 	</div>

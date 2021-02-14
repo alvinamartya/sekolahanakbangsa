@@ -20,23 +20,23 @@
 <!-- TAMBAH CLUSTER -->
 <div class="container-fluid">
 	<div class="card">
-		<div class="card-body">					
+		<div class="card-body">
 			<form method="post" action="<?php echo base_url('Cluster/add') ?>" autocomplete="off">
 				<div class="form-group">
-					<label for="nama_cluster">Nama Cluster</label>
+					<label for="nama_cluster">Nama Cluster <span class="text-danger font-weight-bold">*</span></label>
 					<input type="text" name="nama_cluster" class="form-control <?php echo (form_error('nama_cluster') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('nama_cluster'); ?>">
 					<div class="invalid-feedback"><?php echo form_error('nama_cluster'); ?></div>
 				</div>
 
 				<div class="form-group">
-					<label for="ideskripsi">Deskripsi Cluster</label>
+					<label for="ideskripsi">Deskripsi Cluster <span class="text-danger font-weight-bold">*</span></label>
 					<textarea id="ideskripsi" class="form-control <?php echo (form_error('deskripsi_cluster') != null ? 'is-invalid' : '') ?>" name="deskripsi_cluster"><?php echo set_value('deskripsi_cluster'); ?></textarea>
 					<div class="invalid-feedback"><?php echo form_error('deskripsi_cluster'); ?></div>
 				</div>
 
 				<div>
-					<button id="btn-save" type="submit" class="btn btn-primary">Simpan</button>
-					<a href="<?= site_url('cluster') ?>" class="btn btn-danger">Kembali</a>
+					<button id="btn-save" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+					<a href="<?= site_url('cluster') ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Kembali</a>
 				</div>
 			</form>
 		</div>

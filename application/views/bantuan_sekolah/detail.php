@@ -132,14 +132,14 @@
 			<h3 class="text-danger font-weight-bold">Total Kebutuhan : <?php echo 'Rp '.number_format($kebutuhan_tahunan->total_kebutuhan,2,',','.'); ?></h3>
 			<form action="<?php echo base_url('bantuan_sekolah/page_konfirmasi') ?>" method="post"  class="d-inline float-right">
 				<input type="hidden" name="id" value="<?=$kebutuhan_tahunan->id?>">
-				<button class="btn btn-success">Konfirmasi Sekarang</button>
+				<button class="btn btn-success"><i class="fa fa-check"></i> Konfirmasi Sekarang</button>
 			</form>
 		</div>
 	</div>
 	<br>
     <div class="row">
 		<div class="col-md-1">
-			<a href="<?php echo base_url("Bantuan_sekolah")?>" class="btn btn-secondary">Kembali</a>
+			<a href="<?php echo base_url("bantuan_sekolah")?>" class="btn btn-secondary"><i class="fa fa-reply"></i> Kembali</a>
 		</div>
 
 	</div>

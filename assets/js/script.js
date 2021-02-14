@@ -3,7 +3,7 @@ $(function () {
     $('#master-data').DataTable({
         "language": {
             "lengthMenu": "_MENU_ Data per halaman",
-            "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
+            "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
             "zeroRecords": "Tidak ada data.",
             "search": "Pencarian :",
             "infoFiltered": "(tersaring dari total _MAX_ data)",
@@ -17,7 +17,7 @@ $(function () {
     $('#master-data2').DataTable({
         "language": {
             "lengthMenu": "_MENU_ Data per halaman",
-            "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ entries",
+            "info": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
             "zeroRecords": "Tidak ada data.",
             "search": "Pencarian :",
             "infoFiltered": "(tersaring dari total _MAX_ data)",

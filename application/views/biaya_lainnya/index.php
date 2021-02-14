@@ -35,7 +35,7 @@
                         </div>
                     <?php } ?>
                     <div class="table-responsive">
-                        <a href="<?= site_url('biaya-lainnya/tambah') ?>" class="btn btn-primary mb-2">Tambah Data Biaya Lainnya</a>
+                        <a href="<?= site_url('biaya-lainnya/tambah') ?>" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Data Biaya Lainnya</a>
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>

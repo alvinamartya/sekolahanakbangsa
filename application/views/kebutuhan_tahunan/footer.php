@@ -55,8 +55,8 @@
                 <td>${data.nama_biaya}</td>
                 <td>${currencyFormat.format(data.harga)}</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm btnEdit" data-id="${data.id_biaya}" data-type="biaya">Ubah</button>
-                    <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="${data.id_biaya}" data-type="biaya">Hapus</button>
+                    <button type="button" class="btn btn-warning btn-sm btnEdit" data-id="${data.id_biaya}" data-type="biaya"><i class="fa fa-edit"></i> Ubah</button>
+                    <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="${data.id_biaya}" data-type="biaya"><i class="fa fa-trash"></i> Hapus</button>
                 </td>
             </tr>`);
         });
@@ -70,8 +70,8 @@
                 <td>${data.jumlah}</td>
                 <td>${currencyFormat.format(data.harga_satuan)}</td>
                 <td>
-                    <button type="button" class="btn btn-primary btn-sm btnEdit" data-id="${data.id_barang}" data-type="barang">Ubah</button>
-                    <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="${data.id_barang}" data-type="barang">Hapus</button>
+                    <button type="button" class="btn btn-warning btn-sm btnEdit" data-id="${data.id_barang}" data-type="barang"><i class="fa fa-edit"></i> Ubah</button>
+                    <button type="button" class="btn btn-danger btn-sm btnDelete" data-id="${data.id_barang}" data-type="barang"><i class="fa fa-trash"></i> Hapus</button>
                 </td>
             </tr>`);
         });
@@ -93,6 +93,7 @@
             if (getNumber($('#target_donasi').html()) === 0) {
                 $("#validationAlert").html('<p>Total Kebutuhan wajib diisi.<\/p>\n');
                 $("#validationAlert").show();
+                $('html, body').animate({scrollTop: '0px'}, 300);
             } else {
                 $.ajax({
                     url: "<?= site_url('kebutuhan_tahunan/add') ?>",

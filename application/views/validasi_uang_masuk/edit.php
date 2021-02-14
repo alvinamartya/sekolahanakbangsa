@@ -63,8 +63,8 @@
                 </div>
 
                 <div>
-                    <button id="btn-save" type="submit" class="btn btn-primary">Perbarui</button>
-                    <a href="<?= site_url('validasi_uang_masuk') ?>" class="btn btn-danger">Kembali</a>
+                    <button id="btn-save" type="submit" class="btn btn-primary"><i class="fa fa-pencil-alt"></i> Perbarui</button>
+                    <a href="<?= site_url('validasi_uang_masuk') ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Kembali</a>
                 </div>
             </form>
         </div>

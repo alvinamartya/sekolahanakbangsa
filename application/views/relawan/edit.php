@@ -23,19 +23,19 @@
         <div class="card-body">
             <form method="post" action="<?php echo base_url('relawan/edit/' . $r->id_relawan) ?>" autocomplete="off">
                 <div class="form-group">
-                    <label for="nik">NIK Relawan</label>
+                    <label for="nik">NIK Relawan <span class="text-danger font-weight-bold">*</span></label>
                     <input type="number" class="form-control <?php echo (form_error('nik') != null ? 'is-invalid' : '') ?>" id="nik" name="nik" placeholder="NIK Relawan" value="<?= $r->nik ?>">
                     <div class="invalid-feedback"><?php echo form_error('nik'); ?></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="nama_relawan">Nama Relawan</label>
+                    <label for="nama_relawan">Nama Relawan <span class="text-danger font-weight-bold">*</span></label>
                     <input type="text" class="form-control <?php echo (form_error('nama_relawan') != null ? 'is-invalid' : '') ?>" id="nama_relawan" name="nama_relawan" placeholder="Nama Relawan" value="<?= $r->nama_relawan ?>">
                     <div class="invalid-feedback"><?php echo form_error('nama_relawan'); ?></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="id_cluster_relawan">Cluster</label>
+                    <label for="id_cluster_relawan">Cluster <span class="text-danger font-weight-bold">*</span></label>
                     <select name="id_cluster_relawan" id="id_cluster_relawan" class="form-control <?php echo (form_error('id_cluster_relawan') != null ? 'is-invalid' : '') ?>">
                         <?php foreach ($cluster as $c) { ?>
                             <option value="<?= $c->id_cluster_relawan ?>" <?= $c->id_cluster_relawan == $r->id_cluster_relawan ? 'selected' : '' ?>>
@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="L" class="d-block">Jenis Kelamin</label>
+                    <label for="L" class="d-block">Jenis Kelamin <span class="text-danger font-weight-bold">*</span></label>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" id="L" name="jenis_kelamin" value="L" <?= ($r->jenis_kelamin == 'L' ? 'checked' : '') ?>>
                         <label class="form-check-label" for="L">Laki-laki</label>
@@ -60,32 +60,32 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="no_telepon">No. Telepon</label>
+                    <label for="no_telepon">No. Telepon <span class="text-danger font-weight-bold">*</span></label>
                     <input type="number" id="no_telepon" class="form-control <?php echo (form_error('no_telepon') != null ? 'is-invalid' : '') ?>" name="no_telepon" value="<?= $r->no_telepon ?>">
                     <div class="invalid-feedback"><?php echo form_error('no_telepon'); ?></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">Email <span class="text-danger font-weight-bold">*</span></label>
                     <input type="text" id="email" class="form-control <?php echo (form_error('email') != null ? 'is-invalid' : '') ?>" name="email" value="<?= $r->email ?>">
                     <div class="invalid-feedback"><?php echo form_error('email'); ?></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="tempat_lahir">Tempat lahir</label>
+                    <label for="tempat_lahir">Tempat lahir <span class="text-danger font-weight-bold">*</span></label>
                     <input type="text" id="tempat_lahir" name="tempat_lahir" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>" name="tempat_lahir" value="<?= $r->tempat_lahir ?>">
                     <div class="invalid-feedback"><?php echo form_error('tempat_lahir'); ?></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="tanggal_lahir">Tanggal lahir</label>
+                    <label for="tanggal_lahir">Tanggal lahir <span class="text-danger font-weight-bold">*</span></label>
                     <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="form-control <?php echo (form_error('tanggal_lahir') != null ? 'is-invalid' : '') ?>" value="<?= date_format(date_create($r->tanggal_lahir), "Y-m-d")  ?>">
                     <div class="invalid-feedback"><?php echo form_error('tanggal_lahir'); ?></div>
                 </div>
 
                 <div>
-                    <button id="btn-save" type="submit" class="btn btn-primary">Perbarui</button>
-                    <a href="<?= site_url('relawan') ?>" class="btn btn-danger">Kembali</a>
+                    <button id="btn-save" type="submit" class="btn btn-primary"><i class="fa fa-pencil-alt"></i> Perbarui</button>
+                    <a href="<?= site_url('relawan') ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Kembali</a>
                 </div>
             </form>
         </div>

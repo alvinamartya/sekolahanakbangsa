@@ -32,7 +32,7 @@
                     <?php } ?>
                     <form action="<?= site_url('siswa/add') ?>" method="POST">
                         <div class="form-group">
-                            <label for="nama_siswa">Nama Siswa</label>
+                            <label for="nama_siswa">Nama Siswa <span class="text-danger font-weight-bold">*</span></label>
                             <input type="text" class="form-control <?php echo (form_error('nama_siswa') != null ? 'is-invalid' : '') ?>" id="nama_siswa" name="nama_siswa" aria-describedby="schoolNameHelp" value="<?php echo set_value('nama_siswa'); ?>" placeholder="Nama Siswa">
                             <div class="invalid-feedback"><?php echo form_error('nama_siswa'); ?></div>
                         </div>
@@ -44,26 +44,23 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="tempat_lahir">Tempat Lahir</label>
+                            <label for="tempat_lahir">Tempat Lahir <span class="text-danger font-weight-bold">*</span></label>
                             <input type="text" name="tempat_lahir" class="form-control <?php echo (form_error('tempat_lahir') != null ? 'is-invalid' : '') ?>" value="<?php echo set_value('tempat_lahir'); ?>" placeholder="Tempat Lahir">
                             <div class="invalid-feedback"><?php echo form_error('tempat_lahir'); ?></div>
                         </div>
 
                         <div class="form-group">
-                            <label for="tanggal_lahir">Tanggal lahir</label>
+                            <label for="tanggal_lahir">Tanggal lahir <span class="text-danger font-weight-bold">*</span></label>
                             <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="<?= set_value('tanggal_lahir') != '' ? set_value('tanggal_lahir') : '1971-01-01' ?>" class="form-control <?php echo (form_error('tanggal_lahir') != null ? 'is-invalid' : '') ?>">
                             <div class="invalid-feedback"><?php form_error('tanggal_lahir'); ?></div>
                         </div>
 
                         <div class="form-group">
-                            <label for="id_sekolah">Sekolah</label>
-                            <select name="id_sekolah" id="id_sekolah" class="form-control">
+                            <label for="id_sekolah">Sekolah <span class="text-danger font-weight-bold">*</span></label>
+                            <select name="id_sekolah" id="id_sekolah" class="form-control <?php echo (form_error('id_sekolah') != null ? 'is-invalid' : '') ?>">
                                 <option value="" hidden>Pilih Sekolah</option>
                                 <?php foreach ($sekolah as $s) { ?>
-                                    <option value="<?= $s->id_sekolah ?>" <?php
-                                                                            if (set_value('id_sekolah') !== "") {
-                                                                                echo set_value('id_sekolah') == $s->id_sekolah ? 'selected' : '';
-                                                                            } ?>>
+                                    <option value="<?= $s->id_sekolah ?>">
                                         <?= $s->nama_sekolah ?>
                                     </option>
                                 <?php } ?>
@@ -72,7 +69,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="L" class="d-block">Jenis Kelamin</label>
+                            <label for="L" class="d-block">Jenis Kelamin <span class="text-danger font-weight-bold">*</span></label>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" id="L" name="jenis_kelamin" value="L" <?php echo (set_value('jenis_kelamin') == 'L' ? 'checked' : '') ?>>
                                 <label class="form-check-label" for="L">Laki-laki</label>
@@ -85,8 +82,8 @@
                         </div>
 
                         <div>
-                            <button id="btn-save" type="submit" class="btn btn-primary">Simpan</button>
-                            <a href="<?= site_url('siswa') ?>" class="btn btn-danger">Kembali</a>
+                            <button id="btn-save" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
+                            <a href="<?= site_url('siswa') ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Kembali</a>
                         </div>
                     </form>
                 </div>

@@ -42,7 +42,7 @@
                         </div>
                     <?php } ?>
                     <div class="table-responsive">
-                        <a href="<?= site_url('kebutuhan-tahunan/tambah') ?>" class="btn btn-primary mb-2">Tambah</a>
+                        <a href="<?= site_url('kebutuhan-tahunan/tambah') ?>" class="btn btn-primary mb-2"><i class="fa fa-plus-circle"></i> Tambah Kebutuhan Tahunan</a>
                         <table id="master-data" class="table table-striped table-bordered no-wrap">
                             <thead>
                                 <tr>
@@ -64,8 +64,8 @@
                                         <td align="center">
                                             <a href="<?= site_url('kebutuhan-tahunan/detail/' .  $kt->id) ?>" class="btn btn-secondary"><i class="fa fa-eye"></i> Detail</a>
                                             <?php if ($kt->kt_status == 'Draft') { ?>
-                                            <form action="<?= site_url('kebutuhan-tahunan/kirim/' .  $kt->id) ?>" onclick="return confirm('Apakah anda yakin ingin mengirim kebutuhan tahunan ini?')" method="post" class="d-inline">
-                                                <button type="submit" class="btn btn-info"><i class="fa fa-paper-plane"></i> Kirim</button>
+                                            <form action="<?= site_url('kebutuhan-tahunan/kirim/' .  $kt->id) ?>" method="post" class="d-inline">
+                                                <button type="submit" class="btn btn-info" onclick="return confirm('Apakah anda yakin ingin mengirim kebutuhan tahunan ini?') "><i class="fa fa-paper-plane"></i> Kirim</button>
                                             </form>
                                             <a href="<?= site_url('kebutuhan-tahunan/edit/' .  $kt->id) ?>" class="btn btn-warning"><i class="fa fa-edit"></i> Edit</a>
                                             <a href="<?= site_url('kebutuhan-tahunan/destroy/' .  $kt->id) ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</a>

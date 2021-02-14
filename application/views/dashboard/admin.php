@@ -97,8 +97,8 @@
     			</div>
     		</div>
     	</div>
-    	<a class="btn btn-success" href="<?= site_url('dashboard/export_laporan_admin/' . $id_sekolah) ?>">Export Laporan</a>
-    	<a class="btn btn-warning" style="margin-left: 10px;" href="" data-toggle="modal" data-target=".bd-example-modal-lg">Export Semua</a>
+    	<a class="btn btn-success" href="<?= site_url('dashboard/export_laporan_admin/' . $id_sekolah) ?>"><i class="fa fa-file-export"></i> Export Laporan</a>
+    	<a class="btn btn-warning" style="margin-left: 10px;" href="" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fa fa-file-export"></i> Export Semua</a>
     </div>
 
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -112,23 +112,24 @@
     					</button>
     				</div>
     				<div class="modal-body">
-    					<?php foreach ($sekolah as $s) { ?>
-    						<div class="form-check form-check-inline">
-    							<input class="form-check-input" type="checkbox" id="<?= $s->id_sekolah ?>" name="sekolah[]" value="<?= $s->id_sekolah ?>">
-    							<label class="form-check-label" for="<?= $s->id_sekolah ?>"><?= $s->nama_sekolah ?></label>
-    						</div>
-    					<?php } ?>
+						<div class="ml-4 row">
+							<?php foreach ($sekolah as $s) { ?>
+								<div class="custom-control custom-checkbox col-6">
+                                    <input class="custom-control-input" type="checkbox" id="<?= $s->id_sekolah ?>" name="sekolah[]" value="<?= $s->id_sekolah ?>">
+                                    <label class="custom-control-label" for="<?= $s->id_sekolah ?>"><?= $s->nama_sekolah ?></label>
+                                </div>
+							<?php } ?>
+						</div>
     				</div>
     				<div class="modal-footer">
-    					<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-    					<button type="submit" class="btn btn-primary">Export</button>
+    					<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tutup</button>
+    					<button type="submit" class="btn btn-primary"><i class="fa fa-file-export"></i> Export</button>
     				</div>
     			</form>
     		</div>
     	</div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script>
     	window.onload = function() {
     		var label = <?= $label ?>;

@@ -43,7 +43,7 @@ class Dashboard extends CI_Controller
 		// set page title
 		$header['title'] = "Dashboard Admin";
 
-		// set employee 
+		// set employee
 		$header['name'] =  $this->getKaryawanName();
 		$header['role'] =  $this->getKaryawanRole();
 
@@ -569,7 +569,7 @@ class Dashboard extends CI_Controller
 		// set page title
 		$header['title'] = "Dashboard Admin";
 
-		// set employee 
+		// set employee
 		$header['name'] =  $this->getKaryawanName();
 		$header['role'] =  $this->getKaryawanRole();
 
