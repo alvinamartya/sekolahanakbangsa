@@ -61,18 +61,18 @@
             </div>
         </div>
         <div class="footer-down">
-            <p class="text-center mb-0">&copy; 2020 Sekolah Anak Bangsa</p>
+            <p class="text-center mb-0">&copy; 2021 Sekolah Anak Bangsa</p>
         </div>
     </footer>
 
-    
+
 
     <script src="<?php echo base_url('assets/js/jquery-3.5.1.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/owl.carousel.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/home-script.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery.priceformat.min.js') ?>"></script>
-    
+
     <script>
         $('.priceformat').priceFormat({
                 prefix: 'Rp',
@@ -84,4 +84,3 @@
 </body>
 
 </html>
-
