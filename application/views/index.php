@@ -238,7 +238,7 @@
             </div>
         </div>
         <div class="footer-down">
-            <p class="text-center mb-0">&copy; 2020 Sekolah Anak Bangsa</p>
+            <p class="text-center mb-0">&copy; 2021 Sekolah Anak Bangsa</p>
         </div>
     </footer>
 
