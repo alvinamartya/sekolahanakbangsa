@@ -163,7 +163,7 @@
             <?php if ($hope != null) {
                 foreach ($hope as $h) { ?>
                     <div class="item doa-items">
-                        <div class="doa-box card p-2">
+                        <div class="doa-box card p-2 w-100">
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold"><?= $h->nama_donatur ?></h5>
                                 <p class="card-text"><?= $h->keterangan ?></p>
